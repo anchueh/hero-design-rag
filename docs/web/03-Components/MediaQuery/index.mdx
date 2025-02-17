@@ -1,0 +1,132 @@
+---
+id: mediaquery
+title: MediaQuery
+---
+
+import Props from '../../../../src/components/Props';
+
+# MediaQuery
+
+MediaQuery component lets you render element if given media query matches.
+
+## Examples
+
+### With render children
+
+```jsx live
+<>
+  <Typography.Text mb="medium">Resize window to see effect</Typography.Text>
+  <MediaQuery>
+    {(size) => {
+      switch (size) {
+        case 'small': {
+          return <div>Small</div>;
+        }
+        case 'medium': {
+          return <div>Medium</div>;
+        }
+        case 'large': {
+          return <div>Large</div>;
+        }
+        case 'xlarge': {
+          return <div>XLarge</div>;
+        }
+      }
+    }}
+  </MediaQuery>
+</>
+```
+
+### With props
+
+```jsx live
+<>
+  <Typography.Text mb="medium">Resize window to see effect</Typography.Text>
+  <MediaQuery
+    small={<div>Small</div>}
+    medium={<div>Medium</div>}
+    large={<div>Large</div>}
+    xlarge={<div>XLarge</div>}
+  />
+</>
+```
+
+### MediaQuery is a polymorphic components
+
+MediaQuery lets us specify which React element we want to use for its root. Default component is `React.Fragment`
+
+```jsx live
+<>
+  <Typography.Text mb="medium">Resize window to see effect</Typography.Text>
+  <MediaQuery as={Typography.Title} level={3}>
+    {(size) => {
+      switch (size) {
+        case 'small': {
+          return 'Small';
+        }
+        case 'medium': {
+          return 'Medium';
+        }
+        case 'large': {
+          return 'Large';
+        }
+        case 'xlarge': {
+          return 'XLarge';
+        }
+      }
+    }}
+  </MediaQuery>
+</>
+```
+
+### MediaQuery with breakpoints
+
+By default, MediaQuery uses `small`, `medium`, `large`, `xlarge` breakpoints, if you want to use less or more breakpoints, pass them into `breakpoints` prop.
+
+```jsx live
+<>
+  <Typography.Text mb="medium">Resize window to see effect</Typography.Text>
+  <MediaQuery breakpoints={['xsmall', 'medium', 'large', 'xxlarge']}>
+    {(size) => {
+      switch (size) {
+        case 'xsmall': {
+          return 'XSmall';
+        }
+        case 'small': {
+          return 'Small';
+        }
+        case 'medium': {
+          return 'Medium';
+        }
+        case 'large': {
+          return 'Large';
+        }
+        case 'xlarge': {
+          return 'XLarge';
+        }
+        case 'xxlarge': {
+          return 'XXLarge';
+        }
+      }
+    }}
+  </MediaQuery>
+</>
+```
+
+### useMediaQuery
+
+Hero Design also provides a hook to use media query in your components, by default it uses `small`, `medium`, `large`, `xlarge` breakpoints. If you want to use less or more breakpoints, pass them into `breakpoints` option config.
+
+```jsx
+// small | medium | large | xlarge
+const size = useMediaQuery();
+
+// small | medium
+const size = useMediaQuery({ breakpoints: ['small', 'medium'] });
+```
+
+## Props
+
+### MediaQuery Props
+
+<Props of="MediaQuery" from="web" />

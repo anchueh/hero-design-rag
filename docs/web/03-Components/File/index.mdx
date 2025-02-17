@@ -1,0 +1,413 @@
+---
+id: file
+title: FileUpload
+---
+
+import { Button } from '@ehrocks/hero-design-react';
+
+# FileUpload
+
+An input component to upload files.
+
+## Examples
+
+### Drag and Drop
+
+#### Basic
+
+Drag and drop single file.
+
+<Note title="Dropping single file">
+  When dropping multiple files into File.DragAndDrop without specify{' '}
+  <Highlight>multiple</Highlight> prop <Highlight>true</Highlight>. Only the
+  first file in the list gets effect.
+</Note>
+
+```jsx live
+<File.DragAndDrop
+  text="Drap and Drop files here"
+  description="Please only use these following file formats: .JPG, .JPEG, .PNG"
+  onAccept={(files) => {
+    console.log('accepted files', files);
+  }}
+  accept=".jpg,.jpeg,.png"
+/>
+```
+
+#### Multiple files
+
+Drag and drop multiple files by specify `multiple` prop `true`.
+
+```jsx live
+<File.DragAndDrop
+  text="Drap and Drop files here"
+  description="Please only use these following file formats: .JPG, .JPEG, .PNG"
+  onAccept={(files) => {
+    console.log('accepted files', files);
+  }}
+  multiple
+  accept=".jpg,.jpeg,.png"
+/>
+```
+
+#### Limit file size
+
+In below example, we will limit the file size to be uploaded `<=10MB`. If there is a larger file added, `onReject` callback will be triggered with reason `size-limit-exceeded`.
+
+```jsx live
+<File.DragAndDrop
+  text="Drap and Drop files here"
+  description="Please only use these following file formats: .JPG, .JPEG, .PNG"
+  onAccept={(files) => {
+    console.log('accepted files', files);
+  }}
+  onReject={(rejectedFiles) => {
+    console.log('rejected files', rejectedFiles);
+  }}
+  accept=".jpg,.jpeg,.png"
+  maxSize={10 * 1024 * 1024}
+/>
+```
+
+#### Permit file types
+
+We can limit the type of files to be picked via `accept` prop. In below example, if we pick files which are not images, `onReject` callback will be triggered with reason `format-not-allowed`.
+
+<Note title="Different types of accept prop" intent="info">
+  Some examples with explanation for accept prop:
+  <Ul>
+    <Li>
+      <Highlight>.png, .jpeg</Highlight>: Only allow PNG or JPEG files to be
+      uploaded.
+    </Li>
+    <Li>
+      <Highlight>image/*</Highlight>: Allow all image file types (such as PNG,
+      GIF, JPEG,...) to be uploaded.
+    </Li>
+    <Li>
+      <Highlight>image/png</Highlight>: Allow specific PNG image to be uploaded.
+    </Li>
+  </Ul>
+</Note>
+
+```jsx live
+<File.DragAndDrop
+  text="Drap and Drop files here"
+  description="Please only use these following file formats: .JPG, .JPEG, .PNG"
+  onAccept={(files) => {
+    console.log('accepted files', files);
+  }}
+  onReject={(rejectedFiles) => {
+    console.log('rejected files', rejectedFiles);
+  }}
+  multiple
+  accept="image/*"
+/>
+```
+
+#### Disabled state
+
+Drag and drop can be disabled via `disableConfig` prop.
+
+<Note title="Reason for disable state">
+  A reason must be provided when the upload is disabled.
+</Note>
+
+```jsx live
+<File.DragAndDrop
+  text="Drap and Drop files here"
+  description="Please only use these following file formats: .JPG, .JPEG, .PNG"
+  onAccept={(files) => {
+    console.log('accepted files', files);
+  }}
+  accept=".jpg,.jpeg,.png"
+  disableConfig={{
+    disabled: true,
+    reason: 'Reason for disabling uploading, this is required.',
+  }}
+/>
+```
+
+### Upload Button
+
+#### Variants
+
+Click to select file. There are filled, outlined Upload buttons.
+
+```jsx live
+<Box style={{ display: 'inline-flex' }}>
+  <File.UploadButton
+    onAccept={(files) => {
+      console.log('accepted files', files);
+    }}
+    accept=".jpg,.jpeg,.png"
+    sx={{ mr: 'small' }}
+    text="Upload"
+  />
+  <File.UploadButton
+    onAccept={(files) => {
+      console.log('accepted files', files);
+    }}
+    accept=".jpg,.jpeg,.png"
+    variant="filled"
+    text="Upload"
+  />
+</Box>
+```
+
+#### With loading
+
+A loading indicator can be added to a upload button by setting the `loading` property of the UploadButton. With loading state is turned on, all pointer events are disabled.
+
+```jsx live
+<Box style={{ display: 'inline-flex' }}>
+  <File.UploadButton
+    onAccept={(files) => {
+      console.log('accepted files', files);
+    }}
+    accept=".jpg,.jpeg,.png"
+    sx={{ mr: 'small' }}
+    loading
+    text="Upload"
+  />
+  <File.UploadButton
+    onAccept={(files) => {
+      console.log('accepted files', files);
+    }}
+    accept=".jpg,.jpeg,.png"
+    variant="filled"
+    loading
+    text="Upload"
+  />
+</Box>
+```
+
+#### Multiple files
+
+Click to select files by specify `multiple` prop `true`.
+
+```jsx live
+<File.UploadButton
+  onAccept={(files) => {
+    console.log('accepted files', files);
+  }}
+  accept=".jpg,.jpeg,.png"
+  multiple
+  text="Upload"
+/>
+```
+
+#### Limit file size
+
+In below example, we will limit the file size to be uploaded `<=10MB`. If there is a larger file added, `onReject` callback will be triggered with reason `size-limit-exceeded`.
+
+```jsx live
+<File.UploadButton
+  onAccept={(files) => {
+    console.log('accepted files', files);
+  }}
+  onReject={(rejectedFiles) => {
+    console.log('rejected files', rejectedFiles);
+  }}
+  accept=".jpg,.jpeg,.png"
+  maxSize={10 * 1024 * 1024}
+  text="Upload"
+/>
+```
+
+#### Permit file types
+
+We can limit the type of files to be picked via `accept` prop. In below example, if we pick files which are not images, `onReject` callback will be triggered with reason `format-not-allowed`.
+
+<Note title="Different types of accept prop" intent="info">
+  Some examples with explanation for accept prop:
+  <Ul>
+    <Li>
+      <Highlight>.png, .jpeg</Highlight>: Only allow PNG or JPEG files to be
+      uploaded.
+    </Li>
+    <Li>
+      <Highlight>image/*</Highlight>: Allow all image file types (such as PNG,
+      GIF, JPEG,...) to be uploaded.
+    </Li>
+    <Li>
+      <Highlight>image/png</Highlight>: Allow specific PNG image to be uploaded.
+    </Li>
+  </Ul>
+</Note>
+
+```jsx live
+<File.UploadButton
+  onAccept={(files) => {
+    console.log('accepted files', files);
+  }}
+  onReject={(rejectedFiles) => {
+    console.log('rejected files', rejectedFiles);
+  }}
+  multiple
+  accept="image/*"
+  text="Upload"
+/>
+```
+
+### Upload Icon Button
+
+#### Basic
+
+Click to select file with icon.
+
+```jsx live
+<Box style={{ display: 'inline-flex' }}>
+  <File.UploadIconButton
+    onAccept={(files) => {
+      console.log('accepted files', files);
+    }}
+    accept=".jpg,.jpeg,.png"
+    icon="upload-outlined"
+    sx={{
+      mr: 'medium',
+    }}
+  />
+  <File.UploadIconButton
+    onAccept={(files) => {
+      console.log('accepted files', files);
+    }}
+    accept=".jpg,.jpeg,.png"
+    icon="link-1"
+  />
+</Box>
+```
+
+#### With different sizes
+
+Click to select file with different sizes by specify `size` prop.
+
+```jsx live
+<Box style={{ display: 'inline-flex' }}>
+  <File.UploadIconButton
+    onAccept={(files) => {
+      console.log('accepted files', files);
+    }}
+    accept=".jpg,.jpeg,.png"
+    icon="upload-outlined"
+    sx={{
+      mr: 'medium',
+    }}
+    size="small"
+  />
+  <File.UploadIconButton
+    onAccept={(files) => {
+      console.log('accepted files', files);
+    }}
+    accept=".jpg,.jpeg,.png"
+    icon="upload-outlined"
+    sx={{
+      mr: 'medium',
+    }}
+    size="medium"
+  />
+  <File.UploadIconButton
+    onAccept={(files) => {
+      console.log('accepted files', files);
+    }}
+    accept=".jpg,.jpeg,.png"
+    icon="upload-outlined"
+    sx={{
+      mr: 'medium',
+    }}
+    size="large"
+  />
+</Box>
+```
+
+#### Multiple files
+
+Click to select files by specify `multiple` prop `true`.
+
+```jsx live
+<File.UploadIconButton
+  onAccept={(files) => {
+    console.log('accepted files', files);
+  }}
+  accept=".jpg,.jpeg,.png"
+  multiple
+  icon="upload-outlined"
+/>
+```
+
+#### Limit file size
+
+In below example, we will limit the file size to be uploaded `<=10MB`. If there is a larger file added, `onReject` callback will be triggered with reason `size-limit-exceeded`.
+
+```jsx live
+<File.UploadIconButton
+  onAccept={(files) => {
+    console.log('accepted files', files);
+  }}
+  onReject={(rejectedFiles) => {
+    console.log('rejected files', rejectedFiles);
+  }}
+  accept=".jpg,.jpeg,.png"
+  maxSize={10 * 1024 * 1024}
+  icon="upload-outlined"
+/>
+```
+
+#### Permit file types
+
+We can limit the type of files to be picked via `accept` prop. In below example, if we pick files which are not images, `onReject` callback will be triggered with reason `format-not-allowed`.
+
+<Note title="Different types of accept prop" intent="info">
+  Some examples with explanation for accept prop:
+  <Ul>
+    <Li>
+      <Highlight>.png, .jpeg</Highlight>: Only allow PNG or JPEG files to be
+      uploaded.
+    </Li>
+    <Li>
+      <Highlight>image/*</Highlight>: Allow all image file types (such as PNG,
+      GIF, JPEG,...) to be uploaded.
+    </Li>
+    <Li>
+      <Highlight>image/png</Highlight>: Allow specific PNG image to be uploaded.
+    </Li>
+  </Ul>
+</Note>
+
+```jsx live
+<File.UploadIconButton
+  onAccept={(files) => {
+    console.log('accepted files', files);
+  }}
+  onReject={(rejectedFiles) => {
+    console.log('rejected files', rejectedFiles);
+  }}
+  multiple
+  accept="image/*"
+  icon="upload-outlined"
+/>
+```
+
+## Props
+
+<Note title="File interface" intent="info">
+  File object which is used in <Highlight>onAccept</Highlight> and{' '}
+  <Highlight>onReject</Highlight> is defined at{' '}
+  <Button.Link
+    href="https://developer.mozilla.org/en-US/docs/Web/API/File"
+    text="https://developer.mozilla.org/en-US/docs/Web/API/File"
+  />
+  .
+</Note>
+
+### File.DragAndDrop
+
+<Props of="DragAndDrop" from="web" />
+
+### File.UploadButton
+
+<Props of="UploadButton" from="web" />
+
+### File.UploadIconButton
+
+<Props of="UploadIconButton" from="web" />

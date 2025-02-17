@@ -1,0 +1,117 @@
+---
+id: appCue
+title: AppCue
+---
+
+# AppCue
+
+The App Cue provides a brief message and visual guidance to help users learn new features and get the most out of their app experience.
+
+## Examples
+
+```jsx live
+function App() {
+  const content =
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus nec nunc.';
+
+  return (
+    <Box padding="medium">
+      <Box flexDirection="row" justifyContent="center" marginBottom="medium">
+        <AppCue
+          content={content}
+          placement="top"
+          target={
+            <Button
+              text="Click Here (Top)"
+              onPress={() => {
+                console.log('clicked');
+              }}
+            />
+          }
+        />
+      </Box>
+      <Box flexDirection="row" justifyContent="center" marginBottom="medium">
+        <AppCue
+          content={content}
+          placement="bottom"
+          target={
+            <Button
+              text="Click Here (Bottom)"
+              onPress={() => {
+                console.log('clicked');
+              }}
+            />
+          }
+        />
+      </Box>
+      <Box flexDirection="row" justifyContent="flex-end" marginBottom="medium">
+        <AppCue
+          content={content}
+          placement="left"
+          target={
+            <Button
+              variant="text"
+              text="Click Here (Left)"
+              onPress={() => {
+                console.log('clicked');
+              }}
+            />
+          }
+        />
+      </Box>
+      <Box
+        flexDirection="row"
+        justifyContent="flex-start"
+        marginBottom="medium"
+      >
+        <AppCue
+          content={content}
+          placement="right"
+          target={
+            <Button
+              variant="text"
+              text="Click Here (Right)"
+              onPress={() => {
+                console.log('clicked');
+              }}
+            />
+          }
+        />
+      </Box>
+      <Box
+        flexDirection="row"
+        justifyContent="flex-start"
+        marginBottom="medium"
+      >
+        <AppCue
+          content={
+            <Box style={{ width: 200 }}>
+              <Icon icon="circle-check" intent="text-inverted" />
+              <Typography.Body
+                intent="inverted"
+                style={{ marginTop: theme.space.small }}
+              >
+                {content}
+              </Typography.Body>
+            </Box>
+          }
+          placement="top"
+          target={
+            <Button
+              variant="text"
+              text="Click Here (Custom Content)"
+              onPress={() => {
+                console.log('clicked');
+              }}
+            />
+          }
+        />
+      </Box>
+    </Box>
+  );
+}
+```
+
+## Props
+
+<Props of="AppCue" />

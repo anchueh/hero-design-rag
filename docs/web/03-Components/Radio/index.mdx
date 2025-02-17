@@ -1,0 +1,388 @@
+---
+id: radio
+title: Radio
+---
+
+# Radio
+
+- The radio usually prepresents an option in a list where only one item can be selected at a time.
+
+- Hero design supports 2 styles of radio: Radio & Radio.Button. In addition, we support Radio.Group & Radio.ButtonGroup to prepresent each radio style in groups.
+
+## Examples
+
+### Basic
+
+Basic usage of a radio.
+
+```jsx live
+<>
+  <Radio name="basic_usage" value="hr_document" text="HR Document" />
+  <Radio name="basic_usage" value="hr_guide" text="HR Guide" />
+</>
+```
+
+### Disabled
+
+Show a disabled option.
+
+```jsx live
+<Radio
+  value="independent_contractor"
+  text="Independent contractor"
+  disabled
+  checked
+/>
+```
+
+### Controlled checked status
+
+```jsx live
+function RadioStatus() {
+  const [checked, setChecked] = useState(false);
+  return (
+    <Radio
+      value="hr_guide"
+      text="HR Guide"
+      checked={checked}
+      onChange={(e) => setChecked(e.target.checked)}
+    />
+  );
+}
+```
+
+### Radio.Group
+
+Generate a group of radios from an array to show a series of options.
+
+```jsx live
+function RadioGroup() {
+  const [value, setValue] = useState('hr_document');
+  return (
+    <Radio.Group
+      value={value}
+      name="radio_group"
+      onChange={setValue}
+      options={[
+        { text: 'HR Document', value: 'hr_document' },
+        { text: 'HR Guide', value: 'hr_guide' },
+        {
+          text: 'Indenpendent Contractor',
+          value: 'independent_contractor',
+          disabled: true,
+        },
+      ]}
+    />
+  );
+}
+```
+
+### Radio.Group Layout
+
+Group can be rendered with either a vertical or horizontal layout.
+
+```jsx live
+function RadioGroupLayout() {
+  const [value, setValue] = useState('hr_document');
+  return (
+    <Radio.Group
+      value={value}
+      name="radio_group_layout"
+      layout="horizontal"
+      onChange={setValue}
+      options={[
+        { text: 'HR Document', value: 'hr_document' },
+        { text: 'HR Guide', value: 'hr_guide' },
+        {
+          text: 'Indenpendent Contractor',
+          value: 'independent_contractor',
+          disabled: true,
+        },
+      ]}
+    />
+  );
+}
+```
+
+### Radio.Button
+
+Radio can be rendered as a button with Radio.Button.
+
+```jsx live
+function RadioButton() {
+  const [value, setValue] = useState('policy_document');
+  return (
+    <>
+      <Radio.Button
+        name="radio_button"
+        value="hr_document"
+        text="HR Document"
+        style={{ marginRight: theme.space.small }}
+        checked={value === 'hr_document'}
+        onChange={(e) => {
+          if (e.target.checked) {
+            setValue('hr_document');
+          }
+        }}
+      />
+      <Radio.Button
+        name="radio_button"
+        value="hr_guide"
+        text="HR Guide"
+        style={{ marginRight: theme.space.small }}
+        checked={value === 'hr_guide'}
+        onChange={(e) => {
+          if (e.target.checked) {
+            setValue('hr_guide');
+          }
+        }}
+      />
+      <Radio.Button
+        name="radio_button"
+        value="independent_contractor"
+        text="Independent Contractor"
+        disabled
+        style={{ marginRight: theme.space.small }}
+        checked={value === 'independent_contractor'}
+        onChange={(e) => {
+          if (e.target.checked) {
+            setValue('independent_contractor');
+          }
+        }}
+      />
+      <Radio.Button
+        name="radio_button"
+        value="policy_document"
+        text="Policy Document"
+        disabled
+        checked={value === 'policy_document'}
+        onChange={(e) => {
+          if (e.target.checked) {
+            setValue('policy_document');
+          }
+        }}
+      />
+    </>
+  );
+}
+```
+
+### Radio.Button sizes
+
+Radio.Button can be rendered with 3 different sizes: `small`, `medium` and `large`.
+
+```jsx live
+function RadioButtonSize() {
+  const [value, setValue] = useState('small');
+  return (
+    <>
+      <Radio.Button
+        size="small"
+        name="radio_button_sizes"
+        value="small"
+        text="Small"
+        style={{ marginRight: theme.space.small }}
+        checked={value === 'small'}
+        onChange={(e) => {
+          if (e.target.checked) {
+            setValue('small');
+          }
+        }}
+      />
+      <Radio.Button
+        size="medium"
+        name="radio_button_sizes"
+        value="medium"
+        text="Medium"
+        style={{ marginRight: theme.space.small }}
+        checked={value === 'medium'}
+        onChange={(e) => {
+          if (e.target.checked) {
+            setValue('medium');
+          }
+        }}
+      />
+      <Radio.Button
+        size="large"
+        name="radio_button_sizes"
+        value="large"
+        text="Large"
+        checked={value === 'large'}
+        onChange={(e) => {
+          if (e.target.checked) {
+            setValue('large');
+          }
+        }}
+      />
+    </>
+  );
+}
+```
+
+### Radio.Button intents
+
+```jsx live
+function RadioButtonIntent() {
+  const [value, setValue] = useState('basic');
+  return (
+    <>
+      <Radio.Button
+        name="radio_button_intents"
+        value="basic"
+        text="Basic"
+        style={{ marginRight: theme.space.small }}
+        checked={value === 'basic'}
+        onChange={(e) => {
+          if (e.target.checked) {
+            setValue('basic');
+          }
+        }}
+      />
+      <Radio.Button
+        name="radio_button_intents"
+        value="primary"
+        intent="primary"
+        text="Primary"
+        style={{ marginRight: theme.space.small }}
+        checked={value === 'primary'}
+        onChange={(e) => {
+          if (e.target.checked) {
+            setValue('primary');
+          }
+        }}
+      />
+      <Radio.Button
+        name="radio_button_intents"
+        value="danger"
+        intent="danger"
+        text="Danger"
+        style={{ marginRight: theme.space.small }}
+        checked={value === 'danger'}
+        onChange={(e) => {
+          if (e.target.checked) {
+            setValue('danger');
+          }
+        }}
+      />
+      <Radio.Button
+        name="radio_button_intents"
+        value="error"
+        intent="error"
+        text="Error"
+        style={{ marginRight: theme.space.small }}
+        checked={value === 'error'}
+        onChange={(e) => {
+          if (e.target.checked) {
+            setValue('error');
+          }
+        }}
+      />
+      <Radio.Button
+        name="radio_button_intents"
+        value="success"
+        intent="success"
+        text="Success"
+        style={{ marginRight: theme.space.small }}
+        checked={value === 'success'}
+        onChange={(e) => {
+          if (e.target.checked) {
+            setValue('success');
+          }
+        }}
+      />
+      <Radio.Button
+        name="radio_button_intents"
+        value="warning"
+        intent="warning"
+        text="Warning"
+        style={{ marginRight: theme.space.small }}
+        checked={value === 'warning'}
+        onChange={(e) => {
+          if (e.target.checked) {
+            setValue('warning');
+          }
+        }}
+      />
+    </>
+  );
+}
+```
+
+### Radio.ButtonGroup
+
+Radio.Button can also be grouped by using Radio.ButtonGroup.
+
+```jsx live
+function RadioButtonGroup() {
+  const [value, setValue] = useState('policy_document');
+  return (
+    <Radio.ButtonGroup
+      value={value}
+      name="radio_button_group"
+      onChange={setValue}
+      options={[
+        { text: 'HR Document', value: 'hr_document' },
+        { text: 'HR Guide', value: 'hr_guide' },
+        {
+          text: 'Indenpendent Contractor',
+          value: 'independent_contractor',
+          disabled: true,
+        },
+        {
+          text: 'Policy Document',
+          value: 'policy_document',
+        },
+      ]}
+    />
+  );
+}
+```
+
+### Radio.ButtonGroup layout
+
+The group can be rendered with either a `gap` or `no-gap` layout.
+
+```jsx live
+function RadioButtonGroupLayout() {
+  const [value, setValue] = useState('policy_document');
+  return (
+    <Radio.ButtonGroup
+      layout="gap"
+      value={value}
+      name="radio_button_gap_group"
+      onChange={setValue}
+      options={[
+        { text: 'HR Document', value: 'hr_document' },
+        { text: 'HR Guide', value: 'hr_guide' },
+        {
+          text: 'Indenpendent Contractor',
+          value: 'independent_contractor',
+          disabled: true,
+        },
+        {
+          text: 'Policy Document',
+          value: 'policy_document',
+        },
+      ]}
+    />
+  );
+}
+```
+
+## Props
+
+### Radio Props
+
+<Props of="Radio" from="web" />
+
+### Radio.Group Props
+
+<Props of="RadioGroup" from="web" />
+
+### Radio.Button Props
+
+<Props of="RadioButton" from="web" />
+
+### Radio.ButtonGroup Props
+
+<Props of="RadioButtonGroup" from="web" />

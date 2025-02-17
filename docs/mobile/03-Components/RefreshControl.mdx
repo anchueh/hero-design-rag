@@ -1,0 +1,63 @@
+---
+id: refreshControl
+title: RefreshControl
+---
+
+import ComponentPreview from '../../../src/components/ComponentPreview';
+
+# RefreshControl
+
+**RefreshControl** is used inside a ScrollView or ListView to add pull to refresh functionality. When the ScrollView is at scrollY: 0, swiping down triggers an onRefresh event.
+
+## Preview
+
+<ComponentPreview
+  iosSrc="/img/screenshots/refresh-control-ios.png"
+  androidSrc="/img/screenshots/refresh-control-android.png"
+/>
+
+## Examples
+
+```SnackPlayer name=RefreshControl/Example
+import React from 'react';
+import { SafeAreaView, ScrollView } from 'react-native';
+import { theme, RefreshControl, Typography } from './@hero-design/rn';
+import PlaygroundContext from './PlaygroundContext.js';
+
+const App = () => {
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 1000);
+  }, []);
+
+  return (
+    <PlaygroundContext>
+      <ScrollView
+        contentContainerStyle={{
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
+        <Typography.Body variant="small">
+          Pull down to see RefreshControl indicator
+        </Typography.Body>
+      </ScrollView>
+    </PlaygroundContext>
+  );
+};
+
+export default App;
+```
+
+## Props
+
+Hero Design RefreshControl uses the same props as the [native RefreshControl](https://reactnative.dev/docs/refreshcontrol), with modified `colors` and `tintColor` props that use colors from Hero Design color palette.

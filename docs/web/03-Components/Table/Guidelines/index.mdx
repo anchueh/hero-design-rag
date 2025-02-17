@@ -1,0 +1,121 @@
+---
+id: table-guidelines
+title: Guidelines
+---
+
+import { Icon } from '@ehrocks/hero-design-react';
+
+import ColumnHeadingTablePrinciple from '../../../../../src/components/Table/ColumnHeadingTablePrinciple';
+import RowActionTablePrinciple from '../../../../../src/components/Table/RowActionTablePrinciple';
+
+## Table Guidelines
+
+### Principle 1: First column[^1] should be the identifying column
+
+[^1]First column for data (i.e. showing information) rather than UI actions like expand/collapse or checkbox.
+
+**Identifying column**
+
+- Contains the most relevant/useful information to help users choose a row to see more info.
+
+**Use of avatar**
+
+- Use avatar when personnel name is the identifying column.
+- Do not use avatar when personnel name is not the identifying column.
+- Do not use an avatar for other non-personnel, e.g. candidates.
+
+**Column headings**
+
+- Be very succint, the heading text should fit in a single row of text.
+- When scrolling the table, the column heading will be sticky so it's always visible.
+
+<div id="column-heading-principle">
+  <ColumnHeadingTablePrinciple />
+</div>
+
+### Principle 2: Tables should have 1 primary row action (identifying column) and 1 or many secondary row actions (last column)
+
+**Primary row action**
+
+- The most common call-to-action - the thing you expect users to do most frequently.
+- Usually linked from the _identifying column_.
+- Where there is more information available on an object, the identifying column should be the _primary action_ and be selectable (clickable & tappable).
+- Sometimes a single column is not enough as the identifying column, you should choose 1 column as the identifying column with the primary action (don‚Äôt repeat the primary action on 2 columns).
+  - e.g. Timesheet management: Personnel & time/date combined identifies a timesheet, but only 1 column is the identifying column.
+
+**Secondary row action**
+
+- The second most common call-to-actions performed by users.
+- Only appear in the last (right most) column.
+- All secondary row actions should be available from detailed view.
+- 1 secondary row action: use a text button.
+- 2 or more secondary row actions: use **Ellipsis icon** (<Icon icon="more-horizontal" /> 3 horizontal dots) and show actions within the menu.
+- Secondary row actions can be used without a primary row action when there isn't any more info available (no detailed view).
+
+<div id="row-action-principle">
+  <RowActionTablePrinciple />
+</div>
+
+**Exception 1: No detailed view of a table object**
+
+When there is not detailed page, and all actions must be visible from the table using the Actions list.
+
+- There will be no View option (since there is no detailed view).
+
+### Principle 3: It `must` be clear what search terms or filters have been applied to the table
+
+**Default filters**
+
+- By default the table should have a sensible sort order (most useful/relevant items on top), in which case no filters should be applied.
+- When a filter is applied, it should be visually highlighted.
+- Recommend no more than 7 filters - not a hard rule but more than 7 gets complicated.
+
+**Persistent filters**
+
+- Filters should be automatically remembered when user leave the page and return within the session - up to Product squads to implement this.
+  - This has already been supported by hero-design via Table.useFilterState, Table.getLSCacheProvider:
+
+```typescript
+export type CacheProvider<T> = {
+  load: () => Promise<T | null>;
+  save: (value: T) => Promise<void>;
+};
+const cacheProvider = Table.getLSCacheProvider('examples/leaveFilters');
+
+const { filterValues, setFilterValues } = Table.useFiltersState({
+  initialValues: initialFilterValues,
+  cacheProvider,
+  cacheOnChange: true,
+});
+```
+
+**Reset filters**
+
+- Users can clear all filters to show all rows.
+
+**Search**
+
+- Free text search looks for any words or numbers.
+
+### Principle 4: Show enough rows to make the table immediately useful without impacting performance/load time (recommend 50 rows by default)
+
+**Rows per page:**
+
+- Options should be 25, 50, 100 per page.
+
+### Principle 5: Rows should be sorted by primary column by default - sort order should be very clear
+
+Default sort order should be intuitive, e.g.
+
+- Recency: if there is a Date is a column, this is usually good column to sort by, most recent at the top.
+  - e.g. Date added, Date modified, Leave start date, Requested date,
+
+## Table Styling
+
+There are a few things to take into consideration when designing a Table using [Hero Design's Table](/web/components/table/basic) component:
+
+- First column should always be clickable.
+- If you have a column where there can only be one default value, consider using a [Badge](/web/components/badge) in another column (e.g Name) for better visualization. Best to use the **outlined** version.
+- For actions column, we prefer showing 3 dots icons.
+- Highlighted row should be in a color that is distinguised from the title row color.
+- We don't need to wrap a table inside a container.

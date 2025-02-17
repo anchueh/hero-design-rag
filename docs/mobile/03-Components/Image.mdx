@@ -1,0 +1,76 @@
+---
+id: image
+title: Image
+---
+
+# Image
+
+Image in hero-design extends react-native image to be used in different sizes.
+
+## Examples
+
+### Sizes
+
+Currently, Image supports 2 sizes `6xlarge` (default) and `15xlarge`.
+
+```jsx live
+function ImageSizes() {
+  return (
+    <Box>
+      <Box>
+        <Typography.Body
+          style={{ marginBottom: theme.space.medium }}
+          variant="regular-bold"
+          level="h5"
+        >
+          6xlarge image (default)
+        </Typography.Body>
+
+        <Image
+          source={{
+            uri: 'https://i.pinimg.com/originals/e6/92/fe/e692fe2bef601bf4760425bd62118117.jpg',
+          }}
+        />
+      </Box>
+
+      <Box>
+        <Typography.Body
+          variant="regular-bold"
+          style={{ marginVertical: theme.space.medium }}
+        >
+          15xlarge image
+        </Typography.Body>
+        <Image
+          size="15xlarge"
+          source={{
+            uri: 'https://i.pinimg.com/originals/e6/92/fe/e692fe2bef601bf4760425bd62118117.jpg',
+          }}
+        />
+      </Box>
+    </Box>
+  );
+}
+```
+
+### Rounded
+
+Image can be rounded by specifying `rounded` true.
+
+```jsx live
+function RoundedImage() {
+  return (
+    <Image
+      source={{
+        uri: 'https://i.pinimg.com/originals/e6/92/fe/e692fe2bef601bf4760425bd62118117.jpg',
+      }}
+      rounded
+    />
+  );
+}
+```
+
+## Props
+
+Hero-design image extends all props from [React-native image](https://reactnative.dev/docs/image#props).
+
+<Props of="Image" />

@@ -1,0 +1,60 @@
+---
+id: spinner
+title: Spinner
+---
+
+# Spinner
+
+Spinners indicate an operation under loading process.
+
+## Examples
+
+### Basic
+
+Use spinner with or without text.
+
+```jsx live
+<>
+  <Spinner />
+  <Spinner text="We're fetching your data..." />
+</>
+```
+
+### Spinner with content
+
+Spinner can be used to wrap some content. It will spin while fetching the content.
+
+<Note title="Visibility note">
+  <Ul>
+    <Li>The content is ALWAYS displayed regardless to loading.</Li>
+    <Li>The spinning element is ONLY displayed when to loading is true.</Li>
+  </Ul>
+</Note>
+
+```jsx live
+<Spinner loading size="small">
+  <Typography.Text>
+    With Employment Hero you can paperlessly onboard staff, provide induction
+    content, conduct visa checks and performance reviews. We also help you stay
+    compliant with built in contracts, policies and HR templates ready to go.
+  </Typography.Text>
+</Spinner>
+```
+
+### Sizes
+
+There are three sizes of a Spinner: `small`, `medium` (default) and `large`.
+
+```jsx live
+<>
+  <Spinner size="small" text="Loading..." />
+  <br />
+  <Spinner size="medium" text="Loading..." />
+  <br />
+  <Spinner size="large" text="Loading..." />
+</>
+```
+
+## Props
+
+<Props of="Spinner" from="web" />

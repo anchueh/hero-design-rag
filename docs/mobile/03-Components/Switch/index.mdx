@@ -1,0 +1,97 @@
+---
+id: switch
+title: Switch
+---
+
+<PageTitle
+  title="Switch"
+  content="Switches are a useful way to change the state of functionalities and preferences in a system. They work by controlling two options that are mutually exclusive, meaning only one of them can be selected at a time. And they always have a default state, such as on/off or true/false."
+/>
+
+## Examples
+
+### Basic Switch
+
+```jsx live
+function BasicSwitchExample() {
+  const [isChecked, setIsChecked] = React.useState({
+    switchOne: true,
+    switchTwo: false,
+    switchThree: true,
+    switchFour: false,
+  });
+  const toggleState = React.useCallback(
+    (switchId) =>
+      setIsChecked({
+        ...isChecked,
+        [switchId]: !isChecked[switchId],
+      }),
+    [isChecked]
+  );
+
+  return (
+    <ScrollView>
+      <Typography.Body
+        variant="small"
+        style={{ marginVertical: theme.space.xsmall }}
+      >
+        Basic Switch
+      </Typography.Body>
+      <Switch
+        checked={isChecked.switchOne}
+        onPress={() => toggleState('switchOne')}
+      />
+      <Switch
+        style={{ marginTop: theme.space.small }}
+        checked={isChecked.switchTwo}
+        onPress={() => toggleState('switchTwo')}
+      />
+      <Switch checked disabled style={{ marginTop: theme.space.small }} />
+      <Switch disabled style={{ marginTop: theme.space.small }} />
+    </ScrollView>
+  );
+}
+```
+
+### Selector Switch
+
+```jsx live
+function SelectorSwitchExample() {
+  const [permission, setPermission] = React.useState('employee');
+  const togglePermission = () =>
+    setPermission(permission === 'employee' ? 'manager' : 'employee');
+
+  return (
+    <ScrollView>
+      <Typography.Body style={{ marginVertical: theme.space.medium }}>
+        Switch.Selector
+      </Typography.Body>
+      <Switch.Selector
+        options={[
+          {
+            value: 'employee',
+            text: 'My Dashboard',
+            icon: 'user',
+          },
+          {
+            value: 'manager',
+            text: 'Manager Dashboard',
+            icon: 'multiple-users',
+            badge: { type: 'status' },
+          },
+        ]}
+        value={permission}
+        onPress={togglePermission}
+      />
+    </ScrollView>
+  );
+}
+```
+
+## Switch Props
+
+<Props of="Switch" />
+
+## Switch.Selector Props
+
+<Props of="SelectorSwitch" />

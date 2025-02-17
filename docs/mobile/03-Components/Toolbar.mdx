@@ -1,0 +1,158 @@
+---
+id: toolbar
+title: Toolbar
+---
+
+import { ToolbarLabelGuideline } from './ToolbarGuidelines';
+
+# Toolbar
+
+A toolbar provides convenient access to frequently used commands and controls that perform actions relevant to the current view.
+
+<ToolbarLabelGuideline />
+
+```jsx live
+function BasicToolbarExample() {
+  const items = [
+    {
+      icon: 'cancel',
+      onPress: () => alert('Cancel'),
+    },
+    {
+      label: 'Print',
+      icon: 'print',
+      onPress: () => alert('Print'),
+    },
+    {
+      label: 'Inbox',
+      onPress: () => alert('Inbox'),
+    },
+  ];
+
+  return (
+    <Box style={{ height: 100 }}>
+      <Toolbar>
+        <Toolbar.Group items={items} />
+      </Toolbar>
+    </Box>
+  );
+}
+```
+
+## Example
+
+### Example 1: Basic usage
+
+Toolbar can be configure with 3 variants of action items: text-only action, icon-only action and text with icon action.
+
+```jsx live
+function BasicToolbarExample() {
+  const items = [
+    {
+      icon: 'cancel',
+      onPress: () => alert('Cancel'),
+    },
+    {
+      label: 'Print',
+      icon: 'print',
+      onPress: () => alert('Print'),
+    },
+    {
+      label: 'Inbox',
+      onPress: () => alert('Inbox'),
+    },
+  ];
+
+  return (
+    <Box style={{ height: 100 }}>
+      <Toolbar>
+        <Toolbar.Group items={items} />
+      </Toolbar>
+    </Box>
+  );
+}
+```
+
+### Example 2: Toolbar action items
+
+Toolbar action items come with 6 intent: `primary`, `secondary`, `success`, `danger`, `info`, `warning`.
+Toolbar action item can be disabled via disabled prop.
+
+```jsx live
+function ToolbarActionItemsExample() {
+  const items = [
+    {
+      label: 'Reset',
+      intent: 'danger',
+      onPress: () => alert('Reset'),
+    },
+    {
+      label: 'Cancel',
+      disabled: true,
+      intent: 'secondary',
+      onPress: () => alert('Disabled'),
+    },
+    {
+      label: 'Submit',
+      intent: 'primary',
+      onPress: () => alert('Submit'),
+    },
+  ];
+  return (
+    <Box style={{ height: 100 }}>
+      <Toolbar>
+        <Toolbar.Group items={items} />
+      </Toolbar>
+    </Box>
+  );
+}
+```
+
+# Toolbar.Message
+
+Toolbar.Message is a component that can be used to display a message input in the toolbar.
+
+```jsx live
+function ToolbarMessageExample() {
+  return (
+    <Box style={{ height: 100 }}>
+      <Toolbar>
+        <Toolbar.Message
+          placeholder="Message..."
+          prefix={<Button.Icon icon="add" intent="primary" />}
+          suffix={<Button.Icon icon="send" intent="primary" />}
+        />
+      </Toolbar>
+    </Box>
+  );
+}
+```
+
+## Example
+
+### Example 1: Toolbar message with cutom prefix and suffix
+
+```jsx live
+<Box style={{ height: 100 }}>
+  <Toolbar>
+    <Toolbar.Message
+      placeholder="Message..."
+      suffix={<Button.Icon icon="send" intent="primary" />}
+    />
+  </Toolbar>
+</Box>
+```
+
+## Props
+
+#### Toolbar.Group Props
+
+<Props of="ToolbarGroup" />
+
+#### ToolbarItem Config Props
+
+<Props of="ToolbarItem" />
+
+#### Toolbar.Message Props
+
+<Props of="ToolbarMessage" />

@@ -1,0 +1,101 @@
+---
+id: empty
+title: Empty
+---
+
+# Empty
+
+- A component to display empty state of a feature.
+
+## Examples
+
+### Variants
+
+```jsx live
+function EmptyExample1() {
+  return (
+    <Box>
+      <Box>
+        <Empty
+          image={
+            <Image
+              source={{
+                uri: 'https://i.pinimg.com/originals/e6/92/fe/e692fe2bef601bf4760425bd62118117.jpg',
+              }}
+              rounded
+              size="15xlarge"
+            />
+          }
+          title="Empty on light background"
+          description="We'll notify you once an item is ready to be viewed here."
+          variant="light"
+        />
+      </Box>
+
+      <Box marginTop="medium" bgColor="darkGlobalSurface">
+        <Empty
+          image={
+            <Image
+              source={{
+                uri: 'https://i.pinimg.com/originals/e6/92/fe/e692fe2bef601bf4760425bd62118117.jpg',
+              }}
+              rounded
+              size="15xlarge"
+            />
+          }
+          title="Empty on dark background"
+          description="We'll notify you once an item is ready to be viewed here."
+          variant="dark"
+        />
+      </Box>
+    </Box>
+  );
+}
+```
+
+### Multiline Title
+
+```jsx live
+function EmptyExample2() {
+  return (
+    <Empty
+      image={
+        <Image
+          source={{
+            uri: 'https://i.pinimg.com/originals/e6/92/fe/e692fe2bef601bf4760425bd62118117.jpg',
+          }}
+          rounded
+          size="15xlarge"
+        />
+      }
+      title={'There are no events on \nApril 14, 2022'}
+      description="When there are new events, you'll see them here."
+    />
+  );
+}
+```
+
+### Title Only
+
+```jsx live
+function EmptyExample3() {
+  return (
+    <Empty
+      image={
+        <Image
+          source={{
+            uri: 'https://i.pinimg.com/originals/e6/92/fe/e692fe2bef601bf4760425bd62118117.jpg',
+          }}
+          rounded
+          size="15xlarge"
+        />
+      }
+      title="You have no notification at this time"
+    />
+  );
+}
+```
+
+## Props
+
+<Props of="Empty" />

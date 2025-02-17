@@ -1,0 +1,43 @@
+---
+id: sxProp
+title: sx Prop
+---
+
+import { Banner } from '@ehrocks/hero-design-react';
+
+# sx prop
+
+`sx prop` is a shortcut for defining custom style that has access to the theme.
+
+- **Superset of CSS**: `sx` accepts all CSS attributes (using JSS syntax similar to `style` prop).
+- **Theme-aware**: theme values can be quickly accesed without importing.
+- **Shorthand properties**: `bgColor`, `m`, `mb`, `ml`, `mr`, `mt`, `p`, `pb`, `pl`, `pr`, `pt` are also suported .
+- **Full access to colors**: color related properties accept the color key from both of palette and semantic. Eg: `color="primary"` and `color="violet"` both work.
+
+<Banner
+  intent="success"
+  title="Sx prop value convention"
+  content="Sx prop value uses kebab case of theme key to access to theme value. Eg: Using 'default-border' to access to theme.colors.defaultBorder"
+  sx={{
+    mb: 'large',
+  }}
+/>
+
+```jsx live
+<Box
+  sx={{
+    width: '200px',
+    backgroundColor: 'green-light-90',
+    borderRadius: '20px',
+    textAlign: 'center',
+    color: 'green',
+    fontSize: 'medium',
+    lineHeight: 'medium',
+    m: 'small',
+    p: 'medium',
+    boxShadow: 'danger',
+  }}
+>
+  This is box content
+</Box>
+```

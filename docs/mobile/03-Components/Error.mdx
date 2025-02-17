@@ -1,0 +1,91 @@
+---
+id: error
+title: Error
+---
+
+# Error
+
+- A component to display error state and action buttons
+
+## Examples
+
+### In-page Error Screen
+
+```jsx live
+function ErrorExample1() {
+  return (
+    <Error
+      variant="in-page"
+      title="We’re sorry, something went wrong"
+      description="Please try again later"
+      image={{
+        uri: 'https://i.pinimg.com/originals/e6/92/fe/e692fe2bef601bf4760425bd62118117.jpg',
+      }}
+    />
+  );
+}
+```
+
+### In-page Error Screen with CTA
+
+```jsx live
+function ErrorExample2() {
+  return (
+    <Error
+      variant="in-page"
+      title="We’re sorry, something went wrong"
+      description="Please try again later"
+      image={{
+        uri: 'https://i.pinimg.com/originals/e6/92/fe/e692fe2bef601bf4760425bd62118117.jpg',
+      }}
+      ctaText="Retry"
+      onCtaPress={() => navigation.goBack()}
+      onSecondaryCtaPress={() => navigation.goBack()}
+      secondaryCtaText="Dismiss"
+    />
+  );
+}
+```
+
+### Fullscreen Error Screen
+
+```jsx live
+function ErrorExample3() {
+  const [isVisible, setIsVisible] = useState(true);
+
+  return (
+    <HeroDesignProvider theme={theme}>
+      <Box style={{ height: 600 }}>
+        <Button
+          variant="text"
+          text="Show Full Screen Error page"
+          onPress={() => setIsVisible(!isVisible)}
+          testID="error-btn-toggle"
+        />
+        {isVisible && (
+          <Error
+            variant="full-screen"
+            title="We’re sorry, something went wrong"
+            description="Please try again later"
+            image={{
+              uri: 'https://i.pinimg.com/originals/e6/92/fe/e692fe2bef601bf4760425bd62118117.jpg',
+            }}
+            ctaText="Retry"
+            onCtaPress={() => {
+              setIsVisible(false);
+            }}
+            secondaryCtaText="Dismiss"
+            onSecondaryCtaPress={() => {
+              setIsVisible(false);
+            }}
+          />
+        )}
+      </Box>
+    </HeroDesignProvider>
+  );
+}
+```
+
+## Props
+
+<Props of="Error" />

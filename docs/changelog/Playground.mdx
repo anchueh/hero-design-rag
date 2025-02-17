@@ -1,0 +1,16 @@
+---
+id: playground
+title: '@hero-design/playground'
+---
+
+import ChangelogVersionSelect from '@site/src/components/ChangelogVersionSelect';
+import Changelog, {
+  toc as ChangelogToc,
+  // eslint-disable-next-line import/no-relative-packages
+} from '../../../playground/CHANGELOG.md';
+
+<ChangelogVersionSelect options={ChangelogToc} />
+
+<Changelog />
+
+export const toc = ChangelogToc;

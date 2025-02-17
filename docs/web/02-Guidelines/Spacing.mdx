@@ -1,0 +1,40 @@
+---
+id: spacing
+title: Spacing
+---
+
+import { theme } from '@ehrocks/hero-design-react';
+import SpacingTable from '../../helpers/Spacing';
+import LayoutExample from '../../../static/img/EH-Layout.png';
+
+# Spacing
+
+Spacing is used to help with organizing the content within components or positioning components to create a specific layout.
+
+Hero Design's spacing is based on a scale of `8px` as below:
+
+<SpacingTable type="web" />
+
+<br />
+
+#### Example
+
+```jsx live
+<>
+  <div style={{ margin: `0 0 ${theme.space.large}px`, padding: 0 }}>
+    <Breadcrumb
+      items={[
+        { href: '/web/guidelines/spacing', text: 'Level 1' },
+        { href: '/web/guidelines/spacing', text: 'Level 2' },
+      ]}
+    />
+  </div>
+  <Typography.Title level={3}>Spacing</Typography.Title>
+</>
+```
+
+<img
+  alt="eh-layout"
+  style={{ width: '100%', marginTop: theme.space.xxxxlarge }}
+  src={LayoutExample}
+/>

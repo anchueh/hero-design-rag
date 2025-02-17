@@ -1,0 +1,1869 @@
+---
+id: basic-table
+title: Basic
+---
+
+import { theme } from '@ehrocks/hero-design-react';
+
+import RowActionTableExample from '../../../../../src/components/Table/RowActionTableExample';
+import ActionButtonTableExample from '../../../../../src/components/Table/ActionButtonTableExample';
+import BulkActionsTableExample from '../../../../../src/components/Table/BulkActionsTableExample';
+import FiltersTableExample from '../../../../../src/components/Table/FiltersTableExample';
+
+# Basic Table
+
+- A table displays a collection of structured data in rows.
+- Help users get an at-a-glance summary of the data to perform actions or navigate to a full-page representation of it.
+- Organise information in an easy to scan way so that users can look for patterns and develop insights from data.
+
+<Note title="Typescript usage" intent="error">
+  Currently, our the Table component can support any type of props. So please
+  use the typescript inside <Highlight>@ehrocks/hero-design-react</Highlight>.
+  If you want to have any type of props, please create a new issue to let us
+  know.
+</Note>
+
+## Examples
+
+### Basic
+
+#### Render the most basic table
+
+By provide `data` & `columns`.
+
+<Note title="Notes" style={{ marginTop: theme.space.large }}>
+  <Highlight>accessor</Highlight> is optional, but when it is defined the column
+  default sorting will be enabled by default.
+</Note>
+
+```jsx live
+function BasicTable() {
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'Name',
+        accessor: 'name',
+        Cell: ({ value }) => (
+          <Button.Link href="#" text={value} target="_blank" />
+        ),
+      },
+      { Header: 'Age', accessor: 'age' },
+      { Header: 'Status', accessor: 'status', disableSortBy: true },
+    ],
+    []
+  );
+  const data = [
+    { name: 'Vy Nguyen', age: 50, status: 'Single' },
+    { name: 'Hau Dao', age: 51, status: 'Single' },
+    { name: 'Hanh Le', age: 80, status: 'Complicated' },
+    { name: 'Tuan Thieu', age: 99, status: 'In relationship' },
+    { name: 'Vinh Tony', age: 21, status: 'Single' },
+  ];
+  return <Table data={data} columns={columns} />;
+}
+```
+
+#### Render table under loading state
+
+Passing `loading` to Table to control the table loading spinner.
+
+```jsx live
+function LoadingTable() {
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'Name',
+        accessor: 'name',
+        Cell: ({ value }) => (
+          <Button.Link href="#" text={value} target="_blank" />
+        ),
+      },
+      { Header: 'Age', accessor: 'age' },
+      { Header: 'Status', accessor: 'status', disableSortBy: true },
+    ],
+    []
+  );
+  const data = [
+    { name: 'Vy Nguyen', age: 50, status: 'Single' },
+    { name: 'Hau Dao', age: 51, status: 'Single' },
+    { name: 'Hanh Le', age: 80, status: 'Complicated' },
+    { name: 'Tuan Thieu', age: 99, status: 'In relationship' },
+    { name: 'Vinh Tony', age: 21, status: 'Single' },
+  ];
+  return <Table data={data} columns={columns} loading />;
+}
+```
+
+### Multilevel header
+
+Customise multilevel header rendering by providing columns inside column.
+
+```jsx live
+function MultilevelHeader() {
+  const actions = [
+    {
+      icon: 'checkmark',
+      text: 'Accept',
+      onClick: () => alert('Accept leave'),
+    },
+    {
+      icon: 'cancel',
+      text: 'Decline',
+      onClick: () => alert('Decline leave'),
+      divider: 'bottom',
+    },
+    {
+      icon: 'eye-outlined',
+      text: 'View',
+      onClick: () => alert('View leave'),
+    },
+    {
+      icon: 'pencil-outlined',
+      text: 'Edit',
+      onClick: () => alert('Edit leave'),
+    },
+    {
+      icon: 'box-outlined',
+      text: 'Archive',
+      onClick: () => alert('Archive leave'),
+    },
+    {
+      icon: 'trash-bin-outlined',
+      text: 'Delete',
+      intent: 'danger',
+      divider: 'top',
+      onClick: () => alert('Delete leave'),
+    },
+  ].filter(Boolean);
+
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'Name',
+        align: 'center',
+        columns: [
+          {
+            Header: 'First Name',
+            accessor: 'firstName',
+            Cell: ({ value }) => (
+              <Button.Link href="#" text={value} target="_blank" />
+            ),
+            width: '20%',
+          },
+          { Header: 'Last Name', accessor: 'lastName' },
+        ],
+      },
+      {
+        Header: 'Birth',
+        align: 'center',
+        columns: [
+          {
+            Header: 'Day',
+            accessor: 'day',
+          },
+          { Header: 'Month', accessor: 'month' },
+          { Header: 'Year', accessor: 'year' },
+        ],
+      },
+      {
+        Header: 'Actions',
+        accessor: '',
+        disableSortBy: true,
+        Cell: () => {
+          return <Table.RowAction actions={actions} />;
+        },
+      },
+    ],
+    []
+  );
+  const data = [
+    { firstName: 'Vinh', lastName: 'Phan', day: 16, month: 7, year: 1999 },
+    { firstName: 'Dao', lastName: 'Hau', day: 23, month: 1, year: 1995 },
+    { firstName: 'Kien', lastName: 'Tran', day: 12, month: 3, year: 1989 },
+    { firstName: 'Phuc', lastName: 'Dang', day: 22, month: 3, year: 1996 },
+    { firstName: 'Luan', lastName: 'Lai', day: 22, month: 1, year: 2000 },
+  ];
+  return <Table data={data} columns={columns} />;
+}
+```
+
+### Cell customisation
+
+Customise cell rendering by providing Cell as a react component in the column configuration.
+
+```jsx live
+function CustomCellTable() {
+  const actions = [
+    {
+      icon: 'checkmark',
+      text: 'Accept',
+      onClick: () => alert('Accept leave'),
+    },
+    {
+      icon: 'cancel',
+      text: 'Decline',
+      onClick: () => alert('Decline leave'),
+      divider: 'bottom',
+    },
+    {
+      icon: 'eye-outlined',
+      text: 'View',
+      onClick: () => alert('View leave'),
+    },
+    {
+      icon: 'pencil-outlined',
+      text: 'Edit',
+      onClick: () => alert('Edit leave'),
+    },
+    {
+      icon: 'box-outlined',
+      text: 'Archive',
+      onClick: () => alert('Archive leave'),
+    },
+    {
+      icon: 'trash-bin-outlined',
+      text: 'Delete',
+      intent: 'danger',
+      divider: 'top',
+      onClick: () => alert('Delete leave'),
+    },
+  ].filter(Boolean);
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'Name',
+        accessor: 'name',
+        disableSortBy: true,
+        Cell: ({ value }) => (
+          <Box style={{ display: 'flex', alignItems: 'center' }}>
+            <Box
+              sx={{
+                backgroundColor: 'blue-dark-30',
+                backgroundSize: 'cover',
+                width: theme.sizes.xxlarge,
+                height: theme.sizes.xxlarge,
+                borderRadius: '50%',
+                mr: 'small',
+              }}
+            />
+            <Button.Link href="#" text={value} target="_blank" />
+          </Box>
+        ),
+      },
+      { Header: 'Age', accessor: 'age' },
+      {
+        Header: 'Status',
+        accessor: 'status',
+        disableSortBy: true,
+        Cell: ({ value }) => (
+          <Tag text={value} intent="success" variant="filled" />
+        ),
+      },
+      {
+        Header: 'Actions',
+        accessor: '',
+        disableSortBy: true,
+        Cell: () => {
+          return <Table.RowAction actions={actions} />;
+        },
+      },
+    ],
+    []
+  );
+  const data = [
+    {
+      name: 'Vy Nguyen',
+      age: 50,
+      profile: 'https://employmenthero.com/',
+      status: 'Single',
+    },
+    {
+      name: 'Hau Dao',
+      age: 51,
+      profile: 'https://employmenthero.com/',
+      status: 'Single',
+    },
+    {
+      name: 'Hanh Le',
+      age: 80,
+      profile: 'https://employmenthero.com/',
+      status: 'Complicated',
+    },
+    {
+      name: 'Tuan Thieu',
+      age: 99,
+      profile: 'https://employmenthero.com/',
+      status: 'In relationship',
+    },
+    {
+      name: 'Vinh Tony',
+      age: 21,
+      profile: 'https://employmenthero.com/',
+      status: 'Single',
+    },
+  ];
+  return <Table data={data} columns={columns} />;
+}
+```
+
+### Accessing the original row data in a cell.
+
+It is common to access to other fields of row data to handle logic in a customised cell. The row data object from the `data` array is also passed as the prop `row.original` of `Cell`.
+
+```jsx live
+function TableRowData() {
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'Name',
+        accessor: 'name',
+        Cell: ({ value }) => (
+          <Button.Link href="#" text={value} target="_blank" />
+        ),
+      },
+      { Header: 'Age', accessor: 'age' },
+      {
+        Header: 'Status',
+        accessor: 'status',
+        disableSortBy: true,
+        Cell: ({ value, row: { original } }) => (
+          <Tag
+            text={value}
+            intent="success"
+            variant={original.age >= 18 ? 'filled' : 'outlined'}
+          />
+        ),
+      },
+    ],
+    []
+  );
+  const data = [
+    { name: 'Vy Nguyen', age: 50, status: 'Single' },
+    { name: 'Hau Dao', age: 51, status: 'Single' },
+    { name: 'Hanh Le', age: 80, status: 'Complicated' },
+    { name: 'Tuan Thieu', age: 99, status: 'In relationship' },
+    { name: 'Vinh Tony', age: 16, status: 'Single' },
+  ];
+  return <Table data={data} columns={columns} />;
+}
+```
+
+### Responsive by showing important columns in small screens
+
+In below example, we only show important columns in small screen devices:
+
+- Show Name & Status columns.
+- Hide Age column.
+
+```jsx live
+function ResponsiveColumns() {
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'Name',
+        accessor: 'name',
+        Cell: ({ value }) => (
+          <Button.Link href="#" text={value} target="_blank" />
+        ),
+      },
+      { Header: 'Age', accessor: 'age', displayAtBreakpoint: 'medium' },
+      {
+        Header: 'Status',
+        accessor: 'status',
+        disableSortBy: true,
+        Cell: ({ value }) => (
+          <Tag text={value} intent="success" variant="filled" />
+        ),
+      },
+    ],
+    []
+  );
+  const data = [
+    { name: 'Vy Nguyen', age: 50, status: 'Single' },
+    { name: 'Hau Dao', age: 51, status: 'Single' },
+    { name: 'Hanh Le', age: 80, status: 'Complicated' },
+    { name: 'Tuan Thieu', age: 99, status: 'In relationship' },
+    { name: 'Vinh Tony', age: 21, status: 'Single' },
+  ];
+  return <Table data={data} columns={columns} />;
+}
+```
+
+### Responsive by freezing first column(s) in small screens
+
+When using with `horizontallySticky` prop, the first column(s) of the table will become sticky on small screens (small enough for the table to be horizontally scrollable).
+
+```jsx live
+function FreezingColumn() {
+  const actions = [
+    {
+      icon: 'checkmark',
+      text: 'Accept',
+      onClick: () => alert('Accept leave'),
+    },
+    {
+      icon: 'cancel',
+      text: 'Decline',
+      onClick: () => alert('Decline leave'),
+      divider: 'bottom',
+    },
+    {
+      icon: 'eye-outlined',
+      text: 'View',
+      onClick: () => alert('View leave'),
+    },
+    {
+      icon: 'pencil-outlined',
+      text: 'Edit',
+      onClick: () => alert('Edit leave'),
+    },
+    {
+      icon: 'box-outlined',
+      text: 'Archive',
+      onClick: () => alert('Archive leave'),
+    },
+    {
+      icon: 'trash-bin-outlined',
+      text: 'Delete',
+      intent: 'danger',
+      divider: 'top',
+      onClick: () => alert('Delete leave'),
+    },
+  ].filter(Boolean);
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'Name',
+        accessor: 'name',
+        Cell: ({ value }) => (
+          <Button.Link href="#" text={value} target="_blank" />
+        ),
+      },
+      { Header: 'Age', accessor: 'age' },
+      {
+        Header: 'Marital Status',
+        accessor: 'maritalStatus',
+        disableSortBy: true,
+        Cell: ({ value }) => (
+          <Tag text={value} intent="success" variant="filled" />
+        ),
+      },
+      {
+        Header: 'Gender Status',
+        accessor: 'genderStatus',
+        disableSortBy: true,
+        Cell: ({ value }) => (
+          <Tag text={value} intent="success" variant="filled" />
+        ),
+      },
+      {
+        Header: 'Direct Personnel',
+        accessor: 'directPersonnel',
+        disableSortBy: true,
+      },
+      {
+        Header: 'Actions',
+        accessor: '',
+        disableSortBy: true,
+        Cell: () => {
+          return <Table.RowAction actions={actions} />;
+        },
+      },
+    ],
+    []
+  );
+  const expansionConfig = React.useMemo(
+    () => ({
+      expandedRowRenderer: (rowData) => (
+        <tr>
+          <td
+            colSpan={columns.length + 2}
+            style={{
+              padding: `${theme.space.large}px 0`,
+              margin: 0,
+              textAlign: 'center',
+            }}
+          >
+            <Typography.Text>{`Name: ${rowData.name}; Info: ${rowData.age} - ${rowData.status}`}</Typography.Text>
+          </td>
+        </tr>
+      ),
+      rowExpandable: (rowData) => rowData.age >= 18,
+    }),
+    []
+  );
+  const [expandedRows, setExpandedRows] = React.useState({ 0: true });
+  const [selectedRows, setSelectedRows] = React.useState({ 0: true });
+  const data = [
+    {
+      name: 'Vy Nguyen',
+      age: 50,
+      profile: 'https://employmenthero.com/',
+      maritalStatus: 'Single',
+      genderStatus: 'Male',
+      directPersonnel: 'Indirect',
+    },
+    {
+      name: 'Hau Dao',
+      age: 51,
+      profile: 'https://employmenthero.com/',
+      maritalStatus: 'Single',
+      genderStatus: 'Male',
+      directPersonnel: 'Indirect',
+    },
+    {
+      name: 'Hanh Le',
+      age: 80,
+      profile: 'https://employmenthero.com/',
+      maritalStatus: 'Complicated',
+      genderStatus: 'Male',
+      directPersonnel: 'Direct',
+    },
+    {
+      name: 'Tuan Thieu',
+      age: 99,
+      profile: 'https://employmenthero.com/',
+      maritalStatus: 'In relationship',
+      genderStatus: 'Male',
+      directPersonnel: 'Indirect',
+    },
+    {
+      name: 'Vinh Tony',
+      age: 21,
+      profile: 'https://employmenthero.com/',
+      maritalStatus: 'Single',
+      genderStatus: 'Male',
+      directPersonnel: 'Direct',
+    },
+  ];
+  return (
+    <Grid>
+      <Grid.Row gutter={['small', 'small']}>
+        <Grid.Col span={[24, 16, 16, 8, 8]} offset={[0, 4, 4, 0, 0]}>
+          <Table data={data} columns={columns} horizontallySticky />
+        </Grid.Col>
+        <Grid.Col span={[24, 16, 16, 8, 8]} offset={[0, 4, 4, 0, 0]}>
+          <Table
+            data={data}
+            columns={columns}
+            selectable
+            selectedRows={selectedRows}
+            onSelectedRowsChange={setSelectedRows}
+            horizontallySticky
+          />
+        </Grid.Col>
+        <Grid.Col span={[24, 16, 16, 8, 8]} offset={[0, 4, 4, 0, 0]}>
+          <Table
+            data={data}
+            columns={columns}
+            selectable
+            expansion={expansionConfig}
+            expandedRows={expandedRows}
+            onExpandedRowsChange={setExpandedRows}
+            horizontallySticky
+          />
+        </Grid.Col>
+      </Grid.Row>
+    </Grid>
+  );
+}
+```
+
+### Responsive by freezing multiple column(s) in small screens
+
+Adding `nColumns` property into the `stickyConfig` prop tells the Table how many columns should be sticky on small screens.
+
+```jsx live
+function FreezingMultipleColumns() {
+  const actions = [
+    {
+      icon: 'checkmark',
+      text: 'Accept',
+      onClick: () => alert('Accept leave'),
+    },
+    {
+      icon: 'cancel',
+      text: 'Decline',
+      onClick: () => alert('Decline leave'),
+      divider: 'bottom',
+    },
+    {
+      icon: 'eye-outlined',
+      text: 'View',
+      onClick: () => alert('View leave'),
+    },
+    {
+      icon: 'pencil-outlined',
+      text: 'Edit',
+      onClick: () => alert('Edit leave'),
+    },
+    {
+      icon: 'box-outlined',
+      text: 'Archive',
+      onClick: () => alert('Archive leave'),
+    },
+    {
+      icon: 'trash-bin-outlined',
+      text: 'Delete',
+      intent: 'danger',
+      divider: 'top',
+      onClick: () => alert('Delete leave'),
+    },
+  ].filter(Boolean);
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'Name',
+        accessor: 'name',
+        Cell: ({ value }) => (
+          <Button.Link href="#" text={value} target="_blank" />
+        ),
+      },
+      { Header: 'Age', accessor: 'age' },
+      {
+        Header: 'Marital Status',
+        accessor: 'maritalStatus',
+        disableSortBy: true,
+        Cell: ({ value }) => (
+          <Tag text={value} intent="success" variant="filled" />
+        ),
+      },
+      {
+        Header: 'Gender Status',
+        accessor: 'genderStatus',
+        disableSortBy: true,
+        Cell: ({ value }) => (
+          <Tag text={value} intent="success" variant="filled" />
+        ),
+      },
+      {
+        Header: 'Direct Personnel',
+        accessor: 'directPersonnel',
+        disableSortBy: true,
+      },
+      {
+        Header: 'Actions',
+        accessor: '',
+        disableSortBy: true,
+        Cell: () => {
+          return <Table.RowAction actions={actions} />;
+        },
+      },
+    ],
+    []
+  );
+  const expansionConfig = React.useMemo(
+    () => ({
+      expandedRowRenderer: (rowData) => (
+        <tr>
+          <td
+            colSpan={columns.length + 2}
+            style={{
+              padding: `${theme.space.large}px 0`,
+              margin: 0,
+              textAlign: 'center',
+            }}
+          >
+            <Typography.Text>{`Name: ${rowData.name}; Info: ${rowData.age} - ${rowData.status}`}</Typography.Text>
+          </td>
+        </tr>
+      ),
+      rowExpandable: (rowData) => rowData.age >= 18,
+    }),
+    []
+  );
+  const [expandedRows, setExpandedRows] = React.useState({ 0: true });
+  const [selectedRows, setSelectedRows] = React.useState({ 0: true });
+  const data = [
+    {
+      name: 'Vy Nguyen',
+      age: 50,
+      profile: 'https://employmenthero.com/',
+      maritalStatus: 'Single',
+      genderStatus: 'Male',
+      directPersonnel: 'Indirect',
+    },
+    {
+      name: 'Hau Dao',
+      age: 51,
+      profile: 'https://employmenthero.com/',
+      maritalStatus: 'Single',
+      genderStatus: 'Male',
+      directPersonnel: 'Indirect',
+    },
+    {
+      name: 'Hanh Le',
+      age: 80,
+      profile: 'https://employmenthero.com/',
+      maritalStatus: 'Complicated',
+      genderStatus: 'Male',
+      directPersonnel: 'Direct',
+    },
+    {
+      name: 'Tuan Thieu',
+      age: 99,
+      profile: 'https://employmenthero.com/',
+      maritalStatus: 'In relationship',
+      genderStatus: 'Male',
+      directPersonnel: 'Indirect',
+    },
+    {
+      name: 'Vinh Tony',
+      age: 21,
+      profile: 'https://employmenthero.com/',
+      maritalStatus: 'Single',
+      genderStatus: 'Male',
+      directPersonnel: 'Direct',
+    },
+  ];
+  return (
+    <Grid>
+      <Grid.Row gutter={['small', 'small']}>
+        <Grid.Col span={[36, 24, 24, 12, 12]} offset={[0, 4, 4, 0, 0]}>
+          <Table
+            data={data}
+            columns={columns}
+            horizontallySticky
+            stickyConfig={{ nColumns: 2 }}
+          />
+        </Grid.Col>
+        <Grid.Col span={[36, 24, 24, 12, 12]} offset={[0, 4, 4, 0, 0]}>
+          <Table
+            data={data}
+            columns={columns}
+            selectable
+            selectedRows={selectedRows}
+            onSelectedRowsChange={setSelectedRows}
+            horizontallySticky
+            stickyConfig={{ nColumns: 3 }}
+          />
+        </Grid.Col>
+      </Grid.Row>
+    </Grid>
+  );
+}
+```
+
+### Pagination
+
+Pagination is one of table advanced feature. To enable it, we need to:
+
+- Passing `pagination` configuration.
+- Provide `onPaginationChange` callback to control the selected page value.
+
+<Note title="Pagination index">
+  Pagination index is 1-based which means the first page will be 1 (NOT 0).
+</Note>
+
+We may display items per page selection by:
+
+- Passing `itemsPerPage` configuration.
+- Provide `onItemsPerPageChange` callback to control the selected items per page.
+
+<Note title="Items per page is only visible when:">
+  Items per page UI is only visible when <Highlight>pagination</Highlight>{' '}
+  configuration is defined.
+</Note>
+
+```jsx live
+function PaginationTable() {
+  const [itemsPerPageValue, setItemsPerPageValue] = React.useState('20');
+  const itemsPerPageOptions = React.useMemo(() => [
+    { value: '20', text: '20 / page' },
+    { value: '50', text: '50 / page' },
+    { value: '100', text: '100 / page' },
+  ]);
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'Name',
+        accessor: 'name',
+        Cell: ({ value }) => (
+          <Button.Link href={value} text={value} target="_blank" />
+        ),
+      },
+      { Header: 'Age', accessor: 'age', displayAtBreakpoint: 'medium' },
+      {
+        Header: 'Status',
+        accessor: 'status',
+        disableSortBy: true,
+        Cell: ({ value }) => (
+          <Tag text={value} intent="success" variant="filled" />
+        ),
+      },
+    ],
+    []
+  );
+  const paginatedData = [
+    [
+      { name: 'Vy Nguyen', age: 50, status: 'Single' },
+      { name: 'Hau Dao', age: 51, status: 'Single' },
+      { name: 'Hanh Le', age: 80, status: 'Complicated' },
+    ],
+    [
+      { name: 'Tuan Thieu', age: 99, status: 'In relationship' },
+      { name: 'Vinh Tony', age: 21, status: 'Single' },
+      { name: 'Son Trinh', age: 69, status: 'Separated' },
+    ],
+  ];
+  const [currentPage, setCurrentPage] = React.useState(1);
+  // The pagination.current is 1-based index, JS array is 0-based index.
+  return (
+    <Table
+      data={paginatedData[currentPage - 1]}
+      columns={columns}
+      pagination={{ current: currentPage, total: paginatedData.length }}
+      onPaginationChange={setCurrentPage}
+      itemsPerPage={{
+        value: itemsPerPageValue,
+        options: itemsPerPageOptions,
+      }}
+      onItemsPerPageChange={setItemsPerPageValue}
+    />
+  );
+}
+```
+
+### Row expansion
+
+Row expansion is one of table advanced feature. To enable it, we need to:
+
+- Passing `expansion` configuration to decide which rows can be expanded, the how the expanded rows will be rendered.
+- [Optional] Control expansion state by passing: `expandedRows` & `onExpandedRowsChange`.
+
+<Note title="Data shape">
+  <Ul>
+    <Li>
+      <Highlight>expandedRows</Highlight> is an object of{' '}
+      <Highlight>{'{ [string]: boolean }'}</Highlight>. Eg if expandedRows is{' '}
+      <Highlight>{'{ 0: true }'}</Highlight>, it does mean the first row of
+      table (at index 0) will be expanded.
+    </Li>
+    <Li>
+      Because expandedRows uses row index to extract the expansion state, it may
+      work INCORRECTLY if table has paginated data. This needs your extra work
+      to manipulate the <Highlight>expandedRows</Highlight> by observing the{' '}
+      <Highlight>onPaginationChange</Highlight> callback.
+    </Li>
+  </Ul>
+</Note>
+
+```jsx live
+function RowExpansion() {
+  const expansionConfig = React.useMemo(
+    () => ({
+      expandedRowRenderer: (rowData) => (
+        <tr>
+          <td />
+          <td
+            colSpan={1}
+            style={{ padding: `${theme.space.large}px 0`, margin: 0 }}
+          >
+            <Typography.Text>{`Name: ${rowData.name}`}</Typography.Text>
+          </td>
+          <td
+            colSpan={2}
+            style={{ padding: `${theme.space.large}px 0`, margin: 0 }}
+          >
+            <Typography.Text>{`Info: ${rowData.age} - ${rowData.status}`}</Typography.Text>
+          </td>
+        </tr>
+      ),
+      rowExpandable: (rowData) => rowData.age >= 18,
+    }),
+    []
+  );
+  const [expandedRows, setExpandedRows] = React.useState({ 0: true });
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'Name',
+        accessor: 'name',
+        Cell: ({ value }) => (
+          <Button.Link href={value} text={value} target="_blank" />
+        ),
+      },
+      { Header: 'Age', accessor: 'age', displayAtBreakpoint: 'medium' },
+      {
+        Header: 'Status',
+        accessor: 'status',
+        disableSortBy: true,
+        Cell: ({ value }) => (
+          <Tag text={value} intent="success" variant="filled" />
+        ),
+      },
+    ],
+    []
+  );
+  const data = [
+    { name: 'Vy Nguyen', age: 50, status: 'Single' },
+    { name: 'Hau Dao', age: 51, status: 'Single' },
+    { name: 'Hanh Le', age: 80, status: 'Complicated' },
+    { name: 'Tuan Thieu', age: 99, status: 'In relationship' },
+    { name: 'Vinh Tony', age: 21, status: 'Single' },
+  ];
+  return (
+    <Table
+      data={data}
+      columns={columns}
+      expansion={expansionConfig}
+      expandedRows={expandedRows}
+      onExpandedRowsChange={setExpandedRows}
+    />
+  );
+}
+```
+
+### Column sorting
+
+Sorting is enabled by default on every table column, we can optionally control the sorting state by passing: `sortBy` & `onSortByChange`.
+
+<Note title="Data shape">
+  <Ul>
+    <Li>
+      <Highlight>sortBy</Highlight> is an array of{' '}
+      <Highlight>{'{ id: string, desc?: boolean }'}</Highlight>. Eg if sortBy is{' '}
+      <Highlight>{"[{ id: 'firstName', desc: true }]"}</Highlight>, it does mean
+      the column firstName is sorted descendingly.
+    </Li>
+    <Li>
+      To disable sortBy in a column, specify{' '}
+      <Highlight>disableSortBy</Highlight> true.
+    </Li>
+  </Ul>
+</Note>
+
+```jsx live
+function SortingColumn() {
+  const [sortBy, setSortBy] = React.useState([{ id: 'name', desc: false }]);
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'Name',
+        accessor: 'name',
+        Cell: ({ value }) => (
+          <Button.Link href={value} text={value} target="_blank" />
+        ),
+      },
+      { Header: 'Age', accessor: 'age', displayAtBreakpoint: 'medium' },
+      {
+        Header: 'Status',
+        accessor: 'status',
+        disableSortBy: true,
+        Cell: ({ value }) => (
+          <Tag text={value} intent="success" variant="filled" />
+        ),
+      },
+    ],
+    []
+  );
+  const data = [
+    { name: 'Vy Nguyen', age: 50, status: 'Single' },
+    { name: 'Hau Dao', age: 51, status: 'Single' },
+    { name: 'Hanh Le', age: 80, status: 'Complicated' },
+    { name: 'Tuan Thieu', age: 99, status: 'In relationship' },
+    { name: 'Vinh Tony', age: 21, status: 'Single' },
+  ];
+  return (
+    <Table
+      data={data}
+      columns={columns}
+      sortBy={sortBy}
+      onSortByChange={setSortBy}
+    />
+  );
+}
+```
+
+### Row selection
+
+Row selection is one of table advanced feature. To enable it, we need to:
+
+- Specify `selectable` true.
+- [Optional] Control selection state by passing: `selectedRows` & `onSelectedRowsChange`.
+
+<Note title="Data shape">
+  <Ul>
+    <Li>
+      <Highlight>selectedRows</Highlight> is an object of{' '}
+      <Highlight>{'{ [string]: boolean }'}</Highlight>. Eg if selectedRows is{' '}
+      <Highlight>{'{ 0: true }'}</Highlight>, it does mean the first row of
+      table (at index 0) will be selected.
+    </Li>
+    <Li>
+      If you are using Table has paginated data you need to define{' '}
+      <Highlight>rowIdExtractor</Highlight> in <Highlight>rows</Highlight> prop
+      for <Highlight>Table</Highlight> component, that will help set identify
+      key for each Table Row, so bulk checks items will work properly for
+      pagination and the object of <Highlight>selectedRows</Highlight> will be{' '}
+      <Highlight>{'{ <YOUR-ROW-ID>: true }'}</Highlight>. Default rowIdExtractor
+      is <Highlight>undefined</Highlight>, it means the identify key is{' '}
+      <Highlight>index</Highlight> that causes the INCORRECT work when using
+      pagination.
+    </Li>
+  </Ul>
+</Note>
+
+```jsx live
+function RowSelection() {
+  const [selectedRows, setSelectedRows] = React.useState({ 0: true });
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'Name',
+        accessor: 'name',
+        Cell: ({ value }) => (
+          <Button.Link href={value} text={value} target="_blank" />
+        ),
+      },
+      { Header: 'Age', accessor: 'age', displayAtBreakpoint: 'medium' },
+      {
+        Header: 'Status',
+        accessor: 'status',
+        disableSortBy: true,
+        Cell: ({ value }) => (
+          <Tag text={value} intent="success" variant="filled" />
+        ),
+      },
+    ],
+    []
+  );
+  const data = [
+    { name: 'Vy Nguyen', age: 50, status: 'Single' },
+    { name: 'Hau Dao', age: 51, status: 'Single' },
+    { name: 'Hanh Le', age: 80, status: 'Complicated' },
+    { name: 'Tuan Thieu', age: 99, status: 'In relationship' },
+    { name: 'Vinh Tony', age: 21, status: 'Single' },
+  ];
+  return (
+    <Table
+      data={data}
+      columns={columns}
+      selectable
+      selectedRows={selectedRows}
+      onSelectedRowsChange={setSelectedRows}
+      bulkCheckSettings={{
+        disableCheckRule: (row) => row.original.status === 'Complicated',
+      }}
+    />
+  );
+}
+```
+
+- [Optional] Custom bulk check items by passing: `bulkCheckSettings`.
+
+<Note title="Notes" style={{ marginTop: theme.space.large }}>
+  <Highlight>bulkCheckSettings</Highlight> will have 3 props:
+  <Ul>
+    <Li>
+      <Highlight>disableCheckRule</Highlight> is the function to help us set{' '}
+      <Highlight>disabled</Highlight> for checkbox when you don&apost want the
+      user to be able to check the checkbox for specific row. If all checkbox
+      items are disabled, the select all checkbox (the checkbox at the Header)
+      will be <Highlight>disabled</Highlight> as well based on the{' '}
+      <Highlight>disableCheckRule</Highlight> function.
+    </Li>
+    <Li>
+      <Highlight>bulkHeaderRenderer</Highlight> is the function to help us
+      custom the select all checkbox in the Header, we can freely to custom it
+      to whatever you want.
+    </Li>
+    <Li>
+      <Highlight>bulkItemRerender</Highlight> is the function to help us custom
+      the item checkbox for each row. when you want to custom the disabled item
+      (like lock icon or something like that), you should be aware of using{' '}
+      <Highlight>disabled</Highlight> prop from this function, it will be
+      affected by the logic of the select all checkbox.
+    </Li>
+  </Ul>
+</Note>
+
+```jsx live
+function RowSelection2() {
+  const [selectedRows, setSelectedRows] = React.useState({});
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'Personnel',
+        accessor: 'name',
+        Cell: ({ value }) => (
+          <Box style={{ display: 'flex', alignItems: 'center' }}>
+            <Box
+              sx={{
+                backgroundColor: 'blue-dark-30',
+                backgroundSize: 'cover',
+                width: theme.sizes.xxlarge,
+                height: theme.sizes.xxlarge,
+                borderRadius: '50%',
+                mr: 'small',
+              }}
+            />
+            <Button.Link href="#" text={value} target="_blank" />
+          </Box>
+        ),
+      },
+      {
+        Header: 'Start date',
+        accessor: 'startDate',
+      },
+      {
+        Header: 'End date',
+        accessor: 'endDate',
+      },
+      {
+        Header: 'Leave category',
+        accessor: 'leaveCategory',
+      },
+      {
+        Header: 'Duration',
+        accessor: 'duration',
+      },
+      {
+        Header: 'Remaining',
+        accessor: 'remaining',
+      },
+      {
+        Header: 'Status',
+        accessor: 'status',
+        Cell: ({ value }) => {
+          const intent = value === 'Approved' ? 'success' : 'warning';
+          return (
+            <Tag
+              text={value.toUpperCase()}
+              variant="outlined"
+              intent={intent}
+            />
+          );
+        },
+      },
+      {
+        Header: 'More options',
+        accessor: 'deletable',
+        disableSortBy: true,
+        Cell: ({ value }) => {
+          return (
+            <Table.RowAction
+              actions={[
+                {
+                  icon: 'checkmark',
+                  text: 'Accept',
+                  onClick: () => alert('Accept leave'),
+                },
+                {
+                  icon: 'cancel',
+                  text: 'Decline',
+                  onClick: () => alert('Decline leave'),
+                  divider: 'bottom',
+                },
+                {
+                  icon: 'eye-outlined',
+                  text: 'View',
+                  onClick: () => alert('View leave'),
+                },
+                {
+                  icon: 'pencil-outlined',
+                  text: 'Edit',
+                  onClick: () => alert('Edit leave'),
+                },
+                value && {
+                  icon: 'trash-bin-outlined',
+                  text: 'Delete',
+                  intent: 'danger',
+                  divider: 'top',
+                  onClick: () => alert('Delete leave'),
+                },
+              ].filter(Boolean)}
+            />
+          );
+        },
+      },
+    ],
+    []
+  );
+  const [itemsPerPageValue, setItemsPerPageValue] = React.useState(20);
+  const itemsPerPageOptions = React.useMemo(() => [
+    { value: 20, text: '20 / page' },
+    { value: 50, text: '50 / page' },
+    { value: 100, text: '100 / page' },
+  ]);
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [data, setData] = React.useState(tableData);
+  const paginatedData = React.useMemo(() => {
+    return chunk(itemsPerPageValue)(data);
+  }, [itemsPerPageValue, data]);
+  React.useEffect(() => {
+    if (currentPage > paginatedData.length && paginatedData.length > 0) {
+      setCurrentPage(paginatedData.length);
+    }
+  }, [itemsPerPageValue]);
+  return (
+    <Grid>
+      <Grid.Row>
+        <Grid.Col span={[24, 24, 24, 24, 24]}>
+          <Table.ActionButtons
+            buttons={[
+              {
+                icon: 'add',
+                text: 'Add new leave request',
+                role: 'primary',
+                onClick: () => alert('Create new leave request'),
+              },
+            ]}
+            style={{
+              display: 'inline-block',
+            }}
+            sx={{ mb: 'large' }}
+          />
+          <Table.BulkActions
+            data={data}
+            selectedRows={selectedRows}
+            rowIdExtractor={(row) => row.id}
+            actions={[
+              {
+                icon: 'checkmark',
+                text: 'Approve',
+                intent: 'success',
+                onClick: () => alert('Approve rows'),
+              },
+              {
+                icon: 'cancel',
+                text: 'Decline',
+                intent: 'danger',
+                variant: 'outlined',
+                onClick: () => alert('Decline rows'),
+              },
+              {
+                icon: 'trash-bin-outlined',
+                text: 'Delete',
+                intent: 'danger',
+                variant: 'text',
+                divider: 'before',
+                onClick: () => alert('Decline rows'),
+              },
+            ]}
+            sx={{ mb: 'large' }}
+          />
+        </Grid.Col>
+      </Grid.Row>
+      <Grid.Row>
+        <Grid.Col span={[24, 24, 24, 24, 24]}>
+          <Table
+            data={paginatedData[currentPage - 1] || []}
+            columns={columns}
+            selectable
+            selectedRows={selectedRows}
+            onSelectedRowsChange={setSelectedRows}
+            noData="There are currently no leave requests to display"
+            horizontallySticky
+            pagination={{ current: currentPage, total: paginatedData.length }}
+            onPaginationChange={setCurrentPage}
+            itemsPerPage={{
+              value: itemsPerPageValue,
+              options: itemsPerPageOptions,
+            }}
+            onItemsPerPageChange={setItemsPerPageValue}
+            bulkCheckSettings={{
+              disableCheckRule: (row) => row.original.status === 'Pending',
+              bulkItemRerender: ({
+                checked,
+                onChange,
+                indeterminate,
+                disabled,
+              }) =>
+                disabled ? (
+                  <Icon icon="lock" size="large" />
+                ) : (
+                  <Checkbox
+                    checked={checked}
+                    indeterminate={indeterminate}
+                    onChange={onChange}
+                    style={{ display: 'block' }}
+                    value=""
+                    text=""
+                  />
+                ),
+            }}
+            rows={{ rowIdExtractor: (row) => row.id }}
+          />
+        </Grid.Col>
+      </Grid.Row>
+    </Grid>
+  );
+}
+```
+
+### Column layout
+
+Column layout can be customised by:
+
+- [Optional] Specify `width` prop for each column to define the width of column.
+- [Optional] Specify `align` prop for each column to define the text alignment of the content inside the column. The alignment will be applied both to header & cell. Individual setting is not supported.
+
+<Note title="Notes">
+  <Ul>
+    <Li>
+      <Highlight>accessor</Highlight> is required to make column alignment and
+      width setting get effect.
+    </Li>
+    <Li>
+      <Highlight>accessor</Highlight> is defined will enable default column
+      sorting, we may want to disable it by setting{' '}
+      <Highlight>disableSortBy</Highlight> true.
+    </Li>
+  </Ul>
+</Note>
+
+```jsx live
+function ColumnLayout() {
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'Name',
+        accessor: 'name',
+        Cell: ({ value }) => (
+          <Button.Link href={value} text={value} target="_blank" />
+        ),
+        align: 'left',
+        width: '15%',
+      },
+      { Header: 'Age', accessor: 'age', align: 'right' },
+    ],
+    []
+  );
+  const data = [
+    { name: 'Vy Nguyen', age: 50 },
+    { name: 'Hau Dao', age: 51 },
+    { name: 'Hanh Le', age: 80 },
+    { name: 'Tuan Thieu', age: 99 },
+    { name: 'Vinh Tony', age: 21 },
+  ];
+  return <Table data={data} columns={columns} />;
+}
+```
+
+### Empty state
+
+When `data` is potentially an empty array, it is recommended to specify prop `noData` to show an empty state of `Table`.
+
+```jsx live
+function EmptyState() {
+  const columns = React.useMemo(
+    () => [
+      { Header: 'Name', accessor: 'name' },
+      { Header: 'Age', accessor: 'age' },
+      { Header: 'Status', accessor: 'status', disableSortBy: true },
+    ],
+    []
+  );
+  const data = [];
+  return (
+    <Table
+      data={data}
+      columns={columns}
+      noData="No employees have been added yet"
+    />
+  );
+}
+```
+
+### Filters, Row Action, ActionButtons and Bulk Actions
+
+**Using `Table.RowAction`**
+
+- To render one action or multiple actions menu for table.
+
+<div id="row-action-example">
+  <RowActionTableExample />
+</div>
+
+**Using `Table.ActionButtons`**
+
+- To render action buttons for table.
+
+<div id="action-button-example">
+  <ActionButtonTableExample />
+</div>
+
+**Using `Table.BulkActions`**
+
+- To render actions that applied for all the selected rows of the table.
+
+<div id="bulk-actions-example">
+  <BulkActionsTableExample />
+</div>
+
+**Using `Table.Filters (Deprecated)` (Use [Filters](/web/Components/Filters) instead) and `Table.Filter`**
+
+<Note title="Deprecated" intent="error">
+  Table.Filters, Table.Filter, Table.createFilters is deprecated. Please use
+  Filter or Filters component instead.
+</Note>
+
+- To filter table data.
+
+<div id="filters-table-example">
+  <FiltersTableExample />
+</div>
+
+<Note
+  title="Notes"
+  style={{ marginTop: theme.space.large, marginBottom: -theme.space.large }}
+>
+  To use <strong>Table.Filters</strong> and <strong>Table.Filter</strong> with
+  Typescript, using <strong>Table.createFilters</strong> to ensure type safety.
+  See example code below for more information.
+</Note>
+
+```typescript
+/* Table.createFilters example */
+
+type FilterTypes = {
+  dateRange?: {
+    endDate?: string;
+    startDate?: string;
+  };
+  leaveCategory?: string;
+  personnel?: string;
+  reportingPersonnel: string;
+  search?: string;
+  status: string[];
+};
+
+const { Filters, Filter } = Table.createFilters<FilterTypes>();
+
+const Component = () => {
+  return (
+    {/* Filters component will require the value and onChange to match with the FilterTypes above */}
+    <Filters value={...} onChange={...}>
+      {/* Filter component will take the filterKey then auto infer type of value and onChange for its render function */}
+      <Filter filterKey="search">
+        {/* On below render function, the type of value will be `string | undefined` - according to FilterTypes['search'] */}
+        {({ value, onChange }) => (
+          <Input value={value} onChange={e => onChange(e.target.value)} />
+        )}
+      </Filter>
+    </Filters>
+  )
+}
+
+```
+
+```jsx live
+function TableFiler() {
+  const [selectedRows, setSelectedRows] = React.useState({});
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'Personnel',
+        accessor: 'name',
+        Cell: ({ value }) => (
+          <Box style={{ display: 'flex', alignItems: 'center' }}>
+            <Box
+              sx={{
+                backgroundColor: 'blue-dark-30',
+                backgroundSize: 'cover',
+                width: theme.sizes.xxlarge,
+                height: theme.sizes.xxlarge,
+                borderRadius: '50%',
+                mr: 'small',
+              }}
+            />
+            <Button.Link href="#" text={value} target="_blank" />
+          </Box>
+        ),
+      },
+      {
+        Header: 'Start date',
+        accessor: 'startDate',
+      },
+      {
+        Header: 'End date',
+        accessor: 'endDate',
+      },
+      {
+        Header: 'Leave category',
+        accessor: 'leaveCategory',
+      },
+      {
+        Header: 'Duration',
+        accessor: 'duration',
+      },
+      {
+        Header: 'Remaining',
+        accessor: 'remaining',
+      },
+      {
+        Header: 'Status',
+        accessor: 'status',
+        Cell: ({ value }) => {
+          const intent = value === 'Approved' ? 'success' : 'warning';
+          return (
+            <Tag
+              text={value.toUpperCase()}
+              variant="outlined"
+              intent={intent}
+            />
+          );
+        },
+      },
+      {
+        Header: 'More options',
+        accessor: 'deletable',
+        disableSortBy: true,
+        Cell: ({ value }) => {
+          return (
+            <Table.RowAction
+              actions={[
+                {
+                  icon: 'checkmark',
+                  text: 'Accept',
+                  onClick: () => alert('Accept leave'),
+                },
+                {
+                  icon: 'cancel',
+                  text: 'Decline',
+                  onClick: () => alert('Decline leave'),
+                  divider: 'bottom',
+                },
+                {
+                  icon: 'eye-outlined',
+                  text: 'View',
+                  onClick: () => alert('View leave'),
+                },
+                {
+                  icon: 'pencil-outlined',
+                  text: 'Edit',
+                  onClick: () => alert('Edit leave'),
+                },
+                value && {
+                  icon: 'trash-bin-outlined',
+                  text: 'Delete',
+                  intent: 'danger',
+                  divider: 'top',
+                  onClick: () => alert('Delete leave'),
+                },
+              ].filter(Boolean)}
+            />
+          );
+        },
+      },
+    ],
+    []
+  );
+  const [itemsPerPageValue, setItemsPerPageValue] = React.useState(20);
+  const itemsPerPageOptions = React.useMemo(() => [
+    { value: 20, text: '20 / page' },
+    { value: 50, text: '50 / page' },
+    { value: 100, text: '100 / page' },
+  ]);
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [loading, setLoading] = React.useState(false);
+  const [data, setData] = React.useState([]);
+  const paginatedData = React.useMemo(() => {
+    return chunk(itemsPerPageValue)(data);
+  }, [itemsPerPageValue, data]);
+  const initialFilterValues = {
+    status: ['Pending'],
+    reportingPersonnel: 'all',
+  };
+  const { filterValues, setFilterValues } = Table.useFiltersState({
+    initialValues: initialFilterValues,
+    cacheProvider,
+    cacheOnChange: true,
+  });
+  // prettier-ignore
+  const [savedFilterValues, setSavedFilterValues] =
+    React.useState(initialFilterValues);
+  const fetchData = () => {
+    setLoading(true);
+    fetchEmployees(savedFilterValues, tableData).then((res) => {
+      setData(res);
+      setLoading(false);
+    });
+  };
+  React.useEffect(() => {
+    fetchData();
+  }, [savedFilterValues]);
+  React.useEffect(() => {
+    if (currentPage > paginatedData.length && paginatedData.length > 0) {
+      setCurrentPage(paginatedData.length);
+    }
+  }, [itemsPerPageValue]);
+  return (
+    <Grid>
+      <Grid.Row>
+        <Grid.Col span={[24, 24, 24, 24, 24]}>
+          <Table.Filters
+            value={filterValues}
+            onChange={setFilterValues}
+            onSave={(value) =>
+              setSavedFilterValues({ ...savedFilterValues, ...value })
+            }
+            onReset={() => {
+              setFilterValues(initialFilterValues);
+              setSavedFilterValues(initialFilterValues);
+            }}
+            applyButtonProps={{
+              text: 'Apply',
+              onClick: () => setSavedFilterValues(filterValues),
+            }}
+            clearButtonProps={{
+              text: 'Clear',
+            }}
+            sx={{ mb: 'large' }}
+          >
+            <Table.Filter icon="search-outlined" noCaret filterKey="search">
+              {({ value, onChange }) => (
+                <Input
+                  value={value}
+                  onChange={(e) => onChange(e.target.value)}
+                  placeholder="Search by name, status or date"
+                />
+              )}
+            </Table.Filter>
+            <Table.Filter filterKey="dateRange" label="Date range">
+              {({ value, onChange }) => (
+                <DatePicker.Range value={value} onChange={onChange} />
+              )}
+            </Table.Filter>
+            <Table.Filter label="Status" filterKey="status" clearable={false}>
+              {({ value, onChange }) => (
+                <Checkbox.Group
+                  value={value}
+                  onChange={onChange}
+                  options={[
+                    { value: 'Pending', text: 'Pending' },
+                    { value: 'Approved', text: 'Approved' },
+                    { value: 'Declined', text: 'Declined' },
+                  ]}
+                />
+              )}
+            </Table.Filter>
+            <Table.Filter label="Leave category" filterKey="leaveCategory">
+              {({ value, onChange }) => (
+                <Select
+                  value={value}
+                  onChange={onChange}
+                  options={[
+                    { value: 'Annual Leave', text: 'Annual Leave' },
+                    {
+                      value: 'Compassionate Leave',
+                      text: 'Compassionate Leave',
+                    },
+                    { value: 'Leisure Rules Day', text: 'Leisure Rules Day' },
+                    {
+                      value: 'Paid Paternity Leave',
+                      text: 'Paid Paternity Leave',
+                    },
+                    { value: 'Sick Leave', text: 'Sick Leave' },
+                    { value: 'Study Leave', text: 'Study Leave' },
+                    { value: 'Unpaid Leave', text: 'Unpaid Leave' },
+                    { value: 'Working From Home', text: 'Working From Home' },
+                  ]}
+                  placeholder="Select..."
+                />
+              )}
+            </Table.Filter>
+            <Table.Filter label="Personnel" filterKey="personnel">
+              {({ value, onChange }) => (
+                <Select
+                  value={value}
+                  onChange={onChange}
+                  options={[
+                    { value: 'Vinh Hoang', text: 'Vinh Hoang' },
+                    { value: 'Kien Tran', text: 'Kien Tran' },
+                    { value: 'Hau Dao', text: 'Hau Dao' },
+                    { value: 'Minh Dinh', text: 'Minh Dinh' },
+                    { value: 'Tung Nguyen', text: 'Tung Nguyen' },
+                    { value: 'Thong Quach', text: 'Thong Quach' },
+                    { value: 'Khoa Thai', text: 'Khoa Thai' },
+                    { value: 'Son Trinh', text: 'Son Trinh' },
+                    { value: 'Sang Nguyen', text: 'Sang Nguyen' },
+                    { value: 'Thuong Huynh', text: 'Thuong Huynh' },
+                    { value: 'Anh Dau', text: 'Anh Dau' },
+                  ]}
+                  placeholder="Select..."
+                />
+              )}
+            </Table.Filter>
+            <Table.Filter
+              label="Reporting personnel"
+              filterKey="reportingPersonnel"
+              clearable={false}
+              formatValue={(value) => {
+                return value.charAt(0).toUpperCase() + value.slice(1);
+              }}
+            >
+              {({ value, onChange }) => (
+                <Radio.Group
+                  value={value}
+                  onChange={onChange}
+                  options={[
+                    { value: 'direct', text: 'Direct' },
+                    { value: 'indirect', text: 'Indirect' },
+                    { value: 'all', text: 'All personnel' },
+                  ]}
+                />
+              )}
+            </Table.Filter>
+          </Table.Filters>
+        </Grid.Col>
+      </Grid.Row>
+      <Grid.Row>
+        <Grid.Col span={[24, 24, 24, 24, 24]}>
+          <Table.ActionButtons
+            buttons={[
+              {
+                icon: 'add',
+                text: 'Add new leave request',
+                role: 'primary',
+                onClick: () => alert('Create new leave request'),
+              },
+            ]}
+            style={{
+              display: 'inline-block',
+            }}
+            sx={{ mb: 'large' }}
+          />
+          <Table.BulkActions
+            data={data}
+            selectedRows={selectedRows}
+            rowIdExtractor={(row) => row.id}
+            actions={[
+              {
+                icon: 'checkmark',
+                text: 'Approve',
+                intent: 'success',
+                onClick: () => alert('Approve rows'),
+              },
+              {
+                icon: 'cancel',
+                text: 'Decline',
+                intent: 'danger',
+                variant: 'outlined',
+                onClick: () => alert('Decline rows'),
+              },
+              {
+                icon: 'trash-bin-outlined',
+                text: 'Delete',
+                intent: 'danger',
+                variant: 'text',
+                divider: 'before',
+                onClick: () => alert('Decline rows'),
+              },
+            ]}
+            sx={{ mb: 'large' }}
+          />
+        </Grid.Col>
+      </Grid.Row>
+      <Grid.Row>
+        <Grid.Col span={[24, 24, 24, 24, 24]}>
+          <Table
+            data={paginatedData[currentPage - 1] || []}
+            columns={columns}
+            selectable
+            selectedRows={selectedRows}
+            onSelectedRowsChange={setSelectedRows}
+            loading={loading}
+            noData="There are currently no leave requests to display"
+            horizontallySticky
+            pagination={{ current: currentPage, total: paginatedData.length }}
+            onPaginationChange={setCurrentPage}
+            itemsPerPage={{
+              value: itemsPerPageValue,
+              options: itemsPerPageOptions,
+            }}
+            onItemsPerPageChange={setItemsPerPageValue}
+            rows={{ rowIdExtractor: (row) => row.id }}
+          />
+        </Grid.Col>
+      </Grid.Row>
+    </Grid>
+  );
+}
+```
+
+### Rows grouped by condition
+
+Rows can be grouped by a condition by passing `groupBy` function to `groupingConfig` prop.
+
+- [Optional] Specify `collapsedByDefaultGroups` to collapse the group by default.
+
+```jsx live
+function RowsGroupedBy() {
+  const [selectedRows, setSelectedRows] = React.useState({ 0: true });
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'Name',
+        accessor: 'name',
+        Cell: ({ value }) => (
+          <Button.Link href="#" text={value} target="_blank" />
+        ),
+      },
+      { Header: 'Age', accessor: 'age' },
+      { Header: 'Status', accessor: 'status', disableSortBy: true },
+    ],
+    []
+  );
+  const data = [
+    { name: 'Vy Nguyen', age: 50, status: 'Single' },
+    { name: 'Hau Dao', age: 51, status: 'Single' },
+    { name: 'Hanh Le', age: 80, status: 'Complicated' },
+    { name: 'Tuan Thieu', age: 99, status: 'In relationship' },
+    { name: 'Vinh Tony', age: 21, status: 'Single' },
+  ];
+  return (
+    <Table
+      data={data}
+      columns={columns}
+      selectable
+      selectedRows={selectedRows}
+      onSelectedRowsChange={setSelectedRows}
+      groupingConfig={{
+        groupBy: (data) => ({
+          'Single and older than 50': data.filter(
+            (row) => row.original.status === 'Single' && row.original.age > 50
+          ),
+          'Single and younger than 51': data.filter(
+            (row) => row.original.status === 'Single' && row.original.age <= 50
+          ),
+          Complicated: data.filter(
+            (row) => row.original.status === 'Complicated'
+          ),
+          'In relationship': data.filter(
+            (row) => row.original.status === 'In relationship'
+          ),
+        }),
+        collapsedByDefaultGroups: ['Complicated'],
+      }}
+    />
+  );
+}
+```
+
+## Props
+
+### Table
+
+<Props of="Table" from="web" />
+
+### Table.ActionButtons
+
+<Props of="ActionButtons" from="web" />
+
+### Table.BulkActions
+
+<Props of="BulkActions" from="web" />
+
+### Table.RowAction
+
+<Props of="RowAction" from="web" />
+
+### Table.Filters (Deprecated), use [Filters](/web/Components/Filters) instead
+
+<Props of="Table.Filters" from="web" />
+
+### Table.Filter
+
+<Props of="Table.Filter" from="web" />

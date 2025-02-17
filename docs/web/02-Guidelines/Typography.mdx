@@ -1,0 +1,60 @@
+---
+id: typography
+title: Typography
+---
+
+import formStyling from '@site/static/img/form-styling.png';
+import { FontScale, FontWeights } from '../../helpers/Fonts';
+
+# Typography
+
+Typography helps to display and organisation which eventually guide users through the product.
+
+## Font Family
+
+The default font family for Hero Design for Web is **Be Vietnam Pro**, a modern and elegant sans serif typeface for universal professional design. The family contains 7 weights from Thin to Black and corresponding Italics.
+
+Hero Design for Web uses 4 weight steps from this family: **200** (Light), **400** (Regular), **600** (SemiBold) and **700** (Bold).
+
+## Font Scale & Line Height
+
+Hero Design for Web uses [IBM type scale](https://www.carbondesignsystem.com/guidelines/typography/overview#scale) to define the scale for different font sizes which go with corresponding line heights as follow:
+
+<FontScale type="web" />
+
+<br />
+
+## Font Weight
+
+Hero Design for Web provides 4 types of font weights for emphasizing the content.
+
+<FontWeights type="web" />
+
+<br />
+
+## Font Color
+
+There are two colors of text used across the system which are defined in [Colors](/web/guidelines/colors#typography) section.
+
+## Font Capitalization
+
+For headings and sentences, we follow [**Sentence case**](https://www.stylemanual.gov.au/grammar-punctuation-and-conventions/punctuation-and-capitalisation#capitalise_the_first_word_in_a_sentence_and_in_headings) standard: capitalise the first word in a sentence, and use lower case for all other words, unless those words include proper nouns. This standard is used for:
+
+- [Opening quoted speech within a sentence](https://www.stylemanual.gov.au/grammar-punctuation-and-conventions/punctuation/quotation-marks)
+- [Headings](https://www.stylemanual.gov.au/structuring-content/headings)
+
+We should also avoid using all capitals for headings, unless the visual design for the content meets [WCAG 2.1](https://www.w3.org/TR/WCAG21/) in all respects.
+
+## Form Layout
+
+When displaying information in a form with label-value pair type, it would be best if we can style it as follow:
+
+|             | Weight     | Color         | Font size |
+| ----------- | ---------- | ------------- | --------- |
+| Form Title  | `semiBold` | `text`        | 18        |
+| Field Label | `semiBold` | `subduedText` | 14        |
+| Field Value | `light`    | `text`        | 16        |
+
+Here's a perfect example for displaying information in a form:
+
+<img src={formStyling} alt="Form Styling example" />

@@ -1,0 +1,130 @@
+---
+id: alert
+title: Alert
+---
+
+# Alert
+
+Alert is a simple & elegant way to let your users know about important things like system outages, announcements,...
+
+## Examples
+
+### Basic
+
+Show an alert with title & content
+
+```jsx live
+<Alert
+  title="Special Series D Offer"
+  content="No subscription fees to pay until July 2021 and 2 months free."
+/>
+```
+
+### Compact alert
+
+Show an alert without title
+
+```jsx live
+<Alert content="This month we are excited to announce our latest round of funding, which will be used to create a better world at work. To help us celebrate this monumental occasion, we want to help you build a better world at work too, so we’re offering 2 months free subscription to help get you started!" />
+```
+
+### With different intents
+
+```jsx live
+<>
+  <Alert
+    title="Infomationational Notes"
+    content="Additional description and advice about what the user can do."
+    intent="info"
+  />
+  <br />
+  <Alert
+    title="Success Tips"
+    content="Detailed description and advice about what the user can do."
+    intent="success"
+  />
+  <br />
+  <Alert
+    title="Warning"
+    content="Warning description goes here to warn the user of a potentially important use case."
+    intent="warning"
+  />
+  <br />
+  <Alert
+    title="Danger"
+    content="Error description goes here to inform the user that an error has been made."
+    intent="danger"
+  />
+  <br />
+  <Alert
+    title="Error"
+    content="Error description goes here to inform the user that an error has been made."
+    intent="error"
+  />
+</>
+```
+
+### Without alert icon
+
+```jsx live
+<Alert
+  title="Special Series D Offer"
+  content="No subscription fees to pay until July 2021 and 2 months free."
+  intent="success"
+  icon={null}
+/>
+```
+
+### Customising alert icon
+
+```jsx live
+<>
+  <Alert
+    title="Special Series D Offer"
+    content="No subscription fees to pay until July 2021 and 2 months free."
+    intent="success"
+    icon={<Icon icon="moon" intent="success" size="xlarge" />}
+  />
+  <br />
+  <Alert
+    title="Special Series D Offer"
+    content="This month we are excited to announce our latest round of funding, which will be used to create a better world at work. To help us celebrate this monumental occasion, we want to help you build a better world at work too, so we’re offering 2 months free subscription to help get you started!"
+    intent="success"
+    icon="heart"
+  />
+</>
+```
+
+### With close button on the right side
+
+```jsx live
+<Alert
+  title="Special Series D Offer"
+  content="No subscription fees to pay until July 2021 and 2 months free."
+  intent="success"
+  onClose={() => console.log('clicked close')}
+/>
+```
+
+### Customising alert content
+
+```jsx live
+<Alert
+  content={
+    <Typography.Text tagName="div" style={{ display: 'flex', margin: 0 }}>
+      No subscription fees to pay until July 2021 and 2 months free.
+      <Button.Link
+        text="Book a demo"
+        href="https://employmenthero.com/book-a-demo-series-d-offer-march/"
+        target="_blank"
+        sx={{ marginLeft: 'auto' }}
+      />
+    </Typography.Text>
+  }
+  intent="success"
+/>
+```
+
+## Props
+
+<Props of="Alert" from="web" />

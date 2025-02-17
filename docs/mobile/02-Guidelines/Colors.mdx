@@ -1,0 +1,125 @@
+---
+id: colors
+title: Colors
+---
+
+import DefinitiveNames, {
+  BasedDefinitiveNames,
+} from '@site/src/components/Colors/DefinitiveNames';
+
+import SemanticColors from '@site/src/components/Colors/SemanticColors';
+import {
+  TintScales,
+  ShadeScales,
+} from '@site/src/components/Colors/ColorScales';
+import VisualisationPalette from '@site/src/components/Colors/VisualisationPalette';
+
+# Colors
+
+- Hero-design color system for mobile (Employment Hero SuperApp) builds on the recognition of brand colors for different pillars: `Swag`, `Work`, `Jobs`, `Money` and `Benefits`.
+- The color system based on different levels of color structures:
+  - Definitive colors: Shades and Tints.
+  - Semantic colors.
+- Colors for visualisation.
+
+## Definitive colors
+
+Definitive name of a color is a fancy name of how UI/UXers call a color instead of speaking about hex, rgb or hsla value.
+
+:::caution Using definitive colors
+
+The definitive colors are being used to communicate between Hero-design team and UX team only. From development perpective, developer shouldn't use it in their code base.
+
+:::
+
+### Based definitive colors
+
+In Hero-design, we have various of based definitive colors for different pillars.
+
+<BasedDefinitiveNames />
+
+<br />
+<br />
+
+### Shades and Tints
+
+:::tip
+
+You can try out Shades and Tints by using [color generation tools](/web/Tools/color_generator).
+
+:::
+
+From each based definitive color, we generate 38 variants of it, by:
+
+- Mix 5% > 95% white color into the based color which creates 19 tints.
+
+<TintScales />
+<br />
+
+- Mix 5% > 95% black color into the based color which creates 19 shades.
+
+<ShadeScales />
+<br />
+
+- There are total 39 variant of a definitive color (38 variants of shades and tints + the based color itself).
+- All the based colors and their variants is Hero-design color palette.
+
+:::info Some shades and tints are not exposed
+
+The color pallete opens for future color variants to be selected and used in hero-design without modifying the mechanisim to generate or name a color. But only variants are being used in the design system are exposed.
+
+:::
+
+<br />
+
+<DefinitiveNames />
+
+<br />
+<br />
+
+## Semantic colors
+
+:::info What are semantic colors?
+
+Semantic colors are the convention to map definitive colors (and their variants) into names describing the function of colors in the design system.
+
+:::
+
+In Hero-design, we categorise semantic colors by:
+
+- How it is being used for `Globally` or `Specifically` in a pillar.
+- How it is being used for `Surfaces`, `Outline`, `Accents`.
+- Brand: `primary`, `secondary`, `decorative`.
+- Level of highlighting: `muted`.
+- States: `disabled`, `inactive`,
+
+:::tip Recommendation
+
+We recommend using the semantic color whenever you need a color in the consumer apps.
+
+:::
+
+<SemanticColors />
+
+<br />
+<br />
+
+## Visualisation
+
+Some colors are picked to visualise the content on charts, graphs, random background color of avatars. They are not changed based the theming specifically for each pillar.
+
+:::caution
+
+Colors for visualisation are not changed on different themes.
+
+:::
+
+<VisualisationPalette />
+
+<br />
+
+:::tip
+
+To import visualisation colors, using `import { mobileVisualisationPalette } from '@hero-design/colors'`
+
+:::

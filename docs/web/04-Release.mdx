@@ -1,0 +1,18 @@
+---
+id: release
+title: Release
+---
+
+# Release @ehrocks/hero-design-react
+
+## Prerequisites
+
+1. Tag all merged pull requests that go into the next release. Each merged PR should also be labeled with one of the [labels](https://github.com/Thinkei/hero-design/labels) named `tag: ...` to indicate what kind of change it is. **Make sure all breaking changes are correctly labelled with `tag: breaking change`.**
+2. You'll need an [access token for the GitHub API](https://help.github.com/articles/creating-an-access-token-for-command-line-use/). Save it to this environment variable: `export GITHUB_AUTH="..."`
+3. You must be a hero-design repository admin
+
+## Release
+
+1. Make sure to include “Migrating from ...” instructions for the previous release. Often you can copy and paste them.
+2. Checkout master branch
+3. Run `yarn release` (ensure your npm account have been disabled 2FA)

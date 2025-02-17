@@ -1,0 +1,314 @@
+---
+id: textInput
+title: TextInput
+---
+
+<PageTitle
+  title="TextInput"
+  content="Input allow users to enter text, values, select text into a UI. Typically appears in a form or a bottomsheet."
+/>
+
+## How many types?
+
+There are two types of inputs: Text input and Selection input
+
+### Text input
+
+Text inputs allow users to input text or value into a text field
+
+### Selection input
+
+Selection inputs allow users to choose a pre-defined set of options in a bottom sheet. See more [**Select**](/mobile/Components/select).
+
+## Examples
+
+### Basic
+
+```jsx live
+function BasicInput() {
+  const [value, setValue] = React.useState('');
+
+  const ControlledTextInput = ({ value, ...rest }) => {
+    const [internalValue, setValue] = React.useState(value);
+    return (
+      <TextInput
+        {...rest}
+        onChangeText={(text) => {
+          setValue(text);
+          if (rest.onChangeText) {
+            rest.onChangeText.text;
+          }
+        }}
+        value={internalValue}
+      />
+    );
+  };
+
+  const PasswordTextFiled = () => {
+    const [secureTextEntry, setSecureTextEntry] = React.useState(true);
+    return (
+      <ControlledTextInput
+        label="Password"
+        secureTextEntry={secureTextEntry}
+        suffix={
+          <TouchableOpacity
+            onPress={() => {
+              setSecureTextEntry(!secureTextEntry);
+            }}
+          >
+            <Icon icon="eye-invisible" />
+          </TouchableOpacity>
+        }
+        required
+      />
+    );
+  };
+
+  return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    >
+      <ScrollView>
+        <Typography.Body variant="small">Idle </Typography.Body>
+        <ControlledTextInput
+          label="Amount (AUD)"
+          prefix="dollar-sign"
+          onChangeText={setValue}
+        />
+
+        <Typography.Body variant="small">Filled </Typography.Body>
+        <ControlledTextInput
+          label="Amount (AUD)"
+          prefix="dollar-sign"
+          value="100"
+        />
+
+        <Typography.Body variant="small">Password </Typography.Body>
+        <PasswordTextFiled />
+
+        <Typography.Body variant="small">
+          Max Length Without Character Count
+        </Typography.Body>
+        <ControlledTextInput
+          label="Shout out"
+          required
+          maxLength={255}
+          hideCharacterCount
+          multiline
+        />
+
+        <Typography.Body variant="small">Max Length </Typography.Body>
+        <ControlledTextInput
+          label="Shout out"
+          required
+          maxLength={255}
+          multiline
+        />
+
+        <Typography.Body variant="small">Multilines </Typography.Body>
+        <ControlledTextInput
+          label="Amount (AUD)"
+          prefix="dollar-sign"
+          required
+          multiline
+        />
+        <Typography.Body variant="small">Helper Text </Typography.Body>
+
+        <ControlledTextInput
+          label="Amount (AUD)"
+          prefix="dollar-sign"
+          required
+          helpText="This is helper text"
+          maxLength={100}
+        />
+        <ControlledTextInput
+          label="Amount (AUD)"
+          prefix="dollar-sign"
+          required
+          error="Errors will replace helper text"
+          helpText="This is helper text"
+          maxLength={100}
+        />
+      </ScrollView>
+    </KeyboardAvoidingView>
+  );
+}
+```
+
+### Variants
+
+TextInput comes with 2 variants: `text` and `textarea`
+
+```jsx live
+function BasicInput() {
+  const [value, setValue] = React.useState('');
+
+  const ControlledTextInput = ({ value, ...rest }) => {
+    const [internalValue, setValue] = React.useState(value);
+    return (
+      <TextInput
+        {...rest}
+        onChangeText={(text) => {
+          setValue(text);
+          if (rest.onChangeText) {
+            rest.onChangeText.text;
+          }
+        }}
+        value={internalValue}
+      />
+    );
+  };
+
+  return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    >
+      <ScrollView>
+        <Typography.Body variant="small">Text variant</Typography.Body>
+        <ControlledTextInput
+          label="Amount (AUD)"
+          prefix="dollar-sign"
+          onChangeText={setValue}
+        />
+        <Typography.Body variant="small">Textarea variant</Typography.Body>
+        <ControlledTextInput
+          label="Amount (AUD)"
+          prefix="dollar-sign"
+          onChangeText={setValue}
+          variant="textarea"
+        />
+      </ScrollView>
+    </KeyboardAvoidingView>
+  );
+}
+```
+
+### TextInput states
+
+```jsx live
+function TextInputStatesExample() {
+  const [value, setValue] = React.useState('');
+
+  const ControlledTextInput = ({ value, ...rest }) => {
+    const [internalValue, setValue] = React.useState(value);
+    return (
+      <TextInput
+        {...rest}
+        onChangeText={(text) => {
+          setValue(text);
+          rest.onChangeText.text;
+        }}
+        value={internalValue}
+      />
+    );
+  };
+
+  return (
+    <>
+      <Typography.Body variant="small">Readonly </Typography.Body>
+      <ControlledTextInput
+        label="Amount (AUD)"
+        prefix="dollar-sign"
+        editable={false}
+        value="100"
+        required
+      />
+
+      <Typography.Body variant="small">Loading </Typography.Body>
+      <ControlledTextInput
+        label="Amount (AUD)"
+        prefix="dollar-sign"
+        suffix="arrow-right"
+        loading
+      />
+
+      <Typography.Body variant="small">Disabled </Typography.Body>
+      <ControlledTextInput
+        label="Amount (AUD)"
+        prefix="dollar-sign"
+        required
+        disabled
+        value="100"
+      />
+      <ControlledTextInput label="Amount (AUD)" required disabled />
+
+      <ControlledTextInput
+        label="Amount (AUD)"
+        required
+        disabled
+        suffix="arrow-right"
+      />
+
+      <Typography.Body variant="small">Error </Typography.Body>
+      <ControlledTextInput
+        label="Shout out"
+        required
+        maxLength={255}
+        multiline
+        error="must not exceed character limit"
+      />
+      <ControlledTextInput
+        label="Amount (AUD)"
+        prefix="dollar-sign"
+        required
+        error="This field is required"
+      />
+    </>
+  );
+}
+```
+
+### Handling events
+
+```jsx live
+function TextInputEventHandlerExample() {
+  const [value, setValue] = React.useState('');
+
+  return (
+    <>
+      <Typography.Body variant="small">Text changed: {value}</Typography.Body>
+      <TextInput
+        label="Amount (AUD)"
+        prefix="dollar-sign"
+        required
+        value={value}
+        onChangeText={(text) => setValue(text)}
+      />
+    </>
+  );
+}
+```
+
+### TextInput with Ref
+
+```jsx live
+function TextInputEventHandlerExample() {
+  const [value, setValue] = React.useState('');
+  const textInputRef = React.useRef(null);
+
+  return (
+    <>
+      <Typography.Body variant="small">Text changed: {value}</Typography.Body>
+      <TextInput
+        label="Amount (AUD)"
+        prefix="dollar-sign"
+        required
+        value={value}
+        onChangeText={(text) => setValue(text)}
+        ref={textInputRef}
+      />
+      <Button
+        variant="text"
+        text="focus"
+        onPress={() => textInputRef.current.focus()}
+      />
+    </>
+  );
+}
+```
+
+## Props
+
+TextInput also accepts all the properties from [react-native one](https://reactnative.dev/docs/textinput).
+
+<Props of="TextInput" />

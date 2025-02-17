@@ -1,0 +1,82 @@
+---
+id: bottomNavigation
+title: Bottom Navigation
+---
+
+import Props from '../../../src/components/Props';
+
+# Bottom Navigation
+
+Bottom Navigation provides quick navigation between top-level views of an app with a bottom navigation bar.
+
+## Examples
+
+```jsx live
+function App() {
+  const [selectedTabKey, setSelectedTabKey] = React.useState('home');
+  const HomeScreen = () => (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Typography.Body>Home Screen</Typography.Body>
+    </View>
+  );
+
+  const FeedScreen = () => (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Typography.Body>Feed Screen</Typography.Body>
+    </View>
+  );
+
+  const AlertsScreen = () => (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Typography.Body>Alerts Screen</Typography.Body>
+    </View>
+  );
+
+  const ProfileScreen = () => (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Typography.Body>Profile Screen</Typography.Body>
+    </View>
+  );
+
+  const tabs = [
+    {
+      key: 'home',
+      title: 'Home',
+      icon: 'home',
+      component: <HomeScreen />,
+    },
+    {
+      key: 'feed',
+      title: 'Feed',
+      icon: 'speaker',
+      component: <FeedScreen />,
+    },
+    {
+      key: 'alerts',
+      title: 'Alerts',
+      icon: 'bell',
+      component: <AlertsScreen />,
+    },
+    {
+      key: 'profile',
+      title: 'Profile',
+      icon: 'user',
+      component: <ProfileScreen />,
+    },
+  ];
+
+  return (
+    <Box style={{ height: 300 }}>
+      <BottomNavigation
+        onTabPress={(newTabKey) => setSelectedTabKey(newTabKey)}
+        selectedTabKey={selectedTabKey}
+        tabs={tabs}
+      />
+    </Box>
+  );
+}
+```
+
+## Props
+
+<Props of="BottomNavigation" />

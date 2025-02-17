@@ -1,0 +1,79 @@
+---
+id: alert
+title: Alert
+---
+
+<PageTitle
+  title="Alert"
+  content="Alerts are used to call out critical information or give the user contextual feedback after performing a task. The four types of alerts are Informational, Success, Warning and Error.
+"
+/>
+
+Alert is a simple & elegant way to let your users know about important things like system outages, and announcements, ...
+
+## Example
+
+Alert comes with 4 intents which are `info`, `success`, `warning`, and `error`.
+
+```jsx live
+function App() {
+  return (
+    <Box>
+      <Alert
+        title="Title"
+        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis semper enim augue."
+        intent="success"
+        style={{ marginBottom: theme.space.small }}
+        onClose={() => alert('Closed')}
+        testID="alert-item"
+      />
+      <Alert
+        title="Title"
+        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis semper enim augue."
+        intent="info"
+        style={{ marginBottom: theme.space.small }}
+        onClose={() => alert('Closed')}
+      />
+      <Alert
+        title="Title"
+        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis semper enim augue."
+        intent="warning"
+        style={{ marginBottom: theme.space.small }}
+        onClose={() => alert('Closed')}
+      />
+      <Alert
+        title="Title"
+        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis semper enim augue."
+        intent="error"
+        style={{ marginBottom: theme.space.small }}
+        onClose={() => alert('Closed')}
+      />
+      <Typography.Title level="h6">Alert with CTA</Typography.Title>
+      <Alert
+        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis semper enim augue."
+        intent="success"
+        style={{ marginBottom: theme.space.small }}
+        onClose={() => alert('Closed')}
+        actionLabel="VIEW"
+      />
+      <Typography.Title level="h6">Alert without close button</Typography.Title>
+      <Alert
+        content="Success"
+        intent="success"
+        style={{ marginBottom: theme.space.small }}
+      />
+      <Typography.Title level="h6">Alert without rounded</Typography.Title>
+      <Alert
+        content="Success"
+        intent="success"
+        style={{ marginBottom: theme.space.small }}
+        variant="unrounded"
+      />
+    </Box>
+  );
+}
+```
+
+## Props
+
+<Props of="Alert" />

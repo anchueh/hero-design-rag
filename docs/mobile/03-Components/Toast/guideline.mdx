@@ -1,0 +1,36 @@
+---
+title: Guideline
+---
+
+import SectionHeadingDosAndDonts from './SectionHeadingDosAndDonts';
+
+<PageTitle
+  title="Toast"
+  content="A toast provides simple feedback about an operation in a small popup. It only fills the amount of space required for the message and the current activity remains visible and interactive. Toasts automatically disappear after a timeout."
+/>
+
+<SectionHeadingDosAndDonts />
+
+## What is Toast?
+
+The Toast mobile component is a lightweight, temporary UI element that displays a brief message to the user, always appearing at the bottom of the screen.
+
+## Tip for...
+
+### When to use Toast?
+
+The Toast component provides a brief message that conveys information to users. These messages are displayed at the bottom of the screen, in front of the app content, and should not block any Calls-to-Action (CTAs) or navigation elements. A Toast is triggered when a user performs an action and a brief, responsive message is necessary. It's typically used for non-interruptive notifications such as:
+
+- Confirming a successful action.
+- Displaying a brief message or suggestion to the user.
+- Providing status updates
+
+### Writing toast content
+
+- Keep the message concise and to the point. Toasts are meant to be brief, so only include essential information. Use no more than two lines of text to communicate the toast message.
+- Don't make the Toast too long or complex. Keep the message brief and easy to understand.
+- Do consider including an action button if it adds value to the user's experience.
+
+### Behaviour
+
+To maintain a seamless user experience, Toasts are designed to appear briefly and disappear without interrupting user activity. They do not require user input to be dismissed and will automatically disappear after 4 seconds (maximum 10 seconds). In cases where multiple Toasts are necessary, they should be displayed one at a time to ensure that the user is not interrupted. Additionally, the Toast may include a single action button such as ‘UNDO’ or DISMISS that allows the user to interact with the message.

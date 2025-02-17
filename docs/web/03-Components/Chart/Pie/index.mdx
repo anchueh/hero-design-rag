@@ -1,0 +1,486 @@
+---
+id: pie-chart
+title: Pie
+---
+
+# Chart.Pie
+
+Pie chart are used to show the proportions of categorical data, with the size of each piece representing the proportion of each category.
+
+## Chart.Pie
+
+### Basic
+
+Basic usage example.
+
+```jsx live
+<Chart.Pie
+  data={[
+    { data: 1, label: 'Mon' },
+    { data: 20, label: 'Tue' },
+    { data: 30, label: 'Wed' },
+    { data: 40, label: 'Thu' },
+    { data: 50, label: 'Fri' },
+  ]}
+/>
+```
+
+### Sizes
+
+There are three sizes of a `Chart.Pie`: small, medium (default) and large.
+
+```jsx live
+<Box sx={{ display: 'flex' }}>
+  <Chart.Pie
+    size="large"
+    data={[
+      { data: 10, label: 'Mon' },
+      { data: 20, label: 'Tue' },
+      { data: 30, label: 'Wed' },
+      { data: 40, label: 'Thu' },
+      { data: 50, label: 'Fri' },
+    ]}
+    sx={{ marginRight: 'large' }}
+  />
+  <Chart.Pie
+    size="medium"
+    data={[
+      { data: 10, label: 'Mon' },
+      { data: 20, label: 'Tue' },
+      { data: 30, label: 'Wed' },
+      { data: 40, label: 'Thu' },
+      { data: 50, label: 'Fri' },
+    ]}
+    sx={{ marginRight: 'large' }}
+  />
+  <Chart.Pie
+    size="small"
+    data={[
+      { data: 10, label: 'Mon' },
+      { data: 20, label: 'Tue' },
+      { data: 30, label: 'Wed' },
+      { data: 40, label: 'Thu' },
+      { data: 50, label: 'Fri' },
+    ]}
+  />
+</Box>
+```
+
+### With title
+
+Pie chart can be displayed with a title.
+
+```jsx live
+<Chart.Pie
+  data={[
+    { data: 10, label: 'Mon' },
+    { data: 20, label: 'Tue' },
+    { data: 30, label: 'Wed' },
+  ]}
+  title="My chart"
+/>
+```
+
+### With icon
+
+Pie chart can be displayed with icon inside.
+
+```jsx live
+<Chart.Pie
+  data={[
+    { data: { value: 5, icon: 'checkmark' }, label: 'Success' },
+    { data: { value: 95, icon: 'cancel' }, label: 'Fail' },
+  ]}
+  data-test-id="piechart-with-icon"
+/>
+```
+
+### With legends
+
+Pie chart can be displayed with legends.
+
+```jsx live
+function App() {
+  return (
+    <Chart.Pie
+      data={[
+        { data: 10, label: 'Mon' },
+        { data: 20, label: 'Tue' },
+        { data: 30, label: 'Wed' },
+        { data: 40, label: 'Thu' },
+        { data: 50, label: 'Fri' },
+      ]}
+      legendConfig={{
+        maxLegend: 4,
+      }}
+    />
+  );
+}
+```
+
+### With checkbox legends
+
+Pie chart can be displayed partially with checkbox legends.
+
+```jsx live
+function App() {
+  return (
+    <Chart.Pie
+      data={[
+        { data: 10, label: 'Mon' },
+        { data: 20, label: 'Tue' },
+        { data: 30, label: 'Wed' },
+        { data: 40, label: 'Thu' },
+        { data: 50, label: 'Fri' },
+      ]}
+      legendConfig={{
+        maxLegend: 4,
+        selectable: true,
+      }}
+    />
+  );
+}
+```
+
+### Always show total
+
+Pie chart can be displayed with always showing the total inside it.
+
+```jsx live
+<Chart.Pie
+  data={[
+    { data: 10, label: 'Mon' },
+    { data: 20, label: 'Tue' },
+    { data: 30, label: 'Wed' },
+    { data: 40, label: 'Thu' },
+    { data: 50, label: 'Fri' },
+  ]}
+  alwaysShowTotal
+/>
+```
+
+### With highlighted items
+
+The pie match with the props data will be highlighted.
+
+```jsx live
+<Chart.Pie
+  data={[
+    { data: 10, label: 'Mon' },
+    { data: 20, label: 'Tue' },
+    { data: 30, label: 'Wed' },
+    { data: 40, label: 'Thu' },
+    { data: 50, label: 'Fri' },
+  ]}
+  highlightedItems={['Tue', 'Wed']}
+/>
+```
+
+### With custom color
+
+The chart support style for the line color by passing colors attribute into the styleConfig prop.
+
+<Note title="Color used best practice">
+  Please follow the best practice to ensure consistency across these specific
+  charts deviating from the color order. Should confirm with designer team
+  before using the custom color for the chart.
+  <br />
+  <Highlight>Example</Highlight>
+  <br />
+  Specifically, we have standardized the colors for Gender and Employment status
+  filters:
+  <br />
+  For Employment status:
+  <Ul>
+    <Li>Full time: Violet</Li>
+    <Li>Part time: Blue</Li>
+    <Li>Casual: Orange</Li>
+    <Li>Unassigned: Green</Li>
+  </Ul>
+  And Gender:
+  <Ul>
+    <Li>Female: Violet</Li>
+    <Li>Male: Blue</Li>
+    <Li>Non-binary: Orange</Li>
+    <Li>Prefer not to say: Green</Li>
+    <Li>Unspecified: Red</Li>
+  </Ul>
+</Note>
+
+```jsx live
+function App() {
+  return (
+    <Chart.Pie
+      data={[
+        { data: 10, label: 'Mon' },
+        { data: 20, label: 'Tue' },
+        { data: 30, label: 'Wed' },
+        { data: 40, label: 'Thu' },
+        { data: 50, label: 'Fri' },
+      ]}
+      legendConfig={{
+        maxLegend: 4,
+        selectable: true,
+      }}
+      styleConfig={{
+        series: [
+          {
+            label: 'Mon',
+            color: 'dodgerBlueLight30',
+          },
+          {
+            label: 'Tue',
+            color: 'violetLight30',
+          },
+          {
+            label: 'Wed',
+            color: 'greenLight30',
+          },
+          {
+            label: 'Thu',
+            color: 'orangeLight30',
+          },
+          {
+            label: 'Fri',
+            color: 'purpleLight30',
+          },
+        ],
+      }}
+    />
+  );
+}
+```
+
+### With custom central content
+
+Pie Chart allow to custom the central content inside it.
+
+```jsx live
+function App() {
+  const data = React.useMemo(
+    () => [
+      { data: 10, label: 'Mon' },
+      { data: 20, label: 'Tue' },
+      { data: 30, label: 'Wed' },
+      { data: 40, label: 'Thu' },
+      { data: 50, label: 'Fri' },
+    ],
+    []
+  );
+  const total = React.useMemo(
+    () => data.reduce((total, item) => total + item.data, 0),
+    [data]
+  );
+  const [selectedSlice, setSelectedSlice] = React.useState(null);
+  return (
+    <Chart.Pie
+      data={data}
+      itemConfig={{
+        onMouseOver: (e, slice) => setSelectedSlice(slice),
+        onMouseOut: () => setSelectedSlice(null),
+      }}
+      centralContentRenderer={() => {
+        if (selectedSlice)
+          return (
+            <div>
+              {selectedSlice.label}: {selectedSlice.data}
+            </div>
+          );
+        return <div>Total: {total}</div>;
+      }}
+    />
+  );
+}
+```
+
+## Chart.MultiplePie
+
+Chart.MultiplePie are a set of concentric circles which is used to visualize hierarchical relationships. Maximum number of charts is 4.
+
+### Basic
+
+```jsx live
+<Chart.MultiplePie
+  data={[
+    { data: [10, 15, 5], label: 'Mon' },
+    { data: [20, 20, 25], label: 'Tue' },
+    { data: [25, 20, 25], label: 'Wed' },
+    { data: [5, 15, 10], label: 'Thu' },
+    { data: [30, 20, 30], label: 'Fri' },
+  ]}
+  labels={['Tom', 'Jerry', 'Spike']}
+  data-test-id="multiple-pie-chart"
+/>
+```
+
+### With title
+
+Multiple Pie chart can be displayed with a title.
+
+```jsx live
+<Chart.MultiplePie
+  data={[
+    { data: [10, 15, 5], label: 'Mon' },
+    { data: [20, 20, 25], label: 'Tue' },
+    { data: [25, 20, 25], label: 'Wed' },
+    { data: [5, 15, 10], label: 'Thu' },
+    { data: [30, 20, 30], label: 'Fri' },
+  ]}
+  labels={['Tom', 'Jerry', 'Spike']}
+  title="Multiple Pie Chart"
+/>
+```
+
+### With legends
+
+Multiple Pie chart can be displayed with legends.
+
+```jsx live
+<Chart.MultiplePie
+  data={[
+    { data: [10, 15, 5], label: 'Mon' },
+    { data: [20, 20, 25], label: 'Tue' },
+    { data: [25, 20, 25], label: 'Wed' },
+    { data: [5, 15, 10], label: 'Thu' },
+    { data: [30, 20, 30], label: 'Fri' },
+  ]}
+  labels={['Tom', 'Jerry', 'Spike']}
+  legendConfig={{
+    maxLegend: 4,
+  }}
+/>
+```
+
+### With checkbox legends
+
+Multiple Pie chart can be displayed partially with checkbox legends.
+
+```jsx live
+<Chart.MultiplePie
+  data={[
+    { data: [10, 15, 5], label: 'Mon' },
+    { data: [20, 20, 25], label: 'Tue' },
+    { data: [25, 20, 25], label: 'Wed' },
+    { data: [5, 15, 10], label: 'Thu' },
+    { data: [30, 20, 30], label: 'Fri' },
+  ]}
+  labels={['Tom', 'Jerry', 'Spike']}
+  legendConfig={{
+    maxLegend: 4,
+    selectable: true,
+  }}
+/>
+```
+
+### With highlighted items
+
+The pie match with the props data will be highlighted.
+
+```jsx live
+<Chart.MultiplePie
+  data={[
+    { data: [10, 15, 5], label: 'Mon' },
+    { data: [20, 20, 25], label: 'Tue' },
+    { data: [25, 20, 25], label: 'Wed' },
+    { data: [5, 15, 10], label: 'Thu' },
+    { data: [30, 20, 30], label: 'Fri' },
+  ]}
+  labels={['Tom', 'Jerry', 'Spike']}
+  highlightedItems={[
+    {
+      label: 'Jerry',
+      legend: 'Wed',
+    },
+    {
+      label: 'Spike',
+      legend: 'Fri',
+    },
+    {
+      label: 'Tom',
+      legend: 'Thu',
+    },
+  ]}
+/>
+```
+
+### With custom color
+
+The chart support style for the line color by passing colors attribute into the styleConfig prop.
+
+<Note title="Color used best practice">
+  Please follow the best practice to ensure consistency across these specific
+  charts deviating from the color order. Should confirm with designer team
+  before using the custom color for the chart.
+  <br />
+  <Highlight>Example</Highlight>
+  <br />
+  Specifically, we have standardized the colors for Gender and Employment status
+  filters:
+  <br />
+  For Employment status:
+  <Ul>
+    <Li>Full time: Violet</Li>
+    <Li>Part time: Blue</Li>
+    <Li>Casual: Orange</Li>
+    <Li>Unassigned: Green</Li>
+  </Ul>
+  And Gender:
+  <Ul>
+    <Li>Female: Violet</Li>
+    <Li>Male: Blue</Li>
+    <Li>Non-binary: Orange</Li>
+    <Li>Prefer not to say: Green</Li>
+    <Li>Unspecified: Red</Li>
+  </Ul>
+</Note>
+
+```jsx live
+<Chart.MultiplePie
+  data={[
+    { data: [10, 15, 5], label: 'Mon' },
+    { data: [20, 20, 25], label: 'Tue' },
+    { data: [25, 20, 25], label: 'Wed' },
+    { data: [5, 15, 10], label: 'Thu' },
+    { data: [30, 20, 30], label: 'Fri' },
+  ]}
+  labels={['Tom', 'Jerry', 'Spike']}
+  legendConfig={{
+    maxLegend: 4,
+    selectable: true,
+  }}
+  styleConfig={{
+    series: [
+      {
+        label: 'Mon',
+        color: 'dodgerBlueLight30',
+      },
+      {
+        label: 'Tue',
+        color: 'violetLight30',
+      },
+      {
+        label: 'Wed',
+        color: 'greenLight30',
+      },
+      {
+        label: 'Thu',
+        color: 'orangeLight30',
+      },
+      {
+        label: 'Fri',
+        color: 'purpleLight30',
+      },
+    ],
+  }}
+/>
+```
+
+## Props
+
+### Chart.Pie
+
+<Props of="PieChart" from="web" />
+
+### Chart.MultiplePie
+
+<Props of="MultiplePieChart" from="web" />

@@ -1,0 +1,133 @@
+---
+id: development
+title: Bring up development environment
+---
+
+# Bring up development environment
+
+Before starting, please make sure you have access to Hero Design's Github repo (https://github.com/Thinkei/hero-design).
+
+## Getting started
+
+1. Clone the repo to your computer.
+
+```bash
+git clone git@github.com:Thinkei/hero-design.git
+```
+
+2. Install [Node.js](https://nodejs.org/en/)(>=20.0.0)
+
+3. Enable Corepack Nodejs feature
+
+```bash
+corepack enable
+```
+
+4. Install the project dependencies. ([expo-cli](https://docs.expo.dev/get-started/installation/#installing-expo-cli) are required to install on your machine.)
+
+```bash
+yarn install
+```
+
+5. Build libraries.
+
+```bash
+yarn build
+```
+
+or build and watch
+
+```bash
+yarn build:watch:rn
+```
+
+6. Start the playground.
+
+```bash
+yarn dev:rn
+```
+
+The playground uses Expo, please make sure you have [iOS Simulator](https://docs.expo.dev/workflow/ios-simulator/) or [Android Studio Emulator](https://docs.expo.dev/workflow/android-studio-emulator/) ready on your machine.
+
+By default, the app will run in development mode, to switch to Expo Go mode, press S. If it is your first time running the app, you might be asked for an account, please contact Andromeda team to proceed.
+
+7. Run test.
+
+```bash
+yarn turbo run test --filter=rn
+```
+
+#### Tips
+
+- To run a specific test:
+
+```bash
+# Run test for Button component
+yarn turbo run test --filter=rn -- -- Button
+```
+
+- To run a test in watch mode
+
+```bash
+# Run test for Button component
+yarn turbo run test --filter=rn -- -- Button --watch
+```
+
+- To run test and update snapshots
+
+```bash
+# Run test for Button component
+yarn turbo run test --filter=rn -- -- Button --updateSnapshot
+```
+
+## Code structure
+
+The source code for mobile hero design is under `rn` package, following this structure:
+
+- `src` for component implementation, including
+  - `theme` for theming configuration
+  - `components` for implementation code
+  - `utils` for shared utilities and `testHelpers` for shared testing helpers.
+- `playground` for actual examples of components. Each component has its own playground under `components` directory.
+
+#### Theming
+
+The theme configuration includes:
+
+- `global`: base configuration for `colors`, `typography` (fonts, font sizes, line heights), `space` and `borders` scale.
+- `components`: configuration for each component. Every component must have its own theme.
+
+The theme object is built based on `styled-system`. Please refer to its [doc](https://styled-system.com/table) for organising the theme object.
+
+#### Component styling
+
+- `@hero-design/rn` uses [`emotion`](https://emotion.sh/docs/introduction) to style components, separating styling and styling logics out of components' logics.
+- Each component use its own theme for styling which is put under `theme/components` and this must not be shared with any other components.
+- All variables used to create component's theme must be got from global theme at `theme/global`, apart from specific ones used for that component itself only.
+
+## Component documentation
+
+Documentation for mobile hero desing is built with [`docusaurus`](https://docusaurus.io/docs). All the documents are in `website` package.
+
+To start development:
+
+```bash
+yarn dev:website
+```
+
+- All component docs are placed under `docs/02-Components` directory.
+- Each doc must follow this format:
+
+```markdown
+# Component Name
+
+General description & usage of the component.
+
+## Examples
+
+Interactive examples of the component with description.
+
+## Props
+
+Component's API interface. This is automatically generated from component's interface.
+```

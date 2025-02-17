@@ -1,0 +1,161 @@
+---
+id: card
+title: Card
+---
+
+<PageTitle
+  title="Card"
+  content="Cards are used to group information together and can serve as an entry point to additional information. Actions are typically presented at the bottom of a card."
+/>
+
+## Examples
+
+### Basic card
+
+Basic card comes with 2 variants which are `basic` and `super-round`.
+
+#### Basic
+
+```jsx live
+function App() {
+  function CardContent({ textIntent }: { textIntent: 'primary' | 'body' }) {
+    const theme = useTheme();
+    return (
+      <View style={{ padding: theme.space.medium }}>
+        <Typography.Caption intent={textIntent}>
+          Update Key Results
+        </Typography.Caption>
+        <Typography.Body
+          intent={textIntent}
+          style={{ marginTop: theme.space.small }}
+        >
+          CX Global Ready
+        </Typography.Body>
+        <Typography.Caption intent={textIntent} fontSize="small">
+          From 20% to 25%
+        </Typography.Caption>
+      </View>
+    );
+  }
+
+  const CardExample = ({ intent, style }) => {
+    const theme = useTheme();
+
+    return (
+      <Card
+        intent={intent}
+        style={[{ marginVertical: theme.space.medium }, style]}
+      >
+        <CardContent textIntent={intent === 'primary' ? 'inverted' : 'body'} />
+      </Card>
+    );
+  };
+
+  return (
+    <>
+      <CardExample style={{ backgroundColor: theme.colors.backgroundLight }} />
+      <CardExample intent="primary" />
+      <CardExample intent="success" />
+      <CardExample intent="warning" />
+      <CardExample intent="danger" />
+      <CardExample intent="archived" />
+      <CardExample intent="neutral" />
+    </>
+  );
+}
+```
+
+#### Super Round Card
+
+```jsx live
+function App() {
+  function CardContent() {
+    const theme = useTheme();
+    return (
+      <View style={{ padding: theme.space.medium }}>
+        <Typography.Caption>Update Key Results</Typography.Caption>
+        <Typography.Body style={{ marginTop: theme.space.small }}>
+          CX Global Ready
+        </Typography.Body>
+        <Typography.Caption fontSize="small">
+          From 20% to 25%
+        </Typography.Caption>
+      </View>
+    );
+  }
+
+  return (
+    <Card variant="super-round" intent="warning">
+      <CardContent />
+    </Card>
+  );
+}
+```
+
+### Card.Data
+
+Card.Data comes with 5 intents which are `success`, `warning`, `danger`, `info`, and `archived`.
+
+```jsx live
+function App() {
+  const Screen = View;
+
+  const DataCard = ({
+    intent,
+  }: {
+    intent: 'success' | 'info' | 'warning' | 'danger' | 'archived',
+  }) => {
+    const theme = useTheme();
+
+    return (
+      <Card.Data
+        intent={intent}
+        style={{
+          marginTop: theme.space.medium,
+          backgroundColor: theme.colors.backgroundLight,
+        }}
+      >
+        <View style={{ padding: theme.space.medium }}>
+          <Typography.Caption intent="subdued">
+            Update Key Results
+          </Typography.Caption>
+          <Typography.Body style={{ marginTop: theme.space.small }}>
+            CX Global Ready
+          </Typography.Body>
+          <Typography.Caption>From 20% to 25%</Typography.Caption>
+          <Typography.Caption
+            intent="subdued"
+            style={{ marginTop: theme.space.small }}
+          >
+            Making progress
+          </Typography.Caption>
+        </View>
+      </Card.Data>
+    );
+  };
+  return (
+    <Box
+      style={{
+        height: 700,
+        backgroundColor: theme.colors.defaultGlobalSurface,
+      }}
+    >
+      <DataCard intent="archived" />
+      <DataCard intent="warning" />
+      <DataCard intent="danger" />
+      <DataCard intent="info" />
+      <DataCard intent="success" />
+    </Box>
+  );
+}
+```
+
+## Props
+
+### Card Props
+
+<Props of="Card" />
+
+### Card.Data Props
+
+<Props of="DataCard" />

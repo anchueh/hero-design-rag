@@ -1,0 +1,310 @@
+---
+id: list
+title: List
+---
+
+# List
+
+- List.BasicItem are used to display simple rows of information: prefix, title, subtitle, suffix
+- List.Item are used to display rows of information: Basic Item, leading status and customize views
+
+## Examples
+
+### Basic Item
+
+```jsx live
+function BasicItem() {
+  const Section = ({ children }) => {
+    const theme = useTheme();
+    return (
+      <SectionHeading
+        fontWeight="semi-bold"
+        fontSize="xlarge"
+        intent="primary"
+        style={{
+          marginVertical: theme.space.medium,
+        }}
+        text={children}
+      />
+    );
+  };
+
+  const BasicItemData = [
+    { title: 'List Item' },
+    { title: 'List Item with suffix', suffix: <Switch checked /> },
+    {
+      title: 'List item with prefix and suffix',
+      suffix: 'checkmark',
+      prefix: <Avatar title="ML" />,
+    },
+    {
+      title: 'List item with value',
+      suffix: <Typography.Body variant="small">$500.00</Typography.Body>,
+    },
+    { disabled: true, title: 'Disabled list item', suffix: 'checkmark' },
+  ];
+
+  return (
+    <>
+      <Section>Item inside a View</Section>
+      <List.BasicItem title="Basic Item" suffix="checkmark" />
+      <List.Item title="Item" suffix="checkmark" />
+      <FlatList
+        ItemSeparatorComponent={Divider}
+        data={BasicItemData}
+        renderItem={({ item }) => {
+          return (
+            <List.BasicItem
+              {...item}
+              style={{ marginVertical: theme.space.xsmall }}
+            />
+          );
+        }}
+      />
+    </>
+  );
+}
+```
+
+### Item
+
+```jsx live
+function ListItem() {
+  const CardStyleListItemData = [
+    {
+      suffix: 'arrow-right',
+      title: 'Menu list',
+    },
+    {
+      suffix: 'arrow-right',
+      title: 'Disabled Menu list',
+      disabled: true,
+      onPress: () => {
+        alert('should not be called');
+      },
+    },
+    {
+      prefix: 'circle-question-outlined',
+      suffix: 'arrow-right',
+      title: 'Menu list with prefix and suffix',
+    },
+    {
+      subtitle: 'Got a common question?',
+      suffix: 'arrow-right',
+      title: 'Menu list with subtitle',
+    },
+    {
+      prefix: 'circle-question-outlined',
+      subtitle: 'Got a common question?',
+      suffix: 'arrow-right',
+      title: 'Menu list with prefix, subtitle and suffix',
+    },
+    {
+      prefix: 'circle-question-outlined',
+      subtitle: 'Got a common question?',
+      suffix: 'arrow-right',
+      title: 'Selected menu list',
+      selected: true,
+    },
+  ];
+
+  const Section = ({ children }) => {
+    const theme = useTheme();
+    return (
+      <SectionHeading
+        fontWeight="semi-bold"
+        fontSize="xlarge"
+        intent="primary"
+        style={{
+          marginVertical: theme.space.medium,
+        }}
+        text={children}
+      />
+    );
+  };
+
+  return (
+    <>
+      <Typography.Title level="h5">Item inside a View</Section>
+      <List.Item title="Item" suffix="checkmark" />
+      <ScrollView style={{ backgroundColor: theme.colors.backgroundLight }}>
+        <Typography.Title
+          level="h5"
+          style={{ marginBottom: theme.space.medium }}
+        >
+          Card Style
+        </Typography.Title>
+        <FlatList
+          data={CardStyleListItemData}
+          renderItem={({ item }) => {
+            return (
+              <List.Item
+                variant="card"
+                {...item}
+                style={{ marginVertical: theme.space.xsmall }}
+              />
+            );
+          }}
+        />
+        <ScrollView>
+          <Typography.Title
+            level="h5"
+            style={{ marginVertical: theme.space.medium }}
+          >
+            Full-width Style
+          </Typography.Title>
+          <Typography.Body>1. Default</Typography.Body>
+          <List.Item
+            suffix="arrow-right"
+            title="Menu list"
+            style={{ marginVertical: theme.space.xsmall }}
+          />
+          <Typography.Body>2. Static</Typography.Body>
+          <List.Item
+            prefix={<Avatar title="ML" />}
+            suffix="arrow-right"
+            title="Menu List"
+            subtitle="Got a common question?"
+            style={{ marginVertical: theme.space.xsmall }}
+          >
+            <View
+              style={{
+                flexDirection: 'row',
+                alignSelf: 'stretch',
+                justifyContent: 'space-between',
+              }}
+            >
+              <Typography.Body variant="small">Gross pay</Typography.Body>
+              <Typography.Body variant="small">$1052.03</Typography.Body>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignSelf: 'stretch',
+                justifyContent: 'space-between',
+              }}
+            >
+              <Typography.Body variant="small">Gross pay</Typography.Body>
+              <Typography.Body variant="small">$1052.03</Typography.Body>
+            </View>
+          </List.Item>
+          <Typography.Body>3. Selected</Typography.Body>
+          <List.Item
+            prefix={<Avatar title="ML" />}
+            suffix="arrow-right"
+            title="Menu List"
+            subtitle="Got a common question?"
+            style={{ marginVertical: theme.space.xsmall }}
+            selected={true}
+          >
+            <View
+              style={{
+                flexDirection: 'row',
+                alignSelf: 'stretch',
+                justifyContent: 'space-between',
+              }}
+            >
+              <Typography.Body variant="small">Gross pay</Typography.Body>
+              <Typography.Body variant="small">$1052.03</Typography.Body>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignSelf: 'stretch',
+                justifyContent: 'space-between',
+              }}
+            >
+              <Typography.Body variant="small">Gross pay</Typography.Body>
+              <Typography.Body variant="small">$1052.03</Typography.Body>
+            </View>
+          </List.Item>
+          <List.Item
+            suffix="arrow-right"
+            title="Menu List"
+            style={{ marginVertical: theme.space.xsmall }}
+          >
+            <View
+              style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+            >
+              <Typography.Body variant="small">Gross pay</Typography.Body>
+              <Typography.Body variant="small">$1052.03</Typography.Body>
+            </View>
+            <View
+              style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+            >
+              <Typography.Body variant="small">Gross pay</Typography.Body>
+              <Typography.Body variant="small">$1052.03</Typography.Body>
+            </View>
+          </List.Item>
+          <Typography.Body>4. Leading Status</Typography.Body>
+          <List.Item
+            leadingStatus="archived"
+            suffix="arrow-right"
+            title="03:00 PM - 9:00 PM"
+          >
+            <View
+              style={{
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+              }}
+            >
+              <Typography.Caption>Ariel EH Demo 2022</Typography.Caption>
+            </View>
+          </List.Item>
+          <List.Item
+            suffix="arrow-right"
+            title="03:00 PM - 9:00 PM"
+            leadingStatus="warning"
+            style={{ marginVertical: theme.space.xsmall }}
+          >
+            <Typography.Caption>Ariel EH Demo 2022</Typography.Caption>
+            <Tag intent="warning" content="PENDING SHIFT" />
+          </List.Item>
+          <List.Item
+            suffix="arrow-right"
+            title="03:00 PM - 9:00 PM"
+            leadingStatus="danger"
+            style={{ marginVertical: theme.space.xsmall }}
+          >
+            <Typography.Caption>Webinar</Typography.Caption>
+            <Tag intent="danger" content="BIDDING SHIFT" />
+          </List.Item>
+          <List.Item
+            leadingStatus="info"
+            suffix="arrow-right"
+            title="03:00 PM - 9:00 PM"
+            style={{ marginVertical: theme.space.xsmall }}
+          >
+            <Typography.Caption>Webinar</Typography.Caption>
+            <Typography.Caption>To: Abby Price</Typography.Caption>
+            <Tag
+              intent="info"
+              content="PROPOSED SHIFT SWAP (AWAITING APPROVAL)"
+            />
+          </List.Item>
+          <List.Item
+            leadingStatus="success"
+            suffix="arrow-right"
+            title="03:00 PM - 9:00 PM"
+            style={{ marginVertical: theme.space.xsmall }}
+          >
+            <Typography.Caption>Webinar</Typography.Caption>
+            <Typography.Caption>To: Abby Price</Typography.Caption>
+            <Tag intent="success" content="ASSIGNED SHIFT" />
+          </List.Item>
+        </ScrollView>
+      </ScrollView>
+    </>
+  );
+}
+```
+
+## Props
+
+### List.BasicItem
+
+<Props of="BasicListItem" />
+
+### List.Item
+
+<Props of="ListItem" />

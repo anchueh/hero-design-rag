@@ -1,0 +1,131 @@
+---
+id: slider
+title: Slider
+---
+
+# Slider
+
+A slider is used to select a single value from a range of values.
+
+## Preview
+
+## Examples
+
+```jsx live
+function BasicSelect() {
+  const Value = ({ value }) => {
+    const theme = useTheme();
+    return (
+      <Typography.Body
+        variant="regular-bold"
+        style={{ alignSelf: 'center', marginBottom: theme.space.medium }}
+      >
+        {value}
+      </Typography.Body>
+    );
+  };
+  const [value, setValue] = useState(5);
+
+  return (
+    <View style={{ padding: theme.space.medium }}>
+      <Slider
+        value={value}
+        minimumValue={1}
+        maximumValue={10}
+        step={1}
+        onValueChange={(progress) => {
+          console.log('value change', progress);
+        }}
+        onSlidingStart={(progress) => {
+          console.log('sliding start at: %d', progress);
+        }}
+        onSlidingComplete={(progress) => {
+          setValue(progress);
+          console.log('sliding complete', progress);
+        }}
+      />
+      <Value value={value} />
+      <Typography.Body>Default</Typography.Body>
+      <Slider value={0.5} />
+      <Typography.Body>Disabled</Typography.Body>
+      <Slider value={0.5} disabled />
+    </View>
+  );
+}
+```
+
+# Range Slider
+
+Range selection slider allows the user to select two values on one slider track to create a range.
+
+## Examples
+
+```SnackPlayer name=RangeSlider/Example
+import React, { useState } from 'react';
+import { View } from 'react-native';
+import { Slider, Typography, useTheme } from '@hero-design/rn';
+import PlaygroundContext from './PlaygroundContext.js';
+
+const RangeValue = ({ value }: { value?: SliderRangeValue }) => {
+  const theme = useTheme();
+  return (
+    <Typography.Body
+      variant="regular-bold"
+      style={{ alignSelf: 'center', marginBottom: theme.space.medium }}
+    >
+      {value.start}$ - {value.end}$
+    </Typography.Body>
+  );
+};
+
+const App = () => {
+  const theme = useTheme();
+  const [rangeValue, setRangeValue] = useState({
+    start: -5,
+    end: 5,
+  });
+
+  return (
+    <PlaygroundContext>
+      <Typography.Title level="h5">Range Slider</Typography.Title>
+      <Typography.Body>Default</Typography.Body>
+      <Slider.Range
+        value={rangeValue}
+        minimumValue={-10}
+        maximumValue={10}
+        step={1}
+        onValueChange={(progress) => {
+          setRangeValue(progress);
+        }}
+        onSlidingStart={() => {}}
+        onSlidingComplete={(progress) => {
+          setRangeValue(progress);
+          console.log('sliding complete', progress);
+        }}
+        allowOverlap
+      />
+      <RangeValue value={rangeValue} />
+      <Typography.Body>Disablded</Typography.Body>
+      <Slider.Range
+        minimumValue={-10}
+        maximumValue={10}
+        step={1}
+        disabled
+        value={{ start: -5, end: 5 }}
+      />
+    </PlaygroundContext>
+  );
+};
+
+export default App;
+```
+
+## Props
+
+### Slider
+
+<Props of="SingleSlider" />
+
+### Button.Range
+
+<Props of="RangeSlider" />

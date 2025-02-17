@@ -1,0 +1,472 @@
+---
+id: line-chart
+title: Line
+---
+
+## Line Chart
+
+A line chart is a type of data visualization that displays information through a series of data points called "markers" connected by straight line segments. These charts are particularly useful for showing trends and patterns over a continuous interval or time span. The x-axis (horizontal axis) typically represents the independent variable (such as time), while the y-axis (vertical axis) represents the dependent variable.
+
+There are two variants: outlined and filled
+
+### Outlined variant
+
+The outlined chart consists solely of lines without any filled colors.
+
+```jsx live
+function LineChart() {
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+  const labels = [
+    'May 2023',
+    'Jun 2023',
+    'Jul 2023',
+    'Aug 2023',
+    'Sep 2023',
+    'Jun 2024',
+    'Jul 2024',
+  ];
+  const data = [
+    { label: 'Kien Tran', data: [-2.2, 1, 2, 2.5, 4, 3, 4] },
+    { label: 'Hau Dao', data: [1, 3, 1.5, 0.5, 2, 2, 3] },
+    { label: 'Phuc Dang', data: [2, 2, 1.6, 1.5, 1, 1, 2] },
+  ];
+  const numberOfColumns = 5;
+
+  return (
+    <Box sx={{ height: 400 }}>
+      <Chart.Line
+        data={data.map((d) => ({
+          ...d,
+          data: d.data.slice(currentIndex, currentIndex + numberOfColumns),
+        }))}
+        xAxisConfig={{
+          title: 'Horizontal Title',
+          labels: labels.slice(currentIndex, currentIndex + numberOfColumns),
+        }}
+        yAxisConfig={{
+          title: 'Vertical Title',
+          maxValue: 5,
+          tick: {
+            interval: 1,
+          },
+        }}
+        data-test-id="outlined"
+      />
+    </Box>
+  );
+}
+```
+
+### Filled variant
+
+- The filled chart features lines adorned with vibrant colors, utilize the fill-color variant for charts containing fewer than four legends.
+
+```jsx live
+function LineChart() {
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+  const labels = [
+    'May 2023',
+    'Jun 2023',
+    'Jul 2023',
+    'Aug 2023',
+    'Sep 2023',
+    'Jun 2024',
+    'Jul 2024',
+  ];
+  const data = [
+    { label: 'Kien Tran', data: [2.2, 1, 2, 2.5, 4, 3, 4] },
+    { label: 'Hau Dao', data: [1, 3, 1.5, 0.5, 2, 2, 3] },
+    { label: 'Phuc Dang', data: [2, 2, 1.6, 1.5, 1, 1, 2] },
+  ];
+  const numberOfColumns = 5;
+
+  return (
+    <Box sx={{ height: 400 }}>
+      <Chart.Line
+        data={data.map((d) => ({
+          ...d,
+          data: d.data.slice(currentIndex, currentIndex + numberOfColumns),
+        }))}
+        xAxisConfig={{
+          title: 'Horizontal Title',
+          labels: labels.slice(currentIndex, currentIndex + numberOfColumns),
+        }}
+        yAxisConfig={{
+          title: 'Vertical Title',
+          maxValue: 5,
+          tick: {
+            interval: 1,
+          },
+        }}
+        data-test-id="basic-line-chart"
+        variant="filled"
+      />
+    </Box>
+  );
+}
+```
+
+### With tick config
+
+Tick includes `interval` props. It is used to set the interval between the tick.
+
+```jsx live
+function LineChart() {
+  const labels = [
+    'May 2023',
+    'Jun 2023',
+    'Jul 2023',
+    'Aug 2023',
+    'Sep 2023',
+    'Jun 2024',
+    'Jul 2024',
+  ];
+  const data = [
+    { label: 'Kien Tran', data: [2.2, 1, 2, 2.5, 4, 3, 4] },
+    { label: 'Hau Dao', data: [1, 3, 1.5, 0.5, 2, 2, 3] },
+    { label: 'Phuc Dang', data: [2, 2, 1.6, 1.5, 1, 1, 2] },
+    { label: 'Vinh Phan', data: [3, 5, 2.3, 3, 3, 3, 1] },
+    { label: 'Luan Lai', data: [2, 1, 3, 2, 1.5, 0.6, 1] },
+  ];
+
+  return (
+    <Box sx={{ height: 400 }}>
+      <Chart.Line
+        xAxisConfig={{
+          title: 'Horizontal Title',
+          labels: labels,
+        }}
+        yAxisConfig={{
+          title: 'Vertical Title',
+          maxValue: 10,
+          tick: {
+            interval: 0.5,
+          },
+        }}
+        data={data}
+      />
+    </Box>
+  );
+}
+```
+
+### With legend
+
+The line chart is attached the legend to help visualize the data.
+We have `legendConfig.selectable` props to make the legend become checkbox to filter the data.
+
+```jsx live
+function LineChart() {
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+  const labels = [
+    'May 2023',
+    'Jun 2023',
+    'Jul 2023',
+    'Aug 2023',
+    'Sep 2023',
+    'Jun 2024',
+    'Jul 2024',
+  ];
+  const data = [
+    { label: 'Kien Tran', data: [2.2, 1, 2, 2.5, 4, 3, 4] },
+    { label: 'Hau Dao', data: [1, 3, 1.5, 0.5, 2, 2, 3] },
+    { label: 'Phuc Dang', data: [2, 2, 1.6, 1.5, 1, 1, 2] },
+    { label: 'Vinh Phan', data: [3, 5, 2.3, 3, 3, 3, 1] },
+    { label: 'Luan Lai', data: [2, 1, 3, 2, 1.5, 0.6, 1] },
+  ];
+  const numberOfColumns = 5;
+
+  return (
+    <Box sx={{ height: 400 }}>
+      <Chart.Line
+        data={data.map((d) => ({
+          ...d,
+          data: d.data.slice(currentIndex, currentIndex + numberOfColumns),
+        }))}
+        xAxisConfig={{
+          title: 'Horizontal Title',
+          labels: labels.slice(currentIndex, currentIndex + numberOfColumns),
+        }}
+        yAxisConfig={{
+          title: 'Vertical Title',
+          maxValue: 5,
+          tick: {
+            interval: 1,
+          },
+        }}
+        legendConfig={{
+          selectable: true,
+          viewMoreText: 'More',
+          maxLegend: 4,
+        }}
+        data-test-id="line-chart"
+      />
+    </Box>
+  );
+}
+```
+
+### With Navigation
+
+The line chart support navigation between the data. We have `navigationConfig.visible` props to make the navigation button appear.
+
+and we have `navigationConfig.onNavigate` props to handle the navigation.
+
+```jsx live
+function LineChart() {
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+  const labels = [
+    'May 2023',
+    'Jun 2023',
+    'Jul 2023',
+    'Aug 2023',
+    'Sep 2023',
+    'Jun 2024',
+    'Jul 2024',
+  ];
+  const data = [
+    { label: 'Kien Tran', data: [2.2, 1, 2, 2.5, 4, 3, 4] },
+    { label: 'Hau Dao', data: [1, 3, 1.5, 0.5, 2, 2, 3] },
+    { label: 'Phuc Dang', data: [2, 2, 1.6, 1.5, 1, 1, 2] },
+    { label: 'Vinh Phan', data: [3, 5, 2.3, 3, 3, 3, 1] },
+    { label: 'Luan Lai', data: [2, 1, 3, 2, 1.5, 0.6, 1] },
+  ];
+  const numberOfColumns = 5;
+
+  const disabledButtonMapping = {
+    0: 'prev',
+    [`${labels.length - numberOfColumns}`]: 'next',
+  };
+
+  return (
+    <Box sx={{ height: 400 }}>
+      <Chart.Line
+        data={data.map((d) => ({
+          ...d,
+          data: d.data.slice(currentIndex, currentIndex + numberOfColumns),
+        }))}
+        xAxisConfig={{
+          title: 'Horizontal Title',
+          labels: labels.slice(currentIndex, currentIndex + numberOfColumns),
+        }}
+        yAxisConfig={{
+          title: 'Vertical Title',
+          maxValue: 5,
+          tick: {
+            interval: 1,
+          },
+        }}
+        navigationConfig={{
+          visible: true,
+          onNavigate: (direction) => {
+            if (direction === 'next') {
+              if (currentIndex + numberOfColumns >= labels.length) return;
+              setCurrentIndex(currentIndex + 1);
+            }
+            if (direction === 'prev') {
+              if (currentIndex === 0) return;
+              setCurrentIndex(currentIndex - 1);
+            }
+          },
+          disabledButtons: disabledButtonMapping[currentIndex],
+        }}
+        data-test-id="line-chart"
+      />
+    </Box>
+  );
+}
+```
+
+### With line custom color
+
+The chart support style for the line color by passing colors attribute into the styleConfig prop.
+
+<Note title="Color used best practice">
+  Please follow the best practice to ensure consistency across these specific
+  charts deviating from the color order. Should confirm with designer team
+  before using the custom color for the chart.
+  <br />
+  <Highlight>Example</Highlight>
+  <br />
+  Specifically, we have standardized the colors for Gender and Employment status
+  filters:
+  <br />
+  For Employment status:
+  <Ul>
+    <Li>Full time: Violet</Li>
+    <Li>Part time: Blue</Li>
+    <Li>Casual: Orange</Li>
+    <Li>Unassigned: Green</Li>
+  </Ul>
+  And Gender:
+  <Ul>
+    <Li>Female: Violet</Li>
+    <Li>Male: Blue</Li>
+    <Li>Non-binary: Orange</Li>
+    <Li>Prefer not to say: Green</Li>
+    <Li>Unspecified: Red</Li>
+  </Ul>
+</Note>
+
+```jsx live
+function LineChart() {
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+  const labels = [
+    'May 2023',
+    'Jun 2023',
+    'Jul 2023',
+    'Aug 2023',
+    'Sep 2023',
+    'Jun 2024',
+    'Jul 2024',
+  ];
+  const data = [
+    { label: 'Kien Tran', data: [-2.2, 1, 2, 2.5, 4, 3, 4] },
+    { label: 'Hau Dao', data: [1, 3, 1.5, 0.5, 2, 2, 3] },
+    { label: 'Phuc Dang', data: [2, 2, 1.6, 1.5, 1, 1, 2] },
+  ];
+  const numberOfColumns = 5;
+
+  return (
+    <Box sx={{ height: 400 }}>
+      <Chart.Line
+        data={data.map((d) => ({
+          ...d,
+          data: d.data.slice(currentIndex, currentIndex + numberOfColumns),
+        }))}
+        xAxisConfig={{
+          title: 'Horizontal Title',
+          labels: labels.slice(currentIndex, currentIndex + numberOfColumns),
+        }}
+        yAxisConfig={{
+          title: 'Vertical Title',
+          maxValue: 5,
+          tick: {
+            interval: 1,
+          },
+        }}
+        styleConfig={{
+          series: [
+            {
+              label: 'Kien Tran',
+              color: 'dodgerBlueLight30',
+            },
+            {
+              label: 'Hau Dao',
+              color: 'violetLight30',
+            },
+            {
+              label: 'Phuc Dang',
+              color: 'greenLight30',
+            },
+          ],
+        }}
+        variant="filled"
+      />
+    </Box>
+  );
+}
+```
+
+### With customized tooltip
+
+The customizing Tooltip feature allows users to tailor the appearance.
+
+```jsx live
+function LineChart() {
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+  const labels = [
+    'May 2023',
+    'Jun 2023',
+    'Jul 2023',
+    'Aug 2023',
+    'Sep 2023',
+    'Jun 2024',
+    'Jul 2024',
+  ];
+  const data = [
+    { label: 'Kien Tran', data: [-2.2, 1, 2, 2.5, 4, 3, 4] },
+    { label: 'Hau Dao', data: [1, 3, 1.5, 0.5, 2, 2, 3] },
+    { label: 'Phuc Dang', data: [2, 2, 1.6, 1.5, 1, 1, 2] },
+  ];
+  const numberOfColumns = 5;
+
+  return (
+    <Box sx={{ height: 400 }}>
+      <Chart.Line
+        data={data.map((d) => ({
+          ...d,
+          data: d.data.slice(currentIndex, currentIndex + numberOfColumns),
+        }))}
+        xAxisConfig={{
+          title: 'Horizontal Title',
+          labels: labels.slice(currentIndex, currentIndex + numberOfColumns),
+        }}
+        yAxisConfig={{
+          title: 'Vertical Title',
+          maxValue: 5,
+          tick: {
+            interval: 1,
+          },
+        }}
+        data-test-id="outlined"
+        tooltipRenderer={(selectedItem, items) => {
+          return (
+            <Box>
+              {items.map(({ label, xAxisLabel, value, legendColor }) => {
+                const isSelected = selectedItem.label === label;
+                return (
+                  <Box
+                    sx={{ display: 'flex', alignItems: 'center' }}
+                    key={label}
+                  >
+                    <Box
+                      data-test-id="legend-circle"
+                      style={{
+                        backgroundColor: legendColor,
+                        width: theme.space.small,
+                        height: theme.space.small,
+                        borderRadius: theme.radii.medium,
+                        marginRight: theme.space.xsmall,
+                      }}
+                    />
+                    <Typography.Text
+                      fontSize={14}
+                      fontWeight={isSelected ? 'bold' : 'light'}
+                      intent="subdued"
+                      tagName="span"
+                      sx={{ marginRight: 'xsmall' }}
+                    >
+                      {label}
+                    </Typography.Text>
+                    <Typography.Text
+                      fontSize={14}
+                      fontWeight="light"
+                      intent="subdued"
+                      tagName="span"
+                      sx={{ marginRight: 'xsmall' }}
+                    >
+                      {xAxisLabel}
+                    </Typography.Text>
+                    <Typography.Text
+                      fontSize={14}
+                      fontWeight="light"
+                      tagName="span"
+                    >
+                      {value}
+                    </Typography.Text>
+                  </Box>
+                );
+              })}
+            </Box>
+          );
+        }}
+      />
+    </Box>
+  );
+}
+```
+
+## Props
+
+<Props of="LineChart" from="web" />

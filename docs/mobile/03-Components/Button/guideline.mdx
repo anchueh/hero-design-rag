@@ -1,0 +1,101 @@
+---
+title: Guideline
+---
+
+import DosAndDonts from './ButtonDosAndDonts.tsx';
+
+<PageTitle
+  title="Button"
+  content="Buttons are used to present an action users can take. When triggered, the button initiates an action or redirects the users."
+/>
+
+<DosAndDonts />
+
+## Writing button labels
+
+<Ul>
+  <Li>Generally, use no more than 2-3 words for button labels.</Li>
+  <Li>
+    Use sentence case and proper nouns for label text. Use verbs that best
+    describe the action the user is taking. For example, “Remove” instead of
+    “Trash”.
+  </Li>
+  <Li>
+    When labelling two opposing actions next to each other, be as specific as
+    possible. Instead of using a generic ‘Ok’ and ‘Cancel’, consider describing
+    the action itself eg. ‘Save’ and ‘Discard’.
+  </Li>
+</Ul>
+
+```jsx live previewOnly
+function ButtonExample() {
+  return (
+    <Box
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: theme.space.large,
+      }}
+    >
+      <Button
+        text="Ok"
+        variant="filled"
+        intent="primary"
+        onPress={() => {}}
+        style={{ marginBottom: theme.space.medium }}
+      />
+      <Button
+        text="Remove"
+        variant="filled"
+        intent="secondary"
+        onPress={() => {}}
+        style={{ marginBottom: theme.space.medium }}
+      />
+    </Box>
+  );
+}
+```
+
+<br />
+
+## Icons
+
+<Ul>
+  <Li>
+    Icons may only be used if they enhance the user experience. For example, a
+    lock icon may be used for a payment button to infer security.
+  </Li>
+  <Li>
+    Always place icons on the leading side of the button, before the text label.
+    When choosing icons, ensure there is a clear link to the action the user is
+    taking.
+  </Li>
+</Ul>
+
+```jsx live previewOnly
+function BadgeBehavior() {
+  const [showBadge, setShowBadge] = React.useState(true);
+
+  return (
+    <Box
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: theme.space.large,
+      }}
+    >
+      <Badge.Status visible={showBadge}>
+        <Icon icon="bell" size="small" />
+      </Badge.Status>
+      <Button
+        style={{ marginLeft: theme.space.large }}
+        variant="text"
+        text="Click"
+        onPress={() => setShowBadge(!showBadge)}
+      />
+    </Box>
+  );
+}
+```

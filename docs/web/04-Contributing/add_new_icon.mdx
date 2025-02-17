@@ -1,0 +1,78 @@
+---
+id: add_new_icon
+title: Add new icon
+---
+
+import ImportIcons from './Icon/ImportIcons.png';
+import SVGGenerateConfig from './Icon/SVGGenerateConfig.png';
+import SizeConfig from './Icon/SizeConfig.png';
+import ChooseManualSizeConfig from './Icon/ChooseManualSizeConfig.png';
+import EditSVG from './Icon/EditSVG.png';
+import ScaleIcon from './Icon/ScaleIcon.png';
+import AligmentIcon from './Icon/AligmentIcon.png';
+
+# How to add a new icon?
+
+Make sure you have got these following:
+
+- New icon file from designer (SVG format with **Bounding box**).
+- Format the icon file by this [tool](https://icomoon.io/app/#/select) to convert some tags and attributes (no account needed). Because font formats do not support all of the features that the SVG format provides.
+
+:::caution Note
+Please check whether your icon has existed or not in the [Icon List](https://design.employmenthero.com/web/Components/Icon/). If it's not existed, you can add your icon.
+:::
+
+## Steps to format the SVG file
+
+1. First, Go to [IconMoonApp](https://icomoon.io/app/#/select) and click the `Generate SVG & More` at the bottom of the screen.
+
+<img
+  alt="svg-generate-config"
+  src={SVGGenerateConfig}
+  style={{ width: '70%' }}
+/>
+
+2. Then please click the `Size` button as in the image below to configure the size of exported SVG file.
+
+<img alt="size-config" src={SizeConfig} style={{ width: '70%' }} />
+
+3. Choose `Manual (px)` option and set it to `1024` to ensure we export (download) the SVG file with the valid size.
+
+<img
+  alt="choose-manual-size-config"
+  src={ChooseManualSizeConfig}
+  style={{ width: '70%' }}
+/>
+
+:::info Note
+Once you perform steps 1 through 3, there is no need to repeat them again.
+:::
+
+4. Click on `Import Icons` at `the Selection Tab` to upload the SVG that you want to format.
+
+<img alt="import-icon" src={ImportIcons} style={{ width: '70%' }} />
+
+5. After the SVG file is imported successfully. First, select the `pencil` icon at the top then click on your `icon`.
+
+<img alt="edit-svg" src={EditSVG} style={{ width: '70%' }} />
+
+6. When you perform step 5, the below modal will be opened. Please follow the below steps to format it to a valid and consistent icon with the others.
+
+- Scale icon.
+
+<img alt="scale-icon" src={ScaleIcon} style={{ width: '70%' }} />
+
+- Align icon.
+
+<img alt="alignment-icon" src={AligmentIcon} style={{ width: '70%' }} />
+
+7. Then click on the Download(SVG). You will get a new valid formatted SVG file.
+
+## Steps to add a new icon
+
+1. Access to the package `icons-generation` of the repo [hero-design](https://github.com/thinkei/hero-design/tree/master/packages/icons-generation).
+2. Move the new icon after the conversion process to the current icon set folder, under its corresponding category (filled/outlined) for `packages/icons-generations/rawFiles/web`.
+3. Check the new icon file name (using a hyphen and having `outlined` at the end for outlined icons).
+4. Run `yarn generate:icons`.
+5. Run `docker-compose run visual_test yarn visual-test:update` to update the visual test related to Icon.
+6. Commit changes and open a new PR for reviewing.

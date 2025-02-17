@@ -1,0 +1,51 @@
+---
+id: checkbox
+title: Checkbox
+---
+
+<PageTitle
+  title="Checkbox"
+  content="Checkboxes are used for multiple choices, not for mutually exclusive choices, each checkbox works independently, therefore checking an additional box does not affect any other selections."
+/>
+
+## Examples
+
+```jsx live
+function App() {
+  const ControlledCheckbox = (props) => {
+    const theme = useTheme();
+    const [checked, setChecked] = useState(false);
+
+    return (
+      <Checkbox
+        checked={checked}
+        onPress={() => setChecked(!checked)}
+        style={{ marginVertical: theme.space.medium }}
+        {...props}
+      />
+    );
+  };
+  return (
+    <>
+      <ControlledCheckbox description="Please agree to our privacy policy" />
+      <ControlledCheckbox
+        description={`Please agree you make sure you update any direct debits or reoccurring payments associated.${'\n'}You can view and update these details in your Hero Wallet settings.`}
+      />
+      <ControlledCheckbox
+        description="Please agree to our privacy policy"
+        disabled
+        checked
+      />
+      <ControlledCheckbox
+        description="Please agree to our privacy policy"
+        checked
+        readonly
+      />
+    </>
+  );
+}
+```
+
+## Props
+
+<Props of="Checkbox" />

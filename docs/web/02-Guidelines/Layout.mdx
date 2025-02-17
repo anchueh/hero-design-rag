@@ -1,0 +1,387 @@
+---
+id: layout
+title: Layout
+---
+
+# Layout general guidelines
+
+Currently, there are 3 types of layout that be used in a page:
+
+- Full
+- Primary
+- Grid
+
+## Full
+
+- Always use Full width with containers that contain dense tables/content.
+
+#### Full: Web
+
+- Always leave `24px` spacing around each container.
+- The container width should fit the full width no matter the screen size.
+
+```jsx live
+function FullWeb() {
+  return (
+    <Website>
+      <SideNavigationBar />
+      <Page sx={{ p: 'large' }}>
+        <PageBreadcrumb />
+        <PageHeader title="Page title" />
+        <Container sx={{ mb: 'large' }}>Max width</Container>
+        <Container>Max width</Container>
+      </Page>
+    </Website>
+  );
+}
+```
+
+#### Full: Tablet
+
+- Always leave `16px` left and right spacing.
+- Always leave `24px` top and bottom spacing (there could be a container above and below).
+- The container width should fit the full width no matter the Tablet screen size.
+- As the screen size or window reduces in width, the Primary size should maintain `736px` width until it no longer fits within the frame while keeping `16px` left and right for spacing as a minimum. At this breakpoint the Primary should convert to Mobile view.
+- Taken into account the above, there are numerous screens sizes, thus we should allow for wider widths, as long as the `16px` side margins are kept.
+
+```jsx live
+function FullTablet() {
+  return (
+    <Website>
+      <Page
+        sx={{
+          maxWidth: '768px',
+          pt: 'large',
+          pb: 'large',
+          pl: 'medium',
+          pr: 'medium',
+        }}
+      >
+        <PageBreadcrumb />
+        <PageHeader title="Page title" />
+        <Container sx={{ mb: 'large' }}>Max width</Container>
+        <Container>Max width</Container>
+      </Page>
+    </Website>
+  );
+}
+```
+
+#### Full: Mobile
+
+- Always leave `8px` left and right spacing.
+- Always leave `24px` top and bottom spacing (there could be a container above and below).
+- As the max width size is `360px`, the side spacing will depend on whatever the screen size or window size that the user is using, but should never exceed past the `8px` left and right spacing.
+- Taken into account the above, there are numerous screens sizes, thus we should allow for wider widths, as long as the `8px` side margins are kept.
+- The container width should fit the full width no matter the Mobile screen size.
+
+```jsx live
+function FullMobile() {
+  return (
+    <Website>
+      <Page
+        sx={{
+          maxWidth: '376px',
+          pt: 'large',
+          pb: 'large',
+          pl: 'small',
+          pr: 'small',
+        }}
+      >
+        <PageBreadcrumb />
+        <PageHeader title="Page title" />
+        <Container sx={{ mb: 'large' }}>Max width</Container>
+        <Container>Max width</Container>
+      </Page>
+    </Website>
+  );
+}
+```
+
+## Primary
+
+- Always use Primary width with containers for most of the platform, as most containers do not need to be full width.
+
+#### Primary: Web
+
+- Always leave `24px` spacing around each container (other container may be above or below).
+- As the max width size is `1128px`, the side spacing will depend on whatever the screen size or window that the user is using, but should never exceed past the `24px` left and right spacing margins.
+- As the screen size or window reduces in width, the Primary size should maintain `1128px` width until it no longer fits within the frame while keeping `24px` left and right for spacing as a minimum. At this breakpoint the Primary should convert to Tablet view.
+
+```jsx live
+function PrimaryWeb() {
+  return (
+    <Website>
+      <SideNavigationBar />
+      <Page sx={{ p: 'large', display: 'flex', justifyContent: 'center' }}>
+        <Box sx={{ maxWidth: '1128px', flex: 1 }}>
+          <PageBreadcrumb />
+          <PageHeader title="Page title" />
+          <Container sx={{ mb: 'large' }}>1128px max width</Container>
+          <Container>1128px max width</Container>
+        </Box>
+      </Page>
+    </Website>
+  );
+}
+```
+
+#### Primary: Tablet
+
+- Always leaving `16px` left and right spacing.
+- Always leave `24px`, top and bottom spacing (there could be a container above and below).
+- As the max width size is `1128px`, the side spacing will depend on whatever the screen size or window size that the user is using, but should never exceed past the `16px` left and right spacing.
+- The container width should fit the full width no matter the Tablet screen size.
+- As the screen size or window reduces in width, the Primary size should maintain `736px` width until it no longer fits within the frame while keeping `16px` left and right for spacing as a minimum. At this breakpoint the Primary should convert to Mobile view.
+- Taken into account the above, there are numerous screens sizes, thus we should allow for wider widths, as long as the `16px` side margins are kept.
+
+```jsx live
+function PrimaryTablet() {
+  return (
+    <Website>
+      <Page
+        sx={{
+          maxWidth: '768px',
+          pt: 'large',
+          pb: 'large',
+          pl: 'medium',
+          pr: 'medium',
+        }}
+      >
+        <PageBreadcrumb />
+        <PageHeader title="Page title" />
+        <Container sx={{ mb: 'large' }}>Max width</Container>
+        <Container>Max width</Container>
+      </Page>
+    </Website>
+  );
+}
+```
+
+#### Primary: Mobile
+
+- Always leaving `8px` left and right spacing
+- Always leave `24px`, top and bottom spacing (there could be a container above and below).
+- As the max width size is `360px`, the side spacing will depend on whatever the screen size or window size that the user is using, but should never exceed past the `8px` left and right spacing.
+- Taken into account the above, there are numerous screens sizes, thus we should allow for wider widths, as long as the `8px` side margins are kept.
+- The container width should fit the full width no matter the Mobile screen size.
+
+```jsx live
+function PrimaryMobile() {
+  return (
+    <Website>
+      <Page
+        sx={{
+          maxWidth: '376px',
+          pt: 'large',
+          pb: 'large',
+          pl: 'small',
+          pr: 'small',
+        }}
+      >
+        <PageBreadcrumb />
+        <PageHeader title="Page title" />
+        <Container sx={{ mb: 'large' }}>Max width</Container>
+        <Container>Max width</Container>
+      </Page>
+    </Website>
+  );
+}
+```
+
+## Grid
+
+- Always use Grid width with layouts that need multiple sections for information that need to be separate.
+
+#### Grid: Web
+
+- This grid consists of:
+  - Primary `1128px`: on it's own row
+  - Secondary `744px`: 2/3 of Primary
+  - Tertiary `360px`: 1/3 of Primary
+- Always leaving `24px` spacing around each container, and in between secondary and tertiary containers.
+- As the max width size is `1128px`, the side spacing will depend on whatever the screen size or window that the user is using, but should never exceed past the `24px` left and right spacing margins.
+- As the screen size or window reduces in width, the Grid Primary size should maintain `1128px` width until it no longer fits within the frame while keeping `24px` left and right for spacing as a minimum. At this breakpoint the Primary should convert to Grid Tablet view.
+- As the screen size or window reduces in width, the Grid Secondary size should maintain `744px` width until it no longer fits within the frame while keeping `24px` left and right for spacing as a minimum. At this breakpoint the Secondary should convert to Grid Tablet view.
+- As the screen size or window reduces in width, the Grid Tertiary size should maintain `360px` width until it no longer fits within the frame while keeping `24px` left and right for spacing as a minimum. At this breakpoint the Tertiary should convert to Grid Tablet view
+
+```jsx live
+function GridWeb() {
+  return (
+    <Website>
+      <SideNavigationBar />
+      <Page sx={{ p: 'large', display: 'flex', justifyContent: 'center' }}>
+        <Box sx={{ maxWidth: '1128px', flex: 1 }}>
+          <PageBreadcrumb />
+          <PageHeader title="Page title" />
+          <Grid gutter="large">
+            <Grid.Row>
+              <Grid.Col>
+                <Container>Primary size: 1128px max width</Container>
+              </Grid.Col>
+            </Grid.Row>
+            <Grid.Row gutter={['large', 'large']}>
+              <Grid.Col span={[24, 24, 24, 16, 16]}>
+                <Container>Secondary size: 744px max width</Container>
+              </Grid.Col>
+              <Grid.Col span={[24, 24, 24, 8, 8]}>
+                <Container>Tertiary size: 360px max width</Container>
+              </Grid.Col>
+            </Grid.Row>
+          </Grid>
+        </Box>
+      </Page>
+    </Website>
+  );
+}
+```
+
+#### Grid: Tablet
+
+This Tablet grid consist of 2 options:
+
+- TABLET STACK 1: `24px` top and bottom spacing of each container, `16px` for left & right spacing.
+
+  - Primary: `736px` wide, `24px` spacing
+  - Secondary: `736px` wide, `24px` spacing
+  - Secondary: `736px` wide, `24px` spacing
+
+```jsx live
+function GirdTablet1() {
+  return (
+    <Website>
+      <Page
+        sx={{
+          maxWidth: '768px',
+          pt: 'large',
+          pb: 'large',
+          pl: 'medium',
+          pr: 'medium',
+        }}
+      >
+        <PageBreadcrumb />
+        <PageHeader title="Page title" />
+        <Grid gutter="large">
+          <Grid.Row>
+            <Grid.Col>
+              <Container>Primary size: 736px width (height may vary)</Container>
+            </Grid.Col>
+          </Grid.Row>
+          <Grid.Row gutter={['large', 'large']}>
+            <Grid.Col>
+              <Container>
+                Secondary size: 736px width (height may vary)
+              </Container>
+            </Grid.Col>
+            <Grid.Col>
+              <Container sx={{ height: '200px' }}>
+                Tertiary size: 736px width (height may vary)
+              </Container>
+            </Grid.Col>
+          </Grid.Row>
+        </Grid>
+      </Page>
+    </Website>
+  );
+}
+```
+
+- TABLET STACK 2: `24px` top and bottom spacing of each container, `24px` spacing in between containers, `16px` for left & right spacing
+  - Primary: `736px` wide, `24px` spacing
+  - Secondary: `356px` wide, `24px` spacing
+  - Tertiary: `356px` wide, `24px` spacing
+
+```jsx live
+function GridTablet2() {
+  return (
+    <Website>
+      <Page
+        sx={{
+          maxWidth: '768px',
+          pt: 'large',
+          pb: 'large',
+          pl: 'medium',
+          pr: 'medium',
+        }}
+      >
+        <PageBreadcrumb />
+        <PageHeader title="Page title" />
+        <Grid gutter="large">
+          <Grid.Row>
+            <Grid.Col>
+              <Container>Primary size: 736px width (height may vary)</Container>
+            </Grid.Col>
+          </Grid.Row>
+          <Grid.Row gutter={['large', 'large']}>
+            <Grid.Col span={[24, 24, 24, 12, 12]}>
+              <Container>
+                Secondary size: 356px width (height may vary)
+              </Container>
+            </Grid.Col>
+            <Grid.Col span={[24, 24, 24, 12, 12]}>
+              <Container sx={{ height: '200px' }}>
+                Tertiary size: 356px width (height may vary)
+              </Container>
+            </Grid.Col>
+          </Grid.Row>
+        </Grid>
+      </Page>
+    </Website>
+  );
+}
+```
+
+- As the screen size or window reduces in width, the Grid size should maintain `736px` width as a group until it no longer fits within the frame while keeping `16px` left and right for spacing as a minimum. At this breakpoint the Grid should convert to Mobile view.
+- Taken into account the above, there are numerous screens sizes, thus we should allow for wider widths, as long as the `12px` side margins are kept.
+
+#### Grid: Mobile
+
+- This grid consist of 1 size for each container:
+  - Primary: `360px` - on it's own row
+  - Secondary: `360px` - on it's own row
+  - Tertiary: `360px` - on it's own row
+- Always leave `8px` left and right spacing
+- Always leave `24px`, top and bottom spacing (there could be a container above and below).
+- As the max width size is `360px`, the side spacing will depend on whatever the screen size or window size that the user is using, but should never exceed past the `8px` left and right spacing margins.
+- Taken into account the above, there are numerous screens sizes, thus we should allow for wider widths, as long as the `8px` side margins are kept.
+- The container width should fit the full width no matter the Mobile screen size.
+
+```jsx live
+function GridMobile() {
+  return (
+    <Website>
+      <Page
+        sx={{
+          maxWidth: '376px',
+          pt: 'large',
+          pb: 'large',
+          pl: 'small',
+          pr: 'small',
+        }}
+      >
+        <PageBreadcrumb />
+        <PageHeader title="Page title" />
+        <Grid gutter="large">
+          <Grid.Row>
+            <Grid.Col>
+              <Container>Primary size: 360px width (height may vary)</Container>
+            </Grid.Col>
+          </Grid.Row>
+          <Grid.Row gutter={['large', 'large']}>
+            <Grid.Col>
+              <Container>
+                Secondary size: 360px width (height may vary)
+              </Container>
+            </Grid.Col>
+            <Grid.Col>
+              <Container sx={{ height: '200px' }}>
+                Tertiary size: 360px width (height may vary)
+              </Container>
+            </Grid.Col>
+          </Grid.Row>
+        </Grid>
+      </Page>
+    </Website>
+  );
+}
+```

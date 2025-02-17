@@ -1,0 +1,280 @@
+---
+id: tab
+title: Tabs
+---
+
+# Tabs
+
+Tabs make it easy to switch between different views.
+
+## When to Use
+
+Can be used to manage contents when you have many different categories on the same page.
+
+## Examples
+
+### Basic
+
+```jsx live
+function BasicTabs() {
+  const tabs = [
+    { id: 1, title: 'Tab 1', panel: 'Tab content 1' },
+    { id: 2, title: 'Tab 2', panel: 'Tab content 2' },
+    { id: 3, title: 'Tab 3', panel: 'Tab content 3', disabled: true },
+    { id: 4, title: 'Tab 4', panel: 'Tab content 4' },
+  ];
+  const [selectedTabId, setSelectedTabId] = React.useState(1);
+  return (
+    <Tabs
+      id="sample-tabs"
+      tabs={tabs}
+      selectedTabId={selectedTabId}
+      onChange={(newTabId) => setSelectedTabId(newTabId)}
+    />
+  );
+}
+```
+
+### With secondary Tabs
+
+Use `Tabs.Sub` for nested tabs (secondary).
+
+```jsx live
+function SecondaryTabs() {
+  const [selectedSubTabId, setSelectedSubTabId] = React.useState(4);
+  const [selectedTabId, setSelectedTabId] = React.useState(1);
+  const subTabs = [
+    { id: 1, title: 'Sub Tab 1', panel: 'SubTab content 1' },
+    { id: 2, title: 'Sub Tab 2', panel: 'SubTab content 2' },
+    { id: 3, title: 'Sub Tab 3', panel: 'SubTab content 3', disabled: true },
+    { id: 4, title: 'Sub Tab 4', panel: 'SubTab content 4' },
+  ];
+  const panelWithSubTab = (
+    <Tabs.Sub
+      id="smaple-sub-tabs"
+      tabs={subTabs}
+      selectedTabId={selectedSubTabId}
+      onChange={(newTabId) => setSelectedSubTabId(newTabId)}
+    />
+  );
+  const tabs = [
+    { id: 1, title: 'Tab 1', panel: panelWithSubTab },
+    { id: 2, title: 'Tab 2', panel: 'Tab content 2' },
+    { id: 3, title: 'Tab 3', panel: 'Tab content 3', disabled: true },
+    { id: 4, title: 'Tab 4', panel: 'Tab content 4' },
+  ];
+  return (
+    <Tabs
+      id="sample-tabs"
+      tabs={tabs}
+      selectedTabId={selectedTabId}
+      onChange={(newTabId) => setSelectedTabId(newTabId)}
+    />
+  );
+}
+```
+
+### Tabs with icon
+
+Tab title can have a left icon.
+
+```jsx live
+function TabsWithIcon() {
+  const tabs = [
+    { id: 1, title: 'Tab 1', panel: 'Tab content 1', icon: 'star-outlined' },
+    { id: 2, title: 'Tab 2', panel: 'Tab content 2', icon: 'user-outlined' },
+    { id: 3, title: 'Tab 3', panel: 'Tab content 3', icon: 'number' },
+  ];
+  const [selectedTabId, setSelectedTabId] = React.useState(1);
+  return (
+    <Tabs
+      id="sample-tabs"
+      tabs={tabs}
+      selectedTabId={selectedTabId}
+      onChange={(newTabId) => setSelectedTabId(newTabId)}
+    />
+  );
+}
+```
+
+### Subtabs with icon
+
+`Tabs.Sub` title can have a left icon too.
+
+```jsx live
+function SubtabsWithIcon() {
+  const [selectedSubTabId, setSelectedSubTabId] = React.useState(1);
+  const subTabs = [
+    {
+      id: 1,
+      title: 'Sub Tab 1',
+      panel: 'SubTab content 1',
+      icon: 'star-outlined',
+    },
+    {
+      id: 2,
+      title: 'Sub Tab 2',
+      panel: 'SubTab content 2',
+      icon: 'user-outlined',
+    },
+    { id: 3, title: 'Sub Tab 3', panel: 'SubTab content 3', icon: 'number' },
+  ];
+  const panelWithSubTab = (
+    <Tabs.Sub
+      id="smaple-sub-tabs"
+      tabs={subTabs}
+      selectedTabId={selectedSubTabId}
+      onChange={(newTabId) => setSelectedSubTabId(newTabId)}
+    />
+  );
+  const tabs = [{ id: 1, title: 'Tab 1', panel: panelWithSubTab }];
+  const [selectedTabId, setSelectedTabId] = React.useState(1);
+  return (
+    <Tabs
+      id="sample-tabs"
+      tabs={tabs}
+      selectedTabId={selectedTabId}
+      onChange={(newTabId) => setSelectedTabId(newTabId)}
+    />
+  );
+}
+```
+
+### Subtabs with different sizes
+
+`Tabs.Sub` can have 2 sizes: medium and small
+
+```jsx live
+function SubtabsWithIcon() {
+  const [selectedSubTabId, setSelectedSubTabId] = React.useState(1);
+  const subTabs = [
+    {
+      id: 1,
+      title: 'Sub Tab 1',
+      panel: 'SubTab content 1',
+      icon: 'star-outlined',
+    },
+    {
+      id: 2,
+      title: 'Sub Tab 2',
+      panel: 'SubTab content 2',
+      icon: 'user-outlined',
+    },
+    { id: 3, title: 'Sub Tab 3', panel: 'SubTab content 3', icon: 'number' },
+  ];
+
+  const smallSubTabs = [
+    {
+      id: 1,
+      title: 'Small Sub Tab 1',
+      panel: 'Small Sub Tab content 1',
+      icon: 'star-outlined',
+    },
+    {
+      id: 2,
+      title: 'Small Sub Tab 2',
+      panel: 'Small Sub Tab content 2',
+      icon: 'user-outlined',
+    },
+    {
+      id: 3,
+      title: 'Small Sub Tab 3',
+      panel: 'Small Sub Tab content 3',
+      icon: 'number',
+    },
+  ];
+
+  return (
+    <>
+      <Tabs.Sub
+        size="medium"
+        id="smaple-sub-tabs"
+        tabs={subTabs}
+        selectedTabId={selectedSubTabId}
+        onChange={(newTabId) => setSelectedSubTabId(newTabId)}
+      />
+
+      <Tabs.Sub
+        id="smaple-sub-tabs"
+        size="small"
+        tabs={subTabs}
+        selectedTabId={selectedSubTabId}
+        onChange={(newTabId) => setSelectedSubTabId(newTabId)}
+      />
+    </>
+  );
+}
+```
+
+### Tabs with custom view more text
+
+```jsx live
+function BasicTabs() {
+  const [selectedSubTabId, setSelectedSubTabId] = React.useState(1);
+  const subTabs = [
+    { id: 1, title: 'Sub Tab 1', panel: 'SubTab content 1' },
+    {
+      id: 2,
+      title: 'very loooooooooooooooooooooongSub Tab 2',
+      panel: 'SubTab content 2',
+    },
+    {
+      id: 3,
+      title: 'very loooooooooooooooooooooongSub Tab 3',
+      panel: 'SubTab content 3',
+      disabled: true,
+    },
+    { id: 4, title: 'Sub Tab 4', panel: 'SubTab content 4' },
+  ];
+  const panelWithSubTab = (
+    <Tabs.Sub
+      id="smaple-sub-tabs"
+      tabs={subTabs}
+      selectedTabId={selectedSubTabId}
+      onChange={(newTabId) => setSelectedSubTabId(newTabId)}
+    />
+  );
+
+  const panelWithSmallSubTab = (
+    <Tabs.Sub
+      id="smaple-sub-tabs"
+      tabs={subTabs}
+      selectedTabId={selectedSubTabId}
+      onChange={(newTabId) => setSelectedSubTabId(newTabId)}
+      size="small"
+    />
+  );
+  const tabs = [
+    { id: 1, title: '1 Sub tab (medium)', panel: panelWithSubTab },
+    {
+      id: 2,
+      title: '2 Sub Tab (small)',
+      panel: panelWithSmallSubTab,
+    },
+    { id: 3, title: '3 Short title', panel: 'Tab 3' },
+    { id: 4, title: '4 Another loooooooooooooong tab title', panel: 'Tab 4' },
+    { id: 5, title: '5 Normal tab', panel: 'Tab 5', disabled: true },
+    { id: 6, title: '6 Pretty long tab', panel: 'Tab 6' },
+  ];
+  const [selectedTabId, setSelectedTabId] = React.useState(1);
+  return (
+    <Tabs
+      id="sample-tabs"
+      tabs={tabs}
+      selectedTabId={selectedTabId}
+      onChange={(newTabId) => setSelectedTabId(newTabId)}
+      viewMoreText={'View More'}
+    />
+  );
+}
+```
+
+## Props
+
+### Tabs Props
+
+<Props of="Tabs" from="web" />
+
+### Tabs.Sub Props
+
+<Props of="SubTabs" from="web" />

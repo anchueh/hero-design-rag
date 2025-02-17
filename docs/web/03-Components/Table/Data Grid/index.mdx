@@ -1,0 +1,364 @@
+---
+id: data-grid-table
+title: Data Grid
+---
+
+# Data Grid Table
+
+Use table as a data grid like a spreadsheet with buit-in support for editable cells, copy/paste and more.
+
+## Examples
+
+### Basic Data Grid
+
+Use `grid` variant to render Table with data-grid styling.
+
+```jsx live
+function BasicDataGrid() {
+  const actions = [
+    {
+      icon: 'checkmark',
+      text: 'Accept',
+      onClick: () => alert('Accept leave'),
+    },
+    {
+      icon: 'cancel',
+      text: 'Decline',
+      onClick: () => alert('Decline leave'),
+      divider: 'bottom',
+    },
+    {
+      icon: 'eye-outlined',
+      text: 'View',
+      onClick: () => alert('View leave'),
+    },
+    {
+      icon: 'pencil-outlined',
+      text: 'Edit',
+      onClick: () => alert('Edit leave'),
+    },
+    {
+      icon: 'box-outlined',
+      text: 'Archive',
+      onClick: () => alert('Archive leave'),
+    },
+    {
+      icon: 'trash-bin-outlined',
+      text: 'Delete',
+      intent: 'danger',
+      divider: 'top',
+      onClick: () => alert('Delete leave'),
+    },
+  ].filter(Boolean);
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'Name',
+        accessor: 'name',
+        Cell: ({ value }) => (
+          <Button.Link href="#" text={value} target="_blank" />
+        ),
+      },
+      { Header: 'Age', accessor: 'age' },
+      {
+        Header: 'Marital Status',
+        accessor: 'maritalStatus',
+        disableSortBy: true,
+        Cell: ({ value }) => (
+          <Tag text={value} intent="success" variant="filled" />
+        ),
+      },
+      {
+        Header: 'Gender Status',
+        accessor: 'genderStatus',
+        disableSortBy: true,
+        Cell: ({ value }) => (
+          <Tag text={value} intent="success" variant="filled" />
+        ),
+      },
+      {
+        Header: 'Direct Personnel',
+        accessor: 'directPersonnel',
+        disableSortBy: true,
+      },
+      {
+        Header: 'Actions',
+        accessor: '',
+        disableSortBy: true,
+        Cell: () => {
+          return <Table.RowAction actions={actions} />;
+        },
+      },
+    ],
+    []
+  );
+  const [selectedRows, setSelectedRows] = React.useState({ 0: true });
+  const data = [
+    {
+      name: 'Vy Nguyen',
+      age: 50,
+      profile: 'https://employmenthero.com/',
+      maritalStatus: 'Single',
+      genderStatus: 'Male',
+      directPersonnel: 'Indirect',
+    },
+    {
+      name: 'Hau Dao',
+      age: 51,
+      profile: 'https://employmenthero.com/',
+      maritalStatus: 'Single',
+      genderStatus: 'Male',
+      directPersonnel: 'Indirect',
+    },
+    {
+      name: 'Hanh Le',
+      age: 80,
+      profile: 'https://employmenthero.com/',
+      maritalStatus: 'Complicated',
+      genderStatus: 'Male',
+      directPersonnel: 'Direct',
+    },
+    {
+      name: 'Tuan Thieu',
+      age: 99,
+      profile: 'https://employmenthero.com/',
+      maritalStatus: 'In relationship',
+      genderStatus: 'Male',
+      directPersonnel: 'Indirect',
+    },
+    {
+      name: 'Vinh Tony',
+      age: 21,
+      profile: 'https://employmenthero.com/',
+      maritalStatus: 'Single',
+      genderStatus: 'Male',
+      directPersonnel: 'Direct',
+    },
+  ];
+  return (
+    <Table
+      data={data}
+      columns={columns}
+      selectable
+      selectedRows={selectedRows}
+      onSelectedRowsChange={setSelectedRows}
+      variant="grid"
+    />
+  );
+}
+```
+
+### Editable Data grid
+
+Data-grid table supports editable cells with Input and Select components.
+
+```jsx live
+function EditableDataGrid() {
+  const actions = [
+    {
+      icon: 'checkmark',
+      text: 'Accept',
+      onClick: () => alert('Accept leave'),
+    },
+    {
+      icon: 'cancel',
+      text: 'Decline',
+      onClick: () => alert('Decline leave'),
+      divider: 'bottom',
+    },
+    {
+      icon: 'eye-outlined',
+      text: 'View',
+      onClick: () => alert('View leave'),
+    },
+    {
+      icon: 'pencil-outlined',
+      text: 'Edit',
+      onClick: () => alert('Edit leave'),
+    },
+    {
+      icon: 'box-outlined',
+      text: 'Archive',
+      onClick: () => alert('Archive leave'),
+    },
+    {
+      icon: 'trash-bin-outlined',
+      text: 'Delete',
+      intent: 'danger',
+      divider: 'top',
+      onClick: () => alert('Delete leave'),
+    },
+  ].filter(Boolean);
+  const [ages, setAges] = React.useState({
+    0: 50,
+    1: 51,
+    2: 80,
+    3: 99,
+    4: 21,
+    5: 254,
+  });
+  const [maritalStatuses, setMaritalStatuses] = React.useState({
+    0: 'Single',
+    1: 'Single',
+    2: 'Complicated',
+    3: 'In relationship',
+    4: 'Single',
+    5: 'Single',
+  });
+  const onAgeChange = (id, value) => {
+    setAges((prev) => ({ ...ages, [id]: value }));
+  };
+
+  const onMaritalStatusChange = (id, value) => {
+    setMaritalStatuses((prev) => ({ ...prev, [id]: value }));
+  };
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'Name',
+        accessor: 'name',
+        Cell: ({ value }) => (
+          <Button.Link href="#" text={value} target="_blank" />
+        ),
+      },
+      {
+        Header: 'Age',
+        accessor: 'age',
+        Cell: ({ value, row }) => (
+          <Table.InputCell
+            value={value}
+            disabled={row.original.id === 3}
+            readonly={row.original.id === 4}
+            onChange={(e) => {
+              onAgeChange(row.original.id, e.target.value);
+            }}
+            validationStatus={
+              row.original.id === 5
+                ? { state: 'error', message: 'Invalid age' }
+                : {}
+            }
+          />
+        ),
+      },
+      {
+        Header: 'Marital Status',
+        accessor: 'maritalStatus',
+        disableSortBy: true,
+        Cell: ({ value, row }) => (
+          <Table.SelectCell
+            value={value}
+            disabled={row.original.id === 3}
+            onChange={(value) => onMaritalStatusChange(row.original.id, value)}
+            options={[
+              { value: 'Single', text: 'Single' },
+              { value: 'Complicated', text: 'Complicated' },
+              { value: 'In relationship', text: 'In relationship' },
+            ]}
+          />
+        ),
+      },
+      {
+        Header: 'Gender Status',
+        accessor: 'genderStatus',
+        disableSortBy: true,
+        Cell: ({ value }) => (
+          <Tag text={value} intent="success" variant="filled" />
+        ),
+      },
+      {
+        Header: 'Direct Personnel',
+        accessor: 'directPersonnel',
+        disableSortBy: true,
+      },
+      {
+        Header: 'Actions',
+        accessor: '',
+        disableSortBy: true,
+        Cell: () => {
+          return <Table.RowAction actions={actions} />;
+        },
+      },
+    ],
+    []
+  );
+  const [selectedRows, setSelectedRows] = React.useState({ 0: true });
+  const data = [
+    {
+      id: 0,
+      name: 'Vy Nguyen',
+      age: ages[0],
+      profile: 'https://employmenthero.com/',
+      maritalStatus: maritalStatuses[0],
+      genderStatus: 'Male',
+      directPersonnel: 'Indirect',
+    },
+    {
+      id: 1,
+      name: 'Hau Dao',
+      age: ages[1],
+      profile: 'https://employmenthero.com/',
+      maritalStatus: maritalStatuses[1],
+      genderStatus: 'Male',
+      directPersonnel: 'Indirect',
+    },
+    {
+      id: 2,
+      name: 'Hanh Le',
+      age: ages[2],
+      profile: 'https://employmenthero.com/',
+      maritalStatus: maritalStatuses[2],
+      genderStatus: 'Male',
+      directPersonnel: 'Direct',
+    },
+    {
+      id: 3,
+      name: 'Tuan Thieu',
+      age: ages[3],
+      profile: 'https://employmenthero.com/',
+      maritalStatus: maritalStatuses[3],
+      genderStatus: 'Male',
+      directPersonnel: 'Indirect',
+    },
+    {
+      id: 4,
+      name: 'Vinh Tony',
+      age: ages[4],
+      profile: 'https://employmenthero.com/',
+      maritalStatus: maritalStatuses[4],
+      genderStatus: 'Male',
+      directPersonnel: 'Direct',
+    },
+    {
+      id: 5,
+      name: 'Vinh Ho',
+      age: ages[5],
+      profile: 'https://employmenthero.com/',
+      maritalStatus: maritalStatuses[5],
+      genderStatus: 'Male',
+      directPersonnel: 'Direct',
+    },
+  ];
+  return (
+    <Table
+      data={data}
+      columns={columns}
+      selectable
+      selectedRows={selectedRows}
+      onSelectedRowsChange={setSelectedRows}
+      variant="grid"
+    />
+  );
+}
+```
+
+## Props
+
+Please refer to the [Basic Table](/web/components/Table/Basic/#props) component for the full list of props.
+
+### Table.InputCell
+
+<Props of="InputCell" from="web" />
+
+### Table.SelectCell
+
+<Props of="SelectCell" from="web" />

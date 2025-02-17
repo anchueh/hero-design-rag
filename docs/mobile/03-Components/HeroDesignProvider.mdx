@@ -1,0 +1,208 @@
+---
+id: heroDesignProvider
+titile: Hero Design Provider
+---
+
+# Hero Design Provider
+
+An all-in-one provider for the use of Hero Design System.
+
+# Example
+
+Hero Design Provider includes `ThemeProvider`, `Toast.Provider` and `Portal.Provider` in a single `HeroDesignProvider` component that can be used at the root of your app.
+
+<br />
+
+:::info
+`ThemeProvider`, `Toast.Provider` and `Portal.Provider` can still be imported and used separately at anywhere in your app.
+:::
+
+## Example
+
+### Basic
+
+These badges will change based on the selected theme.
+
+```jsx live
+function BasicExample() {
+  const theme = useTheme();
+
+  return (
+    <HeroDesignProvider theme={theme}>
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          marginBottom: theme.space.medium,
+        }}
+      >
+        <Badge
+          content="PRIMARY"
+          intent="primary"
+          style={{ marginEnd: theme.space.small }}
+        />
+        <Badge
+          content="SUCCESS"
+          intent="success"
+          style={{ marginEnd: theme.space.small }}
+        />
+        <Badge
+          content="WARNING"
+          intent="warning"
+          style={{ marginEnd: theme.space.small }}
+        />
+      </View>{' '}
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          marginBottom: theme.space.small,
+        }}
+      >
+        <Badge
+          content="DANGER"
+          intent="danger"
+          style={{ marginEnd: theme.space.small }}
+        />
+        <Badge
+          content="INFO"
+          intent="info"
+          style={{ marginEnd: theme.space.small }}
+        />
+        <Badge
+          content="ARCHIVED"
+          intent="archived"
+          style={{ marginEnd: theme.space.small }}
+        />
+        <Badge
+          content="PRIMARY"
+          intent="primary"
+          style={{ marginEnd: theme.space.small }}
+        />
+      </View>
+    </HeroDesignProvider>
+  );
+}
+```
+
+### Using Toast
+
+These toasts will change based on the selected theme.
+
+```jsx live
+function ToastExample() {
+  const theme = useTheme();
+  const AppContent = () => {
+    const toast = Toast.useToast();
+    return (
+      <Box flex={1} alignItems="center" justifyContent="center">
+        <Button
+          variant="text"
+          text="Add Info Toast"
+          onPress={() => toast.show({ content: 'Info Toast', intent: 'info' })}
+        />
+        <Button
+          variant="text"
+          text="Add Success Toast"
+          onPress={() =>
+            toast.show({ content: 'Success Toast', intent: 'success' })
+          }
+        />
+        <Button
+          variant="text"
+          text="Add Warning Toast"
+          onPress={() =>
+            toast.show({ content: 'Warning Toast', intent: 'warning' })
+          }
+        />
+        <Button
+          variant="text"
+          text="Add Error Toast"
+          onPress={() =>
+            toast.show({ content: 'Error Toast', intent: 'error' })
+          }
+        />
+        <Button
+          variant="text"
+          text="Add Notification Toast"
+          onPress={() =>
+            toast.show({
+              content: 'Notification Toast',
+              intent: 'notification',
+            })
+          }
+        />
+        <Button
+          variant="text"
+          text="Add Snackbar Toast"
+          onPress={() =>
+            toast.show({ content: 'SnackbarToast', intent: 'snackbar' })
+          }
+        />
+      </Box>
+    );
+  };
+
+  return (
+    <HeroDesignProvider theme={theme}>
+      <AppContent />
+    </HeroDesignProvider>
+  );
+}
+```
+
+### Using Portal
+
+These portal content will also change based on the selected theme
+
+```jsx live
+function PortalExample() {
+  const [active, setActive] = useState(false);
+  const theme = useTheme();
+  const actionGroupRef = useRef(null);
+
+  return (
+    <HeroDesignProvider theme={theme}>
+      <View
+        testID="fab-view"
+        style={{
+          flex: 1,
+          backgroundColor: theme.colors.defaultGlobalSurface,
+          padding: theme.space.large,
+          height: 320,
+        }}
+      >
+        <View
+          style={{
+            height: 120,
+            borderWidth: 0.5,
+            borderColor: theme.colors.secondaryOutline,
+          }}
+        >
+          <Typography.Body>FAB's parent</Typography.Body>
+          <Portal hostName="host">
+            <FAB.ActionGroup
+              style={{
+                paddingBottom: theme.space.large,
+              }}
+              items={[{ icon: 'target', title: 'Goal' }]}
+              onPress={() => {
+                setActive(!active);
+              }}
+              fabTitle="Shout out"
+              fabIcon="speaker"
+              active={active}
+              ref={actionGroupRef}
+            />
+          </Portal>
+        </View>
+        <Portal.Host name="host" />
+      </View>
+    </HeroDesignProvider>
+  );
+}
+```
+
+## Props
+
+<Props of="HeroDesignProvider" />

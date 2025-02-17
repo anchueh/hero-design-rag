@@ -1,0 +1,84 @@
+---
+id: box
+title: Box
+---
+
+# Box
+
+Box is an abstract component that allows to:
+
+- Create layout for its content.
+- Access theme easily via props instead of inline style or css in js methods.
+
+## Examples
+
+### Basic
+
+Box can be use as a layout wrapper with margin and padding.
+
+```jsx live
+<Box m="medium" p="medium">
+  <Typography.Text>This is box content</Typography.Text>
+</Box>
+```
+
+### With colors
+
+Box offers colors for background, border and text content.
+
+```jsx live
+<Box p="medium" bgColor="green-light-90" color="green" fontSize="medium">
+  This is box content
+</Box>
+```
+
+### With borders
+
+Box offers shortcuts for border via `borderWidth`, `borderStyle`, `borderRadius` and `borderColor`.
+
+```jsx live
+<Box
+  p="medium"
+  borderWidth="base"
+  borderStyle="solid"
+  borderColor="grey-light-60"
+  borderRadius="base"
+  fontSize="medium"
+>
+  <Typography.Text>This is box content</Typography.Text>
+</Box>
+```
+
+### With typography
+
+Box offers shortcuts for text via `fontSize`, `fontWeight`, `lineHeight` and `color`.
+
+```jsx live
+<Box
+  p="medium"
+  borderWidth="base"
+  borderStyle="solid"
+  borderColor="grey-light-60"
+  borderRadius="base"
+  fontSize="medium"
+  lineHeight="medium"
+  fontWeight="semi-bold"
+  color="grey-dark-75"
+>
+  This is box content
+</Box>
+```
+
+### Render Box as HTML Tag
+
+You can render Box Components as HTML Tag like `span`, `button`,...Default tag is `div`
+
+```jsx live
+<Box p="medium" tagName="code">
+  This should be displayed as code
+</Box>
+```
+
+## Props
+
+<Props of="Box" from="web" />

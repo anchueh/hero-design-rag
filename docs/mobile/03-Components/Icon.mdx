@@ -1,0 +1,127 @@
+---
+id: icon
+title: Icon
+---
+
+import IconList from '../../../src/components/IconList';
+
+# Icon
+
+Employment Hero Icon Font.
+
+## Examples
+
+Use the `icon` property to select the icon from the list above. Specify the spin property to show spinning animation.
+
+<IconList platform="mobile" />
+
+### Icon intents
+
+Icon comes with these colors: `text`, `primary`, `info`, `danger`, `success`, `warning`, `disabled-text`, `text-inverted` and `muted`. It can be used via `intent` property.
+
+```jsx live
+function App() {
+  return (
+    <Box flexDirection="row">
+      <Icon
+        icon="plane"
+        intent="text"
+        style={{ marginEnd: theme.space.medium }}
+      />
+      <Icon
+        icon="reply"
+        intent="primary"
+        style={{ marginEnd: theme.space.medium }}
+      />
+      <Icon
+        icon="health-bag"
+        intent="info"
+        style={{ marginEnd: theme.space.medium }}
+      />
+      <Icon
+        icon="clock"
+        intent="danger"
+        style={{ marginEnd: theme.space.medium }}
+      />
+      <Icon
+        icon="target"
+        intent="success"
+        style={{ marginEnd: theme.space.medium }}
+      />
+      <Icon
+        icon="speaker"
+        intent="warning"
+        style={{ marginEnd: theme.space.medium }}
+      />
+      <Icon icon="arrow-right" intent="disabled-text" />
+      <Icon
+        icon="bell"
+        intent="muted"
+        style={{ marginEnd: theme.space.medium }}
+      />
+    </Box>
+  );
+}
+```
+
+### Icon sizes
+
+Icon sizes can be set via `size` property with `xsmall`, `small`, `medium`, `large` or `xlarge`.
+
+```jsx live
+function App() {
+  return (
+    <Box flexDirection="row">
+      <Icon
+        icon="activate"
+        intent="text"
+        size="xsmall"
+        style={{ marginEnd: theme.space.medium }}
+      />
+      <Icon
+        icon="add-person"
+        intent="primary"
+        size="small"
+        style={{ marginEnd: theme.space.medium }}
+      />
+      <Icon
+        icon="adjustment"
+        intent="info"
+        size="medium"
+        style={{ marginEnd: theme.space.medium }}
+      />
+      <Icon
+        icon="alignment"
+        intent="danger"
+        size="large"
+        style={{ marginEnd: theme.space.medium }}
+      />
+      <Icon icon="bank" intent="success" size="xlarge" />
+    </Box>
+  );
+}
+```
+
+### Icon animation
+
+Icon can be animated via the `spin` property.
+
+```jsx live
+function App() {
+  return (
+    <Box flexDirection="row">
+      <Icon
+        icon="loading"
+        intent="text"
+        style={{ marginEnd: theme.space.medium }}
+        spin
+      />
+      <Icon icon="sync" style={{ marginEnd: theme.space.medium }} spin />
+    </Box>
+  );
+}
+```
+
+## Props
+
+<Props of="Icon" />

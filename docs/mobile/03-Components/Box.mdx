@@ -1,0 +1,190 @@
+---
+id: box
+title: Box
+---
+
+# Box
+
+Box is an abstract component that allows to:
+
+- Create layout for its content.
+- Access theme easily via props instead of inline style.
+
+## Usage
+
+Box implements `View` component, provides access to style properties with shorcuts to current theme value via props instead of using inline style and passing in theme object value.
+
+Before
+
+```jsx
+<View
+  style={{
+    backgroundColor: theme.colors.warning,
+    borderWidth: theme.borderWidths.base,
+    margin: theme.space.medium,
+    borderRadius: theme.radii.medium,
+  }}
+/>
+```
+
+After
+
+```jsx
+<Box
+  bgColor="warning"
+  borderWidth="base"
+  margin="medium"
+  borderRadius="medium"
+/>
+```
+
+### Color props: `theme.colors`
+
+Available properties:
+
+- `backgroundColor`
+- `bgColor`
+- `borderColor`
+- `borderTopColor`
+- `borderBottomColor`
+- `borderStartColor`
+- `borderEndColor`
+- `borderLeftColor`
+- `borderRightColor`
+
+### Space props: `theme.space`
+
+Available properties:
+
+- `margin`
+- `marginBottom`
+- `marginEnd`
+- `marginHorizontal`
+- `marginLeft`
+- `marginRight`
+- `marginStart`
+- `marginTop`
+- `marginVertical`
+- `padding`
+- `paddingBottom`
+- `paddingEnd`
+- `paddingHorizontal`
+- `paddingLeft`
+- `paddingRight`
+- `paddingStart`
+- `paddingTop`
+- `paddingVertical`
+
+### Radius props: `theme.radii`
+
+- `borderBottomEndRadius`
+- `borderBottomLeftRadius`
+- `borderBottomRightRadius`
+- `borderBottomStartRadius`
+- `borderTopEndRadius`
+- `borderTopLeftRadius`
+- `borderTopRightRadius`
+- `borderTopStartRadius`
+- `borderRadius`
+
+### Border Widths props: `theme.borderWidths`
+
+- `borderWidth`
+- `borderBottomWidth`
+- `borderTopWidth`
+- `borderLeftWidth`
+- `borderRightWidth`
+
+### Common flex props
+
+- `alignContent`
+- `alignItems`
+- `alignSelf`
+- `display`
+- `flex`
+- `flexBasis`
+- `flexDirection`
+- `flexGrow`
+- `flexShrink`
+- `flexWrap`
+- `justifyContent`
+
+## Example
+
+### Example 1: With spacing
+
+Box can be used as layout wrapper with shortcut margin and padding props.
+
+```jsx live
+function App() {
+  return (
+    <Box paddingHorizontal="xxlarge" paddingVertical="xxlarge">
+      <Typography.Body>This is box content</Typography.Body>
+    </Box>
+  );
+}
+```
+
+### Example 2: With Colors
+
+Box with color shortcut props.
+
+```jsx live
+function App() {
+  return (
+    <Box
+      paddingHorizontal="xxlarge"
+      paddingVertical="xxlarge"
+      backgroundColor="warning"
+      borderColor="outline"
+    >
+      <Typography.Body variant="small">This is box content</Typography.Body>
+    </Box>
+  );
+}
+```
+
+### Example 3: With borders
+
+Box with shortcut props for border.
+
+```jsx live
+function App() {
+  return (
+    <Box
+      paddingHorizontal="xxlarge"
+      paddingVertical="xxlarge"
+      borderColor="outline"
+      borderWidth="base"
+      borderRadius="medium"
+    >
+      <Typography.Body variant="small">This is box content</Typography.Body>
+    </Box>
+  );
+}
+```
+
+### Example 4: Flexbox
+
+Box with common flexbox properties.
+
+```jsx live
+function App() {
+  return (
+    <Box
+      paddingHorizontal="xxlarge"
+      paddingVertical="xxlarge"
+      backgroundColor="warning"
+      flexDirection="row"
+      justifyContent="space-between"
+    >
+      <Typography.Body variant="small">Text 1</Typography.Body>
+      <Typography.Body variant="small">Text 2</Typography.Body>
+    </Box>
+  );
+}
+```
+
+## Props
+
+<Props of="Box" />

@@ -1,0 +1,129 @@
+---
+id: sectionHeading
+title: Section Heading
+---
+
+<PageTitle
+  title="SectionHeading"
+  content="A section heading is used to label a group of mixed components and functions as a divider between different sections on a screen."
+/>
+
+## Examples
+
+### How many types?
+
+There are five types of sections headings: Default, With icon, With CTA, With badge & Small.
+
+```jsx live noInline
+const ItemWrapper = ({ children }: { children: React.ReactNode }) => {
+  const theme = useTheme();
+
+  return (
+    <View
+      style={{
+        borderRadius: theme.radii.base,
+        borderWidth: theme.borderWidths.base,
+        borderColor: theme.colors.secondaryOutline,
+        paddingVertical: theme.space.small,
+        paddingHorizontal: theme.space.medium,
+        marginBottom: theme.space.medium,
+      }}
+    >
+      {children}
+    </View>
+  );
+};
+
+
+
+const SectionHeadingPlayground = () => {
+  const theme = useTheme();
+
+  const sampleSections = [
+    {
+      type: 'Default',
+      title: 'Main dishes',
+      data: ['Pizza', 'Risotto'],
+    },
+    {
+      type: 'With Icon',
+      caption: 'An icon can be placed before a section heading to both clarify the groupings and call attentions to users',
+      title: 'Sides',
+      data: ['French Fries', 'Fried Shrimps'],
+      haveIcon: true,
+    },
+    {
+      type: 'With CTA',
+      caption: 'An primary text button can be used on a section heading to direct users to a new screen or a bottom sheet to execute or view more information.',
+      title: 'Sides',
+      data: ['French Fries', 'Onion Rings'],
+      cta: () => Alert.alert('Sides'),
+    },
+    {
+      type: 'With badge',
+      caption: 'A number count badge can be used on a section heading to indicate a quantifiable grouping.',
+      title: 'Desserts',
+      data: ['Tropical Fruits'],
+      badge: {
+        intent: 'primary' as const,
+        content: 1,
+      },
+    },
+    {
+      type: 'Small',
+      caption: 'Only use a small variant of section heading within a drawer component.',
+      title: 'More',
+      data: [],
+      smallSize: true,
+    },
+  ];
+
+  return (
+    <ScrollView
+      style={{
+        margin: theme.space.medium,
+      }}
+    >
+      <SectionList
+        sections={sampleSections}
+        keyExtractor={(item, index) => item + index}
+        renderItem={({ item }) => (
+          <ItemWrapper>
+            <Typography.Body>{item}</Typography.Body>
+          </ItemWrapper>
+        )}
+        renderSectionHeader={({ section: { type, caption, title, cta, haveIcon, badge, smallSize }}) => (
+          <>
+            <Box marginBottom="small">
+              <Typography.Body variant="regular-bold">{type}</Typography.Body>
+              <Typography.Caption>{caption}</Typography.Caption>
+            </Box>
+            <SectionHeading
+              size={smallSize ? 'small' : 'medium' }
+              text={title}
+              icon={haveIcon ? 'document' : undefined}
+              rightChildren={
+                <>
+                  {cta && (
+                    <TouchableOpacity onPress={cta}>
+                      <Typography.Body intent="primary">Edit</Typography.Body>
+                    </TouchableOpacity>
+                  )}
+
+                  {badge && <Badge {...badge} />}
+                </>
+              }
+            />
+          </>
+        )}
+      />
+    </ScrollView>
+  );
+};
+
+render(SectionHeadingPlayground);
+```
+
+## Props
+
+<Props of="SectionHeading" />

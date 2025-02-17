@@ -1,0 +1,236 @@
+---
+id: form
+title: Form
+---
+
+# Form
+
+The `Form` component is used to add validations to input components including `Input`, `Input.TextArea` and `DatePicker`.
+
+## Examples
+
+### Form.Field with Input
+
+`Form.Field` helps to control validate status of its inputs.
+
+```jsx live
+<>
+  <Form.Field style={{ marginBottom: theme.space.small }}>
+    <Input placeholder="no validate status" suffix="pencil" />
+  </Form.Field>
+  <Form.Field
+    validateStatus="success"
+    style={{ marginBottom: theme.space.small }}
+  >
+    <Input placeholder="success" />
+  </Form.Field>
+  <Form.Field
+    validateStatus="error"
+    style={{ marginBottom: theme.space.small }}
+  >
+    <Input placeholder="error" />
+  </Form.Field>
+  <Form.Field
+    validateStatus="warning"
+    style={{ marginBottom: theme.space.small }}
+  >
+    <Input placeholder="warning" />
+  </Form.Field>
+  <Form.Field validateStatus="validating">
+    <Input placeholder="validating" />
+  </Form.Field>
+</>
+```
+
+### Form.Field with Input.TextArea
+
+```jsx live
+function FormWithTextArea() {
+  const [value, setValue] = React.useState();
+  return (
+    <>
+      <Form.Field style={{ marginBottom: theme.space.small }}>
+        <Input.TextArea
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          placeholder="no validate status"
+        />
+      </Form.Field>
+      <Form.Field
+        validateStatus="success"
+        style={{ marginBottom: theme.space.small }}
+      >
+        <Input.TextArea
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          placeholder="success"
+        />
+      </Form.Field>
+      <Form.Field
+        validateStatus="error"
+        style={{ marginBottom: theme.space.small }}
+      >
+        <Input.TextArea
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          placeholder="error"
+        />
+      </Form.Field>
+      <Form.Field
+        validateStatus="warning"
+        style={{ marginBottom: theme.space.small }}
+      >
+        <Input.TextArea
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          placeholder="warning"
+        />
+      </Form.Field>
+      <Form.Field validateStatus="validating">
+        <Input.TextArea
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          placeholder="validating"
+        />
+      </Form.Field>
+    </>
+  );
+}
+```
+
+### Form.Field with DatePicker
+
+```jsx live
+function FormWithDatePicker() {
+  const [value, setValue] = React.useState();
+  return (
+    <>
+      <Form.Field style={{ marginBottom: theme.space.small }}>
+        <DatePicker
+          value={value}
+          onChange={(newVal) => setValue(newVal)}
+          placeholder="no validate status"
+        />
+      </Form.Field>
+      <Form.Field
+        validateStatus="success"
+        style={{ marginBottom: theme.space.small }}
+      >
+        <DatePicker
+          value={value}
+          onChange={(newVal) => setValue(newVal)}
+          placeholder="success"
+        />
+      </Form.Field>
+      <Form.Field
+        validateStatus="error"
+        style={{ marginBottom: theme.space.small }}
+      >
+        <DatePicker
+          value={value}
+          onChange={(newVal) => setValue(newVal)}
+          placeholder="error"
+        />
+      </Form.Field>
+      <Form.Field
+        validateStatus="warning"
+        style={{ marginBottom: theme.space.small }}
+      >
+        <DatePicker
+          value={value}
+          onChange={(newVal) => setValue(newVal)}
+          placeholder="warning"
+        />
+      </Form.Field>
+      <Form.Field
+        validateStatus="validating"
+        style={{ marginBottom: theme.space.small }}
+      >
+        <DatePicker
+          value={value}
+          onChange={(newVal) => setValue(newVal)}
+          placeholder="validating"
+        />
+      </Form.Field>
+    </>
+  );
+}
+```
+
+### Form.Field with Select
+
+```jsx live
+function FormWithSelect() {
+  const options = [
+    { value: 'item-1', text: 'Item 1' },
+    { value: 'item-2', text: 'Item 2' },
+    { value: 'item-3', text: 'Item 3' },
+    { value: 'item-4', text: 'Item 4', disabled: true },
+    { value: 'item-5', text: 'Item 5' },
+    { value: 'item-6', text: 'Item 6' },
+  ];
+  const [value, setValue] = React.useState('item-1');
+  return (
+    <>
+      <Form.Field style={{ marginBottom: theme.space.small }}>
+        <Select
+          options={options}
+          value={value}
+          onChange={setValue}
+          placeholder="Select an item"
+        />
+      </Form.Field>
+      <Form.Field
+        validateStatus="success"
+        style={{ marginBottom: theme.space.small }}
+      >
+        <Select
+          options={options}
+          value={value}
+          onChange={setValue}
+          placeholder="Select an item"
+        />
+      </Form.Field>
+      <Form.Field
+        validateStatus="error"
+        style={{ marginBottom: theme.space.small }}
+      >
+        <Select
+          options={options}
+          value={value}
+          onChange={setValue}
+          placeholder="Select an item"
+        />
+      </Form.Field>
+      <Form.Field
+        validateStatus="warning"
+        style={{ marginBottom: theme.space.small }}
+      >
+        <Select
+          options={options}
+          value={value}
+          onChange={setValue}
+          placeholder="Select an item"
+        />
+      </Form.Field>
+      <Form.Field
+        validateStatus="validating"
+        style={{ marginBottom: theme.space.small }}
+      >
+        <Select
+          options={options}
+          value={value}
+          onChange={setValue}
+          placeholder="Select an item"
+        />
+      </Form.Field>
+    </>
+  );
+}
+```
+
+## Props
+
+### Form.Field
+
+<Props of="Field" from="web" />

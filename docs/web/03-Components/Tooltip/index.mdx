@@ -1,0 +1,167 @@
+---
+id: tooltip
+title: Tooltip
+---
+
+# Tooltip
+
+Used as a small pop up to display some additonal information.
+
+## Examples
+
+### Basic
+
+```jsx live
+<>
+  <div style={{ padding: theme.space.large, margin: 0 }}>
+    <Tooltip
+      target={<Button text="Hover to show tooltip" variant="basic" />}
+      content="This is a tooltip"
+    />
+  </div>
+</>
+```
+
+### Placement
+
+Tooltip supports 4 positions for placement, including `top`, `bottom`, `right` and `left`. By default, it will be placed on the top of its relative target. When there is not enough space to show the tooltip, it will be flipped and shown on the opposite side of its original placement.
+
+```jsx live
+<>
+  <div style={{ padding: theme.space.large, textAlign: 'center', margin: 0 }}>
+    <Tooltip
+      target={<Button text="Top" variant="basic" />}
+      content="This is a tooltip"
+    />
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'space-evenly',
+        margin: 0,
+        padding: 0,
+      }}
+    >
+      <Tooltip
+        target={<Button text="Left" variant="basic" />}
+        content="This is a tooltip"
+        placement="left"
+      />
+      <Tooltip
+        target={<Button text="Right" variant="basic" />}
+        content="This is a tooltip"
+        placement="right"
+      />
+    </div>
+    <Tooltip
+      target={<Button text="Bottom" variant="basic" />}
+      content="This is a tooltip"
+      placement="bottom"
+    />
+  </div>
+</>
+```
+
+### Interactivity
+
+Tooltips can be interactive, allowing you to hover over and click inside them.
+
+```jsx live
+<>
+  <Tooltip
+    target={<Button text="Interative" variant="basic" />}
+    content="You can select the text inside this text."
+    interactive
+  />
+</>
+```
+
+### Visibility
+
+Sometimes you want to disable the tooltip when hovering over target, you can pass `visible={false}` for Tooltip in that case.
+
+```jsx live
+<>
+  <div
+    style={{
+      display: 'flex',
+      justifyContent: 'space-evenly',
+      margin: theme.space.large,
+      padding: 0,
+    }}
+  >
+    <Tooltip
+      target={<Button text="Hide Tooltip content" variant="basic" />}
+      content="Hide Tooltip"
+      visible={false}
+    />
+    <Tooltip
+      target={
+        <Button
+          text="Show Tooltip content"
+          variant="basic"
+          disabled
+          data-test-id="disabledButton"
+        />
+      }
+      content="Show Tooltip"
+      visible
+    />
+  </div>
+</>
+```
+
+### Delay
+
+You can delay the tooltip show by passing `delay` prop.
+
+```jsx live
+<>
+  <Tooltip
+    target={
+      <Button
+        text="Hover this button to show the tooltip"
+        variant="basic"
+        data-test-id="delay-button"
+      />
+    }
+    placement="right"
+    content="Tooltip content"
+    delay={300}
+    interactive
+  />
+</>
+```
+
+### Controlled tooltip
+
+Tooltip open state can be controller by using `open` prop.
+
+<Note title="Notes">
+  Default hover behaviour and interactive tooltip will be disabled if open prop
+  is set.
+</Note>
+
+```jsx live
+function ControlledTooltip() {
+  const [open, setOpen] = React.useState(false);
+  return (
+    <Tooltip
+      open={open}
+      target={
+        <Button
+          text="Click this button to show/hide the tooltip"
+          variant="basic"
+          onClick={() => setOpen(!open)}
+          data-test-id="delay-button"
+        />
+      }
+      placement="right"
+      content="Tooltip content"
+    />
+  );
+}
+```
+
+## Props
+
+<Props of="Tooltip" from="web" />

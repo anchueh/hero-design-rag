@@ -1,0 +1,134 @@
+---
+id: chip
+title: Chip
+---
+
+import Props from '../../../src/components/Props';
+
+Chips are compact elements that allow users to trigger actions.
+
+## Example
+
+### Variants
+
+Chip has 4 variants: `selection`, `filter`, `compact` and `compact-outlined`.
+
+```jsx live noInline
+const chipVariantData: ChipData[] = [
+  {
+    key: '1',
+    label: 'Selection chip',
+    variant: 'selection',
+    icon: 'add',
+  },
+  {
+    key: '2',
+    label: 'Filter chip',
+    variant: 'filter',
+    icon: 'charging-station-outlined',
+  },
+  {
+    key: '3',
+    label: 'Compact chip',
+    variant: 'compact',
+    icon: 'charging-station-outlined',
+  },
+  {
+    key: '4',
+    label: 'Compact outlined chip',
+    variant: 'compact-outlined',
+    icon: 'charging-station-outlined',
+  },
+];
+
+const ChipsVariantExamples = () => {
+  const [selectedChips, setSelectedChips] = React.useState<string[]>([
+    '1',
+    '2',
+  ]);
+  const theme = useTheme();
+
+  const addOrRemoveChip = (chipKey: string) => {
+    if (selectedChips.includes(chipKey)) {
+      setSelectedChips(selectedChips.filter((key) => key !== chipKey));
+    } else {
+      setSelectedChips([...selectedChips, chipKey]);
+    }
+  };
+
+  return (
+    <Box
+      flexDirection="column"
+      backgroundColor="neutralGlobalSurface"
+      borderRadius="large"
+      padding="medium"
+      justifyContent="center"
+    >
+      {chipVariantData.map(
+          ({ key, label, variant, icon, showSelectedIcon }) => (
+            <Box flexDirection="column" justifyContent="center">
+              <Box>
+                <Typography.Body
+                  variant="regular-bold"
+                  style={{ marginBottom: theme.space.medium }}
+                >
+                  {variant} variant
+                </Typography.Body>
+              </Box>
+
+              <Chip
+                key={key}
+                label={label}
+                variant={variant}
+                icon={icon}
+                onPress={() => addOrRemoveChip(key)}
+                selected={selectedChips.includes(key)}
+                style={{
+                  marginBottom: theme.space.medium,
+                }}
+                showSelectedIcon={showSelectedIcon}
+              />
+            </Box>
+          )
+        )}
+    </Box>
+  );
+};
+
+render(<ChipsVariantExamples />);
+```
+
+### Custom chip label
+
+Chip label can be customized by passing a custom component as a `label` prop.
+
+```jsx live
+function CustomChipLabel() {
+  const [chipSelected, setChipSelected] = React.useState(false);
+
+  return (
+    <Box
+      flexDirection="column"
+      backgroundColor="neutralGlobalSurface"
+      borderRadius="large"
+      padding="medium"
+      justifyContent="center"
+    >
+      <Chip
+        variant="filled"
+        onPress={() => setChipSelected(!chipSelected)}
+        selected={chipSelected}
+        label={
+          <Badge.Status>
+            <Typography.Body variant="small">Leave Management</Typography.Body>
+          </Badge.Status>
+        }
+      />
+    </Box>
+  );
+}
+```
+
+## Props
+
+<Props of="Chip" />

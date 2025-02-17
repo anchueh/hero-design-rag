@@ -1,0 +1,83 @@
+---
+id: menu
+title: Menu
+---
+
+# Menu
+
+Menu can be used to display a list of interactive items either in a dropdown or a sidebar menu.
+
+## Examples
+
+### Basic
+
+Use `Menu` as a container for menu items.
+
+```jsx live
+<Menu>
+  <Menu.Item text="Item 1" />
+  <Menu.Item text="Item 2" />
+  <Menu.Item text="Active item" active />
+  <Menu.Item text="Disabled item" disabled />
+</Menu>
+```
+
+### MenuItem with text element
+
+Use `textElement` prop to display some element content on the right side of the item, useful for showing hotkeys.
+
+```jsx live
+<Menu>
+  <Menu.Item text="Item 1" />
+  <Menu.Item text="Item 2" />
+  <Menu.Item
+    text="Active item"
+    active
+    textElement={<Icon icon="checkmark" intent="primary" />}
+  />
+  <Menu.Item text="Disabled item" disabled />
+</Menu>
+```
+
+### MenuItem with icon
+
+Use `icon` prop to display a icon before the menu text.
+
+```jsx live
+<Menu>
+  <Menu.Item text="Item 1" icon="checkmark" />
+  <Menu.Item text="Item 2" icon={<Icon icon="checkmark" />} />
+  <Menu.Item
+    text="Active item"
+    active
+    textElement={<Icon icon="checkmark" intent="primary" />}
+  />
+  <Menu.Item text="Disabled item" disabled />
+</Menu>
+```
+
+### MenuItem with intent
+
+Use `intent` prop to display a danger menu item.
+
+```jsx live
+<Menu>
+  <Menu.Item text="Danger item" icon="cancel" intent="danger" />
+  <Menu.Item
+    text="Active item"
+    active
+    textElement={<Icon icon="checkmark" intent="primary" />}
+  />
+  <Menu.Item text="Disabled item" disabled />
+</Menu>
+```
+
+## Props
+
+### Menu Props
+
+<Props of="Menu" from="web" />
+
+### Menu.Item Props
+
+<Props of="MenuItem" from="web" />

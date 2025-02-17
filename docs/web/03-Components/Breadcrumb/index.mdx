@@ -1,0 +1,71 @@
+---
+id: breadcrumb
+title: Breadcrumb
+---
+
+# Breadcrumb
+
+Breadcrumbs identify the path to the current resource in an application. It is useful to:
+
+- Inform users of where they are.
+- Help users to navigate back to a higher page level.
+
+## Examples
+
+### Basic
+
+Breadcrumb components require a list of `BreadcrumbItem` passed through `items` property.
+
+```jsx live
+function BasicBreadcrumb() {
+  const breadcrumbItems = [
+    { href: 'https://employmenthero.com', text: 'Home' },
+    {
+      href: 'https://employmenthero.com/benefits',
+      text: 'Benefits',
+    },
+    {
+      href: 'https://employmenthero.com/benefits/for-employers',
+      text: 'For Employers',
+    },
+  ];
+  return <Breadcrumb items={breadcrumbItems} />;
+}
+```
+
+### With React Router
+
+Breadcrumb can be used with `react-router` by set `withRouter` true for BreadcrumbItem. By this way `Link` component from `react-router-dom` will be rendered instead of a normal `a` tag. It is commonly used for SPA navigation.
+
+```javascript
+const breadcrumbItems = [
+  { href: '#', text: 'Home', withRouter:  true },
+  {
+    href: '/#/benefits,
+    text: 'Benefits',
+    withRouter: true,
+  },
+  {
+    href: '/#/for-employers',
+    text: 'For Employers',
+    withRouter: true,
+  },
+];
+```
+
+### Single usage
+
+When `items` has only one breadcrumb, it will turn on single mode. This is used as a shortcut coming back to home or parent page.
+
+```jsx live
+function SingleBreadcrumb() {
+  const breadcrumbItems = [
+    { href: 'https://employmenthero.com', text: 'Home' },
+  ];
+  return <Breadcrumb items={breadcrumbItems} />;
+}
+```
+
+## Props
+
+<Props of="Breadcrumb" from="web" />

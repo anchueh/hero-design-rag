@@ -1,0 +1,264 @@
+---
+id: button
+title: Button
+---
+
+# Button
+
+Buttons trigger actions when clicked.
+
+## Examples
+
+### Variants
+
+There are `basic-transparent`, `filled`, `outlined` and `text` button. Though `basic-transparent` button does not require color, it need to be passed through `intent` when `filled`, `outlined`, `filled-reversed` or `text` variant is used.
+
+```jsx live
+<>
+  <Box sx={{ display: 'flex', gap: 'small', flexWrap: 'wrap', mb: 'small' }}>
+    <PrimaryBackground>
+      <Button variant="basic-transparent" text="Basic Transparent" />
+    </PrimaryBackground>
+  </Box>
+  <Box sx={{ display: 'flex', gap: 'small', flexWrap: 'wrap', mb: 'small' }}>
+    <Button variant="filled" intent="primary" text="Primary" />
+    <Button variant="filled" intent="danger" text="Danger" />
+    <Button variant="filled" intent="success" text="Success" />
+    <Button variant="filled" intent="warning" text="Warning" />
+    <Button variant="filled" intent="error" text="Error" />
+  </Box>
+  <Box sx={{ display: 'flex', gap: 'small', flexWrap: 'wrap', mb: 'small' }}>
+    <Button variant="outlined" intent="primary" text="Primary (Outlined)" />
+    <Button variant="outlined" intent="danger" text="Danger (Outlined)" />
+    <Button variant="outlined" intent="success" text="Success (Outlined)" />
+    <Button variant="outlined" intent="warning" text="Warning (Outlined)" />
+    <Button variant="outlined" intent="error" text="Error (Outlined)" />
+  </Box>
+  <Box sx={{ display: 'flex', gap: 'small', flexWrap: 'wrap', mb: 'small' }}>
+    <Button variant="text" intent="primary" text="Primary (Text)" />
+    <Button variant="text" intent="danger" text="Danger (Text)" />
+    <Button variant="text" intent="success" text="Success (Text)" />
+    <Button variant="text" intent="warning" text="Warning (Text)" />
+    <Button variant="text" intent="error" text="Error (Text)" />
+  </Box>
+  <Box sx={{ display: 'flex', gap: 'medium', flexWrap: 'wrap', mb: 'small' }}>
+    <Button
+      variant="inline-text"
+      intent="primary"
+      text="Primary (Inline Text)"
+    />
+    <Button variant="inline-text" intent="danger" text="Danger (Inline Text)" />
+    <Button
+      variant="inline-text"
+      intent="success"
+      text="Success (Inline Text)"
+    />
+    <Button
+      variant="inline-text"
+      intent="warning"
+      text="Warning (Inline Text)"
+    />
+    <Button variant="inline-text" intent="error" text="Error (Inline Text)" />
+  </Box>
+  <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+    <PrimaryBackground
+      style={{
+        padding: `${theme.space.small}px ${theme.space.large}px`,
+        borderRadius: `${theme.radii.base}px 0 0 ${theme.radii.base}px`,
+      }}
+    >
+      <Button variant="filled-reversed" text="Primary" />
+    </PrimaryBackground>
+    <div
+      style={{
+        display: 'inline-block',
+        padding: `${theme.space.small}px ${theme.space.large}px`,
+        background: theme.colors.palette.green,
+        textAlign: 'center',
+        margin: 0,
+      }}
+    >
+      <Button variant="filled-reversed" intent="success" text="Success" />
+    </div>
+    <div
+      style={{
+        display: 'inline-block',
+        padding: `${theme.space.small}px ${theme.space.large}px`,
+        background: theme.colors.palette.red,
+        textAlign: 'center',
+        margin: 0,
+      }}
+    >
+      <Button variant="filled-reversed" intent="danger" text="Danger" />
+    </div>
+    <div
+      style={{
+        display: 'inline-block',
+        padding: `${theme.space.small}px ${theme.space.large}px`,
+        background: theme.colors.palette.orange,
+        textAlign: 'center',
+        margin: 0,
+      }}
+    >
+      <Button variant="filled-reversed" intent="warning" text="Warning" />
+    </div>
+    <div
+      style={{
+        display: 'inline-block',
+        padding: `${theme.space.small}px ${theme.space.large}px`,
+        background: theme.colors.palette.pink,
+        textAlign: 'center',
+        margin: 0,
+        borderRadius: `0 ${theme.radii.base}px ${theme.radii.base}px 0`,
+      }}
+    >
+      <Button variant="filled-reversed" intent="error" text="Error" />
+    </div>
+  </Box>
+</>
+```
+
+### With icons
+
+`Button` components can contain an `Icon`. This is done by setting the `icon` property. If you wish to add an `icon` to the right, use `rightIcon` instead.
+
+```jsx live
+<>
+  <Button text="Add New" icon="add" sx={{ mr: 'small' }} />
+  <Button
+    intent="danger"
+    text="Delete"
+    icon="trash-bin-outlined"
+    sx={{ mr: 'small' }}
+  />
+  <Button intent="success" text="More" rightIcon="arrow-down" />
+</>
+```
+
+### With loading
+
+A loading indicator can be added to a button by setting the `loading` property of the Button. With loading state is turned on, all pointer events are disabled.
+
+```jsx live
+<>
+  <Button
+    variant="filled"
+    intent="primary"
+    text="Primary"
+    loading
+    sx={{ mr: 'small' }}
+  />
+  <Button
+    variant="filled"
+    intent="danger"
+    text="Danger"
+    loading
+    sx={{ mr: 'small' }}
+  />
+  <Button
+    variant="outlined"
+    intent="primary"
+    text="Primary (Outlined)"
+    loading
+  />
+</>
+```
+
+### Disabled
+
+To mark a button as `disabled`, add the `disabled` property to the `Button`.
+
+```jsx live
+<>
+  <Button
+    disabled
+    variant="basic-transparent"
+    text="Basic Transparent (Disabled)"
+    sx={{ mr: 'small' }}
+  />
+  <Button
+    disabled
+    variant="filled"
+    intent="primary"
+    text="Filled (Disabled)"
+    sx={{ mr: 'small' }}
+  />
+  <Button
+    disabled
+    variant="outlined"
+    intent="danger"
+    text="Outlined (Disabled)"
+  />
+  <Button disabled variant="text" intent="primary" text="Text (Disabled)" />
+</>
+```
+
+### Sizes
+
+Hero Design supports a medium (default) button size as well as large and small.
+If a large or small button is desired, set the `size` property to `large` or `small` respectively. Omit the `size` property for a button with the medium size.
+
+```jsx live
+<>
+  <Box sx={{ display: 'flex', gap: 'small', flexWrap: 'wrap', mb: 'small' }}>
+    <Button variant="filled" intent="primary" text="Small" size="small" />
+    <Button variant="filled" intent="danger" text="Small" size="small" />
+    <Button variant="outlined" intent="primary" text="Small" size="small" />
+    <Button variant="outlined" intent="danger" text="Small" size="small" />
+  </Box>
+  <Box sx={{ display: 'flex', gap: 'small', flexWrap: 'wrap', mb: 'small' }}>
+    <Button variant="filled" intent="primary" text="Medium" />
+    <Button variant="filled" intent="danger" text="Medium" />
+    <Button variant="outlined" intent="primary" text="Medium" />
+    <Button variant="outlined" intent="danger" text="Medium" />
+  </Box>
+  <Box sx={{ display: 'flex', gap: 'small', flexWrap: 'wrap', mb: 'small' }}>
+    <Button variant="filled" intent="primary" text="Large" size="large" />
+    <Button variant="filled" intent="danger" text="Large" size="large" />
+    <Button variant="outlined" intent="primary" text="Large" size="large" />
+    <Button variant="outlined" intent="danger" text="Large" size="large" />
+  </Box>
+</>
+```
+
+### Button.Link
+
+Render an `a` tag instead of a `button`, used to link pages.
+
+```jsx live
+<Box style={{ display: 'flex', flexDirection: 'column' }}>
+  <Button.Link href="#" text="Link" />
+  <Button.Link href="#" text="Link inside SPA" />
+  <Button.Link href="#" text="Link with icon" icon="add" />
+  <Button.Link href="#" text="Link with right icon" rightIcon="arrow-right" />
+  <Button.Link href="#" text="Link (Disabled)" disabled />
+  <Typography.Text>
+    Click <Button.Link href="#" text="here" size="inherit" /> for more details
+  </Typography.Text>
+</Box>
+```
+
+### Button.Icon
+
+Render a button with an icon only.
+
+```jsx live
+<>
+  <Button.Icon icon="more-horizontal" intent="text" sx={{ mr: 'small' }} />
+  <Button.Icon icon="arrow-down" intent="subdued-text" />
+</>
+```
+
+## Props
+
+### Button Props
+
+<Props of="Button" from="web" />
+
+### Button.Link Props
+
+<Props of="LinkButton" from="web" />
+
+### Button.Icon Props
+
+<Props of="IconButton" from="web" />

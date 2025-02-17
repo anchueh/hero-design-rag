@@ -1,0 +1,205 @@
+---
+id: contextPanel
+title: Context Panel
+---
+
+## Basic
+
+```jsx live
+function ContextPanelBasic() {
+  const [open, setOpen] = React.useState(false);
+  const handleOnClickOpen = () => {
+    setOpen(true);
+  };
+  const handleOnClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <Box>
+      <Button onClick={handleOnClickOpen} text="Open Basic Context Panel" />
+      <ContextPanel
+        open={open}
+        onClose={handleOnClose}
+        title="Basic Context Panel"
+        body={
+          <Box sx={{ width: 400 }}>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book. It has survived not
+            only five centuries, but also the leap into electronic typesetting,
+            remaining essentially unchanged. It was popularised in the 1960s
+            with the release of Letraset sheets containing Lorem Ipsum passages,
+            and more recently with desktop publishing software like Aldus
+            PageMaker including versions of Lorem Ipsum.
+          </Box>
+        }
+        footer={
+          <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Button
+              text="Discard"
+              variant="outlined"
+              sx={{ marginRight: theme.space.small }}
+              onClick={handleOnClose}
+            />
+            <Button text="Save" variant="filled" onClick={handleOnClose} />
+          </Box>
+        }
+        sx={{ minWidth: 400 }}
+      />
+    </Box>
+  );
+}
+```
+
+## Customized Context Panel
+
+A modal has 4 sub component including `ContextPanel.Title`, `ContextPanel.Body`, `ContextPanel.Footer` and `ContextPanel.CloseButton` to create a custom panel.
+
+```jsx live
+function ContextPanelCustom() {
+  const [open, setOpen] = React.useState(false);
+  const handleOnClickOpen = () => setOpen(true);
+  const handleOnClose = () => setOpen(false);
+
+  const [selectedTabId, setSelectedTabId] = React.useState(1);
+
+  const ExampleComment = ({ children }) => (
+    <Comment
+      author="Han Solo"
+      authorDetails="Test lorem ipsum"
+      avatar="/img/comment-avatar.png"
+      content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      datetime="2 minutes ago"
+    >
+      {children}
+    </Comment>
+  );
+
+  const tabs = [
+    {
+      id: 1,
+      title: 'Timeline',
+      panel: (
+        <Timeline
+          items={[
+            {
+              id: 1,
+              text: 'Completed',
+              helpText: 'Completed state',
+              state: 'complete',
+            },
+            {
+              id: 2,
+              text: 'Current',
+              helpText: 'Current description',
+              state: 'current',
+            },
+            {
+              id: 3,
+              text: 'Incomplete',
+              helpText: 'Incomplete description',
+              state: 'incomplete',
+            },
+          ]}
+        />
+      ),
+    },
+    {
+      id: 2,
+      title: 'Pick a date',
+      panel: (
+        <DatePicker
+          value="19/02/2021"
+          minDate={new Date(2021, 1, 3)}
+          maxDate={new Date(2021, 1, 20)}
+          id="limited-range-date-picker"
+        />
+      ),
+    },
+    {
+      id: 3,
+      title: 'Tab 3',
+      panel: (
+        <DatePicker
+          value="19/02/2021"
+          minDate={new Date(2021, 1, 3)}
+          maxDate={new Date(2021, 1, 20)}
+          id="limited-range-date-picker"
+        />
+      ),
+      disabled: true,
+    },
+    {
+      id: 4,
+      title: 'Comments',
+      panel: (
+        <>
+          <ExampleComment />
+          <ExampleComment />
+          <ExampleComment />
+          <ExampleComment />
+          <ExampleComment />
+          <ExampleComment />
+        </>
+      ),
+    },
+  ];
+
+  return (
+    <Box>
+      <Button onClick={handleOnClickOpen} text="Open Custom Context Panel" />
+      <ContextPanel open={open} onClose={handleOnClose}>
+        <ContextPanel.Header>
+          <Typography.Text>Panel Title</Typography.Text>
+          <ContextPanel.CloseButton onClick={handleOnClose} />
+        </ContextPanel.Header>
+        <ContextPanel.Body sx={{ maxWidth: 504 }}>
+          <Typography.Text>
+            <Tabs
+              id="sample-tabs"
+              tabs={tabs}
+              selectedTabId={selectedTabId}
+              onChange={(newTabId) => setSelectedTabId(newTabId)}
+            />
+          </Typography.Text>
+        </ContextPanel.Body>
+        <ContextPanel.Footer
+          sx={{ display: 'flex', justifyContent: 'flex-end' }}
+        >
+          <Button text="Save" variant="filled" onClick={handleOnClose} />
+          <Button
+            text="Discard"
+            variant="outlined"
+            sx={{ marginLeft: theme.space.small }}
+            onClick={handleOnClose}
+          />
+        </ContextPanel.Footer>
+      </ContextPanel>
+    </Box>
+  );
+}
+```
+
+## Props
+
+### ContextPanel Props
+
+<Props of="ContextPanel" from="web" />
+
+### ContextPanel.Header Props
+
+<Props of="ContextPanelHeader" from="web" />
+
+### ContextPanel.Body Props
+
+<Props of="ContextPanelBody" from="web" />
+
+### ContextPanel.Footer Props
+
+<Props of="ContextPanelFooter" from="web" />
+
+### ContextPanel.CloseButton Props
+
+<Props of="ContextPanelCloseButton" from="web" />

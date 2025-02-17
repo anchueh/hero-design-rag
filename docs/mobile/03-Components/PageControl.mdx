@@ -1,0 +1,101 @@
+---
+id: pageControl
+title: PageControl
+---
+
+import ComponentPreview from '../../../src/components/ComponentPreview';
+
+# PageControl
+
+**PageControl** component shows the position of the current page and the number of pages
+
+## Preview
+
+<ComponentPreview
+  iosSrc="/img/screenshots/page-control-ios.png"
+  androidSrc="/img/screenshots/page-control-android.png"
+/>
+
+## Examples
+
+```SnackPlayer name=PageControl/Example
+import React, { useCallback, useRef, useState } from 'react';
+import { FlatList, useWindowDimensions, View } from 'react-native';
+import { Card, PageControl, Typography } from './@hero-design/rn';
+
+import PlaygroundContext from './PlaygroundContext.js';
+
+
+const App = () => {
+  const items: Item[] = [
+    {
+      backgroundColor: theme.colors.successSurface,
+      title: 'Page 1',
+    },
+    {
+      backgroundColor: theme.colors.archivedSurface,
+      title: 'Page 2',
+    },
+    {
+      backgroundColor: theme.colors.infoSurface,
+      title: 'Page 3',
+    },
+  ];
+
+  const [currentPage, setCurrentPage] = useState(0);
+  const { width } = useWindowDimensions();
+
+  const visibleSlideChanged = useRef(
+    ({ viewableItems }) => {
+      if (!viewableItems || (viewableItems && !viewableItems.length)) return;
+      const { index } = viewableItems[0];
+
+      setCurrentPage(index || 0);
+    }
+  );
+
+  const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
+  return (
+    <PlaygroundContext>
+      <Box flex={1}>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          pagingEnabled
+          bounces={false}
+          data={items}
+          onViewableItemsChanged={visibleSlideChanged.current}
+          viewabilityConfig={viewConfig}
+          scrollEventThrottle={32}
+          style={{
+            height: 200,
+            width: width,
+            backgroundColor: 'black'
+          }}
+          renderItem={({ item }) => {
+            return (
+              <Box
+                style={{
+                  backgroundColor: item.backgroundColor,
+                  width: width,
+                }}
+              >
+                <Typography.Body variant="small">{item.title}</Typography.Body>
+              </Box>
+            );
+          }}
+        />
+        <Box alignItems="center" style={{ alignItems: 'center', position: 'absolute', bottom: theme.space.medium, left: 0, right: 0 }}>
+          <PageControl numberOfPages={items.length} currentPage={currentPage} />
+        </Box>
+      </Box>
+    </PlaygroundContext>
+  );
+};
+
+export default App;
+```
+
+## Props
+
+<Props of="PageControl" />

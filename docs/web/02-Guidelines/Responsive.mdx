@@ -1,0 +1,33 @@
+---
+id: responsive
+title: Responsive Design
+---
+
+# Responsive desisgn guidelines
+
+Currently, there are 4 breakpoints that can be used in theming:
+
+- Small (575px)
+- Medium (768px)
+- Large (992px)
+- Extra Large (1200px)
+
+## Using with styled-components
+
+- You can use these breakpoint with `styled-components` using theme object
+
+```jsx
+const Container = styled.div`
+  ${({ theme }) => {
+    return css`
+      @media (min-width: ${theme.breakpoints.small}) {
+        display: none;
+      }
+    `;
+  }};
+`;
+```
+
+## Using on Components level
+
+- If you want to use these breakpoints on component level, you can take a look at [MediaQuery](../components/mediaquery) component.

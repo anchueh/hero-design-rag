@@ -1,0 +1,238 @@
+---
+id: scrollables-with-fab
+title: Scrollables with FAB
+---
+
+# Scrollables with FAB
+
+Hero Design introduces 3 scroll components: **ScrollViewWithFAB**, **FlatListWithFAB** and **SectionListWithFAB** that can be used to achieve scroll-based animations with **FAB** and **FAB.ActionGroup** components.
+
+## Example
+
+These components can be used just like their React Native counterparts, with the addition of `fabProps` props to configure the FAB or FAB.ActionGroup.
+
+### ScrollViewWithFAB
+
+```SnackPlayer name=ScrollViewWithFAB
+import React from 'react';
+import {
+  Box,
+  FAB,
+  ScrollViewWithFAB,
+  Typography,
+  theme,
+} from './@hero-design/rn';
+import PlaygroundContext from './PlaygroundContext.js';
+
+const Content = () => (
+  <Box margin="medium" style={{ height: 2000 }} alignItems="center">
+    <Typography.Body>Scroll up and down to see the animations.</Typography.Body>
+  </Box>
+);
+
+const ScrollViewPlayground = () => {
+  const theme = useTheme();
+
+  return (
+    <PlaygroundContext>
+      <ScrollViewWithFAB
+        fabProps={
+          <FAB
+            style={{
+              position: 'absolute',
+              bottom: 0,
+              marginLeft: theme.space.large,
+              marginBottom: theme.space.large,
+            }}
+            onPress={() => {
+              alert('pressed shout out');
+            }}
+            title="Shout out"
+            icon="speaker"
+            animated
+          />
+        }
+      >
+        <Content />
+      </ScrollViewWithFAB>
+    </PlaygroundContext>
+  );
+};
+
+export default ScrollViewPlayground;
+```
+
+<br />
+
+### FlatListWithFAB
+
+```SnackPlayer name=FlatListWithFAB
+import React from 'react';
+import { Box, FlatListWithFAB, Typography, useTheme } from './@hero-design/rn';
+import PlaygroundContext from './PlaygroundContext.js';
+
+const flatListData = Array.from({ length: 30 }, (_, i) => ({
+  id: i,
+  title: `Item ${i}`,
+}));
+
+const ScrollableWithFABPlayground = () => {
+  const theme = useTheme();
+  const [actionGroupActive, setActionGroupActive] = React.useState(false);
+
+  return (
+    <PlaygroundContext>
+      <FlatListWithFAB
+        fabProps={{
+          style: {
+            marginBottom: theme.space.large,
+          },
+          items: [
+            {
+              icon: 'speaker',
+              title: 'Give shout out',
+              onPress: () => {
+                alert('touched');
+              },
+            },
+            { icon: 'target', title: 'Goal' },
+            { icon: 'plane', title: 'Leave request' },
+            { icon: 'health-bag', title: 'Safety incident' },
+            { icon: 'clock', title: 'Timesheets' },
+          ],
+          onPress: () => {
+            setActionGroupActive(!actionGroupActive);
+          },
+          onBackdropPress: () => {
+            setActionGroupActive(!actionGroupActive);
+          },
+          fabTitle: 'Shout out',
+          fabIcon: 'speaker',
+          active: actionGroupActive,
+        }}
+        data={flatListData}
+        renderItem={({ item }) => (
+          <Box marginBottom="medium">
+            <Typography.Title level="h5">{item.title}</Typography.Title>
+            <Typography.Body>Item {item.id}</Typography.Body>
+          </Box>
+        )}
+      />
+    </PlaygroundContext>
+  );
+};
+
+export default ScrollableWithFABPlayground;
+```
+
+<br />
+
+### SectionListWithFAB
+
+```SnackPlayer name=SectionListWithFAB
+import React from 'react';
+import {
+  SectionHeading,
+  SectionListWithFAB,
+  Typography,
+  useTheme,
+} from './@hero-design/rn';
+import PlaygroundContext from './PlaygroundContext.js';
+
+const sectionListData = [
+  {
+    title: 'Main dishes',
+    data: ['Pizza', 'Burger', 'Risotto', 'Pasta', 'Salad', 'Bread'],
+  },
+  {
+    title: 'Sides',
+    data: [
+      'French Fries',
+      'Onion Rings',
+      'Fried Shrimps',
+      'Mashed Potatoes',
+      'Garlic Bread',
+    ],
+  },
+  {
+    title: 'Drinks',
+    data: ['Water', 'Coke', 'Beer', 'Wine', 'Whiskey'],
+  },
+  {
+    title: 'Desserts',
+    data: ['Cheese Cake', 'Ice Cream', 'Apple Pie', 'Cupcake'],
+  },
+];
+
+const ScrollableWithFABPlayground = () => {
+  const theme = useTheme();
+  const [actionGroupActive, setActionGroupActive] = React.useState(false);
+
+  return (
+    <PlaygroundContext>
+      <SectionListWithFAB
+        fabProps={{
+          style: {
+            marginBottom: theme.space.large,
+          },
+          items: [
+            {
+              icon: 'speaker',
+              title: 'Give shout out',
+              onPress: () => {
+                alert('touched');
+              },
+            },
+            { icon: 'target', title: 'Goal' },
+            { icon: 'plane', title: 'Leave request' },
+            { icon: 'health-bag', title: 'Safety incident' },
+            { icon: 'clock', title: 'Timesheets' },
+          ],
+          onPress: () => {
+            setActionGroupActive(!actionGroupActive);
+          },
+          onBackdropPress: () => {
+            setActionGroupActive(!actionGroupActive);
+          },
+          fabTitle: 'Shout out',
+          fabIcon: 'speaker',
+          active: actionGroupActive,
+        }}
+        sections={sectionListData}
+        renderSectionHeader={({ section: { title } }) => (
+          <SectionHeading text={title} />
+        )}
+        renderItem={({ item }) => (
+          <Typography.Body style={{ margin: theme.space.medium }}>
+            {item}
+          </Typography.Body>
+        )}
+      />
+    </PlaygroundContext>
+  );
+};
+
+export default ScrollableWithFABPlayground;
+```
+
+<br />
+
+## Props
+
+### ScrollViewWithFAB
+
+<Props of="ScrollViewWithFAB" />
+
+<br />
+
+### FlatListWithFAB
+
+<Props of="FlatListWithFAB" />
+
+<br />
+
+### SectionListWithFAB
+
+<Props of="SectionListWithFAB" />
+
+<br />

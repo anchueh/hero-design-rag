@@ -1,0 +1,143 @@
+---
+id: skeleton
+title: Skeleton
+---
+
+# Skeleton
+
+Skeleton showcases the loading state of a component.
+
+:::info
+
+In order to use `Skeleton` component, ensure that you have `react-native-linear-gradient` installed in your project.
+
+:::
+
+## Examples
+
+### Variants
+
+Skeleton comes with 3 variants: `rounded`, `rectangular` and `circular`.
+
+```jsx live
+function SkeletonPlayground() {
+  return (
+    <Box padding="medium">
+      <Typography.Body
+        variant="small"
+        style={{ marginVertical: theme.space.medium }}
+      >
+        Rounded variant (default)
+      </Typography.Body>
+      <Skeleton style={{ width: 200, height: 32 }} variant="rounded" />
+      <Typography.Body
+        variant="small"
+        style={{ marginVertical: theme.space.medium }}
+      >
+        Rectangular variant
+      </Typography.Body>
+      <Skeleton style={{ width: 200, height: 32 }} variant="rectangular" />
+      <Typography.Body
+        variant="small"
+        style={{ marginVertical: theme.space.medium }}
+      >
+        Circular variant
+      </Typography.Body>
+      <Skeleton style={{ width: 64, height: 64 }} variant="circular" />
+    </Box>
+  );
+}
+```
+
+<br />
+
+### Intents
+
+Skeleton supports 2 intents: `light` and `dark`.
+
+```jsx live
+function SkeletonPlayground() {
+  return (
+    <Box>
+      <Box padding="medium">
+        <Typography.Title level="h5">
+          Light intent - Used on light background
+        </Typography.Title>
+
+        <Typography.Body
+          variant="small"
+          style={{ marginVertical: theme.space.medium }}
+        >
+          Rounded variant (default)
+        </Typography.Body>
+        <Skeleton style={{ width: 200, height: 32 }} variant="rounded" />
+
+        <Typography.Body
+          variant="small"
+          style={{ marginVertical: theme.space.medium }}
+        >
+          Rectangular variant
+        </Typography.Body>
+        <Skeleton style={{ width: 200, height: 32 }} variant="rectangular" />
+
+        <Typography.Body
+          variant="small"
+          style={{ marginVertical: theme.space.medium }}
+        >
+          Circular variant
+        </Typography.Body>
+        <Skeleton style={{ width: 64, height: 64 }} variant="circular" />
+      </Box>
+
+      <Box padding="medium" bgColor="neutralGlobalSurface">
+        <Typography.Title level="h5">
+          Dark intent - Used on dark background
+        </Typography.Title>
+        <Typography.Body
+          variant="small"
+          style={{ marginVertical: theme.space.medium }}
+        >
+          Rounded variant (default)
+        </Typography.Body>
+        <Skeleton
+          style={{ width: 200, height: 32 }}
+          intent="dark"
+          variant="rounded"
+        />
+
+        <Typography.Body
+          variant="small"
+          style={{ marginVertical: theme.space.medium }}
+        >
+          Rectangular variant
+        </Typography.Body>
+        <Skeleton
+          style={{ width: 200, height: 32 }}
+          intent="dark"
+          variant="rectangular"
+        />
+
+        <Typography.Body
+          variant="small"
+          style={{ marginVertical: theme.space.medium }}
+        >
+          Circular variant
+        </Typography.Body>
+        <Skeleton
+          style={{ width: 64, height: 64 }}
+          intent="dark"
+          variant="circular"
+        />
+      </Box>
+    </Box>
+  );
+}
+```
+
+<br />
+
+## Props
+
+Skeleton also accepts all [View props.](https://reactnative.dev/docs/view)
+
+<Props of="Skeleton" />

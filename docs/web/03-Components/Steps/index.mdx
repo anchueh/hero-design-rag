@@ -1,0 +1,143 @@
+---
+id: steps
+title: Steps
+---
+
+import Note, { Highlight } from '../../../helpers/Note';
+
+# Steps
+
+An indicator to display a sequence of subtasks or steps to complete a workflow.
+
+## Examples
+
+### Basic
+
+To render `Steps`, we provide `steps` and `current` props.
+
+<Note title="Mobile display" intent="info">
+  Normally, the component displays <Highlight>icons</Highlight> &{' '}
+  <Highlight>labels</Highlight> for steps. On mobile screensize, only{' '}
+  <Highlight>icons</Highlight> are rendered.
+</Note>
+
+<Note title="Current prop index">
+  The <Highlight>current</Highlight> prop is 1-based index which means the first
+  step is highlighted when we specify <Highlight>current</Highlight> 1 (NOT 0).
+</Note>
+
+```jsx live
+function BasicStep() {
+  const steps = [
+    {
+      id: 1,
+      status: 'complete',
+      text: 'Request a demo',
+    },
+    {
+      id: 2,
+      status: 'complete',
+      text: 'Choose a plan',
+    },
+    {
+      id: 3,
+      status: 'complete',
+      text: 'Sign up',
+    },
+    {
+      id: 4,
+      status: 'incomplete',
+      text: 'Implement',
+    },
+  ];
+  return (
+    <>
+      <Steps steps={steps} current={1} />
+      <Steps steps={steps} current={2} />
+      <Steps steps={steps} current={3} />
+      <Steps steps={steps} current={4} />
+    </>
+  );
+}
+```
+
+### Clickable steps
+
+By passing `onClick`, steps become clickable.
+
+```jsx live
+function ClickableStep() {
+  const [step, setStep] = useState();
+  const steps = [
+    {
+      id: 1,
+      status: 'complete',
+      text: 'Request a demo',
+      clickable: true,
+    },
+    {
+      id: 2,
+      status: 'complete',
+      text: 'Choose a plan',
+      clickable: true,
+    },
+    {
+      id: 3,
+      status: 'complete',
+      text: 'Sign up',
+      clickable: true,
+    },
+    {
+      id: 4,
+      status: 'incomplete',
+      text: 'Implement',
+      clickable: false,
+    },
+  ];
+  return (
+    <>
+      <Steps steps={steps} current={3} onClick={(s) => setStep(s)} />
+      <Typography.Text>
+        Clicked step:{' '}
+        <Tag text={step === undefined ? 'undefined' : JSON.stringify(step)} />
+      </Typography.Text>
+    </>
+  );
+}
+```
+
+### Compact style
+
+Steps can be rendered in a compact style in mobile screen size or explicitly defining `compact` variant.
+
+```jsx live
+function CompactSteps() {
+  const steps = [
+    {
+      id: 1,
+      status: 'complete',
+      text: 'Request a demo',
+    },
+    {
+      id: 2,
+      status: 'complete',
+      text: 'Choose a plan',
+    },
+    {
+      id: 3,
+      status: 'complete',
+      text: 'Sign up',
+    },
+    {
+      id: 4,
+      status: 'incomplete',
+      text: 'Implement',
+    },
+  ];
+  return <Steps steps={steps} current={3} variant="compact" />;
+}
+```
+
+## Props
+
+<Props of="Steps" from="web" />

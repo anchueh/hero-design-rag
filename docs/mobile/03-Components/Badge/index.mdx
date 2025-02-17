@@ -1,0 +1,430 @@
+---
+id: badge
+title: Badge
+---
+
+<PageTitle
+  title="Badge"
+  content="Badges are used to indicate a notification, item count, or other information relating to a navigtion destination. They usually placed on the ending edge of an icon or a text label."
+/>
+
+# Badge
+
+- Badge is used to describe status or value of a text.
+- It can be used as standalone status; or a notification.
+
+## Examples
+
+There are 2 types: **Standalone** and **Status**.
+
+### Standalone
+
+#### Intents
+
+Badge comes with 6 intents which are `primary`, `success`, `warning`, `danger`, `info`, and `archived`.
+
+`${max}+` is displayed when content is number and larger than `max`. Default value of `max` is 99.
+
+```jsx live
+function App() {
+  const [isVisibleBadge, setIsVisibleBadge] = React.useState(true);
+  const [isVisibleStatusBadge, setIsVisibleStatusBadge] = React.useState(true);
+
+  return (
+    <View style={{ margin: theme.space.medium }}>
+      <Typography.Body
+        variant="small"
+        style={{ marginBottom: theme.space.xsmall }}
+      >
+        Text
+      </Typography.Body>
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          marginBottom: theme.space.small,
+        }}
+      >
+        <Badge
+          content="PRIMARY"
+          intent="primary"
+          style={{ marginEnd: theme.space.small }}
+        />
+        <Badge
+          content="SUCCESS"
+          intent="success"
+          style={{ marginEnd: theme.space.small }}
+        />
+        <Badge
+          content="WARNING"
+          intent="warning"
+          style={{ marginEnd: theme.space.small }}
+        />
+      </View>
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          marginBottom: theme.space.small,
+        }}
+      >
+        <Badge
+          content="DANGER"
+          intent="danger"
+          style={{ marginEnd: theme.space.small }}
+        />
+        <Badge
+          content="INFO"
+          intent="info"
+          style={{ marginEnd: theme.space.small }}
+        />
+        <Badge
+          content="ARCHIVED"
+          intent="archived"
+          style={{ marginEnd: theme.space.small }}
+        />
+        <Badge
+          content="PRIMARY"
+          intent="primary"
+          style={{ marginEnd: theme.space.small }}
+        />
+      </View>
+      <Typography.Body
+        variant="small"
+        style={{ marginBottom: theme.space.xsmall }}
+      >
+        Number
+      </Typography.Body>
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          marginBottom: theme.space.small,
+        }}
+      >
+        <Badge content={9} style={{ marginEnd: theme.space.small }} />
+        <Badge content={99} style={{ marginEnd: theme.space.small }} />
+        <Badge content={100} />
+      </View>
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          marginBottom: theme.space.large,
+        }}
+      >
+        <Badge
+          content={9}
+          style={{ marginEnd: theme.space.small }}
+          intent="primary"
+        />
+        <Badge
+          content={8}
+          style={{ marginEnd: theme.space.small }}
+          intent="success"
+        />
+        <Badge
+          content={9}
+          max={5}
+          style={{ marginEnd: theme.space.small }}
+          intent="warning"
+        />
+        <Badge
+          content={90}
+          max={80}
+          intent="danger"
+          style={{ marginEnd: theme.space.small }}
+        />
+        <Badge
+          content={99}
+          intent="info"
+          style={{ marginEnd: theme.space.small }}
+        />
+        <Badge
+          max={999}
+          content={1000}
+          intent="archived"
+          style={{ marginEnd: theme.space.small }}
+        />
+        <Badge max={99} content={999} intent="primary" />
+      </View>
+      <Typography.Body
+        variant="small"
+        style={{ marginBottom: theme.space.xsmall }}
+      >
+        Visible Badge
+      </Typography.Body>
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          marginBottom: theme.space.large,
+        }}
+      >
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            marginEnd: theme.space.medium,
+          }}
+        >
+          <Typography.Body
+            variant="small"
+            style={{ marginEnd: theme.space.small }}
+          >
+            Notes
+          </Typography.Body>
+          <Badge content={1} intent="archived" visible={isVisibleBadge} />
+        </View>
+        <Button
+          variant="text"
+          text="Click"
+          onPress={() => setIsVisibleBadge((visible) => !visible)}
+        />
+      </View>
+    </View>
+  );
+}
+```
+
+#### Variants
+
+Badge comes with 2 variants which are `filled` and `outlined`. The default variant is `filled`.
+
+```jsx live
+<View
+  style={{
+    display: 'flex',
+    flexDirection: 'column',
+  }}
+>
+  <View
+    style={{
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'flex-end',
+      padding: theme.space.medium,
+    }}
+  >
+    <Badge
+      content="PRIMARY"
+      intent="primary"
+      style={{ marginEnd: theme.space.small }}
+    />
+    <Badge
+      content="SUCCESS"
+      intent="success"
+      style={{ marginEnd: theme.space.small }}
+    />
+    <Badge
+      content="WARNING"
+      intent="warning"
+      style={{ marginEnd: theme.space.small }}
+    />
+    <Badge
+      content="DANGER"
+      intent="danger"
+      style={{ marginEnd: theme.space.small }}
+    />
+    <Badge
+      content="INFO"
+      intent="info"
+      style={{ marginEnd: theme.space.small }}
+    />
+    <Badge
+      content="ARCHIVED"
+      intent="archived"
+      style={{ marginEnd: theme.space.small }}
+    />
+  </View>
+  <View
+    style={{
+      display: 'flex',
+      flexDirection: 'row',
+      backgroundColor: theme.colors.darkGlobalSurface,
+      alignItems: 'flex-end',
+      padding: theme.space.medium,
+    }}
+  >
+    <Badge
+      content="PRIMARY"
+      intent="primary"
+      variant="outlined"
+      style={{ marginEnd: theme.space.small }}
+    />
+    <Badge
+      content="SUCCESS"
+      intent="success"
+      variant="outlined"
+      style={{ marginEnd: theme.space.small }}
+    />
+    <Badge
+      content="WARNING"
+      intent="warning"
+      variant="outlined"
+      style={{ marginEnd: theme.space.small }}
+    />
+    <Badge
+      content="DANGER"
+      intent="danger"
+      variant="outlined"
+      style={{ marginEnd: theme.space.small }}
+    />
+    <Badge
+      content="INFO"
+      intent="info"
+      variant="outlined"
+      style={{ marginEnd: theme.space.small }}
+    />
+    <Badge
+      content="ARCHIVED"
+      intent="archived"
+      variant="outlined"
+      style={{ marginEnd: theme.space.small }}
+    />
+  </View>
+</View>
+```
+
+#### Icon
+
+Icon can be used as the content of the badge.
+
+```jsx live
+<View
+  style={{
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+  }}
+>
+  <Badge
+    icon="checkmark"
+    size="small"
+    intent="primary"
+    style={{ marginEnd: theme.space.small }}
+  />
+
+  <Badge icon="cancel" size="small" style={{ marginEnd: theme.space.small }} />
+
+  <Badge
+    icon="add"
+    size="small"
+    intent="success"
+    style={{ marginEnd: theme.space.small }}
+  />
+
+  <Badge
+    icon="checkmark"
+    intent="primary"
+    style={{ marginEnd: theme.space.small }}
+  />
+
+  <Badge icon="cancel" style={{ marginEnd: theme.space.small }} />
+
+  <Badge icon="add" intent="success" style={{ marginEnd: theme.space.small }} />
+</View>
+```
+
+### Sizes
+
+Badge comes with 2 sizes which are `small` and `medium`. The default size is `medium`.
+
+```jsx live
+<View style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end' }}>
+  <Badge
+    size="small"
+    content="SMALL"
+    intent="primary"
+    style={{ marginEnd: theme.space.small }}
+  />
+  <Badge size="medium" content="MEDIUM" intent="primary" />
+</View>
+```
+
+### Status
+
+Status Badge comes with 6 intents which are `primary`, `success`, `warning`, `danger`, `info`, and `archived`.
+
+```jsx live
+function App() {
+  const [isVisibleBadge, setIsVisibleBadge] = React.useState(true);
+  const [isVisibleStatusBadge, setIsVisibleStatusBadge] = React.useState(true);
+
+  return (
+    <>
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          marginBottom: theme.space.small,
+        }}
+      >
+        <Badge.Status style={{ marginEnd: theme.space.small }}>
+          <Icon icon="bell" size="small" />
+        </Badge.Status>
+        <Badge.Status intent="primary" style={{ marginEnd: theme.space.small }}>
+          <Icon icon="bell" size="small" />
+        </Badge.Status>
+        <Badge.Status intent="warning" style={{ marginEnd: theme.space.small }}>
+          <Icon icon="bell" size="small" />
+        </Badge.Status>
+        <Badge.Status intent="info" style={{ marginEnd: theme.space.small }}>
+          <Icon icon="bell" size="small" />
+        </Badge.Status>
+        <Badge.Status intent="success" style={{ marginEnd: theme.space.small }}>
+          <Icon icon="bell" size="small" />
+        </Badge.Status>
+        <Badge.Status
+          intent="archived"
+          style={{ marginEnd: theme.space.small }}
+        >
+          <Icon icon="bell" size="small" />
+        </Badge.Status>
+        <Badge.Status intent="primary" style={{ marginEnd: theme.space.small }}>
+          <Icon icon="bell" size="small" />
+        </Badge.Status>
+        <Badge.Status style={{ marginEnd: theme.space.small }}>
+          <Typography.Body variant="small">Activity</Typography.Body>
+        </Badge.Status>
+      </View>
+      <Typography.Body
+        variant="small"
+        style={{ marginBottom: theme.space.xsmall }}
+      >
+        Visible Status Badge
+      </Typography.Body>
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}
+      >
+        <Badge.Status
+          visible={isVisibleStatusBadge}
+          style={{ marginEnd: theme.space.small }}
+        >
+          <Typography.Body variant="small">Activity</Typography.Body>
+        </Badge.Status>
+        <Button
+          variant="text"
+          text="Click"
+          onPress={() => setIsVisibleStatusBadge((visible) => !visible)}
+        />
+      </View>
+    </>
+  );
+}
+```
+
+## Props
+
+#### Badge Props
+
+<Props of="Badge" />
+
+#### Badge.Status Props
+
+<Props of="Status" />

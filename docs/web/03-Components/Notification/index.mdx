@@ -1,0 +1,102 @@
+---
+id: notification
+title: Notification
+---
+
+# Notification
+
+Notification is usually used to acknowledge a user action. Eg: Submit a form, Delete a row successfully,...
+
+## Examples
+
+### Basic
+
+Show notification with title & content
+
+```jsx live
+<Notification
+  title="Special Series D Offer"
+  content="No subscription fees to pay until July 2021 and 2 months free."
+/>
+```
+
+### With different intents
+
+```jsx live
+<>
+  <Notification title="Success title" content="Success text" intent="success" />
+  <br />
+  <Notification title="Info title" content="Info text" intent="info" />
+  <br />
+  <Notification title="Warning title" content="Warning text" intent="warning" />
+  <br />
+  <Notification title="Danger title" content="Danger text" intent="danger" />
+  <br />
+  <Notification title="Error title" content="Error text" intent="error" />
+</>
+```
+
+### Without notification icon
+
+```jsx live
+<Notification
+  title="News"
+  content="This month we are excited to announce our latest round of funding, which will be used to create a better world at work. To help us celebrate this monumental occasion, we want to help you build a better world at work too, so we’re offering 2 months free subscription to help get you started!"
+  icon={null}
+/>
+```
+
+### Customising notification icon
+
+```jsx live
+<>
+  <Notification
+    title="Special Series D Offer"
+    content="No subscription fees to pay until July 2021 and 2 months free."
+    intent="success"
+    icon={<Icon icon="loading-2" intent="success" size="xlarge" spin />}
+  />
+  <br />
+  <Notification
+    title="Special Series D Offer"
+    content="This month we are excited to announce our latest round of funding, which will be used to create a better world at work. To help us celebrate this monumental occasion, we want to help you build a better world at work too, so we’re offering 2 months free subscription to help get you started!"
+    intent="success"
+    icon="heart"
+  />
+</>
+```
+
+### With close button on the right side
+
+```jsx live
+<Notification
+  title="Special Series D Offer"
+  content="No subscription fees to pay until July 2021 and 2 months free."
+  intent="success"
+  onClose={() => console.log('clicked close')}
+/>
+```
+
+### Customising notification content
+
+```jsx live
+<Notification
+  title="Special Offer"
+  content={
+    <Typography.Text tagName="div" style={{ display: 'flex' }}>
+      No subscription fees to pay until July 2021 and 2 months free.
+      <Button.Link
+        text="Book a demo"
+        href="https://employmenthero.com/book-a-demo-series-d-offer-march/"
+        target="_blank"
+        sx={{ marginLeft: 'auto' }}
+      />
+    </Typography.Text>
+  }
+  intent="success"
+/>
+```
+
+## Props
+
+<Props of="Notification" from="web" />

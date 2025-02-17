@@ -1,0 +1,208 @@
+---
+id: layout
+title: Layout
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import example1 from '@site/static/img/mobile-layout-example-1.png';
+import example2 from '@site/static/img/mobile-layout-example-2.png';
+import example3 from '@site/static/img/mobile-layout-example-3.png';
+import example4 from '@site/static/img/mobile-layout-example-4.png';
+
+# Layout
+
+Layout is the framework for the structure and composition of a screen. It refers to how the components of a screen are organised in relation to the screen size and each other. Applying a layout ensures consistency, familiarity and visual harmony for the user which enhances their experience and aids their ability to process information on a screen.
+The layout is made up of columns, gutters and margins.
+
+## Layout
+
+For Hero Design mobile, all screens must be designed on an iPhone 14 (390px by 844px - height may be relative to content), this means the layout is applied to these measurements as a baseline when designing and building your app. As user devices range is screen size, we must ensure the layout is responsive. This means, for the end user, the layout will scale larger or smaller than an iPhone 14 depending on the device as to achieve optimal visual legibility and a good user experience.
+
+<img
+  style={{
+    width: 300,
+    height: 600,
+    marginTop: 32,
+    marginBottom: 32,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    display: 'block',
+  }}
+  src={example1}
+  alt="Layout example"
+/>
+
+<Tabs>
+  <TabItem value="do" label="Do" default>
+    <ul>
+      <li>
+        Always use an iPhone 13/14 screen size as the baseline to design or
+        build your app.
+      </li>
+      <li>
+        Do consider multiple device&apos;s screen size and aspect ratio when
+        defining the layout.
+      </li>
+      <li>
+        Do create a clear hierarchy of information, with the most important
+        elements appearing at the top.
+      </li>
+      <li>
+        Do ensure that your layout provides adequate whitespace to improve
+        legibility and overall readability.
+      </li>
+      <li>
+        Do make sure your layout works for both portrait and landscape
+        orientations.
+      </li>
+      <li>
+        Do use consistent and recognisable patterns throughout your layout to
+        improve user familiarity and reduce cognitive load.
+      </li>
+      <li>
+        Do consider the use of different layout types, such as grids, lists, and
+        cards, depending on the type of content being displayed.
+      </li>
+    </ul>
+  </TabItem>
+  <TabItem value="dont" label="Don't">
+    <ul>
+      <li>
+        Don&apos;t use overly complex or hard-to-follow layouts that confuse or
+        frustrate users.
+      </li>
+      <li>
+        Don&apos;t ignore accessibility considerations, such as font sizes and
+        line heights.
+      </li>
+      <li>
+        Don&apos;t ignore the importance of responsive design, making sure your
+        layout adjusts to different screen sizes and orientations.
+      </li>
+      <li>
+        Don&apos;t use layout elements that make it difficult to interact with
+        the content, such as tiny buttons or text links.
+      </li>
+      <li>
+        Don&apos;t overlook the importance of testing your layout on real
+        devices and with real users to identify any usability issues.
+      </li>
+      <li>
+        Don&apos;t ignore the importance of using clear and consistent visual
+        cues to guide users through the interface, such as grids, columns, and
+        margins.
+      </li>
+    </ul>
+  </TabItem>
+</Tabs>
+
+## Columns
+
+A guiding system of spacial areas on the screen that helps us place content. For Hero Design mobile, we always use a responsive 4-column grid layout as the base of our screens. This ensures consistency across all our screens and user devices. On an iPhone 14, the columns will be 78px width. The columns are responsive to multiple devices, this means it will expand or shrink in width depending on the user’s device.
+
+<img
+  style={{
+    width: 300,
+    height: 600,
+    marginTop: 32,
+    marginBottom: 32,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    display: 'block',
+  }}
+  src={example2}
+  alt="Columns example"
+/>
+
+<Tabs>
+  <TabItem value="do" label="Do" default>
+    <ul>
+      <li>
+        Always utilise the columns for a baseline to apply your content within
+        the screen
+      </li>
+      <li>Try to apply the content</li>
+    </ul>
+  </TabItem>
+  <TabItem value="dont" label="Don't">
+    <ul>
+      <li>
+        Apply any content or components inside the margins. (does not apply to
+        background imagery & colour)
+      </li>
+    </ul>
+  </TabItem>
+</Tabs>
+
+## Gutters
+
+A gutter is the space between each column. For the Hero Design mobile grid, we use 4 columns so 3 gutters will be present. The gutter must be 16px in width. The gutters are responsive to multiple devices, this means it will expand or shrink in width depending on the user’s device.
+
+<img
+  style={{
+    width: 300,
+    height: 600,
+    marginTop: 32,
+    marginBottom: 32,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    display: 'block',
+  }}
+  src={example3}
+  alt="Gutters example"
+/>
+
+<Tabs>
+  <TabItem value="do" label="Do" default>
+    <ul>
+      <li>
+        Always utilise the gutters for containing content within the columns
+      </li>
+    </ul>
+  </TabItem>
+  <TabItem value="dont" label="Don't">
+    <ul>
+      <li>
+        Apply any content or components inside the margins. (does not apply to
+        background imagery & colour)
+      </li>
+    </ul>
+  </TabItem>
+</Tabs>
+
+## Margins
+
+A margin is the space between the left and right edges of the screen and the content. Margins help provide alignment and space for the content. Margins For Hero Design mobile, the Margins are fix a width at 16px each side.
+
+<img
+  style={{
+    width: 300,
+    height: 600,
+    marginTop: 32,
+    marginBottom: 32,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    display: 'block',
+  }}
+  src={example4}
+  alt="Margin example"
+/>
+
+<Tabs>
+  <TabItem value="do" label="Do" default>
+    <ul>
+      <li>
+        Always utilise the margins for containing content within the columns
+      </li>
+    </ul>
+  </TabItem>
+  <TabItem value="dont" label="Don't">
+    <ul>
+      <li>
+        Apply any content or components inside the margins. (does not apply to
+        background imagery & colour)
+      </li>
+    </ul>
+  </TabItem>
+</Tabs>

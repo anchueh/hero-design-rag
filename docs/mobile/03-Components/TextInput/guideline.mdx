@@ -1,0 +1,60 @@
+---
+title: Guideline
+---
+
+import TextInputDosAndDonts from './TextInputDosAndDonts';
+import TipsForWritingInputLabels from './TipsForWritingInputLabels';
+
+<PageTitle
+  title="TextInput"
+  content="Input allow users to enter text, values, select text into a UI. Typically appears in a form or a bottomsheet."
+/>
+
+<TextInputDosAndDonts />
+
+## Inputs with prefix/suffix
+
+1. Prefix text
+
+- Text input can include prefix text, such as currency sympbol
+
+```jsx live
+function InputWithPrefix() {
+  return <TextInput label="Amount (AUD)" prefix="dollar-sign" />;
+}
+```
+
+2. Suffix text
+
+- Text input can include suffix text, such as a calendar icon or percentage
+
+```jsx live
+function InputWithSuffix() {
+  return (
+    <TextInput
+      label="Due date"
+      value="23/09/2021"
+      required
+      suffix="calendar-dates-outlined"
+    />
+  );
+}
+```
+
+3. Text field can have both prefix and suffix icons when needed
+
+```jsx live
+function InputWithPrefixAndPrefix() {
+  return (
+    <TextInput
+      label="Amount (AUD)"
+      prefix="dollar-sign"
+      suffix="circle-cancel"
+    />
+  );
+}
+```
+
+## Tips for writing input labels
+
+<TipsForWritingInputLabels />

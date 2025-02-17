@@ -1,0 +1,178 @@
+---
+title: Guideline
+---
+
+import SectionHeadingDosAndDonts from './SectionHeadingDosAndDonts';
+
+<PageTitle
+  title="SectionHeading"
+  content="A section heading is used to label a group of mixed components and functions as a divider between different sections on a screen."
+/>
+
+<SectionHeadingDosAndDonts />
+
+## Where should I use this?
+
+Section headings are rarely used alone and are typically used to label a group of dashboard widgets, lists, menu lists, text inputs, cards and data cards.
+
+<br />
+
+#### With icon
+
+Used to label a group of menu list.
+
+```jsx live previewOnly
+<>
+  <SectionHeading
+    text="Mandatory"
+    icon="assignment-warning"
+    style={{ marginBottom: 0 }}
+  />
+  <Box padding="medium" style={{ height: 100 }}>
+    <Typography.Title level="h5">App test </Typography.Title>
+    <Typography.Caption>Updated on Nov 23, 2023</Typography.Caption>
+  </Box>
+  <SectionHeading text="Nonmandatory" icon="list" style={{ marginBottom: 0 }} />
+  <Box padding="medium" />
+</>
+```
+
+<br />
+
+#### With CTA
+
+Used to label a group of dashboard widgets.
+
+```jsx live previewOnly
+<Box backgroundColor="neutralGlobalSurface">
+  <SectionHeading
+    text="My leave"
+    style={{ marginBottom: 0 }}
+    rightChildren={<Button variant="text" text="View all" onPress={() => {}} />}
+  />
+  <Box
+    paddingTop="0"
+    paddingBottom="medium"
+    paddingHorizontal="medium"
+    flexDirection="row"
+    alignItems="center"
+  >
+    <Card
+      style={{
+        height: 100,
+        width: 150,
+        backgroundColor: theme.colors.defaultGlobalSurface,
+        marginRight: theme.space.medium,
+      }}
+    />
+    <Card
+      style={{
+        height: 100,
+        width: 150,
+        backgroundColor: theme.colors.defaultGlobalSurface,
+        marginRight: theme.space.medium,
+      }}
+    />
+    <Card
+      style={{
+        height: 100,
+        width: 150,
+        backgroundColor: theme.colors.defaultGlobalSurface,
+        marginRight: theme.space.medium,
+      }}
+    />
+    <Card
+      style={{
+        height: 100,
+        width: 150,
+        backgroundColor: theme.colors.defaultGlobalSurface,
+        marginRight: theme.space.medium,
+      }}
+    />
+    <Card
+      style={{
+        height: 100,
+        width: 150,
+        backgroundColor: theme.colors.defaultGlobalSurface,
+        marginRight: theme.space.medium,
+      }}
+    />
+  </Box>
+</Box>
+```
+
+<br />
+
+#### Default
+
+Used to label a group of text inputs.
+
+```jsx live previewOnly
+<>
+  <SectionHeading text="Address" style={{ marginBottom: 0 }} />
+  <Box padding="medium">
+    <TextInput label="Line 1" />
+    <TextInput label="Line 2" />
+    <TextInput label="City" />
+  </Box>
+</>
+```
+
+<br />
+
+#### With badge
+
+Used to label a group of cards.
+
+```jsx live previewOnly
+<>
+  <SectionHeading
+    text="Bidding Employees"
+    style={{ marginBottom: 0 }}
+    rightChildren={<Badge content={5} intent="primary" />}
+  />
+  <Box padding="medium" style={{ height: 100 }}>
+    <Typography.Title level="h5">Employee 1</Typography.Title>
+  </Box>
+  <Divider />
+  <Box padding="medium" style={{ height: 100 }}>
+    <Typography.Title level="h5">Employee 2</Typography.Title>
+  </Box>
+  <Divider />
+  <Box padding="medium" style={{ height: 100 }}>
+    <Typography.Title level="h5">Employee 3</Typography.Title>
+  </Box>
+  <Divider />
+  <Box padding="medium" style={{ height: 100 }}>
+    <Typography.Title level="h5">Employee 4</Typography.Title>
+  </Box>
+  <Divider />
+  <Box padding="medium" style={{ height: 100 }}>
+    <Typography.Title level="h5">Employee 4</Typography.Title>
+  </Box>
+</>
+```
+
+<br />
+
+Section headings can work within a component, such as bottom sheet, a drawer.
+
+#### Default
+
+Used within a bottom sheet component.
+
+<img
+  src="/img/screenshots/default-section-heading.png"
+  alt="default-section-heading"
+  style={{ width: 350 }}
+/>
+
+#### Small
+
+Used within a drawer.
+
+<img
+  src="/img/screenshots/small-section-heading.png"
+  alt="small-section-heading"
+  style={{ width: 350 }}
+/>

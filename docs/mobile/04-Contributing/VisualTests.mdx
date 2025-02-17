@@ -1,0 +1,89 @@
+---
+id: running-visual-tests
+title: Running Visual Tests
+---
+
+# Running Visual Tests
+
+## Prerequisites
+
+Hero Design Mobile uses **Detox** to run visual tests on both **Android** and **iOS**. To run the visual tests, you will need to have these simulator/emulator installed on your machine with the following configurations:
+
+<br />
+
+| Platform | Device    | Device name    | OS       |
+| -------- | --------- | -------------- | -------- |
+| iOS      | iPhone 14 | iPhone 14      | iOS 16.0 |
+| Android  | Pixel 6   | Pixel_6_API_31 | API 31   |
+
+<br />
+
+For iOS, **`applesimutils`** is required to run Detox tests. The recommended way to install it is via **`Homebrew`**.
+
+## Updating binaries
+
+This step will **rebuild the app** together with the native modules. This step is **only required** if you have **updated the dependencies** in the **package.json** file. Ignore this step if the file is unchanged.
+
+To update the binaries:
+
+- Navigate to the **`packages/playground`** folder.
+
+- For **Android**, run:
+
+```bash
+yarn update-binary:android
+```
+
+- For **iOS**, run:
+
+```bash
+yarn update-binary:ios
+```
+
+Also remember to commit the updated binaries.
+
+## Installing the binaries
+
+On the **first run** or **after updating the binaries**, you will then need to install them on the simulator/emulator.
+
+- Boot up and unistall the **existing apps** from the simulator/emulator.
+- For **Android**: Drag and drop the **`bin/android.apk`** and **`bin/test-android.apk`** files into the emulator.
+- For **iOS**: Drag and drop the **`bin/ios.app`** file into the simulator.
+
+## Starting the development server
+
+This will serve as the bundler server for the test app to run. From the root folder, run:
+
+```bash
+yarn dev:rn
+```
+
+The expo server will start in `development build` mode. Then **run the app** on the simulator/emulator. Press **`a`** for Android and **`i`** for iOS.
+
+## Running the tests
+
+From the **`packages/playground`** folder, run:
+
+- For **Android**:
+
+```bash
+yarn detox:test:android
+```
+
+- For **iOS**:
+
+```bash
+yarn detox:test:ios
+```
+
+- To **run a specific test**, specify the test name like so:
+
+```bash
+yarn detox:test:ios Alert
+```
+
+- To **update the snapshots**, run:
+
+```bash
+yarn detox:test:ios Alert -- -- -u
+```

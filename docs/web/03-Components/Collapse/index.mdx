@@ -1,0 +1,105 @@
+---
+id: collapse
+title: Collapse
+---
+
+# Collapse
+
+- Collapse can show or hide content with a built-in slide in/out animation.
+- It can be used to group or hide complex regions to keep the page clean.
+
+## Examples
+
+### Basic
+
+```jsx live
+function BasicCollapse() {
+  const [open, setOpen] = React.useState(false);
+  const [lines, setLines] = React.useState(1);
+  return (
+    <>
+      <Button
+        onClick={() => setOpen((value) => !value)}
+        text="Paperless Onboarding"
+        style={{ marginBottom: theme.space.small }}
+      />
+      <Collapse open={open}>
+        <div
+          style={{
+            border: `${theme.borderWidths.base}px solid ${theme.colors.defaultBorder}`,
+            borderRadius: theme.radii.base,
+            padding: theme.space.small,
+            margin: 0,
+          }}
+        >
+          {Array.from(Array(lines).keys()).map((key) => (
+            <Typography.Text key={key}>
+              Give your employees a digital onboarding experience that’s
+              seamless, and save yourself time in the process.
+            </Typography.Text>
+          ))}
+          <Button.Link
+            href="https://employmenthero.com/request-a-demo"
+            text="Try the demo"
+          />
+          <br />
+          <Button
+            variant="text"
+            text="Add more text"
+            style={{ padding: 0 }}
+            onClick={() => setLines((l) => l + 1)}
+          />
+          <Button
+            variant="text"
+            text="Remove text"
+            onClick={() => setLines((l) => (l > 0 ? l - 1 : 0))}
+          />
+        </div>
+      </Collapse>
+    </>
+  );
+}
+```
+
+### Keep children mounted when collapsing
+
+When open is false (collapsed), the content will be unmounted by default, we can change this behavior by providing `keepChildrenMounted` as `true`, the content can be kept in the DOM tree.
+
+```jsx live
+function CollapseWithChildren() {
+  const [open, setOpen] = React.useState(true);
+  return (
+    <>
+      <Button
+        onClick={() => setOpen((value) => !value)}
+        text="Applicant Tracking System Software"
+        style={{ marginBottom: theme.space.small }}
+      />
+      <Collapse open={open} keepChildrenMounted>
+        <div
+          style={{
+            border: `${theme.borderWidths.base}px solid ${theme.colors.defaultBorder}`,
+            borderRadius: theme.radii.base,
+            padding: theme.space.small,
+            margin: 0,
+          }}
+        >
+          <Typography.Text>
+            Looking for an applicant tracking system? Employment Hero’s ATS
+            software is a robust solution for total employee lifecycle
+            management from Hiring and Onboarding to Off-boarding.
+          </Typography.Text>
+          <Button.Link
+            href="https://employmenthero.com/request-a-demo"
+            text="Try the demo"
+          />
+        </div>
+      </Collapse>
+    </>
+  );
+}
+```
+
+## Props
+
+<Props of="Collapse" from="web" />

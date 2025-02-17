@@ -1,0 +1,245 @@
+---
+id: grid
+title: Grid
+---
+
+# Grid
+
+Our layout system is based on a 24-column grid.
+
+## Examples
+
+### Basic
+
+Render `Grid.Col` inside `Grid.Row`, `Grid.Row` inside `Grid`. By default, the `Col` will take the space of all 24 columns.
+
+```jsx live
+<Grid>
+  <Grid.Row>
+    <Grid.Col>
+      <Box bgColor="primary" p="medium">
+        <Typography.Text intent="white" style={{ textAlign: 'center' }}>
+          Default Col
+        </Typography.Text>
+      </Box>
+    </Grid.Col>
+  </Grid.Row>
+</Grid>
+```
+
+### Span
+
+Using `span` prop to tell how many columns the `Col` will take.
+
+`span` is an array of 5 numbers that represent for 5 device sizes, using the same numbers if you want the same behaviour between devices. For responsive usage, see [Resposiveness](#responsiveness) section below.
+
+```jsx live
+<Grid gutter="medium">
+  <Grid.Row>
+    <Grid.Col span={[24, 24, 24, 24, 24]}>
+      <Box bgColor="primary" p="medium">
+        <Typography.Text intent="white" style={{ textAlign: 'center' }}>
+          col-24
+        </Typography.Text>
+      </Box>
+    </Grid.Col>
+  </Grid.Row>
+  <Grid.Row>
+    <Grid.Col span={[12, 12, 12, 12, 12]}>
+      <Box bgColor="primary" p="medium">
+        <Typography.Text intent="white" style={{ textAlign: 'center' }}>
+          col-12
+        </Typography.Text>
+      </Box>
+    </Grid.Col>
+    <Grid.Col span={[12, 12, 12, 12, 12]}>
+      <Box bgColor="primary-background" p="medium">
+        <Typography.Text style={{ textAlign: 'center' }}>
+          col-12
+        </Typography.Text>
+      </Box>
+    </Grid.Col>
+  </Grid.Row>
+  <Grid.Row>
+    <Grid.Col span={[8, 8, 8, 8, 8]}>
+      <Box bgColor="primary" p="medium">
+        <Typography.Text intent="white" style={{ textAlign: 'center' }}>
+          col-8
+        </Typography.Text>
+      </Box>
+    </Grid.Col>
+    <Grid.Col span={[8, 8, 8, 8, 8]}>
+      <Box bgColor="primary-background" p="medium">
+        <Typography.Text style={{ textAlign: 'center' }}>col-8</Typography.Text>
+      </Box>
+    </Grid.Col>
+    <Grid.Col span={[8, 8, 8, 8, 8]}>
+      <Box bgColor="primary" p="medium">
+        <Typography.Text intent="white" style={{ textAlign: 'center' }}>
+          col-8
+        </Typography.Text>
+      </Box>
+    </Grid.Col>
+  </Grid.Row>
+  <Grid.Row>
+    <Grid.Col span={[6, 6, 6, 6, 6]}>
+      <Box bgColor="primary" p="medium">
+        <Typography.Text intent="white" style={{ textAlign: 'center' }}>
+          col-6
+        </Typography.Text>
+      </Box>
+    </Grid.Col>
+    <Grid.Col span={[6, 6, 6, 6, 6]}>
+      <Box bgColor="primary-background" p="medium">
+        <Typography.Text style={{ textAlign: 'center' }}>col-6</Typography.Text>
+      </Box>
+    </Grid.Col>
+    <Grid.Col span={[6, 6, 6, 6, 6]}>
+      <Box bgColor="primary" p="medium">
+        <Typography.Text intent="white" style={{ textAlign: 'center' }}>
+          col-6
+        </Typography.Text>
+      </Box>
+    </Grid.Col>
+    <Grid.Col span={[6, 6, 6, 6, 6]}>
+      <Box bgColor="primary-background" p="medium">
+        <Typography.Text style={{ textAlign: 'center' }}>col-6</Typography.Text>
+      </Box>
+    </Grid.Col>
+  </Grid.Row>
+</Grid>
+```
+
+### Offset
+
+Using `offset` prop to shift the `Col` to the right. The number of columns get shifted will be decided by the prop value.
+
+Like `span`, `offset` is also an array of 5 numbers, using the same numbers if you want the same behaviour between devices. For responsive usage, see [Resposiveness](#responsiveness) section below.
+
+```jsx live
+<Grid gutter="medium">
+  <Grid.Row>
+    <Grid.Col span={[16, 16, 16, 16, 16]} offset={[4, 4, 4, 4, 4]}>
+      <Box bgColor="primary" p="medium">
+        <Typography.Text intent="white" style={{ textAlign: 'center' }}>
+          col-16 offset-4
+        </Typography.Text>
+      </Box>
+    </Grid.Col>
+  </Grid.Row>
+  <Grid.Row>
+    <Grid.Col span={[8, 8, 8, 8, 8]}>
+      <Box bgColor="primary" p="medium">
+        <Typography.Text intent="white" style={{ textAlign: 'center' }}>
+          col-8
+        </Typography.Text>
+      </Box>
+    </Grid.Col>
+    <Grid.Col span={[8, 8, 8, 8, 8]} offset={[8, 8, 8, 8, 8]}>
+      <Box bgColor="primary" p="medium">
+        <Typography.Text intent="white" style={{ textAlign: 'center' }}>
+          col-8 offset-8
+        </Typography.Text>
+      </Box>
+    </Grid.Col>
+  </Grid.Row>
+</Grid>
+```
+
+### Gutter
+
+Using `gutter` prop for `Grid` and `Row` to set space between rows, columns.
+
+`Grid` gutter is a string that represents space between `Row`.
+
+`Row` gutter is an array of 2 elements `[horizontal, vertical]` that represent horizontal space and vertical space between `Col`.
+
+```jsx live
+<Grid gutter="medium">
+  <Grid.Row gutter={['xsmall', 'xsmall']}>
+    <Grid.Col span={[12, 12, 12, 12, 12]}>
+      <Box bgColor="primary" p="medium">
+        <Typography.Text intent="white" style={{ textAlign: 'center' }}>
+          Row 1
+        </Typography.Text>
+      </Box>
+    </Grid.Col>
+    <Grid.Col span={[12, 12, 12, 12, 12]}>
+      <Box bgColor="primary" p="medium">
+        <Typography.Text intent="white" style={{ textAlign: 'center' }}>
+          Row 1
+        </Typography.Text>
+      </Box>
+    </Grid.Col>
+    <Grid.Col span={[12, 12, 12, 12, 12]}>
+      <Box bgColor="primary" p="medium">
+        <Typography.Text intent="white" style={{ textAlign: 'center' }}>
+          Row 1
+        </Typography.Text>
+      </Box>
+    </Grid.Col>
+    <Grid.Col span={[12, 12, 12, 12, 12]}>
+      <Box bgColor="primary" p="medium">
+        <Typography.Text intent="white" style={{ textAlign: 'center' }}>
+          Row 1
+        </Typography.Text>
+      </Box>
+    </Grid.Col>
+  </Grid.Row>
+  <Grid.Row>
+    <Grid.Col>
+      <Box bgColor="primary-background" p="medium">
+        <Typography.Text style={{ textAlign: 'center' }}>Row 2</Typography.Text>
+      </Box>
+    </Grid.Col>
+  </Grid.Row>
+</Grid>
+```
+
+### Responsiveness
+
+For making different layouts base on device sizes, using different values inside `span`, `offset` arrays, the order is `xs -> sm -> md -> lg -> xl`. Scale the brower viewport to see different result with below example.
+
+```jsx live
+<>
+  <Grid>
+    <Grid.Row gutter={['small', 'small']}>
+      <Grid.Col span={[24, 24, 24, 12, 10]} offset={[0, 0, 0, 0, 3]}>
+        <Box bgColor="primary" p="medium">
+          <Typography.Text intent="white" style={{ textAlign: 'center' }}>
+            Col 1
+          </Typography.Text>
+        </Box>
+      </Grid.Col>
+      <Grid.Col span={[20, 16, 12, 6, 4]} offset={[2, 4, 0, 0, 0]}>
+        <Box bgColor="primary-background" p="medium">
+          <Typography.Text style={{ textAlign: 'center' }}>
+            Col 2
+          </Typography.Text>
+        </Box>
+      </Grid.Col>
+      <Grid.Col span={[20, 16, 12, 6, 4]} offset={[2, 4, 0, 0, 0]}>
+        <Box bgColor="primary" p="medium">
+          <Typography.Text intent="white" style={{ textAlign: 'center' }}>
+            Col 3
+          </Typography.Text>
+        </Box>
+      </Grid.Col>
+    </Grid.Row>
+  </Grid>
+</>
+```
+
+## Props
+
+### Grid
+
+<Props of="Grid" from="web" />
+
+### Grid.Row
+
+<Props of="Row" from="web" />
+
+### Grid.Col
+
+<Props of="Col" from="web" />

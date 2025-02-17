@@ -1,0 +1,474 @@
+---
+id: typography
+title: Typography
+---
+
+# Typography
+
+- Typography is for text writing including title, subtitle, text and paragraph.
+- This component makes it easy to apply a default set of font weights, sizes and colors in your application.
+
+## Examples
+
+### Typography.Title
+
+There are 2 typefaces: `neutral` and `playful`:
+
+- `neutral` supports 6 levels of a Title: `h1`, `h2`, `h3`, `h4`, `h5`, `h6`
+- `playful` supports 5 levels of a Title: `h1`, `h2`, `h3`, `h4`, `h5`
+
+#### Neutral typeface
+
+```jsx live
+function TypographyTitleNeutral() {
+  return (
+    <Box padding="medium">
+      <Box>
+        <Typography.Title
+          style={{ marginBottom: theme.space.small }}
+          level="h1"
+        >
+          Heading 01: This is for special headings on full page splash screens.
+        </Typography.Title>
+      </Box>
+      <Divider
+        style={{
+          marginTop: theme.space.medium,
+          marginBottom: theme.space.medium,
+        }}
+      />
+      <Box>
+        <Typography.Title
+          style={{ marginBottom: theme.space.small }}
+          level="h2"
+        >
+          Heading 02: This is for main headings on screens.
+        </Typography.Title>
+      </Box>
+      <Divider
+        style={{
+          marginTop: theme.space.medium,
+          marginBottom: theme.space.medium,
+        }}
+      />
+      <Box>
+        <Typography.Title
+          style={{ marginBottom: theme.space.small }}
+          level="h3"
+        >
+          Heading 03: This is for secondary or scaled headings on screens.
+        </Typography.Title>
+      </Box>
+      <Divider
+        style={{
+          marginTop: theme.space.medium,
+          marginBottom: theme.space.medium,
+        }}
+      />
+      <Box>
+        <Typography.Title
+          style={{ marginBottom: theme.space.small }}
+          level="h4"
+        >
+          Heading 04: This is for smaller layout headings.
+        </Typography.Title>
+      </Box>
+      <Divider
+        style={{
+          marginTop: theme.space.medium,
+          marginBottom: theme.space.medium,
+        }}
+      />
+      <Box>
+        <Typography.Title
+          style={{ marginBottom: theme.space.small }}
+          level="h5"
+        >
+          Heading 05: This style should be used for section headings.
+        </Typography.Title>
+      </Box>
+      <Divider
+        style={{
+          marginTop: theme.space.medium,
+          marginBottom: theme.space.medium,
+        }}
+      />
+      <Box>
+        <Typography.Title level="h6">
+          Heading 06: This style should be used for section headings or
+          subheadings, complimentry to headings-02.
+        </Typography.Title>
+      </Box>
+    </Box>
+  );
+}
+```
+
+#### Playful typeface
+
+```jsx live
+function TypographyTitlePlayful() {
+  return (
+    <Box padding="medium">
+      <Box>
+        <Typography.Title
+          style={{ marginBottom: theme.space.small }}
+          level="h1"
+          typeface="playful"
+        >
+          Heading 01: This is for main headings on pillar header.
+        </Typography.Title>
+      </Box>
+      <Divider
+        style={{
+          marginTop: theme.space.medium,
+          marginBottom: theme.space.medium,
+        }}
+      />
+      <Box>
+        <Typography.Title
+          style={{ marginBottom: theme.space.small }}
+          level="h2"
+          typeface="playful"
+        >
+          Heading 02: This is for main headings on pillar header.
+        </Typography.Title>
+      </Box>
+      <Divider
+        style={{
+          marginTop: theme.space.medium,
+          marginBottom: theme.space.medium,
+        }}
+      />
+      <Box>
+        <Typography.Title
+          style={{ marginBottom: theme.space.small }}
+          level="h3"
+          typeface="playful"
+        >
+          Heading 03: This is for main headings on pillar header.
+        </Typography.Title>
+      </Box>
+      <Divider
+        style={{
+          marginTop: theme.space.medium,
+          marginBottom: theme.space.medium,
+        }}
+      />
+      <Box>
+        <Typography.Title
+          style={{ marginBottom: theme.space.small }}
+          level="h4"
+          typeface="playful"
+        >
+          Heading 04: This is for main headings on pillar header.
+        </Typography.Title>
+      </Box>
+      <Divider
+        style={{
+          marginTop: theme.space.medium,
+          marginBottom: theme.space.medium,
+        }}
+      />
+
+      <Box>
+        <Typography.Title
+          style={{ marginBottom: theme.space.small }}
+          level="h5"
+          typeface="playful"
+        >
+          Heading 05: This is for main headings on pillar header.
+        </Typography.Title>
+      </Box>
+    </Box>
+  );
+}
+```
+
+### Typography.Body
+
+There are 2 typefaces: `neutral` and `playful`:
+
+- `neutral`: Body, Body Bold, Body small and Body small bold
+- `playful` Body and Body Bold
+
+#### Neutral typeface
+
+```jsx live
+function TypographyBodyNeutral() {
+  return (
+    <Box padding="medium" style={{ paddingTop: 0 }}>
+      <Box>
+        <Typography.Body>Body</Typography.Body>
+        <Typography.Body>
+          This style is the standard for body copy. It should be used for long
+          paragraphs with four lines or more. It is always left-aligned.
+        </Typography.Body>
+      </Box>
+      <Divider
+        style={{
+          marginTop: theme.space.medium,
+          marginBottom: theme.space.medium,
+        }}
+      />
+      <Box>
+        <Typography.Body
+          style={{ marginBottom: theme.space.small }}
+          variant="regular-bold"
+        >
+          Body Bold
+        </Typography.Body>
+        <Typography.Body variant="regular-bold">
+          This style is used for expressive body copy. It should only be used to
+          compliment body-01, for CTAs or in-line links.
+        </Typography.Body>
+      </Box>
+      <Divider
+        style={{
+          marginTop: theme.space.medium,
+          marginBottom: theme.space.medium,
+        }}
+      />
+      <Box>
+        <Typography.Body
+          style={{ marginBottom: theme.space.small }}
+          variant="small"
+        >
+          Body Small
+        </Typography.Body>
+        <Typography.Body
+          style={{ marginBottom: theme.space.small }}
+          variant="small"
+        >
+          This style is for secondary body copy. It should be used to
+          subordinately to body-01. It is always left-aligned.
+        </Typography.Body>
+        <Divider
+          style={{
+            marginTop: theme.space.medium,
+            marginBottom: theme.space.medium,
+          }}
+        />
+        <Typography.Body
+          style={{ marginBottom: theme.space.small }}
+          variant="small-bold"
+        >
+          Body Small Bold
+        </Typography.Body>
+        <Typography.Body
+          style={{ marginBottom: theme.space.small }}
+          variant="small-bold"
+        >
+          The style is for secondary body copy. It should be used to compliment
+          body-03 and subordnately to body-01.
+        </Typography.Body>
+      </Box>
+    </Box>
+  );
+}
+```
+
+#### Playful typeface
+
+```jsx live
+function TypographyBodyPlayful() {
+  return (
+    <Box padding="medium" style={{ paddingTop: 0 }}>
+      <Box justifyContent="center">
+        <Typography.Body
+          style={{ marginBottom: theme.space.small }}
+          typeface="playful"
+        >
+          Body
+        </Typography.Body>
+        <Typography.Body
+          style={{ marginBottom: theme.space.small }}
+          typeface="playful"
+        >
+          This style is the standard for body copy. It should be used for long
+          paragraphs with four lines or more. It is always left-aligned.
+        </Typography.Body>
+      </Box>
+      <Divider
+        style={{
+          marginTop: theme.space.medium,
+          marginBottom: theme.space.medium,
+        }}
+      />
+      <Box justifyContent="center">
+        <Typography.Body
+          style={{ marginBottom: theme.space.small }}
+          variant="regular-bold"
+          typeface="playful"
+        >
+          Body Bold
+        </Typography.Body>
+        <Typography.Body
+          style={{ marginBottom: theme.space.small }}
+          variant="regular-bold"
+          typeface="playful"
+        >
+          This style is the bold for body copy. It should be used for long
+          paragraphs with four lines or more. It is always left-aligned.
+        </Typography.Body>
+      </Box>
+    </Box>
+  );
+}
+```
+
+### Typography.Caption
+
+This is a multipurpose type style that can be used for tertiary information. It can also be used for explanatory helper text that appears below a input field within a component. It should not be used for body copy.
+
+```jsx live
+function TypographyCaption() {
+  return (
+    <Box padding="medium">
+      <Typography.Caption>This is regular caption</Typography.Caption>
+      <Typography.Caption fontWeight="semi-bold">
+        This is bold caption
+      </Typography.Caption>
+      <Typography.Caption intent="subdued" fontWeight="light">
+        This is subdued caption
+      </Typography.Caption>
+      <Typography.Caption intent="primary" fontWeight="light">
+        This is primary caption
+      </Typography.Caption>
+      <Typography.Caption intent="success" fontWeight="light">
+        This is success caption
+      </Typography.Caption>
+      <Typography.Caption intent="info" fontWeight="light">
+        This is info caption
+      </Typography.Caption>
+      <Typography.Caption intent="warning" fontWeight="light">
+        This is warning caption
+      </Typography.Caption>
+      <Typography.Caption intent="danger" fontWeight="light">
+        This is danger caption
+      </Typography.Caption>
+      <Typography.Caption intent="archived" fontWeight="light">
+        This is archived caption
+      </Typography.Caption>
+      <Box bgColor="primary">
+        <Typography.Caption intent="inverted" fontWeight="light">
+          This is inverted caption in colored background
+        </Typography.Caption>
+      </Box>
+
+      <Typography.Caption intent="muted" fontWeight="light">
+        This is muted caption
+      </Typography.Caption>
+    </Box>
+  );
+}
+```
+
+### Typography.Label
+
+This is a multipurpose type style that can be used for chips, labels and captions. It should not be used for body copy.
+
+```jsx live
+function TypographyLabel() {
+  return (
+    <Box padding="medium">
+      <Typography.Label>This is regular label</Typography.Label>
+      <Typography.Label fontWeight="semi-bold">
+        This is bold label
+      </Typography.Label>
+      <Typography.Label intent="subdued" fontWeight="light">
+        This is subdued label
+      </Typography.Label>
+      <Typography.Label intent="primary" fontWeight="light">
+        This is primary label
+      </Typography.Label>
+      <Typography.Label intent="success" fontWeight="light">
+        This is success label
+      </Typography.Label>
+      <Typography.Label intent="info" fontWeight="light">
+        This is info label
+      </Typography.Label>
+      <Typography.Label intent="warning" fontWeight="light">
+        This is warning label
+      </Typography.Label>
+      <Typography.Label intent="danger" fontWeight="light">
+        This is danger label
+      </Typography.Label>
+      <Typography.Label intent="archived" fontWeight="light">
+        This is archived label
+      </Typography.Label>
+      <Box bgColor="primary">
+        <Typography.Label intent="inverted" fontWeight="light">
+          This is inverted label in colored background
+        </Typography.Label>
+      </Box>
+
+      <Typography.Label intent="muted" fontWeight="light">
+        This is muted label
+      </Typography.Label>
+    </Box>
+  );
+}
+```
+
+### Intents
+
+All Typography components come with the following intents: `body`, `subdued`, `primary`, `secondary`, `success`, `info`, `warning`, `danger`, `inverted`, `archived`, `disabled` and `muted`.
+
+```jsx live
+function IntentExamples() {
+  const textIntents = [
+    'body',
+    'subdued',
+    'primary',
+    'secondary',
+    'success',
+    'info',
+    'warning',
+    'danger',
+    'inverted',
+    'archived',
+    'disabled',
+    'muted',
+    ] as const;
+
+  return (
+    <Box padding="medium">
+      {textIntents.map((intent) => (
+      <Box
+        style={{
+          backgroundColor:
+            intent === 'inverted' ? theme.colors.darkGlobalSurface : undefined,
+        }}
+      >
+        <Typography.Body
+          intent={intent}
+          style={{
+            marginBottom: theme.space.small,
+          }}
+        >
+          This is {intent} intent
+        </Typography.Body>
+      </Box>
+    ))}
+    </Box>
+)};
+```
+
+## Props
+
+### Typography.Title
+
+<Props of="Title" />
+
+### Typography.Body
+
+<Props of="Body" />
+
+### Typography.Caption
+
+<Props of="Caption" />
+
+### Typography.Label
+
+<Props of="Label" />

@@ -1,0 +1,141 @@
+---
+id: empty
+title: Empty
+---
+
+# Empty
+
+A UI placeholder to use when the data is empty or not available. An instruction or friendly message is usually shown here to guide user to the next action.
+
+## Examples
+
+### Basic
+
+The most basic empty template.
+
+```jsx live
+<Empty text="Looking for an applicant tracking system? Employment Hero’s ATS software is a robust solution for total employee lifecycle management from Hiring and Onboarding to Off-boarding." />
+```
+
+### With extra action
+
+Some action could be added using `extra` prop.
+
+```jsx live
+<Empty
+  text="Looking for an applicant tracking system? Employment Hero’s ATS software is a robust solution for total employee lifecycle management from Hiring and Onboarding to Off-boarding."
+  extra={
+    <Button
+      icon="add"
+      variant="filled"
+      intent="primary"
+      text="Request a demo"
+    />
+  }
+/>
+```
+
+### With title
+
+Empty can be rendered with a title.
+
+```jsx live
+<Empty
+  extra={
+    <Button icon="add" variant="filled" intent="primary" text="Create a goal" />
+  }
+  title="No goals created yet."
+  text="Reach for the stars! Click 'Create a goal' button below to create your first goal."
+/>
+```
+
+### Sizes
+
+There are two sizes of an Empty: `small` and `medium`.
+
+#### Small size
+
+```jsx live
+<Empty
+  extra={
+    <Button
+      icon="add"
+      variant="filled"
+      intent="primary"
+      text="Request a demo"
+    />
+  }
+  text="Looking for an applicant tracking system? Employment Hero’s ATS software is a robust solution for total employee lifecycle management from Hiring and Onboarding to Off-boarding."
+  size="small"
+/>
+```
+
+#### Medium size
+
+```jsx live
+<Empty
+  extra={
+    <Button
+      icon="add"
+      variant="filled"
+      intent="primary"
+      text="Request a demo"
+    />
+  }
+  text="Looking for an applicant tracking system? Employment Hero’s ATS software is a robust solution for total employee lifecycle management from Hiring and Onboarding to Off-boarding."
+  size="medium"
+/>
+```
+
+### Customise empty image
+
+By providing imageSrc prop.
+
+```jsx live
+<Empty
+  imageSrc="data:image/jpeg;base64,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"
+  extra={
+    <Button
+      icon="add"
+      variant="filled"
+      intent="primary"
+      text="Request a demo"
+    />
+  }
+  text="Looking for an applicant tracking system? Employment Hero’s ATS software is a robust solution for total employee lifecycle management from Hiring and Onboarding to Off-boarding."
+/>
+```
+
+### Customise text display
+
+Text prop can be customised as a React element.
+
+```jsx live
+<Empty
+  extra={
+    <Button
+      icon="add"
+      variant="filled"
+      intent="primary"
+      text="Request a demo"
+    />
+  }
+  text={
+    <Typography.Text>
+      Looking for an applicant tracking system?{' '}
+      <Button.Link
+        href="https://employmenthero.com/product/employment-hero-hr/ats"
+        text="Employment Hero’s ATS software"
+        target="_blank"
+        rel="noreferer noopener"
+      />{' '}
+      is a robust solution for total employee lifecycle management from Hiring
+      and Onboarding to Off-boarding.
+    </Typography.Text>
+  }
+/>
+```
+
+## Props
+
+<Props of="Empty" from="web" />

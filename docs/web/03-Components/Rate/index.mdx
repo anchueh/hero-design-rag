@@ -1,0 +1,152 @@
+---
+id: rate
+title: Rate
+---
+
+# Rate
+
+- The rate can be used to show evaluation or a quick rating operation on something.
+
+## Examples
+
+### Basic
+
+Basic usage of it.
+
+```jsx live
+function BasicRate() {
+  const [rating, setRating] = useState(1);
+  return (
+    <Rate
+      value={rating}
+      name="rate"
+      onChange={setRating}
+      options={[
+        { value: 1 },
+        { value: 2 },
+        { value: 3 },
+        { value: 4 },
+        { value: 5 },
+      ]}
+    />
+  );
+}
+```
+
+### Tooltip
+
+Passing `tooltipContent` along with `value` in `options` renders the corresponding tooltip when hovering over it.
+
+```jsx live
+function TooltippedRate() {
+  const [rating, setRating] = useState(1);
+  return (
+    <Rate
+      value={rating}
+      name="rate"
+      onChange={setRating}
+      options={[
+        { value: 1, tooltipContent: 'One' },
+        { value: 2, tooltipContent: 'Two' },
+        { value: 3, tooltipContent: 'Three' },
+        { value: 4, tooltipContent: 'Four' },
+        { value: 5, tooltipContent: 'Five' },
+      ]}
+    />
+  );
+}
+```
+
+### Disable
+
+The component can be disabled by passing `disabled`. **Use case**: disable this component (when it is used as a form field).
+
+```jsx live
+function DisabledRate() {
+  const [rating, setRating] = useState(1);
+  return (
+    <Rate
+      value={rating}
+      name="rate"
+      onChange={setRating}
+      disabled
+      options={[
+        { value: 1 },
+        { value: 2 },
+        { value: 3 },
+        { value: 4 },
+        { value: 5 },
+      ]}
+    />
+  );
+}
+```
+
+The component can be read-only by passing `readonly`. **Use case**: pure UI component.
+
+```jsx live
+function ReadonlyRate() {
+  return (
+    <Rate
+      value={1}
+      name="rate"
+      readonly
+      options={[
+        { value: 1 },
+        { value: 2 },
+        { value: 3 },
+        { value: 4 },
+        { value: 5 },
+      ]}
+    />
+  );
+}
+```
+
+### Sizes
+
+Rate can be rendered with 2 different sizes: `medium` and `large`.
+
+```jsx live
+function RateSizes() {
+  const [ratingMedium, setRatingMedium] = useState(1);
+  const [ratingLarge, setRatingLarge] = useState('terrible');
+  return (
+    <Box style={{ display: 'flex', flexDirection: 'column' }}>
+      <Rate
+        size="medium"
+        value={ratingMedium}
+        name="rate_medium"
+        onChange={setRatingMedium}
+        sx={{ mb: 'large' }}
+        options={[
+          { value: 1 },
+          { value: 2 },
+          { value: 3 },
+          { value: 4 },
+          { value: 5 },
+        ]}
+      />
+      <Rate
+        size="large"
+        value={ratingLarge}
+        name="rate_large"
+        onChange={setRatingLarge}
+        options={[
+          { value: 'terrible' },
+          { value: 'bad' },
+          { value: 'normal' },
+          { value: 'good' },
+          { value: 'wonderful' },
+        ]}
+      />
+    </Box>
+  );
+}
+```
+
+## Props
+
+### Rate Props
+
+<Props of="Rate" from="web" />

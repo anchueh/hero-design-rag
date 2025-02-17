@@ -1,0 +1,50 @@
+---
+id: colors
+title: Colors
+---
+
+import { Banner } from '@ehrocks/hero-design-react';
+import { Palette } from '../../helpers/Colors';
+import Semantic from '../../../src/components/Colors/web/Semantic';
+import Visualisation from '../../../src/components/Colors/web/Visualisation';
+
+# Colors
+
+<Banner
+  title="Color palette"
+  content="Hero Design color palette is built based on 12 main colors which are captured from the product of Employment Hero by adjusting their brightness."
+  sx={{ mb: 'large' }}
+/>
+
+## Palette
+
+<Palette />
+
+The palette can be easily extended by adding new main colors and using same color generator to generate their derivative colors.
+
+<br />
+
+## Usage
+
+The palette is divided into two subsets for different usage purposes: Semantic and Data Visualisation.
+
+### Semantic
+
+Semantic colors are the name conventions shared across the team: POs, UI/UXers, Hero-design maintainers and Employment Hero developers. Each convention has a consistent meaning in all components of Hero-design and Employment Hero products.
+
+<Semantic />
+
+<br />
+
+### Data Visualisation
+
+<Visualisation />
+
+<br />
+
+### Note for snowflake usages
+
+- In case hero-design can't support the case you need, feel free to [fire a ticket](https://github.com/Thinkei/hero-design/issues/new/choose) to discuss the new feature or enhancement that we can work together to improve hero-design coverage.
+- If the request won't be supported by hero-design (confirmed by hero-design maintainers), we will make decision together (must be approved by hero-design maintainers & UI/UXers) to modify the default support of hero-design or write our own components using hero-design theming to minimise the effort needed for future rebranding / white-labeling. Then colors should be considered to be used as:
+  - `Semantic`: primary, primaryBackground, defaultBorder,...are used to create/modify the components aligned with future branding update / white-labeling.
+  - `Palette`: yellowLight90, yellowLight60,... for absolute value references and do NOT expect them to be updated when rebranding is changed. An example of this is visualising data in a graph.

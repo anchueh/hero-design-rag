@@ -1,0 +1,201 @@
+---
+id: fab
+title: Floating Action Button (FAB)
+---
+
+<PageTitle
+  title="FAB"
+  content="Floating Action Button (FAB) is a floating CTA that appears above all content to highlight a primary action on a screen. The FAB should be fixed and aligned right, and positioned above a toolbar."
+/>
+
+## Usage
+
+A floating action button (FAB) performs the primary, or most common, action on a screen. It appears in front of all screen content, typically as a circular shape with an icon in its center
+
+## Examples
+
+:::info Landscape mode
+To use this component in landscape mode on iOS, you must first pass the `supportedOrientations` prop as specified in the [React Native doc](https://reactnative.dev/docs/modal#supportedorientations-ios).
+:::
+
+### Example 1: FAB with speed dial transition
+
+```jsx live
+function App() {
+  const [active, setActive] = useState(false);
+  return (
+    <Box style={{ height: 150 }}>
+      <Typography.Body
+        style={{
+          margin: theme.space.xxxlarge,
+        }}
+      >
+        Content View should be blured when action group is shown
+      </Typography.Body>
+
+      <FAB.ActionGroup
+        style={{
+          marginBottom: theme.space.large,
+        }}
+        items={[
+          { icon: 'speaker', title: 'Give shout out' },
+          { icon: 'target', title: 'Goal' },
+          { icon: 'plane', title: 'Leave request' },
+          { icon: 'health-bag', title: 'Safety incident' },
+          { icon: 'clock', title: 'Timesheets' },
+        ]}
+        fabIcon="speaker"
+        fabTitle="Shout out"
+        onPress={() => {
+          setActive(!active);
+        }}
+        active={active}
+      />
+    </Box>
+  );
+}
+```
+
+### Example 2: FAB with no transition
+
+```jsx live
+function App() {
+  const [active, setActive] = useState(false);
+  return (
+    <Box style={{ height: 150 }}>
+      <Typography.Body
+        style={{
+          margin: theme.space.xxxlarge,
+        }}
+      >
+        Content View should NOT be blured when action group is shown
+      </Typography.Body>
+
+      <FAB
+        icon="pencil"
+        title="Shout out"
+        onPress={() => {
+          alert('button pressed');
+        }}
+        style={{
+          position: 'absolute',
+          bottom: theme.space.large,
+          right: theme.space.large,
+        }}
+      />
+    </Box>
+  );
+}
+```
+
+### Example 3: FAB with useRef
+
+You can pass a ref to control various FAB animations: show, hide and collapse.
+
+:::caution
+FAB animation does not work properly on web, to see the animation, please run the example using the [Expo Go app](/mobile/intro#run-playground).
+:::
+
+```jsx live
+function App() {
+  const [active, setActive] = useState(false);
+  const [showFAB, setShowFAB] = useState(true);
+  const theme = useTheme();
+  const actionGroupRef = useRef(null);
+
+  return (
+    <Box
+      bgColor="defaultGlobalSurface"
+      padding="large"
+      style={{ overflow: 'hidden' }}
+    >
+      <Box marginBottom="large">
+        <Typography.Body fontSize="xlarge" fontWeight="semi-bold">
+          FAB can be controlled to show, minimize or hide.
+        </Typography.Body>
+
+        <Button
+          variant="text"
+          text="Hide"
+          onPress={() => actionGroupRef.current.hideFAB()}
+        />
+        <Button
+          variant="text"
+          text="Collapse"
+          onPress={() => actionGroupRef.current.collapseFAB()}
+        />
+        <Button
+          variant="text"
+          text="Show"
+          onPress={() => actionGroupRef.current.showFAB()}
+        />
+      </Box>
+
+      <FAB.ActionGroup
+        style={{
+          marginBottom: theme.space.large,
+        }}
+        items={[
+          {
+            icon: 'speaker',
+            title: 'Give shout out',
+            onPress: () => {
+              alert('touched');
+            },
+          },
+          { icon: 'target', title: 'Goal' },
+          { icon: 'plane', title: 'Leave request' },
+          { icon: 'health-bag', title: 'Safety incident' },
+          { icon: 'clock', title: 'Timesheets' },
+        ]}
+        onPress={() => {
+          setActive(!active);
+        }}
+        fabTitle="Shout out"
+        fabIcon="speaker"
+        active={active}
+        ref={actionGroupRef}
+      />
+    </Box>
+  );
+}
+```
+
+### Example 4: Paired FAB
+
+Use FAB.Pair to display two FABs side by side.
+
+```jsx live
+function FABPairPlayground() {
+  return (
+    <FAB.Pair
+      onCancel={() => alert('cancel')}
+      fabConfig={{
+        icon: 'checkmark',
+        title: 'Apply at 2 places',
+        onPress: () => {
+          alert('confirm');
+        },
+      }}
+    />
+  );
+}
+```
+
+## Props
+
+### FAB
+
+<Props of="FAB" />
+
+### Action Group
+
+<Props of="FAB.ActionGroup" />
+
+### ActionItem
+
+<Props of="ActionItem" />
+
+### Pair
+
+<Props of="Pair" />

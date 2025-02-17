@@ -1,0 +1,511 @@
+---
+id: Carousel
+title: Carousel
+---
+
+import Note, { Highlight } from '../../../helpers/Note';
+
+# Carousel
+
+- The carousel component is automatically scaled with the container that user set.
+- Commonly used for slide of pictures.
+
+## Examples
+
+### Example format of Carousel collection
+
+```js
+const collection = [
+  { id: 1, content: <img src="url_1" alt="imgage 1" /> },
+  { id: 2, content: <img src="url_2" alt="imgage 2" /> },
+  { id: 3, content: <img src="url_3" alt="imgage 3" /> },
+];
+```
+
+### Basic usage of Carousel.
+
+It has 2 variants `light` vs `dark` (to indicate dots button color)
+
+- ** light ** (by default) is used for dark background color.
+- ** dark** is used for light background color.
+
+<Note title="Notes">
+  <Highlight>selectedItemIndex, onChange</Highlight> are optional, but when they
+  are defined the component turns into controlled.
+</Note>
+
+```jsx live
+function BasicCarousel() {
+  const { Title } = Typography;
+  const darkBgCollection = [
+    {
+      id: 1,
+      content: (
+        <DarkCarouselWrapper>
+          <Title intent="subdued">1</Title>
+        </DarkCarouselWrapper>
+      ),
+    },
+    {
+      id: 2,
+      content: (
+        <DarkCarouselWrapper>
+          <Title intent="subdued">2</Title>
+        </DarkCarouselWrapper>
+      ),
+    },
+    {
+      id: 3,
+      content: (
+        <DarkCarouselWrapper>
+          <Title intent="subdued">3</Title>
+        </DarkCarouselWrapper>
+      ),
+    },
+  ];
+  const lightBgCollection = [
+    {
+      id: 1,
+      content: (
+        <LightCarouselWrapper>
+          <Title>1</Title>
+        </LightCarouselWrapper>
+      ),
+    },
+    {
+      id: 2,
+      content: (
+        <LightCarouselWrapper>
+          <Title>2</Title>
+        </LightCarouselWrapper>
+      ),
+    },
+    {
+      id: 3,
+      content: (
+        <LightCarouselWrapper>
+          <Title>3</Title>
+        </LightCarouselWrapper>
+      ),
+    },
+  ];
+  return (
+    <Grid.Row gutter={['medium', 'none']}>
+      <Grid.Col style={{ height: 300 }} span={[12, 12, 12, 12, 12]}>
+        <Carousel collection={darkBgCollection} />
+      </Grid.Col>
+      <Grid.Col style={{ height: 300 }} span={[12, 12, 12, 12, 12]}>
+        <Carousel collection={lightBgCollection} variant="dark" />
+      </Grid.Col>
+    </Grid.Row>
+  );
+}
+```
+
+### Autoplay Carousel
+
+- Can set interval in milliseconds, default interval is `2000`.
+- On mouse hover, the animation will pause.
+
+```jsx live
+function AutoplayCarousel() {
+  const { Title } = Typography;
+  const [currentItemIndexDark, setCurrentItemIndexDark] = React.useState(0);
+  const [currentItemIndexLight, setCurrentItemIndexLight] = React.useState(0);
+  const darkBgCollection = [
+    {
+      id: 1,
+      content: (
+        <DarkCarouselWrapper>
+          <Title intent="subdued">1</Title>
+        </DarkCarouselWrapper>
+      ),
+    },
+    {
+      id: 2,
+      content: (
+        <DarkCarouselWrapper>
+          <Title intent="subdued">2</Title>
+        </DarkCarouselWrapper>
+      ),
+    },
+    {
+      id: 3,
+      content: (
+        <DarkCarouselWrapper>
+          <Title intent="subdued">3</Title>
+        </DarkCarouselWrapper>
+      ),
+    },
+  ];
+  const lightBgCollection = [
+    {
+      id: 1,
+      content: (
+        <LightCarouselWrapper>
+          <Title>1</Title>
+        </LightCarouselWrapper>
+      ),
+    },
+    {
+      id: 2,
+      content: (
+        <LightCarouselWrapper>
+          <Title>2</Title>
+        </LightCarouselWrapper>
+      ),
+    },
+    {
+      id: 3,
+      content: (
+        <LightCarouselWrapper>
+          <Title>3</Title>
+        </LightCarouselWrapper>
+      ),
+    },
+  ];
+  return (
+    <Grid.Row gutter={['medium', 'none']}>
+      <Grid.Col style={{ height: 300 }} span={[12, 12, 12, 12, 12]}>
+        <Carousel
+          collection={darkBgCollection}
+          autoPlay
+          selectedItemIndex={currentItemIndexDark}
+          onItemIndexChange={setCurrentItemIndexDark}
+        />
+      </Grid.Col>
+      <Grid.Col style={{ height: 300 }} span={[12, 12, 12, 12, 12]}>
+        <Carousel
+          collection={lightBgCollection}
+          autoPlay
+          variant="dark"
+          interval={4000}
+          selectedItemIndex={currentItemIndexLight}
+          onItemIndexChange={setCurrentItemIndexLight}
+        />
+      </Grid.Col>
+    </Grid.Row>
+  );
+}
+```
+
+### With dot button placements
+
+- There are 4 placements of button : `top | right | bottom | left`.
+- **bottom** will be set as default.
+
+```jsx live
+function DotsCarousel() {
+  const { Title } = Typography;
+  const [currentItemIndexTop, setCurrentItemIndexTop] = React.useState(0);
+  const [currentItemIndexRight, setCurrentItemIndexRight] = React.useState(0);
+  const [currentItemIndexBottom, setCurrentItemIndexBottom] = React.useState(0);
+  const [currentItemIndexLeft, setCurrentItemIndexLeft] = React.useState(0);
+  const bottomCollection = [
+    {
+      id: 1,
+      content: (
+        <DarkCarouselWrapper>
+          <Title intent="subdued">bottom (by default)</Title>
+        </DarkCarouselWrapper>
+      ),
+    },
+    {
+      id: 2,
+      content: (
+        <DarkCarouselWrapper>
+          <Title intent="subdued">bottom (by default)</Title>
+        </DarkCarouselWrapper>
+      ),
+    },
+    {
+      id: 3,
+      content: (
+        <DarkCarouselWrapper>
+          <Title intent="subdued">bottom (by default)</Title>
+        </DarkCarouselWrapper>
+      ),
+    },
+  ];
+  const topCollection = [
+    {
+      id: 1,
+      content: (
+        <DarkCarouselWrapper>
+          <Title intent="subdued">top</Title>
+        </DarkCarouselWrapper>
+      ),
+    },
+    {
+      id: 2,
+      content: (
+        <DarkCarouselWrapper>
+          <Title intent="subdued">top</Title>
+        </DarkCarouselWrapper>
+      ),
+    },
+    {
+      id: 3,
+      content: (
+        <DarkCarouselWrapper>
+          <Title intent="subdued">top</Title>
+        </DarkCarouselWrapper>
+      ),
+    },
+  ];
+  const leftCollection = [
+    {
+      id: 1,
+      content: (
+        <DarkCarouselWrapper>
+          <Title intent="subdued">left</Title>
+        </DarkCarouselWrapper>
+      ),
+    },
+    {
+      id: 2,
+      content: (
+        <DarkCarouselWrapper>
+          <Title intent="subdued">left</Title>
+        </DarkCarouselWrapper>
+      ),
+    },
+    {
+      id: 3,
+      content: (
+        <DarkCarouselWrapper>
+          <Title intent="subdued">left</Title>
+        </DarkCarouselWrapper>
+      ),
+    },
+  ];
+  const rightCollection = [
+    {
+      id: 1,
+      content: (
+        <DarkCarouselWrapper>
+          <Title intent="subdued">right</Title>
+        </DarkCarouselWrapper>
+      ),
+    },
+    {
+      id: 2,
+      content: (
+        <DarkCarouselWrapper>
+          <Title intent="subdued">right</Title>
+        </DarkCarouselWrapper>
+      ),
+    },
+    {
+      id: 3,
+      content: (
+        <DarkCarouselWrapper>
+          <Title intent="subdued">right</Title>
+        </DarkCarouselWrapper>
+      ),
+    },
+  ];
+  return (
+    <>
+      <Grid.Row gutter={['medium', 'none']}>
+        <Grid.Col style={{ height: 300 }} span={[12, 12, 12, 12, 12]}>
+          <Carousel
+            collection={bottomCollection}
+            selectedItemIndex={currentItemIndexBottom}
+            onItemIndexChange={setCurrentItemIndexBottom}
+          />
+        </Grid.Col>
+        <Grid.Col style={{ height: 300 }} span={[12, 12, 12, 12, 12]}>
+          <Carousel
+            collection={topCollection}
+            dotPlacement="top"
+            selectedItemIndex={currentItemIndexTop}
+            onItemIndexChange={setCurrentItemIndexTop}
+          />
+        </Grid.Col>
+      </Grid.Row>
+      <br />
+      <Grid.Row gutter={['medium', 'none']}>
+        <Grid.Col style={{ height: 300 }} span={[12, 12, 12, 12, 12]}>
+          <Carousel
+            collection={leftCollection}
+            dotPlacement="left"
+            selectedItemIndex={currentItemIndexLeft}
+            onItemIndexChange={setCurrentItemIndexLeft}
+          />
+        </Grid.Col>
+        <Grid.Col style={{ height: 300 }} span={[12, 12, 12, 12, 12]}>
+          <Carousel
+            collection={rightCollection}
+            dotPlacement="right"
+            selectedItemIndex={currentItemIndexRight}
+            onItemIndexChange={setCurrentItemIndexRight}
+          />
+        </Grid.Col>
+      </Grid.Row>
+    </>
+  );
+}
+```
+
+### Show multiple slides
+
+Multiple slides can be shown at the same time via `shownSlides` setting.
+
+```jsx live
+function MultipleSlidesCarousel() {
+  const { Title } = Typography;
+  const darkBgCollection = [
+    {
+      id: 1,
+      content: (
+        <DarkCarouselWrapper>
+          <Title intent="subdued">1</Title>
+        </DarkCarouselWrapper>
+      ),
+    },
+    {
+      id: 2,
+      content: (
+        <DarkCarouselWrapper>
+          <Title intent="subdued">2</Title>
+        </DarkCarouselWrapper>
+      ),
+    },
+    {
+      id: 3,
+      content: (
+        <DarkCarouselWrapper>
+          <Title intent="subdued">3</Title>
+        </DarkCarouselWrapper>
+      ),
+    },
+    {
+      id: 4,
+      content: (
+        <DarkCarouselWrapper>
+          <Title intent="subdued">4</Title>
+        </DarkCarouselWrapper>
+      ),
+    },
+    {
+      id: 5,
+      content: (
+        <DarkCarouselWrapper>
+          <Title intent="subdued">5</Title>
+        </DarkCarouselWrapper>
+      ),
+    },
+    {
+      id: 6,
+      content: (
+        <DarkCarouselWrapper>
+          <Title intent="subdued">6</Title>
+        </DarkCarouselWrapper>
+      ),
+    },
+    {
+      id: 7,
+      content: (
+        <DarkCarouselWrapper>
+          <Title intent="subdued">7</Title>
+        </DarkCarouselWrapper>
+      ),
+    },
+    {
+      id: 8,
+      content: (
+        <DarkCarouselWrapper>
+          <Title intent="subdued">8</Title>
+        </DarkCarouselWrapper>
+      ),
+    },
+  ];
+  return (
+    <Box style={{ height: 300 }}>
+      <Carousel
+        collection={darkBgCollection}
+        shownSlides={3}
+        scrollStep={3}
+        variant="dark"
+      />
+    </Box>
+  );
+}
+```
+
+### Infinite Carousel
+
+Infinite carousel can be enabled by setting `infiniteLoop` to `true`. When it is enabled, the last slice will be connected to the first slice and vice-versa.
+
+```jsx live
+function InfiniteCarousel() {
+  const { Title } = Typography;
+  const darkBgCollection = [
+    {
+      id: 1,
+      content: (
+        <DarkCarouselWrapper>
+          <Title intent="subdued">1</Title>
+        </DarkCarouselWrapper>
+      ),
+    },
+    {
+      id: 2,
+      content: (
+        <DarkCarouselWrapper>
+          <Title intent="subdued">2</Title>
+        </DarkCarouselWrapper>
+      ),
+    },
+    {
+      id: 3,
+      content: (
+        <DarkCarouselWrapper>
+          <Title intent="subdued">3</Title>
+        </DarkCarouselWrapper>
+      ),
+    },
+  ];
+  const lightBgCollection = [
+    {
+      id: 1,
+      content: (
+        <LightCarouselWrapper>
+          <Title>1</Title>
+        </LightCarouselWrapper>
+      ),
+    },
+    {
+      id: 2,
+      content: (
+        <LightCarouselWrapper>
+          <Title>2</Title>
+        </LightCarouselWrapper>
+      ),
+    },
+    {
+      id: 3,
+      content: (
+        <LightCarouselWrapper>
+          <Title>3</Title>
+        </LightCarouselWrapper>
+      ),
+    },
+  ];
+  return (
+    <Grid.Row gutter={['medium', 'none']}>
+      <Grid.Col style={{ height: 300 }} span={[12, 12, 12, 12, 12]}>
+        <Carousel collection={darkBgCollection} infiniteLoop />
+      </Grid.Col>
+      <Grid.Col style={{ height: 300 }} span={[12, 12, 12, 12, 12]}>
+        <Carousel collection={lightBgCollection} variant="dark" infiniteLoop />
+      </Grid.Col>
+    </Grid.Row>
+  );
+}
+```
+
+## Props
+
+<Props of="Carousel" from="web" />

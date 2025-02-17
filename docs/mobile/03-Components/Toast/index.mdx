@@ -1,0 +1,305 @@
+---
+id: Toast
+title: Toast
+---
+
+<PageTitle
+  title="Toast"
+  content="A toast provides simple feedback about an operation in a small popup. It only fills the amount of space required for the message and the current activity remains visible and interactive. Toasts automatically disappear after a timeout."
+/>
+
+## Usage
+
+Wrap your app/screen in the `Toast.Provider`.
+
+```js
+import { Toast } from '@hero-design/rn';
+
+const App = () => {
+  return (
+    <Toast.Provider>
+      <RestOfYourApp />
+    </Toast.Provider>
+  );
+};
+```
+
+Then you use the `useToast` hook to access Toast APIs
+
+```js
+import { Toast } from '@hero-design/rn';
+
+const YourComponent = () => {
+  const toast = Toast.useToast();
+
+  ...
+};
+```
+
+### Methods
+
+#### show: (config: ToastConfigProps) => string
+
+Create and add a new toast message into the toast messages queue with specific config.
+
+For config details, please refer to [ToastConfig Props](#toastconfig-props).
+
+```js
+toast.show({
+  content: 'Your timesheet has been deleted.',
+  intent: 'warning',
+  variant: 'round',
+  duration: 3000,
+});
+```
+
+#### hide: (id: string) => void
+
+Dismiss a toast message with specific id. If the toast message is in the messages queue, it will be removed.
+
+```js
+const id = toast.show({ ... });
+toast.hide(id);
+```
+
+#### clearAll: () => void
+
+Dismiss all toast messages and clear the toast messages queue.
+
+```js
+toast.clearAll();
+```
+
+## Example
+
+### Default variant
+
+Toast default variant comes with 6 intents which are `info`, `success`, `warning`, `error`, `notification`, `snackbar`.
+
+```jsx live
+function ToastDefaultExample() {
+  const AppContent = () => {
+    const toast = Toast.useToast();
+    return (
+      <Box flex={1} alignItems="center" justifyContent="center">
+        <Button
+          variant="text"
+          text="Add Info Toast"
+          onPress={() => toast.show({ content: 'Info Toast', intent: 'info' })}
+        />
+        <Button
+          variant="text"
+          text="Add Success Toast"
+          onPress={() =>
+            toast.show({ content: 'Success Toast', intent: 'success' })
+          }
+        />
+        <Button
+          variant="text"
+          text="Add Warning Toast"
+          onPress={() =>
+            toast.show({ content: 'Warning Toast', intent: 'warning' })
+          }
+        />
+        <Button
+          variant="text"
+          text="Add Error Toast"
+          onPress={() =>
+            toast.show({ content: 'Error Toast', intent: 'error' })
+          }
+        />
+        <Button
+          variant="text"
+          text="Add Notification Toast"
+          onPress={() =>
+            toast.show({
+              content: 'Notification Toast',
+              intent: 'notification',
+            })
+          }
+        />
+        <Button
+          variant="text"
+          text="Add Snackbar Toast"
+          onPress={() =>
+            toast.show({ content: 'SnackbarToast', intent: 'snackbar' })
+          }
+        />
+      </Box>
+    );
+  };
+
+  return (
+    <Toast.Provider>
+      <AppContent />
+    </Toast.Provider>
+  );
+}
+```
+
+### Round variant
+
+Toast round variant comes with 6 intents which are `info`, `success`, `warning`, `error`,`notification`, `snackbar`.
+
+```jsx live
+function ToastRoundExample() {
+  const AppContent = () => {
+    const toast = Toast.useToast();
+    return (
+      <Box flex={1} alignItems="center" justifyContent="center">
+        <Button
+          variant="text"
+          text="Add Info Toast"
+          onPress={() =>
+            toast.show({
+              content: 'Info Toast',
+              intent: 'info',
+              variant: 'round',
+            })
+          }
+        />
+        <Button
+          variant="text"
+          text="Add Success Toast"
+          onPress={() =>
+            toast.show({
+              content: 'Success Toast',
+              intent: 'success',
+              variant: 'round',
+            })
+          }
+        />
+        <Button
+          variant="text"
+          text="Add Warning Toast"
+          onPress={() =>
+            toast.show({
+              content: 'Warning Toast',
+              intent: 'warning',
+              variant: 'round',
+            })
+          }
+        />
+        <Button
+          variant="text"
+          text="Add Error Toast"
+          onPress={() =>
+            toast.show({
+              content: 'Error Toast',
+              intent: 'error',
+              variant: 'round',
+            })
+          }
+        />
+        <Button
+          variant="text"
+          text="Add Notification Toast"
+          onPress={() =>
+            toast.show({
+              content: 'Notification Toast',
+              intent: 'notification',
+              variant: 'round',
+            })
+          }
+        />
+        <Button
+          variant="text"
+          text="Add Snackbar Toast"
+          onPress={() =>
+            toast.show({
+              content: 'Snackbar Toast',
+              intent: 'snackbar',
+              variant: 'round',
+            })
+          }
+        />
+      </Box>
+    );
+  };
+
+  return (
+    <Toast.Provider>
+      <AppContent />
+    </Toast.Provider>
+  );
+}
+```
+
+### Display type
+
+Toast can have different display mode by specifying the `displayType` prop.
+
+- `stack`: display multiple toast messages at a time.
+- `single`: display each toast messages one by one.
+
+```jsx live
+function ToastCustomDisplayExample() {
+  const AppContent = () => {
+    const toast = Toast.useToast();
+    return (
+      <Box flex={1} alignItems="center" justifyContent="center">
+        <Button
+          variant="text"
+          text="Add Info Toast"
+          onPress={() =>
+            toast.show({
+              content: 'Warning Toast',
+              intent: 'warning',
+              variant: 'round',
+            })
+          }
+        />
+      </Box>
+    );
+  };
+
+  return (
+    <Toast.Provider displayType="stack">
+      <Box style={{ height: 200 }}>
+        <AppContent />
+      </Box>
+    </Toast.Provider>
+  );
+}
+```
+
+### Toast distance
+
+You can customize the toast distance from bottom by passing `distance` option.
+
+```jsx live
+function ToastDefaultExample() {
+  const AppContent = () => {
+    const toast = Toast.useToast();
+    return (
+      <Box flex={1} alignItems="center" justifyContent="center">
+        <Button
+          variant="text"
+          text="Add Info Toast"
+          onPress={() =>
+            toast.show({ content: 'Info Toast', intent: 'info', distance: 300 })
+          }
+        />
+      </Box>
+    );
+  };
+
+  return (
+    <Toast.Provider>
+      <Box style={{ height: 400 }}>
+        <AppContent />
+      </Box>
+    </Toast.Provider>
+  );
+}
+```
+
+## Props
+
+#### Toast.Provider Props
+
+<Props of="ToastProvider" />
+
+#### ToastConfig Props
+
+<Props of="Toast" />

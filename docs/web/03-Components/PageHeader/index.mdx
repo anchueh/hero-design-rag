@@ -1,0 +1,43 @@
+---
+id: pageheader
+title: PageHeader
+---
+
+# PageHeader
+
+A header with breadcrumb and subtitle.
+
+## Examples
+
+### Basic
+
+- `Title` is passed through `title` property.
+
+```jsx live
+<PageHeader title="Page Header" />
+```
+
+### A header with breadcrumb.
+
+- A list of `BreadcrumbItem` can be passed through `breadcrumbItems` property.
+
+```jsx live
+<PageHeader
+  breadcrumbItems={[
+    { href: '/web/intro', text: 'Home' },
+    {
+      href: '/web/Components/PageHeader/',
+      text: 'Components',
+    },
+    {
+      href: '/web/Components/PageHeader/#a-header-with-breadcrumb',
+      text: 'PageHeader',
+    },
+  ]}
+  title="Page Header"
+/>
+```
+
+## Props
+
+<Props of="PageHeader" from="web" />

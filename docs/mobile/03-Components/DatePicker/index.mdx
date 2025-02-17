@@ -1,0 +1,189 @@
+---
+id: datePicker
+title: DatePicker
+---
+
+import ComponentPreview from '../../../../src/components/ComponentPreview';
+
+<PageTitle
+  title="DatePicker"
+  content="DatePicker allows users to pick a date within a bottom sheet component."
+/>
+
+There are 2 types: **default**, **calendar**.
+
+## Default
+
+The DatePicker consists of date, month and year, and same as the time picker, it allows users to control value selection by scrolling up or down on the corresponding wheel.
+
+### Preview
+
+<ComponentPreview
+  iosSrc="/img/screenshots/date-picker-ios.png"
+  androidSrc="/img/screenshots/date-picker-android.png"
+/>
+
+### Example
+
+:::info Landscape mode
+To use this component in landscape mode on iOS, you must first pass the `supportedOrientations` prop as specified in the [React Native doc](https://reactnative.dev/docs/modal#supportedorientations-ios).
+:::
+
+```SnackPlayer name=DatePicker
+import React, { useState } from 'react';
+import { SafeAreaView, View } from 'react-native';
+import { theme, DatePicker, Typography } from './@hero-design/rn';
+import PlaygroundContext from './PlaygroundContext.js';
+
+const App = () => {
+   const [value, setValue] = useState(
+    new Date("1995-06-17T00:00:00.000Z")
+  );
+
+  const minDate = new Date('1995-01-01T00:00:00.000Z');
+  const maxDate = new Date('1995-12-31T00:00:00.000Z');
+
+  return (
+    <PlaygroundContext>
+    <View
+      style={{
+        paddingVertical: theme.space.medium,
+        paddingHorizontal: theme.space.medium,
+        flex: 1,
+      }}
+    >
+      <Typography.Body variant="small">Date Picker</Typography.Body>
+      <DatePicker
+        value={value}
+        minDate={minDate}
+        maxDate={maxDate}
+        label="Start"
+        confirmLabel="Confirm"
+        onChange={(date) => setValue(date)}
+      />
+      <Typography.Body variant="small">Required</Typography.Body>
+      <DatePicker
+        value={value}
+        label="Start"
+        confirmLabel="Confirm"
+        onChange={(date) => setValue(date)}
+        required
+      />
+      <Typography.Body variant="small">Disabled</Typography.Body>
+      <DatePicker
+        value={value}
+        label="Start"
+        confirmLabel="Confirm"
+        onChange={(date) => setValue(date)}
+        disabled
+      />
+      <Typography.Body variant="small">Error</Typography.Body>
+      <DatePicker
+        value={value}
+        label="Start"
+        confirmLabel="Confirm"
+        onChange={(date) => setValue(date)}
+        error="Invalid date"
+      />
+      <Typography.Body variant="small">With help text</Typography.Body>
+      <DatePicker
+        value={value}
+        label="Start"
+        confirmLabel="Confirm"
+        onChange={(date) => setValue(date)}
+        helpText="This is help text"
+      />
+      <Typography.Title
+        level="h5"
+        style={{ marginBottom: theme.space.medium }}
+      >
+        Month Year picker
+      </Typography.Title>
+      <DatePicker
+        minDate={minDate}
+        maxDate={maxDate}
+        variant="month-year"
+        displayFormat="MMMM yyyy"
+        value={value}
+        label="Start"
+        confirmLabel="Confirm"
+        onChange={(date) => setValue(date)}
+        helpText="This is help text"
+        testID="help-text-date-picker"
+      />
+      <Typography.Title
+          level="h5"
+          style={{ marginBottom: theme.space.medium }}
+        >
+          Custom locale (zh-CN)
+        </Typography.Title>
+        <DatePicker
+          locale="zh-CN"
+          value={value}
+          minDate={minDate}
+          maxDate={maxDate}
+          label="Start"
+          confirmLabel="Confirm"
+          onChange={(date) => setValue(date)}
+          testID="basic-date-picker"
+        />
+    </View>
+    </PlaygroundContext>
+  );
+};
+
+export default App;
+```
+
+## Calendar
+
+The day of the week (DOW) picker allows users to select a day of the week from a calendar view. DOW pickers typically displays the days of the week as abbreviated text labels above, and offer navigation options for moving between different time period. Use this variant sparingly, as it currently doesn’t support quick navigation between months and years.
+
+### Basic
+
+```jsx live
+function DatePickerPlayground() {
+  const theme = useTheme();
+  const [value, setValue] = useState(new Date('1995-06-17T00:00:00.000Z'));
+
+  const minDate = new Date('1995-01-01T00:00:00.000Z');
+  const maxDate = new Date('1995-12-31T00:00:00.000Z');
+  return (
+    <>
+      <Typography.Body variant="small">Date Picker (Calendar)</Typography.Body>
+      <DatePicker
+        value={value}
+        minDate={minDate}
+        maxDate={maxDate}
+        label="Start"
+        confirmLabel="Confirm"
+        onChange={(date) => setValue(date)}
+        variant="calendar"
+      />
+    </>
+  );
+}
+```
+
+### Month picker
+
+:::info Info
+In order to use this function, make sure you have `@hero-design/react-native-month-year-picker` installed.
+:::
+
+<ComponentPreview
+  iosSrc="/img/screenshots/date-picker-month-ios.png"
+  androidSrc="/img/screenshots/date-picker-month-android.png"
+/>
+
+DatePicker Calendar also supports Calendar's month picker by default for faster navigation.
+
+## Props
+
+### DatePicker
+
+<Props of="DatePicker" />
+
+### DatePickerCalendar
+
+<Props of="DatePickerCalendar" />

@@ -1,0 +1,306 @@
+---
+id: comment
+title: Comment
+---
+
+import Note, { Highlight } from '../../../helpers/Note';
+
+# Comment
+
+- A comment displays user feedback and discussion to website content.
+- Comments can be used to enable discussions on an entity such as a page, blog post, issue or other.
+
+## Examples
+
+### Basic Comment
+
+A basic comment with author, avatar and time.
+
+```jsx live
+<Comment
+  author="Han Solo"
+  authorDetails="Test lorem ipsum"
+  avatar="/img/comment-avatar.png"
+  content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+  datetime="2 minutes ago"
+/>
+```
+
+### Comment with reactions
+
+A basic comment with reactions.
+
+```jsx live
+function CommentWithReactions() {
+  const [likes, setLikes] = useState(3);
+  const [dislikes, setDislikes] = useState(1);
+  const like = () => setLikes(likes + 1);
+  const disLike = () => setDislikes(dislikes + 1);
+  const CommentReactions = (
+    <div style={{ margin: 0, padding: 0 }}>
+      <CommentReaction
+        onClick={like}
+        value={likes}
+        icon="face-smiley-outlined"
+        intent="success"
+        style={{ marginRight: theme.space.small }}
+      />
+      <CommentReaction
+        onClick={disLike}
+        value={dislikes}
+        icon="face-sad-outlined"
+        intent="warning"
+      />
+    </div>
+  );
+  return (
+    <Comment
+      author="Han Solo"
+      authorDetails="Test lorem ipsum"
+      avatar="/img/comment-avatar.png"
+      content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      datetime="2 minutes ago"
+      reactions={CommentReactions}
+    />
+  );
+}
+```
+
+### Comment with a menu of actions
+
+<Note title="Show actions" intent="info">
+  Actions are always shown by default. Set{' '}
+  <Highlight>alwaysShowActions</Highlight> to <Highlight>false</Highlight> to
+  show actions only when hovering the comment.
+</Note>
+
+#### Icon actions
+
+```jsx live
+function CommentActions() {
+  const Actions = () => (
+    <Box style={{ display: 'flex', alignItems: 'center' }}>
+      <CommentActionButton icon="face-open-smiley-outlined" />
+      <CommentActionButton icon="reply-outlined" />
+      <CommentActionButton icon="share-2" />
+      <CommentActionButton icon="trash-bin-outlined" />
+    </Box>
+  );
+  return (
+    <Comment
+      author="Han Solo"
+      authorDetails="Test lorem ipsum"
+      avatar="/img/comment-avatar.png"
+      content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      actions={<Actions />}
+      alwaysShowActions
+      datetime="2 minutes ago"
+    />
+  );
+}
+```
+
+#### Dropdown actions
+
+```jsx live
+function CommentDropdown() {
+  const [open, setOpen] = useState(false);
+  const closeDropdown = () => setOpen(false);
+  const dropdownContent = (
+    <Menu>
+      <Menu.Item icon="pencil-outlined" text="Edit" onClick={closeDropdown} />
+      <Divider />
+      <Menu.Item
+        icon="trash-bin-outlined"
+        text="Delete"
+        intent="danger"
+        onClick={closeDropdown}
+      />
+    </Menu>
+  );
+  const actions = (
+    <Dropdown
+      open={open}
+      content={dropdownContent}
+      target={
+        <CommentActionButton
+          icon="more-horizontal"
+          onClick={() => setOpen(!open)}
+        />
+      }
+      onClose={closeDropdown}
+      placement="bottom-right"
+    />
+  );
+  return (
+    <Comment
+      author="Han Solo"
+      authorDetails="Test lorem ipsum"
+      avatar="/img/comment-avatar.png"
+      content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      actions={actions}
+      alwaysShowActions
+      datetime="2 minutes ago"
+    />
+  );
+}
+```
+
+### Usage with a list
+
+```jsx live
+function CommentWithList() {
+  const data = [
+    {
+      id: 1,
+      author: 'Han Solo',
+      avatar: '/img/comment-avatar.png',
+      authorDetails: 'Test lorem ipsum',
+      content:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      datetime: '2 minutes ago',
+    },
+    {
+      id: 2,
+      author: 'Han Solo',
+      avatar: '/img/comment-avatar.png',
+      authorDetails: 'Test lorem ipsum',
+      content:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      datetime: '2 minutes ago',
+    },
+  ];
+  return data.map((comment) => (
+    <Comment
+      key={comment.id}
+      author={comment.author}
+      authorDetails={comment.authorDetails}
+      avatar={comment.avatar}
+      content={comment.content}
+      datetime={comment.datetime}
+    />
+  ));
+}
+```
+
+### Nested comments
+
+Comments can be nested.
+
+```jsx live
+function NestedComments() {
+  const ExampleComment = ({ children }) => (
+    <Comment
+      author="Han Solo"
+      authorDetails="Test lorem ipsum"
+      avatar="/img/comment-avatar.png"
+      content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      datetime="2 minutes ago"
+    >
+      {children}
+    </Comment>
+  );
+  return (
+    <ExampleComment>
+      <ExampleComment>
+        <ExampleComment />
+        <ExampleComment />
+      </ExampleComment>
+    </ExampleComment>
+  );
+}
+```
+
+### Editor
+
+Comment can be used as an editor, so the user can customize the contents of the component.
+
+```jsx live
+function Editor() {
+  const [value, setValue] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [comments, setComments] = useState([]);
+  const { Editor } = Comment;
+  const CommentList = ({ data }) => (
+    <>
+      {data.map(({ id, author, authorDetails, avatar, content, datetime }) => (
+        <Comment
+          key={id}
+          author={author}
+          authorDetails={authorDetails}
+          avatar={avatar}
+          content={content}
+          datetime={datetime}
+        />
+      ))}
+    </>
+  );
+  const handleSubmit = () => {
+    if (!value) {
+      return;
+    }
+    setSubmitting(true);
+    setTimeout(() => {
+      setComments([
+        {
+          author: 'Han Solo',
+          avatar: '/img/comment-avatar.png',
+          authorDetails: 'Test lorem ipsum',
+          content: <p style={{ padding: 0, margin: 0 }}>{value}</p>,
+          datetime: '2 minutes ago',
+        },
+        ...comments,
+      ]);
+      setSubmitting(false);
+      setValue('');
+    }, 1000);
+  };
+  return (
+    <>
+      {comments && comments.length > 0 && <CommentList data={comments} />}
+      <Editor
+        onChange={(e) => setValue(e.target.value)}
+        onSubmit={handleSubmit}
+        submitting={submitting}
+        value={value}
+        avatar="/img/comment-avatar.png"
+      />
+    </>
+  );
+}
+```
+
+### Editor with customizable actions bar
+
+Actions bar of the editor can be customized.
+
+```jsx live
+function EditorWithActionBar() {
+  const { Editor } = Comment;
+  const [value, setValue] = useState();
+  const ActionsList = () => (
+    <Box sx={{ display: 'flex', alignItems: 'center', gap: 'small' }}>
+      <Button.Icon icon="camera-outlined" size="large" />
+      <Button.Icon icon="image-outlined" size="large" />
+      <Button.Icon icon="paperclip" size="large" />
+    </Box>
+  );
+  return (
+    <Editor
+      actions={<ActionsList />}
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+    />
+  );
+}
+```
+
+## Props
+
+### Comment
+
+<Props of="Comment" from="web" />
+
+### Comment.Editor
+
+<Props of="Editor" from="web" />

@@ -1,0 +1,144 @@
+---
+id: testing
+title: Testing
+---
+
+# Testing
+
+- Write tests to prevent regressions and write better code.
+- Our library is using some third-party libraries to achieve the native performance experience. So consumers might encounter some errors during writing tests.
+- Below are components that will be needed to mock in your jest setup file:
+
+### DatePicker
+
+- `DatePicker` is using `@react-native-community/datetimepicker` library, so we need to add the below mock:
+
+```js
+jest.mock('@react-native-community/datetimepicker', () => {
+  const React = jest.requireActual('react');
+
+  return class Picker extends React.Component {
+    render() {
+      return React.createElement('Picker', this.props, this.props.children);
+    }
+  };
+});
+```
+
+### Icon
+
+- We are creating `hero-icon` font automatically that means all icons will be generated again when we add more new icons, so they are different between each version. That may cause the snapshot testing to be updated frequently when we are bumping new hero-design versions.
+- To make the `Icon` component more stable in the snapshot testing, we recommend the consumers use the code below in your jest setup file:
+
+```js
+jest.mock('react-native-vector-icons', () => ({
+  createIconSet: jest.fn(() => 'HeroIcon'),
+}));
+```
+
+### RichTextEditor
+
+- `RichTextEditor` is using `react-native-webview` library, so we need to add the below mock:
+
+```js
+jest.mock('react-native-webview', () => {
+  const React = jest.requireActual('react');
+
+  class WebView extends React.Component {
+    render() {
+      return React.createElement('WebView', this.props, this.props.children);
+    }
+  }
+
+  return {
+    WebView,
+    default: WebView,
+  };
+});
+```
+
+### Slider
+
+- `Slider` is using `@react-native-community/slider` library, so we need to add the below mock:
+
+```js
+jest.mock('@react-native-community/slider', () => {
+  const React = jest.requireActual('react');
+
+  return class Slider extends React.Component {
+    render() {
+      return React.createElement('Slider', this.props, this.props.children);
+    }
+  };
+});
+```
+
+### Swipeable
+
+- `Swipeable` is inherited by `react-native-gesture-handler` library, so we need to add the below mock:
+
+```js
+jest.mock('react-native-gesture-handler', () => {
+  const ReactNative = jest.requireActual('react-native');
+
+  return {
+    Swipeable: ReactNative.View,
+    GestureHandlerRootView: ReactNative.View,
+    FlatList: ReactNative.FlatList,
+    RectButton: ReactNative.Button,
+    TouchableOpacity: ReactNative.TouchableOpacity,
+  };
+});
+```
+
+### Tabs
+
+- `Tabs` is inherited by `react-native-pager-view` library, so we need to add the below mock:
+
+```js
+jest.mock('react-native-pager-view', () => {
+  const RealComponent = jest.requireActual('react-native-pager-view').default;
+  const React = jest.requireActual('react');
+
+  return class ViewPager extends React.Component<{
+    children: React.ReactNode,
+  }> {
+    index = 0;
+
+    setPage = (page: number) => {
+      const { children } = this.props;
+
+      this.index = Math.max(0, Math.min(page, React.Children.count(children)));
+    };
+
+    render() {
+      const { children } = this.props;
+      return <RealComponent>{children}</RealComponent>;
+    }
+  };
+});
+```
+
+### Calendar
+
+- `Calendar` uses `@hero-design/react-native-month-year-picker` internally, so we need to add the below mock:
+
+```js
+jest.mock('@hero-design/react-native-month-year-picker', () => {
+  const React = jest.requireActual('react');
+  const { View, Text } = jest.requireActual('react-native');
+
+  return {
+    MonthYearPickerDialogueAndroid: () => (
+      <View>
+        <Text>Android picker</Text>
+      </View>
+    ),
+    MonthYearPickerViewIOS: () => (
+      <View>
+        <Text>IOS picker</Text>
+      </View>
+    ),
+  };
+});
+```

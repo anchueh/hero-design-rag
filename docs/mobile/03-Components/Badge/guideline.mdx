@@ -1,0 +1,79 @@
+---
+title: Guideline
+---
+
+import DosAndDonts from './BadgeDosAndDonts.tsx';
+
+<PageTitle
+  title="Badge"
+  content="Badges are used to indicate a notification, item count, or other information relating to a navigtion destination. They usually placed on the ending edge of an icon or a text label."
+/>
+
+<DosAndDonts />
+
+## When should I use this?
+
+Both types of badges are most commonly used within other components, such as horizontal navigation, section heading, floating action button (FAB), permission switch and tabs.
+
+```jsx live previewOnly
+<Box
+  style={{
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: theme.space.large,
+  }}
+>
+  <Badge
+    content="PRIMARY"
+    intent="primary"
+    style={{ marginEnd: theme.space.small }}
+  />
+  <Badge
+    content="SUCCESS"
+    intent="success"
+    style={{ marginEnd: theme.space.small }}
+  />
+  <Badge
+    content="WARNING"
+    intent="warning"
+    style={{ marginEnd: theme.space.small }}
+  />
+  <Badge.Status style={{ marginEnd: theme.space.small }}>
+    <Icon icon="bell" size="small" />
+  </Badge.Status>
+</Box>
+```
+
+<br />
+
+## Behaviours
+
+A badge dismisses itself once the user has viewed or acted on the status change or new notification
+
+```jsx live previewOnly
+function BadgeBehavior() {
+  const [showBadge, setShowBadge] = React.useState(true);
+
+  return (
+    <Box
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: theme.space.large,
+      }}
+    >
+      <Badge.Status visible={showBadge}>
+        <Icon icon="bell" size="small" />
+      </Badge.Status>
+      <Button
+        style={{ marginLeft: theme.space.large }}
+        variant="text"
+        text="Click"
+        onPress={() => setShowBadge(!showBadge)}
+      />
+    </Box>
+  );
+}
+```

@@ -1,0 +1,275 @@
+---
+id: tabs
+title: Tabs
+---
+
+import ComponentPreview from '../../../src/components/ComponentPreview';
+
+# Tabs
+
+Tabs let you switch between different views by tapping or swipping the tab item with tab bar on the top of the screen.
+
+## Usage
+
+Can be used to manage content when you have many different categories on the same page.
+
+### Tab with badge
+
+Tab item can be configure to display a badge to provide additional information.
+
+<br />
+
+#### Available badge for Tab label:
+
+- Status badge
+
+```js
+{
+    key: 'Hot',
+    activeItem: `Hot`,
+    component: <CustomScreen title="Hot" />,
+    badge: {
+      type: 'status'
+    }
+  },
+```
+
+- Counter badge
+
+```js
+{
+    key: 'Hot',
+    activeItem: `Hot`,
+    component: <CustomScreen title="Hot" />,
+    badge: {
+      type: 'counter',
+      value: 99,
+      max: 10         // Optional. Refer to Badge component for more details.
+    }
+  },
+```
+
+- hooks useIsFocused to render different content based on the current focus state of the screen.
+
+```js
+import { Tabs } from '@hero-design/rn';
+
+function ExampleScreen() {
+  const isFocused = Tabs.useIsFocused();
+
+  return <Text>{isFocused ? 'focused' : 'unfocused'}</Text>;
+}
+```
+
+## Preview
+
+<ComponentPreview
+  iosSrc="/img/screenshots/tabs-ios.png"
+  androidSrc="/img/screenshots/tabs-android.png"
+/>
+
+## Examples
+
+There are 2 types: **Tabs** and **Tabs.Scroll**.
+
+#### Tabs
+
+Tabs comes with the same width for all items based on the width of the container.
+
+### Example 1
+
+```SnackPlayer name=Tabs/Example1
+import React from 'react';
+import { View, SafeAreaView } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { theme, Tabs, TabType, Typography, Button } from './@hero-design/rn';
+import PlaygroundContext from './PlaygroundContext.js';
+
+const CustomScreen = ({ title }: { title: string }) => (
+  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <Typography.Body variant="small">{title}</Typography.Body>
+  </View>
+);
+
+const workTabs: TabType[] = [
+  {
+    key: 'activity',
+    activeItem: 'Activity',
+    component: <CustomScreen title="Activity" />,
+    badge: {
+      type: 'status',
+    },
+  },
+  {
+    key: 'news',
+    activeItem: `What's new`,
+    component: <CustomScreen title="News" />,
+    badge: {
+      type: 'counter',
+      value: 10,
+    },
+  },
+  {
+    key: 'Hot',
+    activeItem: `Hot`,
+    component: <CustomScreen title="Hot" />,
+    badge: {
+      type: 'status',
+    },
+  },
+];
+
+const App = () => {
+  const [selectedTabKey, setSelectedTabKey] = React.useState('activity');
+
+  return (
+    <PlaygroundContext>
+      <Button.Utility
+        text="Move to What's new"
+        onPress={() => setSelectedTabKey('news')}
+        style={{ margin: theme.space.small }}
+        icon="sync"
+      />
+      <Tabs
+        onTabPress={(newTabKey) => setSelectedTabKey(newTabKey)}
+        selectedTabKey={selectedTabKey}
+        tabs={workTabs}
+      />
+    </PlaygroundContext>
+  );
+};
+
+export default App;
+```
+
+#### Tabs.Scroll
+
+Tabs.Scroll is the horizontal scrollable `Tabs` that comes with dynamic width for all items. It supports 2 variants: `highlighted` and `underlined`. The `highlighted` should be used only on the [primary navigation](https://www.figma.com/file/0fhFGfTQ6H7rxlbw6QdbAb/01-Components---Mobile?type=design&node-id=405-538&mode=design&t=GruBJskMzLumN79r-0), while the `underlined` variant should be used for everything else.
+
+### Example 2
+
+```SnackPlayer name=Tabs/Example2
+import React from 'react';
+import { View, SafeAreaView } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {
+  theme,
+  Tabs,
+  Typography,
+  useTheme,
+  TabType,
+  Button,
+} from './@hero-design/rn';
+import PlaygroundContext from './PlaygroundContext.js';
+
+const CustomScreen = ({ title }: { title: string }) => (
+  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <Typography.Body variant="small">{title}</Typography.Body>
+  </View>
+);
+
+const tabs: TabType[] = [
+  {
+    key: 'work',
+    activeItem: 'home-active-outlined',
+    inactiveItem: 'home-outlined',
+    component: <CustomScreen title="Work Screen" />,
+    badge: {
+      type: 'status',
+    },
+  },
+  {
+    key: 'personal',
+    activeItem: 'bell-active-outlined',
+    inactiveItem: 'bell-outlined',
+    component: <CustomScreen title="Notifications Screen" />,
+    badge: {
+      type: 'status',
+    },
+  },
+  {
+    key: 'speaker',
+    activeItem: 'speaker-active-outlined',
+    inactiveItem: 'speaker-outlined',
+    component: <CustomScreen title="Shoutouts Screen" />,
+  },
+  {
+    key: 'payslips',
+    activeItem: 'Payslips',
+    component: <CustomScreen title="Payslips Screen" />,
+  },
+  {
+    key: 'leave',
+    activeItem: 'Leave',
+    component: <CustomScreen title="Leave Screen" />,
+    badge: {
+      type: 'counter',
+      value: 10,
+    },
+  },
+  {
+    key: 'rosters',
+    activeItem: 'Rosters',
+    component: <CustomScreen title="Rosters Screen" />,
+  },
+  {
+    key: 'timesheets',
+    activeItem: 'Timesheets',
+    component: <CustomScreen title="Timesheets Screen" />,
+    badge: {
+      type: 'counter',
+      value: 999,
+      max: 99,
+    },
+  },
+];
+
+const App = () => {
+  const [selectedTabKey, setSelectedTabKey] = React.useState('work');
+
+  const [scrollableTabVariant, setScrollableTabVariant] = React.useState('highlighted');
+
+  const toggleScrollableTabVariant = () => {
+    setScrollableTabVariant(
+      scrollableTabVariant === 'highlighted' ? 'underlined' : 'highlighted'
+    );
+  };
+
+  return (
+    <PlaygroundContext>
+      <Button.Utility
+        text="Move to Payslips"
+        onPress={() => setSelectedTabKey('payslips')}
+        style={{ margin: theme.space.small }}
+        icon="sync"
+      />
+      <Button.Utility
+        text={`Tab.Scroll variant: ${scrollableTabVariant}`}
+        onPress={toggleScrollableTabVariant}
+        icon="cog-outlined"
+        style={{ margin: theme.space.small }}
+      />
+      <Tabs.Scroll
+        variant={scrollableTabVariant}
+        onTabPress={(newTabKey) => setSelectedTabKey(newTabKey)}
+        selectedTabKey={selectedTabKey}
+        tabs={tabs}
+        lazy
+        lazyPreloadDistance={3}
+      />
+    </PlaygroundContext>
+  );
+};
+
+export default App;
+```
+
+## Props
+
+#### Tabs Props
+
+<Props of="Tabs" />
+
+#### Tabs.Scroll Props
+
+<Props of="ScrollableTabs" />

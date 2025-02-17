@@ -1,0 +1,131 @@
+---
+id: theming
+title: Theming
+---
+
+import Note, { Highlight } from '../../helpers/Note';
+
+# Theming
+
+Hero Design theme object has 2 levels: system and components.
+
+- At system level: This is base configuration which affects the whole design system.
+- At component level: This is specific for each component in Hero Design's component library.
+
+```javascript
+{
+  colors: {
+    palette: { black: ... },
+    primary: ...,
+    ...
+  },
+  space: {
+    ...
+  },
+  sizes: {
+    ...
+  },
+  fontSizes: {
+    ...
+  },
+  fontWeights: {
+    ...
+  },
+  lineHeights: {
+    ...
+  },
+  borderWidths: {
+    ...
+  },
+  radii: {
+    ...
+  },
+  shadows: {
+    ...
+  },
+  __hd__: {
+    alert: {
+      ...
+    }
+  }
+}
+```
+
+In which:
+
+- `colors` contains configuration for semantics colors used in the system.
+- `space` contains configuration for layout, including padding and margin.
+- `sizes` contains configuration for components' sizes including height and width.
+- `fontSizes`, `fontWeights`, `lineHeights` contain configuration for typography's sizes.
+- `borderWidths`, `radii` contain configuration for border across the system.
+- `shadows` contains configuration for shadow effect.
+- `__hd__` contains internal theming structure of components, the library consumer shouldn't care about it.
+
+Every theme key is a object which specifies the system scale. For example:
+
+```javascript
+{
+  space: {
+    small: 8,
+    medium: 16;
+    large: 24;
+  }
+}
+```
+
+To be sure of what included in each them key, please visit the theme config [here](https://github.com/Thinkei/hero-design/blob/master/packages/react/src/theme/index.ts).
+
+<Note title="Using theme in your project">
+  Please note that when accessing theme for your own need, using internal
+  components&apos; theme configuration is&nbsp;
+  <Highlight>
+    NOT RECOMMENDED and can be broken in the newer version of HD without notice
+  </Highlight>
+  &nbsp; as it is specific for those components, not for system usage. Use&nbsp;
+  <Highlight>SYSTEM CONFIGURATION ONLY</Highlight>.
+</Note>
+
+If you wish to customise the default theme on your end when using with your project, please use the utility `getTheme` supported from hero-design.
+
+You need to provide the base scale, and/or the semantic color mapping with the structure:
+
+- scale
+
+```javascript
+// scale
+const scale = {
+  borderWidth: number; // Base border widths
+  radius: number;      // Base radius
+  size: number;        // Base size
+  space: number;       // Base space
+  fontSize: number;    // First fontSize value in the scale Xn = Xn-1 + {INT[(n-2)/4] + 1} * 2, Xn: step n type size Xn-1: step n-1 type size
+};
+```
+
+- Semantic / system colors (variable `systemPalette` in [this file](https://github.com/Thinkei/hero-design/tree/master/packages/react/src/theme/global/colors.ts))
+
+An example of using `getTheme` with customised `scale` & system colors.
+
+```jsx
+import { getTheme } from 'hero-design';
+import { ThemeProvider } from 'styled-components';
+
+const myScale = {
+  borderWidth: 1,
+  radius: 2,
+  size: 4,
+  space: 8,
+  fontSize: 12,
+};
+
+const mySystemPalette = {
+  primary: 'red',
+  ...
+};
+
+const myTheme = getTheme(myScale, mySystemPalette);
+
+// Then using myTheme to inject to ThemeProvider
+
+<ThemeProvider theme={myTheme}><MyPage /></ThemeProvider>;
+```

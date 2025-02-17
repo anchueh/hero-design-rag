@@ -1,0 +1,101 @@
+---
+id: input
+title: Input
+---
+
+import Note, { Highlight } from '../../../helpers/Note';
+
+# Input
+
+The `Input` component is used to get user input in a text field.
+
+## Examples
+
+### Basic
+
+Basic usage example.
+
+```jsx live
+<>
+  <Input
+    placeholder="Basic Usage"
+    style={{ marginBottom: theme.space.medium }}
+  />
+  <Input placeholder="Disabled" disabled />
+</>
+```
+
+### Sizes
+
+There are three sizes of an Input box: `small`, `medium` (default) and `large`.
+
+```jsx live
+<>
+  <Input
+    size="small"
+    placeholder="Small"
+    style={{ marginBottom: theme.space.medium }}
+  />
+  <Input placeholder="Medium" style={{ marginBottom: theme.space.medium }} />
+  <Input size="large" placeholder="Large" />
+</>
+```
+
+### Affixes
+
+Prefix and/or suffix can be displayed inside the input when they are specified as [icon](/web/components/icon) strings.
+
+```jsx live
+<Input
+  placeholder="Input with prefix and suffix"
+  prefix="user"
+  suffix="circle-question-outlined"
+/>
+```
+
+### Customised affixes
+
+Prefix and/or suffix can be customised as a react element.
+
+```jsx live
+<Input
+  placeholder="Input with customised prefix"
+  prefix={<span style={{ margin: 0, padding: 0 }}>$</span>}
+/>
+```
+
+### TextArea
+
+TextArea is for multi-line input. By default, `autoResize` is enabled to automatically adjust the input's height to fit its content value.
+
+<Note title="autoResize requirement">
+  autoResize only gets effect when <Highlight>value</Highlight> &{' '}
+  <Highlight>onChange</Highlight> are defined.
+</Note>
+
+```jsx live
+function TextArea() {
+  const [value, setValue] = useState();
+  return (
+    <Input.TextArea
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+      placeholder="Multiple line input"
+    />
+  );
+}
+```
+
+## Props
+
+### Input Props
+
+The `Input` component accepts all [React.InputHTMLAttributes](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts#L2194) props & following customised props.
+
+<Props of="Input" from="web" />
+
+### Input.TextArea Props
+
+The `Input.TextArea` component accepts all [React.TextareaHTMLAttributes](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts#L2410) props & following customised props.
+
+<Props of="TextArea" from="web" />

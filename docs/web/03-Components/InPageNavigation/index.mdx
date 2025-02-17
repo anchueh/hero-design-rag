@@ -1,0 +1,335 @@
+---
+id: inPageNavigation
+title: InPageNavigation
+---
+
+# InPageNavigation
+
+Menu navigation for in-page usage.
+
+## Examples
+
+### Vertical
+
+Menu with Vertical listing (default variant).
+
+```jsx live
+function VerticalExample() {
+  const [selectedItemId, setSelectedItemId] = React.useState();
+  const onClickItem = (item) => setSelectedItemId(item.id);
+  const items = {
+    '': [
+      {
+        id: 'overview',
+        text: 'Overview',
+      },
+      {
+        id: 'personal_details',
+        text: 'Personal details',
+        disabled: true,
+        disabledReason: 'Upgrade your plan to use this',
+      },
+      {
+        id: 'employment_details',
+        text: 'Employment details',
+      },
+    ],
+    Documents: [
+      {
+        id: 'hr_documents',
+        text: 'HR documents',
+      },
+      {
+        id: 'uploaded_documents',
+        text: 'Uploaded documents',
+      },
+      {
+        id: 'certifications',
+        text: 'Certifications',
+      },
+    ],
+  };
+
+  return (
+    <Grid>
+      <Grid.Row gutter={['small', 'small']}>
+        <Grid.Col span={[12, 6, 6, 6, 6]}>
+          <InPageNavigation
+            items={items}
+            onClickItem={onClickItem}
+            selectedItemId={selectedItemId}
+          />
+        </Grid.Col>
+        <Grid.Col span={[12, 18, 18, 18, 18]}>
+          <Card content="Page content." style={{ height: '100%' }} />
+        </Grid.Col>
+      </Grid.Row>
+    </Grid>
+  );
+}
+```
+
+### Horizontal
+
+Horizontal layout used for display navigation on smaller screens.
+
+```jsx live
+function VerticalExample() {
+  const [selectedItemId, setSelectedItemId] = React.useState();
+  const onClickItem = (item) => setSelectedItemId(item.id);
+  const items = {
+    '': [
+      {
+        id: 'overview',
+        text: 'Overview',
+      },
+      {
+        id: 'personal_details',
+        text: 'Personal details',
+        disabled: true,
+        disabledReason: 'Upgrade your plan to use this',
+      },
+      {
+        id: 'employment_details',
+        text: 'Employment details',
+      },
+    ],
+    Documents: [
+      {
+        id: 'hr_documents',
+        text: 'HR documents',
+      },
+      {
+        id: 'uploaded_documents',
+        text: 'Uploaded documents',
+      },
+      {
+        id: 'certifications',
+        text: 'Certifications',
+        disabled: true,
+        disabledReason: 'Upgrade your plan to use this',
+      },
+    ],
+  };
+
+  return (
+    <Grid gutter="medium">
+      <Grid.Row>
+        <InPageNavigation
+          items={items}
+          onClickItem={onClickItem}
+          selectedItemId={selectedItemId}
+          variant="horizontal"
+        />
+      </Grid.Row>
+      <Grid.Row>
+        <Card content="Page content." style={{ height: 300 }} />
+      </Grid.Row>
+    </Grid>
+  );
+}
+```
+
+### With icons
+
+Items can have prefix/suffix icons.
+
+```jsx live
+function WitIconsExample() {
+  const [selectedItemId, setSelectedItemId] = React.useState();
+  const onClickItem = (item) => setSelectedItemId(item.id);
+  const items = {
+    '': [
+      {
+        id: 'overview',
+        text: 'Overview',
+        prefix: {
+          icon: 'document-outlined',
+        },
+        suffix: {
+          icon: 'circle-warning-outlined',
+          intent: 'warning',
+        },
+      },
+      {
+        id: 'personal_details',
+        text: 'Personal details',
+        disabled: true,
+        disabledReason: 'Upgrade your plan to use this',
+        prefix: {
+          icon: 'user-outlined',
+        },
+      },
+      {
+        id: 'employment_details',
+        text: 'Employment details',
+        prefix: {
+          icon: 'directory-outlined',
+        },
+        suffix: {
+          icon: 'circle-ok-outlined',
+          intent: 'success',
+        },
+      },
+    ],
+    Documents: [
+      {
+        id: 'hr_documents',
+        text: 'HR documents',
+      },
+      {
+        id: 'uploaded_documents',
+        text: 'Uploaded documents',
+      },
+      {
+        id: 'certifications',
+        text: 'Certifications',
+      },
+    ],
+  };
+
+  return (
+    <Grid>
+      <Grid.Row gutter={['small', 'small']}>
+        <Grid.Col span={[12, 6, 6, 6, 6]}>
+          <InPageNavigation
+            items={items}
+            onClickItem={onClickItem}
+            selectedItemId={selectedItemId}
+          />
+        </Grid.Col>
+        <Grid.Col span={[12, 18, 18, 18, 18]}>
+          <Card content="Page content." style={{ height: '100%' }} />
+        </Grid.Col>
+      </Grid.Row>
+    </Grid>
+  );
+}
+```
+
+### With actions
+
+Items can have actions with multiple icons.
+
+<Note title="Number of actions" intent="warning">
+  It is recommended to use 3 actions at maximum.
+</Note>
+
+```jsx live
+function WithMultipleIconsExample() {
+  const [selectedItemId, setSelectedItemId] = React.useState();
+  const onClickItem = (item) => setSelectedItemId(item.id);
+  const items = {
+    '': [
+      {
+        id: 'overview',
+        text: 'Overview',
+        actions: [
+          {
+            icon: 'circle-ok-outlined',
+            intent: 'success',
+            onClick: () => alert('Clicked on circle icon'),
+          },
+        ],
+      },
+      {
+        id: 'personal_details',
+        text: 'Personal details',
+        disabled: true,
+        disabledReason: 'Upgrade your plan to use this',
+        prefix: {
+          icon: 'user-outlined',
+        },
+      },
+      {
+        id: 'employment_details',
+        text: 'Employment details',
+        suffix: { icon: 'circle-warning-outlined', intent: 'warning' },
+        actions: [
+          {
+            icon: 'pencil-outlined',
+            intent: 'primary',
+            onClick: () => alert('Clicked on edit icon'),
+          },
+          {
+            icon: 'cancel',
+            intent: 'error',
+            onClick: () => alert('Clicked on cancel'),
+          },
+        ],
+      },
+    ],
+    Documents: [
+      {
+        id: 'hr_documents',
+        text: 'HR documents',
+      },
+      {
+        id: 'uploaded_documents',
+        text: 'Uploaded documents',
+        actions: [
+          {
+            icon: 'circle-warning-outlined',
+            intent: 'warning',
+            onClick: () => alert('Clicked on circle icon'),
+          },
+          {
+            icon: 'pencil-outlined',
+            intent: 'primary',
+            onClick: () => alert('Clicked on edit icon'),
+          },
+        ],
+      },
+      {
+        id: 'certifications',
+        text: 'Certifications',
+        suffix: {
+          icon: 'circle-ok-outlined',
+          intent: 'success',
+        },
+      },
+    ],
+  };
+
+  return (
+    <Grid>
+      <Grid.Row gutter={['small', 'small']} sx={{ mb: 'small' }}>
+        <Typography.Title level={3}>
+          Horizontal InPageNavigation.
+        </Typography.Title>
+      </Grid.Row>
+      <Grid.Row gutter={['small', 'small']} sx={{ mb: 'large' }}>
+        <Grid.Col>
+          <InPageNavigation
+            items={items}
+            onClickItem={onClickItem}
+            selectedItemId={selectedItemId}
+            variant="horizontal"
+          />
+        </Grid.Col>
+      </Grid.Row>
+      <Grid.Row gutter={['small', 'small']} sx={{ mb: 'small' }}>
+        <Typography.Title level={3}>
+          Vertical InPageNavigation.
+        </Typography.Title>
+      </Grid.Row>
+      <Grid.Row gutter={['small', 'small']}>
+        <Grid.Col span={[12, 6, 6, 6, 6]}>
+          <InPageNavigation
+            items={items}
+            onClickItem={onClickItem}
+            selectedItemId={selectedItemId}
+          />
+        </Grid.Col>
+        <Grid.Col span={[12, 18, 18, 18, 18]}>
+          <Card content="Page content." style={{ height: '100%' }} />
+        </Grid.Col>
+      </Grid.Row>
+    </Grid>
+  );
+}
+```
+
+## Props
+
+<Props of="InPageNavigation" from="web" />

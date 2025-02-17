@@ -1,0 +1,131 @@
+---
+id: widget
+title: Widget
+---
+
+## Widget
+
+Wigets allow users to quickly glance over import information that matters to them, usually used on a dashboard.
+
+## Examples
+
+### Basic
+
+```jsx live
+<Box style={{ width: 450, height: 450 }}>
+  <Widget title="Widget" />
+</Box>
+```
+
+### Widget with title icon
+
+Extra icon can be added to title with `titleIcon`.
+
+```jsx live
+<Box style={{ width: 450, height: 450 }}>
+  <Widget
+    title="Beta feature"
+    titleIcon={{ icon: 'user-outlined', intent: 'primary' }}
+  />
+</Box>
+```
+
+### Widget with title dot
+
+A small dot with custom accent background colour can be added to title with `titleDotIntent`.
+
+```jsx live
+<Box style={{ width: 450, height: 450 }}>
+  <Widget title="Beta feature" titleDotIntent="accent-green" />
+</Box>
+```
+
+### Widget with title extra
+
+Extra content can be added to title with `titleExtra`.
+
+```jsx live
+<Box style={{ width: 450, height: 450 }}>
+  <Widget
+    title="Beta feature"
+    titleExtra={
+      <>
+        <Badge intent="basic" content={9} />
+        <Tag intent="warning" variant="filled" text="TRIAL" />
+      </>
+    }
+  />
+</Box>
+```
+
+### Widget with actions
+
+Use `actions` to render an action dropdown.
+
+```jsx live
+<Box style={{ width: 450, height: 450 }}>
+  <Widget
+    id="widget-action"
+    title="Beta feature"
+    actions={[
+      { key: 'view', icon: 'eye-outlined', text: 'View details' },
+      {
+        key: 'edit',
+        icon: 'pencil-outlined',
+        text: 'Edit details',
+        disabled: true,
+      },
+      {
+        key: 'remove',
+        icon: 'circle-remove-outlined',
+        text: 'Remove widget',
+        divider: 'top',
+        intent: 'danger',
+      },
+    ]}
+  />
+</Box>
+```
+
+### Widget with actions extra
+
+Extra actions/handlers can be added with `actionsExtra`.
+
+```jsx live
+<Box style={{ width: 450, height: 450 }}>
+  <Widget
+    title="Beta feature"
+    titleExtra={<Badge intent="basic" content={9} />}
+    actions={[
+      { key: 'view', icon: 'eye-outlined', text: 'View details' },
+      {
+        key: 'remove',
+        icon: 'circle-remove-outlined',
+        text: 'Remove widget',
+        divider: 'top',
+        intent: 'danger',
+      },
+    ]}
+    actionsExtra={<Pagination variant="compact" current={2} total={5} />}
+  />
+</Box>
+```
+
+### Drag and Resize support
+
+Widget has a drag handle in the top-right corner and a resize handle in the bottom-right corner. These two handles could be configured to perform drag-and-drop and resizing on widget's container via `dragHandleConfig` and `resizeHandleConfig`. By default, widget will be hightlighted when these handles are hover.
+
+```jsx live
+<Box style={{ width: 450, height: 450 }}>
+  <Widget
+    id="drag-resize-widget"
+    title="Widget"
+    dragHandleConfig={{ className: 'drag-handle' }}
+    resizeHandleConfig={{ className: 'resize-handle' }}
+  />
+</Box>
+```
+
+## Props
+
+<Props of="Widget" from="web" />

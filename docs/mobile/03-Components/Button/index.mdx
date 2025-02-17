@@ -1,0 +1,347 @@
+---
+id: button
+title: Button
+---
+
+<PageTitle
+  title="Button"
+  content="Buttons are used to present an action users can take. When triggered, the button initiates an action or redirects the users."
+/>
+
+## Examples
+
+#### Intents & Variants
+
+Button comes with
+
+- 3 intents which are `primary`, `secondary`, and `danger`.
+- 4 variants which are `filled`, `outlined`, `text` and `inline-text`.
+- 2 compact variants which are `filled-compact` and `outlined-compact`.
+
+#### Filled variant
+
+```jsx live
+function App() {
+  return (
+    <>
+      <Typography.Body
+        variant="small"
+        style={{ marginBottom: theme.space.xsmall }}
+      >
+        Variants
+      </Typography.Body>
+      <Button
+        text="Primary (Filled)"
+        variant="filled"
+        intent="primary"
+        onPress={() => {}}
+        style={{ marginBottom: theme.space.medium }}
+      />
+      <Button
+        text="Filled (Loading)"
+        variant="filled"
+        intent="primary"
+        onPress={() => {}}
+        style={{ marginBottom: theme.space.medium }}
+        loading
+      />
+    </>
+  );
+}
+```
+
+#### Outlined variant
+
+```jsx live
+function App() {
+  return (
+    <>
+      <Typography.Body
+        variant="small"
+        style={{ marginBottom: theme.space.xsmall }}
+      >
+        Variants
+      </Typography.Body>
+      <Button
+        text="Primary (Outlined)"
+        variant="outlined"
+        intent="primary"
+        onPress={() => {}}
+        style={{ marginBottom: theme.space.medium }}
+      />
+      <Button
+        text="Outlined (Loading)"
+        variant="outlined"
+        intent="primary"
+        onPress={() => {}}
+        style={{ marginBottom: theme.space.medium }}
+        loading
+      />
+    </>
+  );
+}
+```
+
+#### Text variant
+
+```jsx live
+function App() {
+  return (
+    <>
+      <Typography.Body
+        variant="small"
+        style={{ marginBottom: theme.space.xsmall }}
+      >
+        Text button
+      </Typography.Body>
+      <View>
+        <Button
+          text="Primary (Text)"
+          variant="text"
+          intent="primary"
+          onPress={() => {}}
+          style={{ marginBottom: theme.space.medium }}
+        />
+        <Button
+          text="Secondary (Text)"
+          variant="text"
+          intent="secondary"
+          onPress={() => {}}
+          style={{ marginBottom: theme.space.medium }}
+        />
+        <Button
+          text="Danger (Text)"
+          variant="text"
+          intent="danger"
+          onPress={() => {}}
+          style={{ marginBottom: theme.space.medium }}
+        />
+      </View>
+      <View style={{ alignItems: 'center' }}>
+        <Button
+          text="Text"
+          variant="text"
+          loading
+          style={{ marginBottom: theme.space.medium }}
+        />
+      </View>
+      <Typography.Body
+        variant="small"
+        style={{ marginBottom: theme.space.xsmall }}
+      >
+        Text button with align left
+      </Typography.Body>
+
+      <View style={{ alignItems: 'flex-start' }}>
+        <Button
+          icon="add"
+          text="Add attachment"
+          variant="text"
+          intent="primary"
+          onPress={() => {}}
+          style={{ marginBottom: theme.space.medium }}
+        />
+      </View>
+    </>
+  );
+}
+```
+
+#### Inline-text variant
+
+```jsx live
+function App() {
+  return (
+    <>
+      <View style={{ alignItems: 'flex-start' }}>
+        <Button
+          icon="add"
+          text="Add attachment"
+          variant="inline-text"
+          intent="primary"
+          onPress={() => {}}
+          style={{ marginBottom: theme.space.medium }}
+        />
+        <Button
+          icon="remove"
+          text="Archive attachment"
+          variant="inline-text"
+          intent="secondary"
+          onPress={() => {}}
+          style={{ marginBottom: theme.space.medium }}
+        />
+        <Button
+          icon="trash-bin-outlined"
+          text="Delete attachment"
+          variant="inline-text"
+          intent="danger"
+          onPress={() => {}}
+        />
+      </View>
+    </>
+  );
+}
+```
+
+#### Button with icon
+
+Button icons can either be an icon name or a custom component.
+
+```jsx live
+function App() {
+  return (
+    <>
+      <Typography.Body
+        variant="small"
+        style={{ marginBottom: theme.space.xsmall }}
+      >
+        With Icon
+      </Typography.Body>
+      <Button
+        text="Add Item"
+        variant="filled"
+        intent="primary"
+        icon="add"
+        onPress={() => {}}
+        style={{ marginBottom: theme.space.medium }}
+      />
+      <Button
+        text="More"
+        variant="outlined"
+        intent="primary"
+        rightIcon="arrow-down"
+        onPress={() => {}}
+        style={{ marginBottom: theme.space.medium }}
+      />
+      <Button
+        text="Submit"
+        variant="text"
+        intent="primary"
+        icon={<Icon icon="send" size="small" />}
+        onPress={() => {}}
+        style={{ marginBottom: theme.space.medium }}
+      />
+    </>
+  );
+}
+```
+
+#### Compact variant
+
+```jsx live
+function App() {
+  return (
+    <Box style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
+      <Button
+        text="Primary (Filled)"
+        variant="filled-compact"
+        intent="primary"
+        onPress={() => {}}
+        style={{
+          marginBottom: theme.space.medium,
+          marginRight: theme.space.medium,
+        }}
+      />
+      <Button
+        text="Primary (Outlined)"
+        variant="outlined-compact"
+        intent="primary"
+        onPress={() => {}}
+        style={{
+          marginBottom: theme.space.medium,
+          marginRight: theme.space.medium,
+        }}
+      />
+    </Box>
+  );
+}
+```
+
+#### Disabled button
+
+```jsx live
+function App() {
+  return (
+    <>
+      <Typography.Body
+        variant="small"
+        style={{ marginBottom: theme.space.xsmall }}
+      >
+        Disabled
+      </Typography.Body>
+
+      <Button
+        text="Filled (Disabled)"
+        variant="filled"
+        onPress={() => {}}
+        style={{ marginBottom: theme.space.medium }}
+        disabled
+      />
+      <Button
+        text="Outlined (Disabled)"
+        variant="outlined"
+        onPress={() => {}}
+        style={{ marginBottom: theme.space.medium }}
+        disabled
+      />
+      <Button
+        text="Text (Disabled)"
+        variant="text"
+        onPress={() => {}}
+        style={{ marginBottom: theme.space.medium }}
+        disabled
+      />
+    </>
+  );
+}
+```
+
+#### Utility button
+
+```jsx live
+function App() {
+  return (
+    <>
+      <Typography.Body
+        variant="small"
+        style={{ marginBottom: theme.space.xsmall }}
+      >
+        Utility
+      </Typography.Body>
+      <Button.Utility
+        icon="cog-outlined"
+        text="Settings"
+        onPress={() => {}}
+        style={{ marginBottom: theme.space.medium }}
+      />
+      <Button.Utility
+        icon="funnel-filter-outline"
+        text="Filter"
+        onPress={() => {}}
+        style={{ marginBottom: theme.space.medium }}
+      />
+      <Button.Utility
+        intent="primary"
+        icon="sync"
+        text="Switch / add account"
+        onPress={() => {}}
+        style={{ marginBottom: theme.space.medium }}
+      />
+    </>
+  );
+}
+```
+
+## Props
+
+### Button
+
+<Props of="Button" />
+
+### Button.Icon
+
+<Props of="IconButton" />
+
+### Button.Utility
+
+<Props of="UtilityButton" />

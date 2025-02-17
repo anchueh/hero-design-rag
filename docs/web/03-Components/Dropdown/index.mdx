@@ -1,0 +1,97 @@
+---
+id: dropdown
+title: Dropdown
+---
+
+# Dropdown
+
+Dropdown is a popover container to render a few of options that we can select from by clicking on the target.
+
+## Examples
+
+### Rendering inputs in a dropdown
+
+Dropdown content can be any react element. If your content is overflowed, you may control the styling to make it work as your expectation. In below example, a part of DatePicker popup will invisible if we don't specify `visible` for the overflow style.
+
+```jsx live
+function BasicDropdown() {
+  const [open, setOpen] = React.useState(false);
+  const closeDropdown = () => setOpen(false);
+  const dropdownContent = (
+    <div style={{ padding: theme.space.medium, margin: 0 }}>
+      <Typography.Text fontWeight="semi-bold" tagName="label">
+        Email:
+        <Input />
+      </Typography.Text>
+      <Typography.Text fontWeight="semi-bold" tagName="label">
+        Start date:
+        <DatePicker />
+      </Typography.Text>
+    </div>
+  );
+  return (
+    <Dropdown
+      open={open}
+      content={dropdownContent}
+      target={
+        <Button
+          text="Input personal detail"
+          rightIcon="arrow-down"
+          onClick={() => setOpen(!open)}
+        />
+      }
+      onClose={closeDropdown}
+      style={{ overflow: 'visible' }}
+    />
+  );
+}
+```
+
+### Rendering menu in a dropdown
+
+The most basic dropdown is rendering menu as the dropdown content.
+
+```jsx live
+function RenderMenu() {
+  const [open, setOpen] = React.useState(false);
+  const closeDropdown = () => setOpen(false);
+  const dropdownContent = (
+    <Menu>
+      <Menu.Item icon="phone" text="Request a demo" onClick={closeDropdown} />
+      <Divider />
+      <Menu.Item
+        icon="multiple-stars"
+        text="Right fit"
+        onClick={closeDropdown}
+      />
+      <Menu.Item icon="add-person" text="Sign up" onClick={closeDropdown} />
+      <Menu.Item icon="cog" text="Implement" onClick={closeDropdown} />
+      <Menu.Item icon="speaker" text="Introduce us" onClick={closeDropdown} />
+      <Divider />
+      <Menu.Item
+        icon="raising-hands"
+        text="Onboard with ease"
+        onClick={closeDropdown}
+      />
+    </Menu>
+  );
+  return (
+    <Dropdown
+      open={open}
+      content={dropdownContent}
+      target={
+        <Button
+          text="What to expect"
+          rightIcon="arrow-down"
+          onClick={() => setOpen(!open)}
+        />
+      }
+      onClose={closeDropdown}
+    />
+  );
+}
+```
+
+## Props
+
+<Props of="Dropdown" from="web" />

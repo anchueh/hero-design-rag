@@ -1,0 +1,143 @@
+---
+id: accordion
+title: Accordion
+---
+
+# Accordion
+
+An accordion allows the user to show and hide sections of related content on a screen.
+
+## Examples
+
+Accordion can be used in both controlled and uncontrolled form.
+
+### Example 1: Accordion with default variant
+
+```jsx live
+function App() {
+  const Header = () => {
+    return (
+      <View style={{ flexDirection: 'row' }}>
+        <Avatar
+          title="RD"
+          size="large"
+          style={{
+            marginRight: theme.space.smallMedium,
+          }}
+        />
+        <View>
+          <Typography.Body variant="regular-bold">Rob Dunn</Typography.Body>
+          <Typography.Body>Subtitle</Typography.Body>
+        </View>
+      </View>
+    );
+  };
+
+  const Content = () => (
+    <View style={{ flexDirection: 'row' }}>
+      <View style={{ flex: 1 }}>
+        <Typography.Body>
+          BnP 2021 - Establish an early decision and delivery cadence within BnP
+          team
+        </Typography.Body>
+        <Typography.Body>Due 30 Sep, 2022</Typography.Body>
+      </View>
+      <Progress.Circle value={50} intent="info" />
+    </View>
+  );
+  const [activeItem, setActiveItem] = React.useState('');
+  const items = [
+    {
+      header: <Header />,
+      content: <Content />,
+      key: 'rd1',
+    },
+    {
+      header: <Header />,
+      content: <Content />,
+      key: 'rd2',
+    },
+    {
+      header: <Header />,
+      content: <Content />,
+      key: 'rd3',
+    },
+  ];
+  const style = { backgroundColor: theme.colors.primaryBackground };
+  const styledItems = items.map((item) => ({ ...item, style }));
+
+  return (
+    <Accordion
+      activeItemKey={activeItem}
+      onItemPress={setActiveItem}
+      items={items}
+    />
+  );
+}
+```
+
+### Example 2: Variant card
+
+```jsx live
+function App() {
+  const Header = () => {
+    return (
+      <View style={{ flexDirection: 'row' }}>
+        <Avatar
+          title="RD"
+          size="large"
+          style={{
+            marginRight: theme.space.smallMedium,
+          }}
+        />
+        <View>
+          <Typography.Body variant="regular-bold">Rob Dunn</Typography.Body>
+          <Typography.Body>Subtitle</Typography.Body>
+        </View>
+      </View>
+    );
+  };
+
+  const Content = () => (
+    <View style={{ flexDirection: 'row' }}>
+      <View style={{ flex: 1 }}>
+        <Typography.Body>
+          BnP 2021 - Establish an early decision and delivery cadence within BnP
+          team
+        </Typography.Body>
+        <Typography.Body>Due 30 Sep, 2022</Typography.Body>
+      </View>
+      <Progress.Circle value={50} intent="info" />
+    </View>
+  );
+  const items = [
+    {
+      header: <Header />,
+      content: <Content />,
+      key: 'rd1',
+    },
+    {
+      header: <Header />,
+      content: <Content />,
+      key: 'rd2',
+    },
+    {
+      header: <Header />,
+      content: <Content />,
+      key: 'rd3',
+    },
+  ];
+
+  return (
+    <Box bgColor="neutralGlobalSurface" padding="medium">
+      <Accordion variant="card" items={items} />
+    </Box>
+  );
+}
+```
+
+## Props
+
+### Accordion Props
+
+<Props of="Accordion" />

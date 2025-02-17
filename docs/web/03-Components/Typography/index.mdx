@@ -1,0 +1,266 @@
+---
+id: typography
+title: Typography
+---
+
+import TypographyDiv from './nested-typography-div.png';
+import TypographyP from './nested-typography-p.png';
+import TypographyLabel from './nested-typography-label.png';
+import TypographySpan from './nested-typography-span.png';
+
+# Typography
+
+Typography is for text writing including title, text and paragraph.
+
+## Examples
+
+### Typography.Title
+
+There are 5 levels of a Title:
+
+- **1** (for h1)
+- **2** (for h2)
+- **3** (for h3)
+- **4** (for h4)
+- **5** (for h5)
+
+It is set to `1` by default.
+
+```jsx live
+<>
+  <Typography.Title level={1}>Employment Hero.</Typography.Title>
+  <Typography.Title level={3} intent="subdued">
+    Bring all your HR into one, easy-to-use place.
+  </Typography.Title>
+  <br />
+  <Typography.Title level={3}>HR Software.</Typography.Title>
+  <Typography.Title level={5} intent="subdued">
+    Speedy onboarding and compliant contracts.
+  </Typography.Title>
+  <Typography.Title level={5} intent="primary">
+    Simplify HR tasks with real-time updates.
+  </Typography.Title>
+  <Box sx={{ backgroundColor: 'neutralDarkBackground' }}>
+    <Typography.Title level={5} intent="white">
+      Easily manage employee records and performance reviews.
+    </Typography.Title>
+  </Box>
+  <br />
+  <Typography.Title level={3}>Digital Payroll.</Typography.Title>
+  <Typography.Title level={5} intent="subdued">
+    Automatic award interpretation and dynamic rostering.
+  </Typography.Title>
+  <Typography.Title level={5} intent="primary">
+    Ensure accurate payments effortlessly.
+  </Typography.Title>
+  <Box sx={{ backgroundColor: 'neutralDarkBackground' }}>
+    <Typography.Title level={5} intent="white">
+      Stay compliant with the latest payroll regulations.
+    </Typography.Title>
+  </Box>
+  <br />
+  <Typography.Title level={3}>Employee Engagement.</Typography.Title>
+  <Typography.Title level={5} intent="subdued">
+    Communicate and engage with your team.
+  </Typography.Title>
+  <Typography.Title level={5} intent="primary">
+    Boost workplace culture with regular feedback.
+  </Typography.Title>
+  <Box sx={{ backgroundColor: 'neutralDarkBackground' }}>
+    <Typography.Title level={5} intent="white">
+      Encourage collaboration through interactive platforms.
+    </Typography.Title>
+  </Box>
+  <br />
+  <Typography.Title level={3}>Employee Benefits.</Typography.Title>
+  <Typography.Title level={5} intent="subdued">
+    Discounts, wellness programs & much more.
+  </Typography.Title>
+  <Typography.Title level={5} intent="primary">
+    Increase satisfaction with various perks.
+  </Typography.Title>
+  <Box sx={{ backgroundColor: 'neutralDarkBackground' }}>
+    <Typography.Title level={5} intent="white">
+      Support your team's well-being with tailored benefits.
+    </Typography.Title>
+  </Box>
+  <br />
+  <Typography.Title level={3}>Global Teams.</Typography.Title>
+  <Typography.Title level={5} intent="subdued">
+    Engage the best talent, anywhere in the world.
+  </Typography.Title>
+  <Typography.Title level={5} intent="primary">
+    Manage international staff seamlessly.
+  </Typography.Title>
+  <Box sx={{ backgroundColor: 'neutralDarkBackground' }}>
+    <Typography.Title level={5} intent="white">
+      Facilitate smooth cross-border operations and compliance.
+    </Typography.Title>
+  </Box>
+</>
+```
+
+### Typography.Text
+
+#### Display text in different sizes, weights and colors.
+
+```jsx live
+<>
+  <Typography.Text fontSize={18} fontWeight="regular" intent="main">
+    Our Story.
+  </Typography.Text>
+  <Typography.Text fontSize={14} fontWeight="regular" intent="body">
+    We&apos;ll guide you through a series of live interactive workshops which
+    will guide you through setting up your Employment Hero acount. Each workshop
+    has a specific milestone you will need to achieve and is designed so you can
+    follow along in your own acount.
+  </Typography.Text>
+  <Typography.Text fontSize={14} fontWeight="light" intent="subdued">
+    We’re a team of the best in the business.
+  </Typography.Text>
+  <Typography.Text fontSize={12} fontWeight="semi-bold" intent="primary">
+    Employment Hero is the easiest way for small to medium businesses to manage
+    HR, payroll and employee engagement and benefits in Australia.
+  </Typography.Text>
+  <br />
+  <Typography.Text fontSize={16} fontWeight="bold" intent="success">
+    Our Mission.
+  </Typography.Text>
+  <Typography.Text fontSize={14} fontWeight="regular" intent="danger">
+    We have a powerful purpose.
+  </Typography.Text>
+  <Typography.Text fontSize={12} fontWeight="light" intent="warning">
+    We’re on mission to make employment easier and more rewarding.
+  </Typography.Text>
+  <Typography.Text fontSize={10} fontWeight="light" intent="warning">
+    This mission permeates every aspect of our culture, day-to-day work and work
+    in the community. Learn more about what drives us.
+  </Typography.Text>
+  <br />
+  <Typography.Text fontSize={16} fontWeight="semi-bold" intent="error">
+    Work With Us.
+  </Typography.Text>
+  <Box sx={{ backgroundColor: 'neutralDarkBackground' }}>
+    <Typography.Text fontSize={14} fontWeight="bold" intent="white">
+      Join the team.
+    </Typography.Text>
+  </Box>
+  <Typography.Text fontSize={12} fontWeight="regular" intent="main">
+    We’re a diverse mix of personalities, talents, skills and experience.
+  </Typography.Text>
+  <Typography.Text fontSize={10} fontWeight="regular" intent="main">
+    Together we’re an unbreakable team of players, all working towards the same
+    goals. Plus, we know how to have fun and have a laugh. Care to join us?
+  </Typography.Text>
+</>
+```
+
+#### Display text as your desired html tag
+
+```jsx live
+<>
+  <Typography.Text tagName="label" fontWeight="bold">
+    Products.
+  </Typography.Text>
+  <Typography.Text tagName="div">
+    Manage HR, payroll, performance, learning, recognition and benefits easily
+    with our integrated platform.
+  </Typography.Text>
+</>
+```
+
+#### Nested typography
+
+#### Nested paragraph
+
+When Typography.Text is renderned as paragraph block `p`, these following tags will be displayed followed hero-design setup:
+
+| Typography.Text | Tag type | Supported nested tags                                                |
+| --------------- | -------- | -------------------------------------------------------------------- |
+| `p`             | inline   | `strong`, `b`, `label`: Rendered in semi-bold fontWeight by default. |
+|                 | inline   | `a`: Rendered as primary Button.Link by default.                     |
+|                 | inline   | `em`, `i`, `span`, `br`: Rendered followed default browser support.  |
+
+<img src={TypographyP} alt="Nested paragraph" />
+
+#### Nested division block
+
+When Typography.Text is renderned as document division block `div`, these following tags will be displayed followed hero-design setup:
+
+| Typography.Text | Tag type | Supported nested tags                                                |
+| --------------- | -------- | -------------------------------------------------------------------- |
+| `div`           | block    | `p`: Rendered as Typography.Text paragraph.                          |
+|                 | block    | `ul`: Rendered with hero design customised padding-inline-start.     |
+|                 | inline   | `strong`, `b`, `label`: Rendered in semi-bold fontWeight by default. |
+|                 | inline   | `a`: Rendered as primary Button.Link by default.                     |
+|                 | inline   | `em`, `i`, `span`, `br`: Rendered followed default browser support.  |
+
+<img src={TypographyDiv} alt="Nested div" />
+
+#### Nested span
+
+When Typography.Text is renderned as `span`, these following tags will be displayed followed hero-design setup:
+
+| Typography.Text | Tag type | Supported nested tags                                                |
+| --------------- | -------- | -------------------------------------------------------------------- |
+| `span`          | inline   | `strong`, `b`, `label`: Rendered in semi-bold fontWeight by default. |
+|                 | inline   | `a`: Rendered as primary Button.Link by default.                     |
+|                 | inline   | `em`, `i`, `span`: Rendered followed default browser support.        |
+
+<img src={TypographySpan} alt="Nested span" />
+
+#### Nested label
+
+When Typography.Text is renderned as `label`, these following tags will be displayed followed hero-design setup:
+
+| Typography.Text | Tag type | Supported nested tags                                         |
+| --------------- | -------- | ------------------------------------------------------------- |
+| `label`         | inline   | `strong`, `b`: Rendered in semi-bold fontWeight by default.   |
+|                 | inline   | `a`: Rendered as primary Button.Link by default.              |
+|                 | inline   | `em`, `i`, `span`: Rendered followed default browser support. |
+
+<img src={TypographyLabel} alt="Nested label" />
+
+#### Important note
+
+Only `first-level direct decendants` of the Typography.Text get effect, except:
+
+- Typography.Text(as div) > p > inline tags (strong, b, a, em, i, span)
+
+```JavaScript
+// `a` tag is child of `Typography.Text` WILL get effect.
+<Typography.Text>
+  <a href="https://employmenthero.com/">
+This will be formatted by hero-design.
+  </a>
+</Typography.Text>
+
+// `a` tag is grand child of `Typography.Text` WON'T get effect.
+<Typography.Text>
+  <span>
+    <a href="https://employmenthero.com/">
+       This will NOT be formatted by hero-design.
+    </a>
+  </span>
+</Typography.Text>
+
+// Exception: `a` tag is grand child of `Typography.Text` div via a paragraph block.
+// Since `p` is treated as `Typography.Text` inside the division block (div). This is the only exception of the rule.
+<Typography.Text tagName="div">
+  <p>
+    <a href="https://employmenthero.com/">
+  This will be formatted by hero-design.
+    </a>
+  </p>
+</Typography.Text>
+```
+
+## Props
+
+### Typography.Title Props
+
+<Props of="Title" from="web" />
+
+### Typography.Text Props
+
+<Props of="Text" from="web" />

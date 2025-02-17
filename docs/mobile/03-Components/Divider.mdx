@@ -1,0 +1,58 @@
+---
+id: divider
+title: Divider
+---
+
+import Table from '../../../src/components/Table';
+
+# Divider
+
+- A divider is used to separate contents or UI sections.
+- It is recommended to have divider between full-width cards, data cards to help users easily distinguish content rows.
+
+## Examples
+
+Both horizontal and vertical margin of Divider can be set with 5 options as below:
+
+<Table
+  rows={[
+    {
+      title: 'Option',
+      values: ['xsmall', 'small', 'medium', 'large', 'xlarge'],
+    },
+    {
+      title: 'Margin (dp)',
+      values: [4, 8, 16, 24, 32],
+    },
+  ]}
+/>
+
+As default, Divider's `left/right` and `top/bottom` are not set.
+
+```jsx live
+function DividerExample() {
+  return (
+    <>
+      <Divider
+        style={{ backgroundColor: theme.colors.darkGlobalSurface }}
+        marginHorizontal="xlarge"
+        marginVertical="medium"
+      />
+      <Divider
+        style={{ backgroundColor: theme.colors.darkGlobalSurface }}
+        marginHorizontal="large"
+        marginVertical="large"
+      />
+      <Divider
+        style={{ backgroundColor: theme.colors.darkGlobalSurface }}
+        marginHorizontal="medium"
+        marginVertical="xlarge"
+      />
+    </>
+  );
+}
+```
+
+## Props
+
+<Props of="Divider" />

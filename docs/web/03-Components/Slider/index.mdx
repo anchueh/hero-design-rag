@@ -1,0 +1,100 @@
+---
+id: slider
+title: Slider
+---
+
+# Slider
+
+Slider is used for inputting a value in a range.
+
+## Examples
+
+### Basic
+
+Input a value from `40` to `140` with `4` interval.
+
+```jsx live
+function BasicSlider() {
+  const [value, onChange] = useState(52);
+  return (
+    <div style={{ padding: theme.space.large, margin: 0 }}>
+      <Slider min={40} max={140} step={4} value={value} onChange={onChange} />
+    </div>
+  );
+}
+```
+
+### Always show tooltip
+
+Normally, the current value of slider is shown in a tooltip when we hover on the slider's handle. To make it always showed, mark `alwaysShowTooltip` `true`.
+
+```jsx live
+function ShowTooltip() {
+  const [value, onChange] = useState(25);
+  return (
+    <div style={{ padding: theme.space.large, margin: 0 }}>
+      <Slider
+        min={0}
+        max={50}
+        step={2}
+        value={value}
+        onChange={onChange}
+        alwaysShowTooltip
+      />
+    </div>
+  );
+}
+```
+
+### Custom tooltip
+
+The tooltip can be customised with a `string` by using prop `customTooltipText`.
+
+```jsx live
+function CustomTooltip() {
+  const [value, onChange] = useState(50);
+  return (
+    <div style={{ padding: theme.space.large, margin: 0 }}>
+      <Slider
+        min={0}
+        max={100}
+        step={2}
+        value={value}
+        onChange={onChange}
+        customTooltipText={
+          value < 50
+            ? 'Value is less than 50'
+            : 'Value is equal or greater than 50'
+        }
+        alwaysShowTooltip
+      />
+    </div>
+  );
+}
+```
+
+### Disabled state
+
+Slider can be disabled.
+
+```jsx live
+function DisabledSlider() {
+  const [value, onChange] = useState(66);
+  return (
+    <div style={{ padding: theme.space.large, margin: 0 }}>
+      <Slider
+        min={0}
+        max={100}
+        step={2}
+        value={value}
+        onChange={onChange}
+        disabled
+      />
+    </div>
+  );
+}
+```
+
+## Props
+
+<Props of="Slider" from="web" />

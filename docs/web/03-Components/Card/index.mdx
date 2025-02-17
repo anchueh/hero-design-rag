@@ -1,0 +1,131 @@
+---
+id: card
+title: Card
+---
+
+# Card
+
+A card is a bounded unit of UI content with a solid background color, can be used to display content which can consist of multiple elements.
+
+## Examples
+
+### Basic
+
+Basic usage of Card containing header and content.
+
+```jsx live
+<CardWrapper>
+  <Card
+    variant="grey"
+    header="Company info"
+    content="Employment Hero is the easiest way for small to medium businesses to manage HR, payroll, engagement and employee benefits in Australia. We empower SMEs by providing automated solutions for employee management and engagement, payroll and employee benefits. Over 5,000 Australian businesses use Employment Hero and together we collectively manage over 200,000+ employees."
+  />
+</CardWrapper>
+```
+
+### Card with extra content
+
+Card can also have some extra content as additional description.
+
+```jsx live
+<CardWrapper>
+  <Card
+    variant="grey"
+    header="Card with extra"
+    content="Lorem ipsum dolor sit amet, adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua consequat. sed do eiusmod"
+    extra="Lorem ipsum dolor sit amet, adipiscing elit"
+  />
+</CardWrapper>
+```
+
+### Sizes
+
+Card has two different sizes with different padding to the header and content: `medium` and `small` (set via `size` property).
+
+```jsx live
+<>
+  <CardWrapper>
+    <Card
+      variant="grey"
+      header="Default card"
+      content="Lorem ipsum dolor sit amet, adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua consequat. sed do eiusmod"
+    />
+  </CardWrapper>
+  <CardWrapper>
+    <Card
+      variant="grey"
+      header="Small card"
+      content="Lorem ipsum dolor sit amet, adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua consequat. sed do eiusmod"
+      size="small"
+    />
+  </CardWrapper>
+</>
+```
+
+### Card variants
+
+Card has 4 variants: `basic` (default), `primary`, `info`, and `grey`.
+
+```jsx live
+<>
+  <CardWrapper>
+    <Card
+      header="Basic"
+      content="Lorem ipsum dolor sit amet,  adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua consequat. sed do eiusmod"
+      variant="basic"
+    />
+  </CardWrapper>
+  <CardWrapper>
+    <Card
+      header="Info"
+      content="Lorem ipsum dolor sit amet,  adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua consequat. sed do eiusmod"
+      variant="info"
+    />
+  </CardWrapper>
+  <CardWrapper>
+    <Card variant="grey">
+      <Card.Header>Grey</Card.Header>
+      <Card.Content>
+        Lorem ipsum dolor sit amet, adipiscing elit, sed do eiusmod tempor
+        incididunt ut labore et dolore magna aliqua consequat. sed do eiusmod
+      </Card.Content>
+    </Card>
+  </CardWrapper>
+  <CardWrapper>
+    <Card
+      header="Primary"
+      content="Lorem ipsum dolor sit amet,  adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua consequat. sed do eiusmod"
+      variant="primary"
+    />
+  </CardWrapper>
+</>
+```
+
+### Card image
+
+A card can have an image by passing into `imageSrc`.
+
+```jsx live
+<CardWrapper>
+  <Card
+    header="Primary card with image"
+    content="Lorem ipsum dolor sit amet,  adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua consequat. sed do eiusmod"
+    variant="primary"
+    imageSrc="/img/BenThompson-L_DaveTong-R.jpg"
+  />
+</CardWrapper>
+```
+
+## Props
+
+### Card Props
+
+<Props of="Card" from="web" />
+
+### Card.Header Props
+
+<Props of="CardHeader" from="web" />
+
+### Card.Content Props
+
+<Props of="CardContent" from="web" />

@@ -1,0 +1,118 @@
+---
+id: avoiding-snowflakes
+title: Avoiding Snowflakes
+---
+
+# Avoiding Snowflakes
+
+Hero Design team has implemented a workflow in most web and mobile projects to detect various snowflakes. Below you can find a comprehensive list of how to avoid them to ensure consistency and maintainability.
+
+## Use design tokens
+
+**Design tokens** should be treated as **a single source of truth** for design decisions. They are the foundation of our design system and should be used in all projects.
+
+While using **hardcoded values** might not seem like a big deal at first, it will make it harder to maintain the project in the long run. If you need to change a color or a font size, you will have to change it in multiple places instead of just one.
+
+```jsx {5,12} showLineNumbers
+<Button
+    variant="filled"
+    intent="primary"
+    text="Primary"
+    style={{ marginRight: 16 }}
+/>
+
+<Button
+    variant="filled"
+    intent="primary"
+    text="Primary"
+    style={{ marginRight: theme.space.medium }} // Use design token instead.
+/>
+```
+
+The **`theme`** object should be returned from the **`useTheme`** hook, please avoid importing it directly from **`@hero-design/react`** since it will not have theming support.
+
+```jsx {4} showLineNumbers
+import { useTheme } from 'styled-components';
+
+const Example = () => {
+  const theme = useTheme();
+  // Rest of your code
+};
+```
+
+For a list of available design tokens, please refer to [**Web design tokens**](/web/web-design-tokens).
+
+## Avoid customizing existing components
+
+Hero Design components and their use cases are implemented according to the [**official Web UI Kit**](<https://www.figma.com/file/YKhWvtDlIAbAhdILeTu9FP/Hero-Design-UI-Kit-1.1-(Brand-update-CURRENT)?type=design&node-id=1090-14597&mode=design&t=HyO9CnSz2GmY5n1j-4>) and should be used whenever possible.
+
+If you have UIs or functions that our components have yet to support, please avoid customizing them without [**consulting with the designers and the Andromeda team**](https://employmenthero.slack.com/archives/CHWMT4F44) first to discuss the best approach.
+
+```jsx {4-6,11-12} showLineNumbers
+<Button
+    text="Secondary"
+  style={{
+    color: theme.colors.secondary,
+    backgroundColor: 'transparent',
+    borderRadius: theme.radii.rounded,  // This should be avoided.
+  }}
+/>
+<Button
+    text="Secondary"
+    variant="outlined"
+  intent="secondary" // Use existing intents and variants instead.
+/>
+```
+
+## Avoid using internal components theme keys
+
+Hero Design components have their own sets of internal theme keys that are not meant to be used outside. They are contained in a special **`__hd__`** field in the **`theme`** object and should be avoided.
+
+```jsx {5,12} showLineNumbers
+<CustomComponent
+  text="Press me"
+  onPress={() => alert('Pressed')}
+  style={{
+    fontSize: theme.__hd__.button.fontSize.default,  // This should be avoided.
+  }}
+/>
+<CustomComponent
+  text="Press me"
+  onPress={() => alert('Pressed')}
+  style={{
+    fontSize: theme.fontSizes.xlarge,  // Use design token instead.
+  }}
+/>
+```
+
+## Avoid importing colors from @hero-design/colors
+
+For most cases, **semantic colors** should be extracted and used from the **`theme.colors`** object, instead of imported from the **@hero-design/colors** package, this will ensure that the colors are consistent and correctly themed.
+
+For a list of semantic colors and their use cases, please refer to [**Web colors**](/web/Guidelines/colors#semantic) section.
+
+```jsx {8,15} showLineNumbers
+import { ebensPalette } from '@hero-design/colors';
+
+//...
+<CustomComponent
+  text="Press me"
+  onPress={() => alert('Pressed')}
+  style={{
+    color: ebensPalette.white, // This should be avoided.
+  }}
+/>
+<CustomComponent
+  text="Press me"
+  onPress={() => alert('Pressed')}
+  style={{
+    color: theme.colors.onDarkGlobalSurface, // Use design token from theme instead.
+  }}
+  />
+```
+
+## Try to utilize @ehrocks/hero-design-react components
+
+Hero Design is being actively developed and maintained by the **Andromeda team**. We are constantly working to add new components and features to the library. You can check the [**Changelog**](/changelog/web) section or [**our Roadmap**](https://employmenthero.atlassian.net/wikiOverview) to see what we are working on.
+
+If you have a UI that needs to be implemented with a **3rd party component**, please first [**consult with the designers and the Andromeda team**](https://employmenthero.slack.com/archives/CHWMT4F44) to see if it could be widely used enough to be added to the UI Kit, then we will implement it as a **Hero Design component**.

@@ -1,0 +1,219 @@
+---
+id: badge
+title: Badge
+---
+
+# Badge
+
+- Badge is used to describe status or value of a text or number.
+- It can be used as standalone status; or a notification.
+
+## Examples
+
+There are 3 types: **Standalone**, **Count** and **Status**.
+
+### Standalone
+
+#### Text
+
+```jsx live
+<>
+  <Box sx={{ mb: 'medium', display: 'flex', gap: 'medium', flexWrap: 'wrap' }}>
+    <Badge intent="basic" content="BASIC" />
+    <Badge intent="primary" content="PRIMARY" />
+    <Badge intent="success" content="SUCCESS" />
+    <Badge intent="error" content="ERROR" />
+    <Badge intent="danger" content="DANGER" />
+    <Badge intent="warning" content="WARNING" />
+    <Badge intent="archived" content="ARCHIVED" />
+  </Box>
+  <Box sx={{ mb: 'medium', display: 'flex', gap: 'medium', flexWrap: 'wrap' }}>
+    <Badge intent="basic" variant="outlined" content="BASIC" />
+    <Badge intent="primary" variant="outlined" content="PRIMARY" />
+    <Badge intent="success" variant="outlined" content="SUCCESS" />
+    <Badge intent="error" variant="outlined" content="ERROR" />
+    <Badge intent="danger" variant="outlined" content="DANGER" />
+    <Badge intent="warning" variant="outlined" content="WARNING" />
+    <Badge intent="archived" variant="outlined" content="ARCHIVED" />
+  </Box>
+  <Box sx={{ display: 'flex', gap: 'medium', flexWrap: 'wrap' }}>
+    <Badge intent="accent-grey" variant="outlined" content="GREY" />
+    <Badge intent="accent-violet" variant="outlined" content="VIOLET" />
+    <Badge intent="accent-purple" variant="outlined" content="PURPLE" />
+    <Badge intent="accent-pink" variant="outlined" content="PINK" />
+    <Badge intent="accent-green" variant="outlined" content="GREEN" />
+    <Badge
+      intent="accent-grotesque-green"
+      variant="outlined"
+      content="GROTESQUE GREEN"
+    />
+    <Badge intent="accent-smalt" variant="outlined" content="SMALT" />
+    <Badge
+      intent="accent-dodger-blue"
+      variant="outlined"
+      content="DODGER BLUE"
+    />
+    <Badge intent="accent-blue" variant="outlined" content="BLUE" />
+    <Badge intent="accent-red" variant="outlined" content="RED" />
+    <Badge intent="accent-orange" variant="outlined" content="ORANGE" />
+    <Badge intent="accent-yellow" variant="outlined" content="YELLOW" />
+  </Box>
+</>
+```
+
+#### Number
+
+```jsx live
+<>
+  <Box sx={{ mb: 'medium', display: 'flex', gap: 'medium', flexWrap: 'wrap' }}>
+    <Badge intent="basic" content={1} />
+    <Badge intent="success" content={1} />
+    <Badge intent="error" content={25} />
+    <Badge intent="danger" content={55} />
+    <Badge intent="warning" content={99} />
+    <Badge intent="primary" content={100} />
+    <Badge intent="archived" content={100} />
+  </Box>
+  <Box sx={{ display: 'flex', gap: 'medium', flexWrap: 'wrap' }}>
+    <Badge intent="basic" variant="outlined" content={1} />
+    <Badge intent="success" variant="outlined" content={1} />
+    <Badge intent="error" variant="outlined" content={25} />
+    <Badge intent="danger" variant="outlined" content={55} />
+    <Badge intent="warning" variant="outlined" content={99} />
+    <Badge intent="primary" variant="outlined" content={100} />
+    <Badge intent="archived" variant="outlined" content={100} />
+  </Box>
+</>
+```
+
+### Count
+
+It can be **Number** or **Icon**.
+
+#### Icon
+
+```jsx live
+<Badge.Count content="clock-outlined">
+  <Box
+    backgroundColor="grey-light-60"
+    style={{
+      width: theme.sizes.xxxlarge,
+      height: theme.sizes.xxxlarge,
+      borderRadius: '50%',
+      background: theme.colors.palette.greyLight60,
+      display: 'inline-block',
+      verticalAlign: 'middle',
+    }}
+  />
+</Badge.Count>
+```
+
+#### Number
+
+`99+` is displayed when count is larger than 99.
+
+```jsx live
+<>
+  <Box sx={{ display: 'flex', gap: 'large', flexWrap: 'wrap' }}>
+    <Badge.Count content={9}>
+      <Box
+        backgroundColor="grey-light-60"
+        style={{
+          width: theme.sizes.xxxlarge,
+          height: theme.sizes.xxxlarge,
+          borderRadius: '50%',
+          background: theme.colors.palette.greyLight60,
+          display: 'inline-block',
+          verticalAlign: 'middle',
+        }}
+      />
+    </Badge.Count>
+    <Badge.Count content={99}>
+      <Box
+        backgroundColor="grey-light-60"
+        style={{
+          width: theme.sizes.xxxlarge,
+          height: theme.sizes.xxxlarge,
+          borderRadius: '50%',
+          background: theme.colors.palette.greyLight60,
+          display: 'inline-block',
+          verticalAlign: 'middle',
+        }}
+      />
+    </Badge.Count>
+    <Badge.Count content={25}>
+      <Box
+        backgroundColor="grey-light-60"
+        style={{
+          width: theme.sizes.xxxlarge,
+          height: theme.sizes.xxxlarge,
+          borderRadius: '50%',
+          background: theme.colors.palette.greyLight60,
+          display: 'inline-block',
+          verticalAlign: 'middle',
+        }}
+      />
+    </Badge.Count>
+    <Badge.Count content={100}>
+      <Box
+        backgroundColor="grey-light-60"
+        style={{
+          width: theme.sizes.xxxlarge,
+          height: theme.sizes.xxxlarge,
+          borderRadius: '50%',
+          background: theme.colors.palette.greyLight60,
+          display: 'inline-block',
+          verticalAlign: 'middle',
+        }}
+      />
+    </Badge.Count>
+  </Box>
+</>
+```
+
+### Status
+
+```jsx live
+<Box sx={{ display: 'flex', gap: 'medium', flexWrap: 'wrap' }}>
+  <Badge.Status>
+    <Icon icon="bell" intent="text" size="medium" />
+  </Badge.Status>
+  <Badge.Status intent="basic">
+    <Icon icon="bell" intent="text" size="medium" />
+  </Badge.Status>
+  <Badge.Status intent="error">
+    <Icon icon="bell" intent="text" size="medium" />
+  </Badge.Status>
+  <Badge.Status intent="primary">
+    <Icon icon="bell" intent="text" size="medium" />
+  </Badge.Status>
+  <Badge.Status intent="success">
+    <Icon icon="bell" intent="text" size="medium" />
+  </Badge.Status>
+  <Badge.Status intent="warning">
+    <Icon icon="bell" intent="text" size="medium" />
+  </Badge.Status>
+  <Badge.Status>
+    <Button.Link
+      href="https://employmenthero.com"
+      target="_blank"
+      rel="noreferer noopener"
+      text="Link to Employment Hero"
+    />
+  </Badge.Status>
+</Box>
+```
+
+## Props
+
+#### Badge Props
+
+<Props of="Badge" from="web" />
+
+#### Badge.Count Props
+
+<Props of="Count" from="web" />
+
+#### Badge.Status Props
+
+<Props of="Status" from="web" />

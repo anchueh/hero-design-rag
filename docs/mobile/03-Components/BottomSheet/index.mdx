@@ -1,0 +1,331 @@
+---
+id: bottomSheet
+title: Bottom Sheet
+---
+
+<PageTitle
+  title="Bottom Sheet"
+  content="A bottom sheet is a sheet component that slides up from the bottom of a screen. It is designed to reveal supplementary content that complements the main content on the screen without taking up excessive space. "
+/>
+
+# Bottom Sheet
+
+Bottom sheets are surfaces containing supplementary content that are anchored to the bottom of the screen.
+
+## Example
+
+:::info Landscape mode
+To use this component in landscape mode on iOS, you must first pass the `supportedOrientations` prop as specified in the [React Native doc](https://reactnative.dev/docs/modal#supportedorientations-ios).
+:::
+
+<br />
+
+### Example 1: Basic usage
+
+Basic Bottom Sheet with backdrop.
+
+```jsx live
+function Example1() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button
+        variant="text"
+        text="Toggle Bottom Sheet"
+        onPress={() => setOpen(true)}
+      />
+      <BottomSheet open={open} onRequestClose={() => setOpen(false)}>
+        <>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+        </>
+      </BottomSheet>
+    </>
+  );
+}
+```
+
+### Example 2: Bottom Sheet without backdrop
+
+```jsx live
+function Example2() {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <Button
+        variant="text"
+        text="Toggle Bottom Sheet"
+        onPress={() => setOpen(true)}
+      />
+      <BottomSheet
+        open={open}
+        onRequestClose={() => setOpen(false)}
+        hasBackdrop={false}
+      >
+        <>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+        </>
+      </BottomSheet>
+    </>
+  );
+}
+```
+
+### Example 3: Bottom Sheet with Header & Footer
+
+Bottom Sheet can be config to have a header and a footer
+
+```jsx live
+function Example3() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button
+        variant="text"
+        text="Toggle Bottom Sheet"
+        onPress={() => setOpen(true)}
+      />
+      <BottomSheet
+        open={open}
+        onRequestClose={() => setOpen(false)}
+        header="Title"
+        footer={
+          <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
+            <Button
+              variant="text"
+              text="Close"
+              onPress={() => setOpen(false)}
+            />
+          </View>
+        }
+      >
+        <View style={{ padding: theme.space.medium }}>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+        </View>
+      </BottomSheet>
+    </>
+  );
+}
+```
+
+### Example 4: BottomSheet with ScrollView
+
+BottomSheet can also be used with BottomSheet.ScrollView.
+
+```jsx live
+function Example4() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button
+        variant="text"
+        text="Toggle Bottom Sheet"
+        onPress={() => setOpen(true)}
+      />
+      <BottomSheet
+        open={open}
+        onRequestClose={() => setOpen(false)}
+        header="Title"
+        footer={
+          <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
+            <Button
+              variant="text"
+              text="Close"
+              onPress={() => setOpen(false)}
+            />
+          </View>
+        }
+      >
+        <BottomSheet.ScrollView
+          contentContainerStyle={{ height: 300, padding: theme.space.medium }}
+        >
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+        </BottomSheet.ScrollView>
+      </BottomSheet>
+    </>
+  );
+}
+```
+
+### Example 5: Floating Bottom Sheet
+
+```jsx live
+function Example1() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button
+        variant="text"
+        text="Toggle Floating Bottom Sheet"
+        onPress={() => setOpen(true)}
+      />
+      <BottomSheet
+        variant="floating"
+        open={open}
+        onRequestClose={() => setOpen(false)}
+      >
+        <>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+          <Typography.Body variant="small">
+            Bottom Sheet Content
+          </Typography.Body>
+        </>
+      </BottomSheet>
+    </>
+  );
+}
+```
+
+## Props
+
+### BottomSheet
+
+<Props of="BottomSheet" />
+
+<br />
+
+### BottomSheet.ScrollView
+
+Same as React Native's [ScrollView](https://reactnative.dev/docs/scrollview).

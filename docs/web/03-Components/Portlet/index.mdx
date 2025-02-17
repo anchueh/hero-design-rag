@@ -1,0 +1,215 @@
+---
+id: portlet
+title: Portlet
+---
+
+# Portlet
+
+## Examples
+
+### Basic
+
+```jsx live
+function PortletDemo() {
+  const Item = ({ complete, text }) => (
+    <div style={{ display: 'flex', alignItems: 'center' }}>
+      {complete ? (
+        <Icon icon="circle-check" intent="success" />
+      ) : (
+        <Icon icon="cancel" intent="error" />
+      )}
+      <Typography.Text sx={{ ml: 'small' }} tagName="span">
+        {text}
+      </Typography.Text>
+    </div>
+  );
+
+  const [rewardOpen, setRewardOpen] = React.useState(false);
+  const [onboardingOpen, setOnboardingOpen] = React.useState(true);
+  const [companyFeedOpen, setCompanyFeedOpen] = React.useState(true);
+
+  const [loading, setLoading] = React.useState(false);
+
+  return (
+    <Box p="large" bgColor="neutralBackground">
+      <Grid gutter="medium">
+        <Grid.Row>
+          <Grid.Col span={[24, 24, 24, 24, 24]}>
+            <Portlet
+              title="Rewards and Recognitions"
+              open={rewardOpen}
+              loading={loading}
+              actions={[
+                {
+                  icon: 'speaker',
+                  menus: [
+                    {
+                      value: 'rewards',
+                      item: {
+                        text: 'Rewards',
+                        icon: 'diamond',
+                        onClick: () => {
+                          alert('Clicked rewards');
+                        },
+                      },
+                    },
+                    {
+                      value: 'recognitions',
+                      item: {
+                        text: 'Recognitions',
+                        icon: 'star-medal',
+                        onClick: () => {
+                          alert('Clicked recognitions');
+                        },
+                      },
+                    },
+                  ],
+                },
+                {
+                  icon: 'sync',
+                  onClick: () => {
+                    setLoading(true);
+                    setTimeout(() => setLoading(false), 1000);
+                  },
+                },
+                {
+                  icon: rewardOpen ? 'single-up-arrow' : 'single-down-arrow',
+                  onClick: () => setRewardOpen((value) => !value),
+                },
+              ]}
+            >
+              <Item text="Personal Details" complete />
+              <Item text="Tax Details" complete />
+              <Item text="Superfund Details" complete />
+              <Item text="Work Eligibility" />
+            </Portlet>
+          </Grid.Col>
+        </Grid.Row>
+        <Grid.Row gutter={['medium', 'medium']}>
+          <Grid.Col span={[24, 24, 24, 24, 24]}>
+            <Portlet
+              title={
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <Icon icon="sparkle-outlined" sx={{ mr: 'small' }} />
+                  <Typography.Text fontSize={18} fontWeight="semi-bold">
+                    Company Feed
+                  </Typography.Text>
+                </Box>
+              }
+              titleExtra={<Badge content="New" />}
+              open={companyFeedOpen}
+              actions={[
+                {
+                  icon: companyFeedOpen
+                    ? 'single-up-arrow'
+                    : 'single-down-arrow',
+                  onClick: () => setCompanyFeedOpen((value) => !value),
+                },
+              ]}
+            >
+              <Comment
+                author="Han Solo"
+                authorDetails="Test lorem ipsum"
+                avatar="/img/comment-avatar.png"
+                content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+                datetime="2 minutes ago"
+              />
+            </Portlet>
+          </Grid.Col>
+        </Grid.Row>
+        <Grid.Row gutter={['medium', 'medium']}>
+          <Grid.Col span={[24, 24, 12, 12, 12]}>
+            <Portlet
+              title="Onboarding Status"
+              titleExtra="New"
+              open={onboardingOpen}
+              actions={[
+                {
+                  icon: onboardingOpen
+                    ? 'single-up-arrow'
+                    : 'single-down-arrow',
+                  onClick: () => setOnboardingOpen((value) => !value),
+                },
+              ]}
+            >
+              <Box pt="large" pb="large">
+                <Typography.Title level={5}>
+                  Continue where you left off...
+                </Typography.Title>
+                <Progress value={10} />
+                <Typography.Text intent="subdued">
+                  My certifications
+                </Typography.Text>
+                <Button
+                  text="Certification"
+                  rightIcon="single-right-arrow"
+                  sx={{ margin: 'auto', display: 'block', mt: 'large' }}
+                />
+              </Box>
+            </Portlet>
+          </Grid.Col>
+          <Grid.Col span={[24, 24, 12, 12, 12]}>
+            <Portlet title="Tasks" titleExtra={4}>
+              <Item text="Personal Details" complete />
+              <Item text="Tax Details" complete />
+              <Item text="Superfund Details" complete />
+              <Item text="Work Eligibility" />
+            </Portlet>
+          </Grid.Col>
+        </Grid.Row>
+      </Grid>
+    </Box>
+  );
+}
+```
+
+### Custom actions
+
+Portlet supports passing additional actions to display in the portlet header.
+
+```jsx live
+function PortletDemo() {
+  const Item = ({ complete, text }) => (
+    <div style={{ display: 'flex', alignItems: 'center' }}>
+      {complete ? (
+        <Icon icon="circle-check" intent="success" />
+      ) : (
+        <Icon icon="cancel" intent="error" />
+      )}
+      <Typography.Text sx={{ ml: 'small' }} tagName="span">
+        {text}
+      </Typography.Text>
+    </div>
+  );
+
+  const [open, setOpen] = React.useState(true);
+
+  return (
+    <Box p="large" bgColor="neutralBackground">
+      <Portlet
+        title="Tasks"
+        titleExtra={4}
+        open={open}
+        onClose={() => setOpen((value) => !value)}
+        actions={[
+          { icon: 'sync' },
+          {
+            icon: open ? 'single-up-arrow' : 'single-down-arrow',
+            onClick: () => setOpen((value) => !value),
+          },
+          { icon: 'cancel' },
+        ]}
+      >
+        <Item text="Personal Details" complete />
+        <Item text="Tax Details" complete />
+        <Item text="Superfund Details" complete />
+        <Item text="Work Eligibility" />
+      </Portlet>
+    </Box>
+  );
+}
+```
+
+## Props
+
+<Props of="Portlet" from="web" />

@@ -1,0 +1,777 @@
+---
+id: bar-chart
+title: Bar
+---
+
+# Chart.Bar
+
+Reusable Bar chart components.
+
+## Examples
+
+### Basic
+
+The basic chart just contain the chart with no legend, title and filter.
+
+```jsx live
+function BarChart() {
+  const labels = ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Dec'];
+  const data = [
+    { label: '07th', data: [3, 4, 2, 2.5, 4, 3, 6] },
+    { label: '14th', data: [3, 4, 2, 2.5, 5, 3, 3] },
+    { label: '21st', data: [3, 4, 2, 2.5, 2, 3, 6] },
+    { label: '25th', data: [3, 4, 2, 2.5, 6, 3, 4] },
+    { label: '31st', data: [3, 4, 2, 2.5, 7, 3, 6] },
+  ];
+
+  return (
+    <Box sx={{ height: 400 }}>
+      <Chart.Bar
+        data={data}
+        xAxisConfig={{
+          title: 'Horizontal Title',
+        }}
+        yAxisConfig={{
+          title: 'Vertical Title',
+          labels,
+        }}
+        data-test-id="bar-chart"
+      />
+    </Box>
+  );
+}
+```
+
+### With tick config
+
+Tick includes `interval` props. It is used to set the interval between the tick.
+
+```jsx live
+function BarChart() {
+  const labels = ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Dec'];
+  const data = [
+    { label: '07th', data: [3, 4, 2, 2.5, 4, 3, 6] },
+    { label: '14th', data: [3, 4, 2, 2.5, 5, 3, 3] },
+    { label: '21st', data: [3, 4, 2, 2.5, 2, 3, 6] },
+    { label: '25th', data: [3, 4, 2, 2.5, 6, 3, 4] },
+    { label: '31st', data: [3, 4, 2, 2.5, 7, 3, 6] },
+  ];
+
+  return (
+    <Box sx={{ height: 400 }}>
+      <Chart.Bar
+        data={data}
+        xAxisConfig={{
+          title: 'Horizontal Title',
+          maxValue: 27,
+          tick: {
+            interval: 3,
+          },
+          step: 3,
+        }}
+        yAxisConfig={{
+          title: 'Vertical Title',
+          labels,
+        }}
+      />
+    </Box>
+  );
+}
+```
+
+### With step
+
+the `xAxisConfig.step` props is used to set the step between the xAxis values.
+
+```jsx live
+function BarChart() {
+  const labels = ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Dec'];
+  const data = [
+    { label: '07th', data: [3, 4, 2, 2.5, 4, 3, 6] },
+    { label: '14th', data: [3, 4, 2, 2.5, 5, 3, 3] },
+    { label: '21st', data: [3, 4, 2, 2.5, 2, 3, 6] },
+    { label: '25th', data: [3, 4, 2, 2.5, 6, 3, 4] },
+    { label: '31st', data: [3, 4, 2, 2.5, 7, 3, 6] },
+  ];
+
+  return (
+    <Box sx={{ height: 400 }}>
+      <Chart.Bar
+        data={data}
+        xAxisConfig={{
+          title: 'Horizontal Title',
+          maxValue: 27,
+          tick: {
+            interval: 4,
+          },
+          step: 6,
+        }}
+        yAxisConfig={{
+          title: 'Vertical Title',
+          labels,
+        }}
+      />
+    </Box>
+  );
+}
+```
+
+### With title
+
+The bar chart is attached the horizontal title and vertical title.
+
+```jsx live
+function BarChart() {
+  const labels = ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Dec'];
+  const data = [
+    { label: '07th', data: [3, 4, 2, 2.5, 4, 3, 6] },
+    { label: '14th', data: [3, 4, 2, 2.5, 5, 3, 3] },
+    { label: '21st', data: [3, 4, 2, 2.5, 2, 3, 6] },
+    { label: '25th', data: [3, 4, 2, 2.5, 6, 3, 4] },
+    { label: '31st', data: [3, 4, 2, 2.5, 7, 3, 6] },
+  ];
+
+  return (
+    <Box sx={{ height: 400 }}>
+      <Chart.Bar
+        data={data}
+        xAxisConfig={{
+          title: 'Horizontal Title',
+          maxValue: 25,
+          tick: {
+            interval: 5,
+          },
+          step: 5,
+        }}
+        yAxisConfig={{
+          title: 'Vertical Title',
+          labels,
+        }}
+      />
+    </Box>
+  );
+}
+```
+
+### With legend
+
+The bar chart is attached the legend to help visualize the data.
+We have `legendConfig.selectable` props to make the legend become checkbox to filter the data.
+
+```jsx live
+function BarChart() {
+  const labels = ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Dec'];
+  const data = [
+    { label: '07th', data: [3, 4, 2, 2.5, 4, 3, 6] },
+    { label: '14th', data: [3, 4, 2, 2.5, 5, 3, 3] },
+    { label: '21st', data: [3, 4, 2, 2.5, 2, 3, 6] },
+    { label: '25th', data: [3, 4, 2, 2.5, 6, 3, 4] },
+    { label: '31st', data: [3, 4, 2, 2.5, 7, 3, 6] },
+  ];
+
+  return (
+    <Box>
+      <Typography.Title
+        level={4}
+        style={{ marginTop: `${theme.space.large}px` }}
+      >
+        Circles Legend
+      </Typography.Title>
+
+      <Chart.Bar
+        data={data}
+        xAxisConfig={{
+          maxValue: 25,
+          tick: {
+            interval: 5,
+          },
+          step: 5,
+        }}
+        yAxisConfig={{
+          labels,
+        }}
+        legendConfig={{
+          selectable: false,
+          viewMoreText: 'More',
+          maxLegend: 4,
+        }}
+        style={{ height: 400 }}
+      />
+      <Typography.Title
+        level={4}
+        style={{ marginTop: `${theme.space.large}px` }}
+      >
+        Checkboxes Legend
+      </Typography.Title>
+
+      <Chart.Bar
+        data={data}
+        xAxisConfig={{
+          maxValue: 25,
+          tick: {
+            interval: 5,
+          },
+          step: 5,
+        }}
+        yAxisConfig={{
+          labels,
+        }}
+        legendConfig={{
+          selectable: true,
+          viewMoreText: 'More',
+          maxLegend: 4,
+        }}
+        style={{ height: 400 }}
+      />
+    </Box>
+  );
+}
+```
+
+### With Navigation
+
+The bar chart support navigation between the data. We have `navigationConfig.visible` props to make the navigation button appear.
+
+and we have `navigationConfig.onNavigate` props to handle the navigation.
+
+<Note title="Improvement UX" intent="info">
+  In case, we want to improve the UX by not allow the user interact with
+  navigation when they at the first page or last page. We can use{' '}
+  <Highlight>navigationConfig.disabledButtons</Highlight> with{' '}
+  <Highlight>prev</Highlight> or <Highlight>next</Highlight> value to disable
+  that button.
+</Note>
+
+```jsx live
+function BarChart() {
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+  const numberOfColumns = 6;
+  const data = [
+    { label: '07th', data: [3, 4, 2, 2.5, 4, 3, 6] },
+    { label: '14th', data: [3, 4, 2, 2.5, 5, 3, 3] },
+    { label: '21st', data: [3, 4, 2, 2.5, 2, 3, 6] },
+    { label: '25th', data: [3, 4, 2, 2.5, 6, 3, 4] },
+    { label: '31st', data: [3, 4, 2, 2.5, 7, 3, 6] },
+  ];
+
+  const labels = ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Dec'];
+
+  const navigationMapping = {
+    0: 'prev',
+    [`${labels.length - numberOfColumns}`]: 'next',
+  };
+
+  return (
+    <Box sx={{ height: 400 }}>
+      <Chart.Bar
+        data={data.map((d) => ({
+          ...d,
+          data: d.data.slice(currentIndex, currentIndex + numberOfColumns),
+        }))}
+        xAxisConfig={{
+          maxValue: 25,
+          tick: {
+            interval: 5,
+          },
+          step: 5,
+        }}
+        yAxisConfig={{
+          labels: labels.slice(currentIndex, currentIndex + numberOfColumns),
+        }}
+        legendConfig={{
+          selectable: true,
+          viewMoreText: 'More',
+          maxLegend: 4,
+        }}
+        navigationConfig={{
+          visible: true,
+          onNavigate: (direction) => {
+            if (direction === 'next') {
+              if (currentIndex + numberOfColumns >= labels.length) return;
+              setCurrentIndex(currentIndex + 1);
+            }
+            if (direction === 'prev') {
+              if (currentIndex === 0) return;
+              setCurrentIndex(currentIndex - 1);
+            }
+          },
+          disabledButtons: navigationMapping[currentIndex],
+        }}
+      />
+    </Box>
+  );
+}
+```
+
+### With bar config
+
+We can custom the bar display or behavior throught `barConfig` props. Like, `onClick` of the bar or show the total value by `showTotal` props
+
+<Note title="Notes">
+  The total format can be change by <code>totalFormatter</code>.
+</Note>
+
+```jsx live
+function BarChart() {
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+  const numberOfColumns = 6;
+  const data = [
+    { label: '07th', data: [3, 4, 2, 2.5, 4, 3, 6] },
+    { label: '14th', data: [3, 4, 2, 2.5, 5, 3, 3] },
+    { label: '21st', data: [3, 4, 2, 2.5, 2, 3, 6] },
+    { label: '25th', data: [3, 4, 2, 2.5, 6, 3, 4] },
+    { label: '31st', data: [3, 4, 2, 2.5, 7, 3, 6] },
+  ];
+
+  const labels = ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Dec'];
+
+  return (
+    <Box sx={{ height: 400 }}>
+      <Chart.Bar
+        data={data.map((d) => ({
+          ...d,
+          data: d.data.slice(currentIndex, currentIndex + numberOfColumns),
+        }))}
+        xAxisConfig={{
+          maxValue: 35,
+          tick: {
+            interval: 5,
+          },
+          step: 5,
+        }}
+        yAxisConfig={{
+          labels: labels.slice(currentIndex, currentIndex + numberOfColumns),
+        }}
+        legendConfig={{
+          selectable: true,
+          viewMoreText: 'More',
+          maxLegend: 4,
+        }}
+        navigationConfig={{
+          visible: true,
+          onNavigate: (direction) => {
+            if (direction === 'next') {
+              if (currentIndex + numberOfColumns >= labels.length) return;
+              setCurrentIndex(currentIndex + 1);
+            }
+            if (direction === 'prev') {
+              if (currentIndex === 0) return;
+              setCurrentIndex(currentIndex - 1);
+            }
+          },
+        }}
+        barConfig={{
+          onClick: (e, item) => {
+            console.log(item);
+          },
+          showTotal: true,
+          totalFormatter: (totalValue) => totalValue.toFixed(1) + 'M',
+        }}
+      />
+    </Box>
+  );
+}
+```
+
+### With highlighted items
+
+The bar match with the props data will be highlighted.
+
+```jsx live
+function BarChart() {
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+  const numberOfColumns = 6;
+  const data = [
+    { label: '07th', data: [3, 4, 2, 2.5, 4, 3, 6] },
+    { label: '14th', data: [3, 4, 2, 2.5, 5, 3, 3] },
+    { label: '21st', data: [3, 4, 2, 2.5, 2, 3, 6] },
+    { label: '25th', data: [3, 4, 2, 2.5, 6, 3, 4] },
+    { label: '31st', data: [3, 4, 2, 2.5, 7, 3, 6] },
+  ];
+
+  const labels = ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Dec'];
+
+  return (
+    <Box sx={{ height: 400 }}>
+      <Chart.Bar
+        data={data.map((d) => ({
+          ...d,
+          data: d.data.slice(currentIndex, currentIndex + numberOfColumns),
+        }))}
+        xAxisConfig={{
+          maxValue: 35,
+          tick: {
+            interval: 5,
+          },
+          step: 5,
+        }}
+        yAxisConfig={{
+          labels: labels.slice(currentIndex, currentIndex + numberOfColumns),
+        }}
+        legendConfig={{
+          selectable: true,
+          viewMoreText: 'More',
+          maxLegend: 4,
+        }}
+        navigationConfig={{
+          visible: true,
+          onNavigate: (direction) => {
+            if (direction === 'next') {
+              if (currentIndex + numberOfColumns >= labels.length) return;
+              setCurrentIndex(currentIndex + 1);
+            }
+            if (direction === 'prev') {
+              if (currentIndex === 0) return;
+              setCurrentIndex(currentIndex - 1);
+            }
+          },
+        }}
+        highlightedItems={[
+          {
+            legend: '07th',
+            label: 'Sep',
+          },
+          {
+            legend: '31st',
+            label: 'Oct',
+          },
+          {
+            legend: '31st',
+            label: 'Dec',
+          },
+          {
+            legend: '25th',
+            label: 'Jun',
+          },
+        ]}
+      />
+    </Box>
+  );
+}
+```
+
+### With negative values
+
+The bar chart support negative value with `Chart.HorizontalBar` component.
+
+```jsx live
+function BarChart() {
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+  const numberOfColumns = 6;
+  const data = [
+    { label: '07th', data: [-3, 4, 2, 6, 4, -3, 6] },
+    { label: '14th', data: [3, -5, 2, 4, -5, 3, -3] },
+    { label: '21st', data: [3, -3, 2, 6, 5, 3, -3] },
+  ];
+
+  const labels = ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Dec'];
+
+  const navigationMapping = {
+    0: 'prev',
+    [`${labels.length - numberOfColumns}`]: 'next',
+  };
+
+  return (
+    <Box sx={{ height: 560 }}>
+      <Chart.HorizontalBar
+        data={data.map((d) => ({
+          ...d,
+          data: d.data.slice(currentIndex, currentIndex + numberOfColumns),
+        }))}
+        xAxisConfig={{
+          maxValue: 10,
+          tick: {
+            interval: 2,
+          },
+          step: 10,
+        }}
+        yAxisConfig={{
+          labels: labels.slice(currentIndex, currentIndex + numberOfColumns),
+          title: 'Vertical Title',
+        }}
+        legendConfig={{
+          selectable: false,
+          viewMoreText: 'More',
+          maxLegend: 4,
+        }}
+        navigationConfig={{
+          visible: true,
+          onNavigate: (direction) => {
+            if (direction === 'next') {
+              if (currentIndex + numberOfColumns >= labels.length) return;
+              setCurrentIndex(currentIndex + 1);
+            }
+            if (direction === 'prev') {
+              if (currentIndex === 0) return;
+              setCurrentIndex(currentIndex - 1);
+            }
+          },
+          disabledButtons: navigationMapping[currentIndex],
+        }}
+        data-test-id="horizontal-bar-chart"
+      />
+    </Box>
+  );
+}
+```
+
+### With customized tooltip
+
+The customizing Tooltip feature allows users to tailor the appearance.
+
+```jsx live
+function BarChart() {
+  const labels = ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Dec'];
+  const data = [
+    { label: '07th', data: [3, 4, 2, 2.5, 4, 3, 6] },
+    { label: '14th', data: [3, 4, 2, 2.5, 5, 3, 3] },
+    { label: '21st', data: [3, 4, 2, 2.5, 2, 3, 6] },
+    { label: '25th', data: [3, 4, 2, 2.5, 6, 3, 4] },
+    { label: '31st', data: [3, 4, 2, 2.5, 7, 3, 6] },
+  ];
+
+  return (
+    <Box sx={{ height: 400 }}>
+      <Chart.Bar
+        data={data}
+        xAxisConfig={{
+          title: 'Horizontal Title',
+        }}
+        yAxisConfig={{
+          title: 'Vertical Title',
+          labels,
+        }}
+        data-test-id="customized-tooltip-bar-chart"
+        tooltipRenderer={({ label, legendColor, value, yAxisLabel }) => {
+          const serie = data.find((item) => item.label === label);
+
+          const sum =
+            serie !== undefined
+              ? serie.data.reduce((sum, currentValue) => sum + currentValue, 0)
+              : 0;
+
+          const percent = ((value / sum) * 100).toFixed(2);
+          const percentString = `(${percent}%)`;
+          return (
+            <>
+              <Box
+                data-test-id="legend-circle"
+                style={{
+                  backgroundColor: legendColor,
+                  width: theme.sizes.xsmall,
+                  height: theme.sizes.xsmall,
+                  borderRadius: theme.radii.medium,
+                }}
+              />
+              <Typography.Text
+                fontSize={14}
+                fontWeight="light"
+                intent="subdued"
+                tagName="span"
+              >
+                {label}
+              </Typography.Text>
+              <Typography.Text
+                fontSize={14}
+                fontWeight="light"
+                intent="subdued"
+                tagName="span"
+              >
+                {yAxisLabel}
+              </Typography.Text>
+              <Typography.Text fontSize={14} fontWeight="light" tagName="span">
+                {value}
+              </Typography.Text>
+              <Typography.Text fontSize={14} fontWeight="light" tagName="span">
+                {percentString}
+              </Typography.Text>
+            </>
+          );
+        }}
+      />
+    </Box>
+  );
+}
+```
+
+### With bar custom color
+
+The chart support style for the bar color by passing colors attribute into the styleConfig prop.
+
+<Note title="Color used best practice">
+  Please follow the best practice to ensure consistency across these specific
+  charts deviating from the color order. Should confirm with designer team
+  before using the custom color for the chart.
+  <br />
+  <Highlight>Example</Highlight>
+  <br />
+  Specifically, we have standardized the colors for Gender and Employment status
+  filters:
+  <br />
+  For Employment status:
+  <Ul>
+    <Li>Full time: Violet</Li>
+    <Li>Part time: Blue</Li>
+    <Li>Casual: Orange</Li>
+    <Li>Unassigned: Green</Li>
+  </Ul>
+  And Gender:
+  <Ul>
+    <Li>Female: Violet</Li>
+    <Li>Male: Blue</Li>
+    <Li>Non-binary: Orange</Li>
+    <Li>Prefer not to say: Green</Li>
+    <Li>Unspecified: Red</Li>
+  </Ul>
+</Note>
+
+```jsx live
+function BarChart() {
+  const labels = ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Dec'];
+  const data = [
+    { label: '07th', data: [3, 4, 2, 2.5, 4, 3, 6] },
+    { label: '14th', data: [3, 4, 2, 2.5, 5, 3, 3] },
+    { label: '21st', data: [3, 4, 2, 2.5, 2, 3, 6] },
+    { label: '25th', data: [3, 4, 2, 2.5, 6, 3, 4] },
+    { label: '31st', data: [3, 4, 2, 2.5, 7, 3, 6] },
+  ];
+
+  return (
+    <Box sx={{ height: 400 }}>
+      <Chart.Bar
+        data={data}
+        xAxisConfig={{
+          title: 'Horizontal Title',
+        }}
+        yAxisConfig={{
+          title: 'Vertical Title',
+          labels,
+        }}
+        legendConfig={{
+          selectable: true,
+          viewMoreText: 'More',
+          maxLegend: 4,
+        }}
+        styleConfig={{
+          series: [
+            {
+              label: '07th',
+              color: 'dodgerBlueLight30',
+            },
+            {
+              label: '14th',
+              color: 'violetLight30',
+            },
+            {
+              label: '21st',
+              color: 'greenLight30',
+            },
+            {
+              label: '25th',
+              color: 'orangeLight30',
+            },
+            {
+              label: '31st',
+              color: 'purpleLight30',
+            },
+          ],
+        }}
+      />
+    </Box>
+  );
+}
+```
+
+### With bar sizing
+
+The bar chart can change the bar height by barConfig.size. We have two values is `medium` or `large`.
+The default value is `large`.
+
+```jsx live
+function BarChart() {
+  const labels = ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Dec'];
+  const data = [
+    { label: '07th', data: [3, 4, 2, 2.5, 4, 3, 6] },
+    { label: '14th', data: [3, 4, 2, 2.5, 5, 3, 3] },
+    { label: '21st', data: [3, 4, 2, 2.5, 2, 3, 6] },
+    { label: '25th', data: [3, 4, 2, 2.5, 6, 3, 4] },
+    { label: '31st', data: [3, 4, 2, 2.5, 7, 3, 6] },
+  ];
+
+  const negativeData = [
+    { label: '07th', data: [-3, 4, 2, 6, 4, -3, 6] },
+    { label: '14th', data: [3, -5, 2, 4, -5, 3, -3] },
+    { label: '21st', data: [3, -3, 2, 6, 5, 3, -3] },
+  ];
+
+  return (
+    <>
+      <Typography.Title
+        level={4}
+        style={{ marginTop: `${theme.space.large}px` }}
+      >
+        Bar Chart with bar sizing
+      </Typography.Title>
+
+      <Box sx={{ height: 400 }}>
+        <Chart.Bar
+          data={data}
+          yAxisConfig={{
+            labels,
+          }}
+          barConfig={{
+            size: 'medium',
+          }}
+          legendConfig={{
+            selectable: true,
+            viewMoreText: 'More',
+            maxLegend: 4,
+          }}
+          data-test-id="bar-chart"
+        />
+      </Box>
+
+      <Typography.Title
+        level={4}
+        style={{ marginTop: `${theme.space.large}px` }}
+      >
+        Horizontal Bar Chart with bar sizing
+      </Typography.Title>
+
+      <Box sx={{ height: 560 }}>
+        <Chart.HorizontalBar
+          data={negativeData}
+          xAxisConfig={{
+            maxValue: 10,
+            tick: {
+              interval: 2,
+            },
+            step: 10,
+          }}
+          yAxisConfig={{
+            labels,
+          }}
+          legendConfig={{
+            selectable: true,
+            viewMoreText: 'More',
+            maxLegend: 4,
+          }}
+          barConfig={{
+            size: 'medium',
+          }}
+        />
+      </Box>
+    </>
+  );
+}
+```
+
+## Props
+
+### Chart.Bar
+
+<Props of="BarChart" from="web" />
+
+### Chart.HorizontalBar
+
+<Props of="HorizontalBar" from="web" />

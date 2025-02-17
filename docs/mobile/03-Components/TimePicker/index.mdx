@@ -1,0 +1,106 @@
+---
+id: timePicker
+title: TimePicker
+---
+
+import ComponentPreview from '../../../../src/components/ComponentPreview';
+
+<PageTitle
+  title="TimePicker"
+  content="TimePicker allows users to pick a date within a bottom sheet component."
+/>
+
+## Preview
+
+Typically a time picker consists of hours, minutes, seconds and am/pm. Users can interact with the control by scrolling up or down on the corresponding wheel to select the time.
+
+<ComponentPreview
+  iosSrc="/img/screenshots/time-picker-ios.png"
+  androidSrc="/img/screenshots/time-picker-android.png"
+/>
+
+## Example
+
+:::info Landscape mode
+To use this component in landscape mode on iOS, you must first pass the `supportedOrientations` prop as specified in the [React Native doc](https://reactnative.dev/docs/modal#supportedorientations-ios).
+:::
+
+```SnackPlayer name=TimePicker
+import React, { useState } from 'react';
+import { SafeAreaView, View } from 'react-native';
+import { theme, TimePicker, Typography } from './@hero-design/rn';
+import PlaygroundContext from './PlaygroundContext.js';
+
+const App = () => {
+  const [value, setValue] = useState();
+
+  return (
+    <PlaygroundContext>
+      <View
+        style={{
+          flex: 1,
+          paddingVertical: theme.space.xlarge,
+          paddingHorizontal: theme.space.medium,
+        }}
+      >
+        <Typography.Body variant="small">Time Picker</Typography.Body>
+        <TimePicker
+          value={value}
+          label="Start"
+          confirmLabel="Confirm"
+          onChange={(time) => setValue(time)}
+        />
+        <Typography.Body variant="small">Required</Typography.Body>
+        <TimePicker
+          value={value}
+          label="Start"
+          confirmLabel="Confirm"
+          onChange={(time) => setValue(time)}
+          required
+        />
+        <Typography.Body variant="small">Disabled</Typography.Body>
+        <TimePicker
+          value={value}
+          label="Start"
+          confirmLabel="Confirm"
+          onChange={(time) => setValue(time)}
+          disabled
+        />
+        <Typography.Body variant="small">Error</Typography.Body>
+        <TimePicker
+          value={value}
+          label="Start"
+          confirmLabel="Confirm"
+          onChange={(time) => setValue(time)}
+          error="Invalid time"
+        />
+        <Typography.Body variant="small">With help text</Typography.Body>
+        <TimePicker
+          value={value}
+          label="Start"
+          confirmLabel="Confirm"
+          onChange={(time) => setValue(time)}
+          helpText="UTC+10:00 Australia/Sydney"
+        />
+      </View>
+      <Typography.Body variant="small">hides icon</Typography.Body>
+      <TimePicker
+        value={value}
+        label="Start"
+        confirmLabel="Confirm"
+        onChange={(time) => setValue(time)}
+        helpText="UTC+10:00 Australia/Sydney"
+        showSuffix={false}
+      />
+    </PlaygroundContext>
+  );
+};
+
+export default App;
+```
+
+<br />
+
+## Props
+
+<Props of="TimePicker" />

@@ -1,0 +1,199 @@
+---
+id: chip
+title: Chip
+---
+
+# Chip
+
+Chips help people enter information, make selections, filter content, or trigger actions.
+
+## Examples
+
+### Basic
+
+Here is a basic example of a chip.
+
+```jsx live
+function ChipExample() {
+  const [leftChipChecked, setLeftChipChecked] = React.useState(false);
+  const [rightChipChecked, setRightChipChecked] = React.useState(true);
+
+  return (
+    <Box sx={{ display: 'flex', flexDirection: 'row', gap: 'medium' }}>
+      <Chip
+        data-test-id="employee-records"
+        text="Employee Records"
+        checked={leftChipChecked}
+        onClick={() => setLeftChipChecked(!leftChipChecked)}
+      />
+      <Chip
+        data-test-id="performance-reviews"
+        text="Performance Reviews"
+        checked={rightChipChecked}
+        onClick={() => setRightChipChecked(!rightChipChecked)}
+      />
+    </Box>
+  );
+}
+```
+
+### Checkmark visibility
+
+The checked icon can be toggled using the `withCheckedIcon` prop.
+
+```jsx live
+function ChipExample() {
+  const [checked, setChecked] = React.useState(true);
+
+  return (
+    <Chip
+      text="Employee Records"
+      checked={checked}
+      withCheckedIcon={false}
+      onClick={() => setChecked(!checked)}
+    />
+  );
+}
+```
+
+### With icon
+
+Chip can be customized with an icon using the `icon` prop.
+
+```jsx live
+function ChipExample() {
+  const [checked, setChecked] = React.useState(false);
+
+  return (
+    <Chip
+      text="Employee Records"
+      icon="user-outlined"
+      checked={checked}
+      onClick={() => setChecked(!checked)}
+    />
+  );
+}
+```
+
+### With different intents
+
+Chip color can be customized using the `intent` prop.
+
+```jsx live
+function ChipExample() {
+  const [checked, setChecked] = React.useState({
+    violet: true,
+    orange: true,
+    dodger: true,
+    green: true,
+    pink: true,
+    red: true,
+    grotesque: true,
+    yellow: true,
+    grey: true,
+    purple: true,
+    smalt: true,
+    blue: true,
+  });
+
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        gap: 'small',
+        rowGap: 'small',
+        flexWrap: 'wrap',
+      }}
+    >
+      <Chip
+        text="Violet"
+        checked={checked.violet}
+        onClick={() =>
+          setChecked((prev) => ({ ...prev, violet: !prev.violet }))
+        }
+        intent="accent-violet"
+      />
+      <Chip
+        text="Orange"
+        checked={checked.orange}
+        onClick={() =>
+          setChecked((prev) => ({ ...prev, orange: !prev.orange }))
+        }
+        intent="accent-orange"
+      />
+      <Chip
+        text="Dodger Blue"
+        checked={checked.dodger}
+        onClick={() =>
+          setChecked((prev) => ({ ...prev, dodger: !prev.dodger }))
+        }
+        intent="accent-dodger-blue"
+      />
+      <Chip
+        text="Green"
+        checked={checked.green}
+        onClick={() => setChecked((prev) => ({ ...prev, green: !prev.green }))}
+        intent="accent-green"
+      />
+      <Chip
+        text="Pink"
+        checked={checked.pink}
+        onClick={() => setChecked((prev) => ({ ...prev, pink: !prev.pink }))}
+        intent="accent-pink"
+      />
+      <Chip
+        text="Red"
+        checked={checked.red}
+        onClick={() => setChecked((prev) => ({ ...prev, red: !prev.red }))}
+        intent="accent-red"
+      />
+      <Chip
+        text="Grotesque Green"
+        checked={checked.grotesque}
+        onClick={() =>
+          setChecked((prev) => ({ ...prev, grotesque: !prev.grotesque }))
+        }
+        intent="accent-grotesque-green"
+      />
+      <Chip
+        text="Yellow"
+        checked={checked.yellow}
+        onClick={() =>
+          setChecked((prev) => ({ ...prev, yellow: !prev.yellow }))
+        }
+        intent="accent-yellow"
+      />
+      <Chip
+        text="Grey"
+        checked={checked.grey}
+        onClick={() => setChecked((prev) => ({ ...prev, grey: !prev.grey }))}
+        intent="accent-grey"
+      />
+      <Chip
+        text="Purple"
+        checked={checked.purple}
+        onClick={() =>
+          setChecked((prev) => ({ ...prev, purple: !prev.purple }))
+        }
+        intent="accent-purple"
+      />
+      <Chip
+        text="Smalt"
+        checked={checked.smalt}
+        onClick={() => setChecked((prev) => ({ ...prev, smalt: !prev.smalt }))}
+        intent="accent-smalt"
+      />
+      <Chip
+        text="Blue"
+        checked={checked.blue}
+        onClick={() => setChecked((prev) => ({ ...prev, blue: !prev.blue }))}
+        intent="accent-blue"
+      />
+    </Box>
+  );
+}
+```
+
+## Props
+
+<Props of="Chip" from="web" />

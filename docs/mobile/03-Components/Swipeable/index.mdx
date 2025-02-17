@@ -1,0 +1,186 @@
+---
+id: swipeable
+title: Swipeable
+---
+
+import ComponentPreview from '../../../../src/components/ComponentPreview';
+
+<PageTitle
+  title="Swipeable"
+  content="Swipeable lists can be swiped horizontally to reveal additional actions, such as ‘Delete’, ‘Decline’, ‘Approve’ or ‘Mark as read’. It allows users for a quick and accessible interaction with individual elements in a list."
+/>
+
+## Preview
+
+<ComponentPreview
+  iosSrc="/img/screenshots/swipeable-ios.png"
+  androidSrc="/img/screenshots/swipeable-android.png"
+/>
+
+## Examples
+
+```SnackPlayer name=Swipeable/Example
+import React from 'react';
+import { SafeAreaView, View } from 'react-native';
+import {
+  Box,
+  Icon,
+  Divider,
+  Swipeable,
+  Typography,
+  useTheme,
+  theme,
+} from './@hero-design/rn';
+import { FlatList } from 'react-native';
+import PlaygroundContext from './PlaygroundContext.js';
+
+const notifications = [
+  {
+    title: 'Leave Request',
+    message: 'New leave request submission from Andy.',
+  },
+  {
+    title: 'Timesheet',
+    message: 'New timesheet submission from Jenny.',
+  },
+  {
+    title: 'Expense',
+    message: 'New expense submission from Will.',
+  },
+];
+
+const Notification = ({ item }) => {
+  const theme = useTheme();
+  return (
+    <Swipeable.Content
+      onPress={() => alert(`Pressed ${item.title}`)}
+      style={{ padding: theme.space.medium }}
+    >
+      <Typography.Body variant="regular-bold">
+        {item.title}
+      </Typography.Body>
+      <Typography.Body variant="small" numberOfLines={2}>{item.message}</Typography.Body>
+    </Swipeable.Content>
+  );
+};
+
+const SwipeableNotification = ({ item, variant }) => {
+  const theme = useTheme();
+  const [swipeableState, setSwipeableState] = React.useState();
+  const closeSwipeable = () => setSwipeableState('closed');
+
+  React.useEffect(() => {
+    if (swipeableState === 'leftOpen') {
+      closeSwipeable();
+      alert('archived');
+    }
+  }, [swipeableState]);
+
+  return (
+    <Swipeable
+      variant={variant}
+      state={swipeableState}
+      onStateChange={setSwipeableState}
+      leftActions={
+        <Swipeable.Action
+          intent="primary"
+          style={{
+            justifyContent: 'center',
+            alignItems: 'flex-end',
+          }}
+        >
+          <Box
+            paddingRight="medium"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Icon icon="archive" intent="text-inverted" />
+            <Typography.Body variant="small" intent="inverted">
+              Archived
+            </Typography.Body>
+          </Box>
+        </Swipeable.Action>
+      }
+      rightActions={
+        <>
+          <Swipeable.Action
+            intent="success"
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            onPress={() => {
+              closeSwipeable();
+              alert('approved');
+            }}
+          >
+            <Icon
+              icon="checkmark"
+              size="xsmall"
+              style={{ marginBotttom: theme.space.xsmall }}
+            />
+            <Typography.Body variant="small">Approve</Typography.Body>
+          </Swipeable.Action>
+          <Swipeable.Action
+            intent="danger"
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            onPress={() => {
+              closeSwipeable();
+              alert('declined');
+            }}
+          >
+            <Icon
+              icon="cancel"
+              size="xsmall"
+              style={{ marginBotttom: theme.space.xsmall }}
+            />
+            <Typography.Body variant="small">Decline</Typography.Body>
+          </Swipeable.Action>
+        </>
+      }
+      rightActionsWidth={theme.sizes['18xlarge']}
+    >
+      <Notification item={item} />
+    </Swipeable>
+  );
+};
+
+const App = () => {
+  return (
+    <PlaygroundContext>
+       <Box padding="medium">
+        <Typography.Title level="h5">Card variant</Typography.Title>
+        <FlatList
+          data={notifications}
+          ItemSeparatorComponent={Divider}
+          renderItem={({ item }) => (
+            <SwipeableNotification variant="card" item={item} />
+          )}
+          keyExtractor={(_item, index) => `notification ${index}`}
+          contentContainerStyle={{ padding: theme.space.medium }}
+        />
+
+        <Typography.Title level="h5">Full-width variant</Typography.Title>
+        <FlatList
+          data={notifications}
+          ItemSeparatorComponent={Divider}
+          renderItem={({ item }) => (
+            <SwipeableNotification variant="full-width" item={item} />
+          )}
+          keyExtractor={(_item, index) => `notification ${index}`}
+          contentContainerStyle={{ padding: theme.space.medium }}
+        />
+      </Box>
+    </PlaygroundContext>
+  );
+};
+
+export default App;
+```
+
+## Props
+
+<Props of="Swipeable" />

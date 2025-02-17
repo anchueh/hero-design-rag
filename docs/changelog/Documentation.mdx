@@ -1,0 +1,15 @@
+---
+id: documentation
+title: '@hero-design/website'
+---
+
+import ChangelogVersionSelect from '@site/src/components/ChangelogVersionSelect';
+import Changelog, {
+  toc as ChangelogToc,
+} from '@hero-design/website/CHANGELOG.md';
+
+<ChangelogVersionSelect options={ChangelogToc} />
+
+<Changelog />
+
+export const toc = ChangelogToc;

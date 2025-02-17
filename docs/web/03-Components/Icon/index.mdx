@@ -1,0 +1,77 @@
+---
+id: icon
+title: Icon
+---
+
+import IconList from '../../../../src/components/IconList';
+
+# Icon
+
+Employment Hero Icon Font.
+
+<IconList />
+
+## Examples
+
+### Basic
+
+Use `icon` property to select the icon from the list above. Specify the `spin` property to show spinning animation.
+
+```jsx live
+<div style={{ display: 'flex', gap: theme.space.medium }}>
+  <Icon icon="user" />
+  <Icon icon="heart" />
+  <Icon icon="sync" spin />
+</div>
+```
+
+### With colors
+
+Icon comes with 9 colors which are `text`, `subdued-text`, `disabled-text`, `primary`, `info`, `danger`, `warning`, `success` and `error`. It can be used via `intent` property. If none is provided, Icon will inherit from its parents' color.
+
+```jsx live
+<div style={{ display: 'flex', gap: theme.space.medium }}>
+  <Icon icon="heart" intent="text" />
+  <Icon icon="search-outlined" intent="subdued-text" />
+  <Icon icon="lock" intent="disabled-text" />
+  <Icon icon="circle-info" intent="primary" />
+  <Icon icon="circle-cancel" intent="danger" />
+  <Icon icon="circle-warning" intent="warning" />
+  <Icon icon="circle-check" intent="success" />
+  <Icon icon="cancel" intent="error" />
+</div>
+```
+
+### Sizes
+
+Icon will inherit font-size from its parents, but its size can be set via `size` property with `xsmall`, `small`, `medium`, `large` or `xlarge`.
+
+```jsx live
+<div style={{ display: 'flex', gap: theme.space.medium }}>
+  <Icon icon="location-outlined" size="xsmall" />
+  <Icon icon="camera-outlined" size="small" />
+  <Icon icon="face-id" size="medium" />
+  <Icon icon="number" size="large" />
+  <Icon icon="qr-code-outlined" size="xlarge" />
+</div>
+```
+
+### Custom icon
+
+Besides icons provided from the set above, you can use your own icon by passing it as a ReactElement via icon.
+
+```jsx live
+<Icon
+  icon={
+    <img
+      src="https://addons-assets.employmenthero.com/frontend-core/master/static/media/eh-logo-black.c5aa2723.svg"
+      alt="custom-icon"
+      style={{ height: theme.sizes.xlarge, margin: 0, padding: 0 }}
+    />
+  }
+/>
+```
+
+## Props
+
+<Props of="Icon" from="web" />

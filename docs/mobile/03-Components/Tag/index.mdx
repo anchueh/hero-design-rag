@@ -1,0 +1,79 @@
+---
+id: tag
+title: Tag
+---
+
+<PageTitle
+  title="Tag"
+  content=" A tag is a visual label used to indicate status or an action that’s been taken "
+/>
+
+## How many types?
+
+```jsx live
+function TagExample() {
+  const Item = ({ title, intent, description, variant }) => {
+    return (
+      <View
+        style={{
+          alignItems: 'flex-start',
+          marginBottom: theme.space.small,
+        }}
+      >
+        <Typography.Body fontWeight="semi-bold">{title}</Typography.Body>
+        <Typography.Caption>{description}</Typography.Caption>
+        <Tag
+          content={intent.toUpperCase()}
+          intent={intent}
+          variant={variant ? variant : 'filled'}
+          style={{ marginVertical: theme.space.small }}
+        />
+      </View>
+    );
+  };
+  return (
+    <View
+      style={{
+        display: 'flex',
+      }}
+    >
+      <Item
+        title="Default"
+        intent="primary"
+        description="Use default tag for a general information status, such as: to do, draft"
+      />
+
+      <Item
+        title="Success"
+        intent="success"
+        description=" Use success tag to represent a completion status or state, such as: success, approved, paid, enabled "
+      />
+
+      <Item
+        title="Info"
+        intent="info"
+        description="Use info state tags to represent an initial action has been taken and is now waiting for further actions , such as submitted "
+      />
+      <Item
+        title="Warning"
+        intent="warning"
+        description="Use warning state labels to represent an in-progress or draft status or state that may require attention, such as pending, processed"
+      />
+      <Item
+        title="Danger"
+        intent="danger"
+        description="Use danger state labels to represent an a critical or problematic status or state, such as: declined, rejected, deleted, failed"
+      />
+      <Item
+        title="Archived"
+        intent="archived"
+        description="Use archived state labels to represent an inactive status or state, such as disabled, archived"
+      />
+    </View>
+  );
+}
+```
+
+## Props
+
+<Props of="Tag" />

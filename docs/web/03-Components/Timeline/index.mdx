@@ -1,0 +1,226 @@
+---
+id: timeline
+title: TimeLine
+---
+
+# Timeline
+
+Timeline is used to show a series of information which is connected or ordered by time.
+
+## Examples
+
+### Basic
+
+Providing a list of items.
+
+```jsx live
+<>
+  <Timeline
+    items={[
+      {
+        id: 1,
+        text: 'Self Implementation',
+        helpText:
+          'Continue with your full access to all feature implementation.',
+      },
+      {
+        id: 2,
+        text: '24 January',
+        helpText:
+          "You trial will end. You will revert back to your plan's premium features.",
+      },
+    ]}
+  />
+</>
+```
+
+### With intents
+
+Providing a list of items with intent prop.
+
+```jsx live
+<>
+  <Timeline
+    items={[
+      {
+        id: 1,
+        text: 'Default',
+        helpText: 'Default description',
+      },
+      {
+        id: 2,
+        text: 'Success',
+        helpText: 'Success description',
+        intent: 'success',
+      },
+      {
+        id: 3,
+        text: 'Info',
+        helpText: 'Info description',
+        intent: 'info',
+      },
+      {
+        id: 4,
+        text: 'Warning',
+        helpText: 'Warning description',
+        intent: 'warning',
+      },
+      {
+        id: 5,
+        text: 'Danger',
+        helpText: 'Danger description',
+        intent: 'danger',
+      },
+      {
+        id: 6,
+        text: 'Error',
+        helpText: 'Error description',
+        intent: 'error',
+      },
+    ]}
+  />
+</>
+```
+
+### Customise rendering
+
+Both text & helpText can be customised as a React element.
+
+```jsx live
+<>
+  <React.Fragment>
+    <Typography.Title level={2}>Getting Started.</Typography.Title>
+    <Typography.Title level={4} style={{ marginBottom: theme.space.medium }}>
+      Getting started with Employment Hero is easy!
+    </Typography.Title>
+    <Timeline
+      items={[
+        {
+          id: 1,
+          text: (
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                margin: 0,
+                padding: 0,
+              }}
+            >
+              <Typography.Text
+                fontSize={16}
+                fontWeight="semi-bold"
+                tagName="span"
+              >
+                Request a demo
+              </Typography.Text>
+              <Icon
+                icon="diamond"
+                size="large"
+                intent="success"
+                style={{ marginLeft: theme.space.small }}
+              />
+            </div>
+          ),
+          helpText:
+            'Request a demo to learn exactly how Employment Hero works and how our platform can be tailored to suit your business needs. See how easy it is to onboard employees, request leave and run payroll with our platform! Plus get a preview into our awesome marketplace with discounts on thousands of everyday items.',
+          intent: 'success',
+        },
+        {
+          id: 2,
+          text: (
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                margin: 0,
+                padding: 0,
+              }}
+            >
+              <Typography.Text
+                fontSize={16}
+                fontWeight="semi-bold"
+                tagName="span"
+              >
+                Choose a plan
+              </Typography.Text>
+              <Icon
+                icon="star"
+                size="large"
+                intent="success"
+                style={{ marginLeft: theme.space.small }}
+              />
+            </div>
+          ),
+          helpText:
+            'Choose the plan which best suits your business. We have free, standard and premium plans, plus add-on services like HeroPay (our payroll software), HR and payroll advisory lines and more. Determining which option is best for your company can be tricky, that’s why we have dedicated implementation staff ready to help you assess your needs.',
+          intent: 'success',
+        },
+        {
+          id: 3,
+          text: (
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                margin: 0,
+                padding: 0,
+              }}
+            >
+              <Typography.Text
+                fontSize={16}
+                fontWeight="semi-bold"
+                tagName="span"
+              >
+                Sign up
+              </Typography.Text>
+              <Icon
+                icon="face-smiley"
+                size="large"
+                intent="success"
+                style={{ marginLeft: theme.space.small }}
+              />
+            </div>
+          ),
+          helpText:
+            'Sign up with Employment Hero! We are a subscription as a service and so signing up entails entering your payment details for monthly billing. We work hard every single day to ensure you are 100% happy with our platform.',
+          intent: 'success',
+        },
+        {
+          id: 4,
+          text: (
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                margin: 0,
+                padding: 0,
+              }}
+            >
+              <Typography.Text
+                fontSize={16}
+                fontWeight="semi-bold"
+                tagName="span"
+              >
+                Implement
+              </Typography.Text>
+              <Icon
+                icon="send"
+                size="large"
+                intent="success"
+                style={{ marginLeft: theme.space.small }}
+              />
+            </div>
+          ),
+          helpText:
+            'You are signed up and ready to go. Now it’s time to implement Employment Hero in your organisation. Our customer education site has comprehensive resources that take you through the start up process step-by-step. It’s really easy to input your organisation details and upload employee information into our platform, but we understand some of you are extremely time poor. That’s why we have a dedicated implementation team that you can contract to set your organisation up for you.',
+          intent: 'success',
+        },
+      ]}
+    />
+  </React.Fragment>
+</>
+```
+
+## Props
+
+<Props of="Timeline" from="web" />

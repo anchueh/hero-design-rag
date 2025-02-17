@@ -1,0 +1,65 @@
+---
+id: spinner
+title: Spinner
+---
+
+# Spinner
+
+Spinners indicate an operation under loading process.
+
+## Examples
+
+```jsx live
+function SpinnerExample() {
+  return (
+    <>
+      <Box flexDirection="row" margin="medium">
+        <Box flex={1} alignItems="center" padding="medium">
+          <Typography.Body
+            style={{ marginBottom: theme.space.medium }}
+            variant="small"
+          >
+            Small size
+          </Typography.Body>
+          <Spinner size="small" />
+        </Box>
+        <Box flex={1} bgColor="primary" alignItems="center" padding="medium">
+          <Typography.Body
+            variant="small"
+            intent="inverted"
+            style={{ marginBottom: theme.space.medium }}
+          >
+            Small size (Inverted)
+          </Typography.Body>
+          <Spinner size="small" intent="inverted" />
+        </Box>
+      </Box>
+
+      <Box flexDirection="row" flex={1}>
+        <Box flex={1} padding="medium" alignItems="center">
+          <Typography.Body
+            variant="small"
+            style={{ marginBottom: theme.space.medium }}
+          >
+            Medium size (default)
+          </Typography.Body>
+          <Spinner />
+        </Box>
+        <Box flex={1} bgColor="primary" alignItems="center" padding="medium">
+          <Typography.Body
+            intent="inverted"
+            style={{ marginBottom: theme.space.medium }}
+          >
+            Medium size (inverted)
+          </Typography.Body>
+          <Spinner intent="inverted" />
+        </Box>
+      </Box>
+    </>
+  );
+}
+```
+
+## Props
+
+<Props of="Spinner" />

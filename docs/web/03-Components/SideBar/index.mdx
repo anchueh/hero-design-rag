@@ -1,0 +1,360 @@
+---
+id: sidebar
+title: SideBar
+---
+
+# SideBar
+
+SideBar component that sticks on the right side to help users navigate through out the app.
+
+## Examples
+
+### Basic
+
+```jsx live
+function SideBarExample() {
+  const [selectedItemId, setSelectedItemId] = React.useState();
+  const [selectedSubItemId, setSelectedSubItemId] = React.useState();
+  const redirectTo = (url) => console.log(`Redirect to ${url}`);
+  const onClickSideBarItem = (item) => {
+    setSelectedItemId(item.id);
+    item.panel === undefined && redirectTo(item.url);
+  };
+  const onClickPanelItem = (item) => {
+    if (item === undefined) {
+      setSelectedSubItemId(undefined);
+    } else {
+      setSelectedSubItemId(item.id);
+      item.subItems === undefined && redirectTo(item.url);
+    }
+  };
+
+  const profileItems = {
+    '': [
+      {
+        id: 'general',
+        text: 'General',
+        url: '/general',
+        count: 3,
+        dataAttrs: { 'data-walk-identifier': 'general-item' },
+      },
+      {
+        id: 'notifications',
+        text: 'Notifications',
+        url: '/notifications',
+      },
+    ],
+    Management: [
+      {
+        id: 'schedule',
+        text: 'Schedule',
+        badgeText: 'New',
+        subItems: [
+          {
+            id: 'week',
+            text: 'Week',
+            url: '/week',
+            badgeText: 'New',
+            dataAttrs: { 'data-walk-identifier': 'week-item' },
+          },
+          {
+            id: 'month',
+            text: 'Month',
+            url: '/month',
+          },
+          {
+            id: 'year',
+            text: 'Year',
+            url: '/year',
+          },
+        ],
+      },
+      {
+        id: 'tasks',
+        text: 'Tasks',
+        url: '/tasks',
+      },
+    ],
+    Security: [
+      {
+        id: 'password',
+        text: 'Password',
+        url: '/password',
+      },
+      {
+        id: '2FA',
+        text: '2FA',
+        url: '/2fa',
+      },
+    ],
+  };
+  const items = {
+    header: [
+      { id: 'switch_org', icon: 'multiple-users-outlined', url: '/org' },
+    ],
+    body: [
+      {
+        id: 'home',
+        icon: 'home-outlined',
+        text: 'Home',
+        url: '/home',
+        count: 10,
+        dataAttrs: { 'data-walk-identifier': 'home-item' },
+      },
+      {
+        id: 'profile',
+        icon: 'user-outlined',
+        text: 'Profile',
+        badgeText: 'New',
+        count: 3,
+        panel: (
+          <SideBar.Panel
+            heading="Profile"
+            items={profileItems}
+            selectedItemId={selectedSubItemId}
+            onClickItem={onClickPanelItem}
+          />
+        ),
+      },
+      {
+        id: 'pay',
+        icon: 'moneybag-outlined',
+        text: 'Pay',
+        url: '/pay',
+        count: 100,
+      },
+      {
+        id: 'org_chart',
+        icon: 'graph-outlined',
+        text: 'Organisation Chart',
+        url: '/org_chart',
+        badgeText: 'New',
+      },
+      {
+        id: 'content_management',
+        icon: 'document-outlined',
+        text: 'Content Management',
+        url: '/content_management',
+      },
+    ],
+    footer: [
+      {
+        id: 'setting',
+        icon: 'cog-outlined',
+        text: 'Setting',
+        url: '/setting',
+      },
+    ],
+  };
+  const companyLogo = (
+    <SideBarLogo
+      src="https://addons-assets.employmenthero.com/frontend-core/master/static/media/eh-logo-black.c5aa2723.svg"
+      alt="sidebar-logo"
+    />
+  );
+
+  return (
+    <Grid>
+      <Grid.Row>
+        <Grid.Col span={[24, 24, 24, 12, 12]}>
+          <SideBar
+            items={items}
+            selectedItemId={selectedItemId}
+            onClickItem={onClickSideBarItem}
+          />
+        </Grid.Col>
+        <Grid.Col span={[24, 24, 24, 12, 12]}>
+          <SideBar
+            items={{
+              ...items,
+              header: [
+                {
+                  id: 'switch_org',
+                  icon: companyLogo,
+                  panel: (
+                    <SideBar.Panel
+                      heading="Organisations"
+                      variant="blank"
+                      items={{}}
+                    >
+                      Panel content
+                    </SideBar.Panel>
+                  ),
+                },
+              ],
+            }}
+            selectedItemId={selectedItemId}
+            onClickItem={onClickSideBarItem}
+          />
+        </Grid.Col>
+      </Grid.Row>
+    </Grid>
+  );
+}
+```
+
+### Disabled Navigation
+
+Each items in Sidebar can disable by add `disabled` attribute into the options.
+
+```jsx live
+function SideBarExample() {
+  const [selectedItemId, setSelectedItemId] = React.useState();
+  const [selectedSubItemId, setSelectedSubItemId] = React.useState();
+  const redirectTo = (url) => console.log(`Redirect to ${url}`);
+  const onClickSideBarItem = (item) => {
+    setSelectedItemId(item.id);
+    item.panel === undefined && redirectTo(item.url);
+  };
+  const onClickPanelItem = (item) => {
+    if (item === undefined) {
+      setSelectedSubItemId(undefined);
+    } else {
+      setSelectedSubItemId(item.id);
+      item.subItems === undefined && redirectTo(item.url);
+    }
+  };
+
+  const profileItems = {
+    '': [
+      {
+        id: 'general',
+        text: 'General',
+        url: '/general',
+        count: 3,
+        dataAttrs: { 'data-walk-identifier': 'general-item' },
+      },
+      {
+        id: 'notifications',
+        text: 'Notifications',
+        url: '/notifications',
+      },
+    ],
+    Management: [
+      {
+        id: 'schedule',
+        text: 'Schedule',
+        subItems: [
+          {
+            id: 'week',
+            text: 'Week',
+            url: '/week',
+            count: 5,
+            dataAttrs: { 'data-walk-identifier': 'week-item' },
+          },
+          {
+            id: 'month',
+            text: 'Month',
+            url: '/month',
+          },
+          {
+            id: 'year',
+            text: 'Year',
+            url: '/year',
+          },
+        ],
+      },
+      {
+        id: 'tasks',
+        text: 'Tasks',
+        url: '/tasks',
+      },
+    ],
+    Security: [
+      {
+        id: 'password',
+        text: 'Password',
+        url: '/password',
+      },
+      {
+        id: '2FA',
+        text: '2FA',
+        url: '/2fa',
+      },
+    ],
+  };
+  const items = {
+    header: [
+      { id: 'switch_org', icon: 'multiple-users-outlined', url: '/org' },
+    ],
+    body: [
+      {
+        id: 'home',
+        icon: 'home-outlined',
+        text: 'Home',
+        url: '/home',
+        badgeText: 'New',
+        dataAttrs: { 'data-walk-identifier': 'home-item' },
+        disabled: true,
+      },
+      {
+        id: 'profile',
+        icon: 'user-outlined',
+        text: 'Profile',
+        count: 100,
+        panel: (
+          <SideBar.Panel
+            heading="Profile"
+            items={profileItems}
+            selectedItemId={selectedSubItemId}
+            onClickItem={onClickPanelItem}
+          />
+        ),
+      },
+      {
+        id: 'pay',
+        icon: 'dollar-coin-shine-outlined',
+        text: 'Pay',
+        url: '/pay',
+        count: 100,
+        disabled: true,
+      },
+      {
+        id: 'org_chart',
+        icon: 'graph-outlined',
+        text: 'Org Chart',
+        url: '/org_chart',
+        disabled: true,
+      },
+      {
+        id: 'content_management',
+        icon: 'document-outlined',
+        text: 'Content',
+        url: '/content_management',
+        disabled: true,
+      },
+    ],
+    footer: [
+      {
+        id: 'setting',
+        icon: 'cog-outlined',
+        text: 'Setting',
+        url: '/setting',
+      },
+    ],
+  };
+  const companyLogo = (
+    <SideBarLogo src="/img/employment-hero-logo.png" alt="sidebar-logo" />
+  );
+
+  return (
+    <Box>
+      <SideBar
+        items={items}
+        selectedItemId={selectedItemId}
+        onClickItem={onClickSideBarItem}
+      />
+    </Box>
+  );
+}
+```
+
+## Props
+
+#### SideBar
+
+<Props of="SideBar" from="web" />
+
+#### SideBar.Panel
+
+<Props of="Panel" from="web" />

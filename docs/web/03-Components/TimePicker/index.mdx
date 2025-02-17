@@ -1,0 +1,126 @@
+---
+id: timepicker
+title: TimePicker
+---
+
+# TimePicker
+
+A TimePicker let an user choose a time value from a respective dropdown to select a time value, with support for showing seconds and toggling between 12-hour and 24-hour systems.
+
+## Examples
+
+### Basic
+
+Simple usage of TimePicker.
+
+```jsx live
+function BasicTimePicker() {
+  const [value, setValue] = React.useState();
+  return (
+    <TimePicker
+      value={value}
+      onChange={(newValue) => setValue(newValue)}
+      id="time-picker__basic"
+    />
+  );
+}
+```
+
+### With seconds
+
+TimePicker with seconds.
+
+```jsx live
+function TimePickerWithSecond() {
+  const [value, setValue] = React.useState();
+  return (
+    <TimePicker
+      withSeconds
+      value={value}
+      onChange={(newValue) => setValue(newValue)}
+      id="time-picker__with-seconds"
+    />
+  );
+}
+```
+
+### With AM/PM
+
+TimePicker with AM/PM.
+
+```jsx live
+function TimePickerWithAMPM() {
+  const [value, setValue] = React.useState();
+  return (
+    <TimePicker
+      with12Hours
+      value={value}
+      onChange={(newValue) => setValue(newValue)}
+      id="time-picker__with-am-pm"
+    />
+  );
+}
+```
+
+### With seconds and AM/PM
+
+TimePicker with seconds and AM/PM.
+
+```jsx live
+function CustomTimePicker() {
+  const [value, setValue] = React.useState();
+  return (
+    <TimePicker
+      withSeconds
+      with12Hours
+      value={value}
+      onChange={(newValue) => setValue(newValue)}
+      id="time-picker__with-seconds-and-am-pm"
+    />
+  );
+}
+```
+
+### With custom format
+
+TimePicker with a custom format, e.g. `'hh/mm/ss BBBBB'`.
+
+```jsx live
+function CustomFormatPicker() {
+  const [value, setValue] = React.useState();
+  const customFormat = 'hh/mm/ss BBBBB';
+  return (
+    <TimePicker
+      withSeconds
+      format={customFormat}
+      value={value}
+      onChange={(newValue) => setValue(newValue)}
+      id="time-picker__with-custom-format"
+    />
+  );
+}
+```
+
+### With minute step
+
+TimePicker with minute step.
+
+```jsx live
+function TimePickerWithMinuteStep() {
+  const [value, setValue] = React.useState();
+  return (
+    <TimePicker
+      minuteStep={15}
+      value={value}
+      onChange={(newValue) => setValue(newValue)}
+      id="time-picker__with-minute-step"
+    />
+  );
+}
+```
+
+## Props
+
+### TimePicker
+
+<Props of="TimePicker" from="web" />

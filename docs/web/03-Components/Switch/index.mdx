@@ -1,0 +1,104 @@
+---
+id: switch
+title: Switch
+---
+
+# Switch
+
+A switch is an alternate appearance for a checkbox to toggle a state on/off.
+
+## Examples
+
+### Basic
+
+Render a basic switch.
+
+```jsx live
+<>
+  <Typography.Text tagName="label">
+    Import contract from PDF file?
+    <Switch />
+  </Typography.Text>
+</>
+```
+
+### Sizes
+
+Switch has 2 sizes: `small` & `medium` (default).
+
+```jsx live
+<>
+  <Typography.Text tagName="label">
+    Medium size
+    <Switch size="medium" />
+  </Typography.Text>
+  <Typography.Text tagName="label" fontSize={12}>
+    Small size
+    <Switch size="small" />
+  </Typography.Text>
+</>
+```
+
+### Controlled on/off status
+
+Switch state can be controlled via `checked` & `onChange` props.
+
+```jsx live
+function ControlledStatus() {
+  const [state, setState] = React.useState(false);
+  return (
+    <Typography.Text tagName="label">
+      Import contract from PDF file?
+      <Switch checked={state} onChange={(e) => setState(e.target.checked)} />
+    </Typography.Text>
+  );
+}
+```
+
+### With loading indicator
+
+Loading indicator is rendered when `loading` is set as `true`. Note that loading state doesn't disable toggle events.
+
+```jsx live
+<>
+  <Typography.Text tagName="label">
+    Loading & ON
+    <Switch checked loading />
+  </Typography.Text>
+  <Typography.Text tagName="label">
+    Loading & OFF
+    <Switch checked={false} loading />
+  </Typography.Text>
+</>
+```
+
+### With disabled state
+
+Switch can be disabled by setting `disabled` as `true`.
+
+```jsx live
+<>
+  <Switch disabled checked />
+</>
+```
+
+### With inner icon when switch is on
+
+The icon is only rendered when `icon` is provided and the switch's state is `ON`.
+
+```jsx live
+function InnerIconSwitch() {
+  const [state, setState] = React.useState(true);
+  return (
+    <Switch
+      icon="checkmark"
+      checked={state}
+      onChange={(e) => setState(e.target.checked)}
+    />
+  );
+}
+```
+
+## Props
+
+<Props of="Switch" from="web" />

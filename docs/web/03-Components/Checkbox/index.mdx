@@ -1,0 +1,265 @@
+---
+id: checkbox
+title: Checkbox
+---
+
+# Checkbox
+
+- The checkbox is shown as a square box that is ticked (checked) when activated.
+
+- Checkboxes are used to select one or more options of a limited number of choices.
+
+## Examples
+
+### Checkbox
+
+Basic usage of Checkbox.
+
+```jsx live
+<Checkbox value="hr_software" text="HR Software" />
+```
+
+### Disabled Checkbox
+
+```jsx live
+<>
+  <Checkbox value="employee_engagement" text="Employee engagement" disabled />
+  <Checkbox
+    value="employee_benefits"
+    text="Employee benefits"
+    disabled
+    checked
+    sx={{ ml: 'medium' }}
+  />
+</>
+```
+
+### Checkbox with custom text
+
+We can customise the displaying text of Checkbox by any ReactNode.
+
+```jsx live
+<Checkbox
+  value="digital_payroll"
+  text={
+    <Button.Link
+      href="https://employmenthero.com/product/heropay/compliance-confidence"
+      text="Digital payroll"
+    />
+  }
+/>
+```
+
+### Checkbox.Group
+
+Hero design allows to render a group of checkboxes via an array of options.
+
+```jsx live
+function CheckboxGroup() {
+  const [value, setValue] = React.useState([]);
+  const onChange = (newValue) => setValue(newValue);
+  const options = [
+    { value: 'hr_software', text: 'HR Software' },
+    { value: 'digital_payroll', text: 'Digital Payroll' },
+    { value: 'employee_engagement', text: 'Employee Engagement' },
+    { value: 'employee_benefits', text: 'Employee Benefits' },
+    { value: 'global_teams', text: 'Global Teams' },
+  ];
+  return (
+    <Checkbox.Group
+      name="employment_hero_features"
+      value={value}
+      options={options}
+      onChange={onChange}
+    />
+  );
+}
+```
+
+### Checkbox.Group Layout
+
+Group can be rendered with either a vertical or horizontal layout.
+
+```jsx live
+function CheckboxGroupLayout() {
+  const [value, setValue] = React.useState(['hr_software']);
+  const onChange = (newValue) => setValue(newValue);
+  const options = [
+    { value: 'hr_software', text: 'HR Software' },
+    { value: 'digital_payroll', text: 'Digital Payroll' },
+    { value: 'employee_engagement', text: 'Employee Engagement' },
+    { value: 'employee_benefits', text: 'Employee Benefits' },
+    { value: 'global_teams', text: 'Global Teams' },
+  ];
+  return (
+    <Checkbox.Group
+      name="employment_hero_features"
+      value={value}
+      options={options}
+      onChange={onChange}
+      layout="horizontal"
+    />
+  );
+}
+```
+
+### Indeterminate checkbox
+
+- The checkbox's indeterminate state indicates the checkbox is still either checked or unchecked.
+- It is commonly used in the checkbox which allows to select all other checkboxes.
+
+```jsx live
+function IndeterminateCheckbox() {
+  const [value, setValue] = React.useState(['global_teams']);
+  const options = [
+    { value: 'hr_software', text: 'HR Software' },
+    { value: 'digital_payroll', text: 'Digital Payroll' },
+    { value: 'employee_engagement', text: 'Employee Engagement' },
+    { value: 'employee_benefits', text: 'Employee Benefits' },
+    { value: 'global_teams', text: 'Global Teams' },
+  ];
+  const onCheckAllChange = React.useCallback(
+    (e) => {
+      if (e.target.checked) {
+        setValue(
+          options
+            .filter((opt) => opt.disabled !== true)
+            .map((option) => option.value)
+        );
+      } else {
+        setValue([]);
+      }
+    },
+    [options, setValue]
+  );
+  const nOpts = options.length;
+  const nSelected = value.length;
+  return (
+    <>
+      <Checkbox
+        text="All features"
+        value="all_features"
+        indeterminate={nSelected !== 0 && nSelected < nOpts}
+        checked={nSelected !== 0 && nSelected === nOpts}
+        onChange={onCheckAllChange}
+        sx={{ mb: 'small' }}
+      />
+      <Checkbox.Group
+        name="example_checkbox"
+        value={value}
+        options={options}
+        onChange={setValue}
+        layout="horizontal"
+      />
+    </>
+  );
+}
+```
+
+### Checkbox.Button
+
+Checkbox can be rendered as a button with Checkbox.Button.
+
+```jsx live
+<>
+  <Checkbox.Button
+    name="checkbox_button"
+    value="hr_document"
+    text="HR Document"
+    sx={{ mr: 'small' }}
+  />
+  <Checkbox.Button
+    name="checkbox_button"
+    value="hr_guide"
+    text="HR Guide"
+    sx={{ mr: 'small' }}
+  />
+  <Checkbox.Button
+    name="checkbox_button"
+    value="independent_contractor"
+    text="Independent Contractor"
+    disabled
+    sx={{ mr: 'small' }}
+  />
+  <Checkbox.Button
+    name="checkbox_button"
+    value="policy_document"
+    text="Policy Document"
+    disabled
+    checked
+  />
+</>
+```
+
+### Checkbox.Button Sizes
+
+Checkbox.Button has 3 sizes: `small`, `medium` (default) and `large`.
+
+```jsx live
+<>
+  <Checkbox.Button
+    value="small"
+    text="Small"
+    name="small"
+    size="small"
+    sx={{ mr: 'small' }}
+  />
+  <Checkbox.Button
+    value="medium"
+    text="Medium"
+    name="medium"
+    size="medium"
+    sx={{ mr: 'small' }}
+  />
+  <Checkbox.Button value="large" text="Large" name="large" size="large" />
+</>
+```
+
+### Checkbox.ButtonGroup
+
+Checkbox.Button can also be grouped by using Checkbox.ButtonGroup.
+
+```jsx live
+function CheckboxButtonGroup() {
+  const [value, setValue] = React.useState(['full_time']);
+  return (
+    <Checkbox.ButtonGroup
+      value={value}
+      name="name"
+      options={[
+        {
+          text: 'Full-time',
+          value: 'full_time',
+        },
+        {
+          text: 'Part-time',
+          value: 'part_time',
+        },
+        {
+          text: 'Casual',
+          value: 'casual',
+        },
+      ]}
+      onChange={(val) => setValue(val)}
+    />
+  );
+}
+```
+
+## Props
+
+### Checkbox Props
+
+<Props of="Checkbox" from="web" />
+
+### Checkbox.Group Props
+
+<Props of="CheckboxGroup" from="web" />
+
+### Checkbox.Button Props
+
+<Props of="CheckboxButton" from="web" />
+
+### Checkbox.ButtonGroup Props
+
+<Props of="CheckboxButtonGroup" from="web" />

@@ -1,0 +1,87 @@
+---
+id: essential-guide-and-quick-reference
+title: Essential Guide and Quick Reference
+---
+
+## Essential Guide and Quick Reference
+
+:::info
+**Purpose:** The purpose of this document is to provide comprehensive guidance on utilizing the `@ehrocks/hero-design-react` UI library, which is a fundamental component of Hero Design, Employment Hero's design system. It covers installation, usage, styling, customization, documentation access, versioning, best practices, common Q&A, and the concept of snowflake components. Additionally, it outlines how to incorporate government model guidelines into design system practices.
+
+**Who Should Read:** This document is intended for developers, designers, and stakeholders involved in the development and maintenance of software applications within the Employment Hero ecosystem. It is particularly relevant for those utilizing the `@ehrocks/hero-design-react` UI library and seeking to ensure consistency, efficiency, and adherence to brand identity across projects.
+:::
+
+## Introduction
+
+### `@ehrocks/hero-design-react`:
+
+As part of Hero Design, Employment Hero's design system, `hero-design` offers a UI library featuring:
+
+- 📦 A collection of atomic and composable React/React Native components.
+- 🛡️ Type definitions for each component.
+- 🎨 A light theme with customizable options at both system and component levels.
+- 🗞️ Interactive documentation.
+
+Design systems play a vital role in software development by ensuring consistency, efficiency, and scalability. They provide reusable components, design patterns, and guidelines, streamlining the design and development process while fostering collaboration and alignment across teams. Design systems enhance user experience, reinforce brand identity, and confer a competitive advantage by enabling the creation of intuitive, accessible, and cohesive products.
+
+In line with our commitment to excellence, we adhere to a robust governance model outlined in our Design System Governance Model, which ensures continuous improvement, adherence to standards, and alignment with organizational objectives.
+
+## Installation and Usage
+
+For installation and usage instructions, visit: [Hero Design Introduction](/web/intro)
+
+## Styling and Customization
+
+We encourage the utilization of original Hero Design components to maintain consistency and alignment with our brand identity. For additional customizations such as colors, borders, shadows, or fonts beyond the predefined components, please discuss them in the #eh-hero-design channel for review and guidance. Our design experts will offer advice to ensure that any deviations maintain cohesion with the overall design system and brand guidelines.
+
+For components specific to particular use cases not covered by Hero Design, we recommend utilizing [design tokens](/web/web-design-tokens) to adhere to the following guidelines:
+
+- [Colors](/web/Guidelines/colors)
+- [Layout](/web/Guidelines/layout)
+- [Typography](/web/Guidelines/typography)
+- [Theming](/web/Guidelines/theming)
+- [Spacing](/web/Guidelines/spacing)
+- [Responsive Design](/web/Guidelines/responsive)
+
+## Documentation
+
+Explore the documentation of components and utilize the playground to understand interfaces and experiment with examples: [Hero Design Documentation](/web/Components/Alert/)
+
+The example enables developers to edit, with changes updating directly.
+
+## Versioning and Updates
+
+What’s new of Hero Design react describes in [Changelog](/changelog/web)
+
+## Best Practices
+
+Follow general best practices for using the UI library effectively and consistently.
+
+**Example:**
+
+```jsx
+<Button
+  variant="filled"
+  intent="primary"
+  text="Primary"
+  style={{ marginRight: theme.space.small }}
+/>
+```
+
+**Explanation:** This example utilizes only original HD components (Button), and the margin is applied as a layout, not considered as snowflake or customization.
+
+Additionally, [explore more examples](/web/Guidelines/avoiding-snowflakes) of good and bad practices in component customization to ensure adherence to design system standards.
+
+## Common Q&A (Questions and Answers)
+
+**Q1.** How can I add an icon to `@ehrocks/hero-design-react`?
+
+Our working model follows a co-contribution approach. Developers can follow [guidelines](/web/Contributing/add_new_icon) to add new icons to Hero Design, and the Andromeda team will conduct code reviews. If any issues arise, developers can seek support from the Andromeda team in the #eh-hero-design channel.
+
+**Q2.** What should I do if the design uses colors not included in the semantic color list?
+
+First, inquire with designers about the reason for not using semantic colors. If it's not mandatory, advise them to use semantic colors. If the usage of the color is business-critical, such as creating components for other brands like Google Login Button, using hardcoded color strings is acceptable. Additionally, questions can be raised to the Andromeda team and UI/UX team in the #eh-hero-design channel.
+
+**Q3.** What are snowflake components?
+
+In our frontend context, snowflake components are either customized from original HD components or not utilizing HD components. While some snowflake components are acceptable, others may not align with our goal of UI consistency. If unsure about a specific case, inquiries can be made to the Andromeda team and UI/UX team in the #eh-hero-design channel.

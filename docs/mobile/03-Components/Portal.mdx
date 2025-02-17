@@ -1,0 +1,185 @@
+---
+id: portal
+title: Portal
+---
+
+# Portal
+
+Portals provide a way to render children into a DOM node that exists outside the DOM hierarchy of the parent component.
+
+## Usage
+
+Normally, when you return an element from a component’s render method, it’s mounted into the DOM as a child of the nearest parent node:
+
+```jsx
+render() {
+  return (
+    <View>
+      {this.props.children}
+    </View>
+  );
+}
+
+```
+
+However, sometimes it’s useful to insert a child into a different location in the DOM:
+
+```jsx
+render() {
+  return (
+      <Portal.Provider>
+        <View testID="portal-host-wrapper">
+          <Portal.Host name="placeholder" />
+        </View>
+        <View tetID="real-parent">
+          <Portal hostName="placeholder">
+            <Typography.Body>Hello world</Typography.Body>;
+          </Portal>
+        </View>
+      </Portal.Provider>
+  );
+}
+
+```
+
+Above example, `Hello world` will be rendered inside `portal-host-wrapper` View instead of real parent View
+
+:::note
+Portal.Provider is a Portal.Host with default host name is `root`
+:::
+
+## Examples
+
+### Basic
+
+- render FAB outside of parent box
+
+```jsx live
+function Example1() {
+  const [active, setActive] = useState(false);
+  const theme = useTheme();
+  const actionGroupRef = useRef(null);
+
+  return (
+    <Portal.Provider>
+      <View
+        testID="fab-view"
+        style={{
+          flex: 1,
+          backgroundColor: theme.colors.defaultGlobalSurface,
+          padding: theme.space.large,
+          height: 320,
+        }}
+      >
+        <View
+          style={{
+            height: 120,
+            borderWidth: 0.5,
+            borderColor: theme.colors.secondaryOutline,
+          }}
+        >
+          <Typography.Body>FAB's parent</Typography.Body>
+          <Portal hostName="host">
+            <FAB.ActionGroup
+              style={{
+                marginBottom: theme.space.large,
+              }}
+              items={[{ icon: 'target', title: 'Goal' }]}
+              onPress={() => {
+                setActive(!active);
+              }}
+              fabTitle="Shout out"
+              fabIcon="speaker"
+              active={active}
+              ref={actionGroupRef}
+            />
+          </Portal>
+        </View>
+        <Portal.Host name="host" />
+      </View>
+    </Portal.Provider>
+  );
+}
+```
+
+### Customizing children theme
+
+We can pass a custom theme to Portal component to change the theme of children components.
+
+```jsx live noInline
+const customTheme = getTheme(
+  {
+    borderWidth: 1,
+    space: 8,
+    size: 8,
+    font: {
+      neutral: 'BeVietnamPro',
+      playful: 'Saiga',
+    },
+    fontSize: 10,
+    radius: 4,
+  },
+  walletSystemPalette
+);
+
+function Example2() {
+  const [active, setActive] = useState(false);
+  const actionGroupRef = useRef(null);
+
+  return (
+    <Portal.Provider>
+      <View
+        testID="fab-view"
+        style={{
+          flex: 1,
+          backgroundColor: theme.colors.defaultGlobalSurface,
+          padding: theme.space.large,
+          height: 320,
+        }}
+      >
+        <View
+          style={{
+            height: 120,
+            borderWidth: 0.5,
+            borderColor: theme.colors.secondaryOutline,
+          }}
+        >
+          <Typography.Body>FAB's parent</Typography.Body>
+          <Portal hostName="host" theme={customTheme}>
+            <FAB.ActionGroup
+              style={{
+                marginBottom: theme.space.large,
+              }}
+              items={[{ icon: 'target', title: 'Goal' }]}
+              onPress={() => {
+                setActive(!active);
+              }}
+              fabTitle="Shout out"
+              fabIcon="speaker"
+              active={active}
+              ref={actionGroupRef}
+            />
+          </Portal>
+        </View>
+        <Portal.Host name="host" />
+      </View>
+    </Portal.Provider>
+  );
+}
+
+render(Example2);
+```
+
+## Props
+
+### Portal
+
+<Props of="Portal" />
+
+### Portal.Host
+
+<Props of="PortalHost" />
+
+### Portal.Provider
+
+<Props of="PortalProvider" />

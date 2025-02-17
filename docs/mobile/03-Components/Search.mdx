@@ -1,0 +1,403 @@
+---
+id: search
+title: Search
+---
+
+# Search
+
+Search is a compound component including search input and current state of search input.
+
+## One Line
+
+Search One Line is the TextInput component that designed for search functionality.
+
+## Examples
+
+```jsx live
+function App() {
+  const [value, setValue] = React.useState('');
+  return (
+    <ScrollView>
+      <Typography.Body style={{ marginBottom: theme.space.small }}>
+        Basic
+      </Typography.Body>
+      <Search.OneLine
+        placeholder="Search"
+        style={{ marginBottom: theme.space.medium }}
+      />
+      <Typography.Body style={{ marginBottom: theme.space.small }}>
+        With Suffix
+      </Typography.Body>
+      <Search.OneLine
+        placeholder="Search"
+        suffix="adjustment"
+        style={{ marginBottom: theme.space.medium }}
+      />
+      <Typography.Body style={{ marginBottom: theme.space.small }}>
+        With Custom Suffix
+      </Typography.Body>
+      <Search.OneLine
+        placeholder="Search"
+        suffix={
+          <Search.SuffixIcon
+            suffix={
+              <TouchableOpacity
+                hitSlop={theme.space.small}
+                onPress={() => alert('Clicked')}
+              >
+                <Icon size="small" icon="adjustment" />
+              </TouchableOpacity>
+            }
+          />
+        }
+        style={{ marginBottom: theme.space.medium }}
+      />
+      <Search.OneLine
+        placeholder="Search"
+        suffix={
+          <Search.SuffixIcon
+            badge={{
+              content: 7,
+            }}
+            suffix={
+              <TouchableOpacity
+                hitSlop={theme.space.small}
+                onPress={() => alert('Clicked')}
+              >
+                <Icon size="small" icon="adjustment" />
+              </TouchableOpacity>
+            }
+          />
+        }
+        style={{ marginBottom: theme.space.medium }}
+      />
+      <Typography.Body style={{ marginBottom: theme.space.small }}>
+        Reversed
+      </Typography.Body>
+      <View
+        style={{
+          padding: theme.space.medium,
+          backgroundColor: theme.colors.neutralGlobalSurface,
+          marginBottom: theme.space.medium,
+        }}
+      >
+        <Search.OneLine
+          placeholder="Search"
+          suffix={
+            <Search.SuffixIcon
+              badge={{
+                content: 7,
+              }}
+              suffix={
+                <TouchableOpacity
+                  hitSlop={theme.space.small}
+                  onPress={() => alert('Clicked')}
+                >
+                  <Icon size="small" icon="adjustment" />
+                </TouchableOpacity>
+              }
+            />
+          }
+          variant="reversed"
+        />
+      </View>
+      <Typography.Body style={{ marginBottom: theme.space.small }}>
+        Clearable Search
+      </Typography.Body>
+      <Search.OneLine
+        placeholder="Search"
+        clearable
+        style={{ marginBottom: theme.space.medium }}
+        value={value}
+        onChangeText={setValue}
+        suffix="adjustment"
+      />
+    </ScrollView>
+  );
+}
+```
+
+## Two Line
+
+Search Two Line display the state of the current search term.
+
+## Examples
+
+```jsx live
+function App() {
+  return (
+    <ScrollView>
+      <Typography.Body style={{ marginBottom: theme.space.small }}>
+        Basic
+      </Typography.Body>
+      <Search.TwoLine
+        label="Find Work"
+        content={
+          <Typography.Caption fontWeight="semi-bold" intent="subdued">
+            Anywhere
+          </Typography.Caption>
+        }
+        style={{ marginBottom: theme.space.medium }}
+        testID="idle-compound-search-handler"
+      />
+      <Typography.Body style={{ marginBottom: theme.space.small }}>
+        Selected
+      </Typography.Body>
+      <Search.TwoLine
+        label="Find Work"
+        content={
+          <Box display="flex" flexDirection="row" justifyContent="center">
+            <Icon
+              size="xsmall"
+              icon="near-me-outlined"
+              intent="primary"
+              style={{ marginRight: theme.space.small }}
+            />
+            <Typography.Caption fontWeight="semi-bold" intent="primary">
+              Wollongong, 2500, NSW
+            </Typography.Caption>
+          </Box>
+        }
+        style={{ marginBottom: theme.space.medium }}
+        testID="idle-compound-search-handler"
+      />
+      <Typography.Body style={{ marginBottom: theme.space.small }}>
+        With Suffix
+      </Typography.Body>
+      <Search.TwoLine
+        label="Find Work"
+        content={
+          <Typography.Caption fontWeight="semi-bold" intent="subdued">
+            Anywhere
+          </Typography.Caption>
+        }
+        style={{ marginBottom: theme.space.medium }}
+        suffix="adjustment"
+      />
+      <Typography.Body style={{ marginBottom: theme.space.small }}>
+        With Custom Suffix
+      </Typography.Body>
+      <Search.TwoLine
+        label="Find Work"
+        content={
+          <Typography.Caption fontWeight="semi-bold" intent="subdued">
+            Anywhere
+          </Typography.Caption>
+        }
+        suffix={
+          <Search.SuffixIcon
+            suffix={
+              <TouchableOpacity
+                hitSlop={theme.space.small}
+                onPress={() => alert('Clicked')}
+              >
+                <Icon size="small" icon="adjustment" />
+              </TouchableOpacity>
+            }
+          />
+        }
+        style={{ marginBottom: theme.space.medium }}
+      />
+      <Search.TwoLine
+        label="Find Work"
+        content={
+          <Typography.Caption fontWeight="semi-bold" intent="subdued">
+            Anywhere
+          </Typography.Caption>
+        }
+        style={{ marginBottom: theme.space.medium }}
+        suffix={
+          <Search.SuffixIcon
+            badge={{
+              content: 7,
+            }}
+            suffix={
+              <TouchableOpacity
+                hitSlop={theme.space.small}
+                onPress={() => alert('Clicked')}
+              >
+                <Icon size="small" icon="adjustment" />
+              </TouchableOpacity>
+            }
+          />
+        }
+        style={{ marginBottom: theme.space.medium }}
+      />
+
+      <Typography.Body style={{ marginBottom: theme.space.small }}>
+        Reversed
+      </Typography.Body>
+      <View
+        style={{
+          padding: theme.space.medium,
+          backgroundColor: theme.colors.neutralGlobalSurface,
+        }}
+      >
+        <Search.TwoLine
+          label="Find Work"
+          content={
+            <Typography.Caption fontWeight="semi-bold" intent="subdued">
+              Anywhere
+            </Typography.Caption>
+          }
+          suffix={
+            <Search.SuffixIcon
+              badge={{
+                content: 7,
+              }}
+              suffix={
+                <TouchableOpacity
+                  hitSlop={theme.space.small}
+                  onPress={() => alert('Clicked')}
+                >
+                  <Icon size="small" icon="adjustment" />
+                </TouchableOpacity>
+              }
+            />
+          }
+          variant="reversed"
+        />
+      </View>
+    </ScrollView>
+  );
+}
+```
+
+### Search Two Line with Bottom Sheet
+
+```jsx live
+function SearchBasicWithBottomSheet() {
+  const theme = useTheme();
+  const [open, setOpen] = useState(false);
+
+  const [selected, setSelected] = useState('Sydney, 2000, NSW');
+
+  const items = useMemo(
+    () => [
+      'Sydney, 2000, NSW',
+      'Melbourne, 3000, VIC',
+      'Brisbane, 4000, QLD',
+      'Perth, 6000, WA',
+      'Adelaide, 5000, SA',
+      'Hobart, 7000, TAS',
+      'Darwin, 0800, NT',
+      'Canberra, 2600, ACT',
+    ],
+    []
+  );
+
+  return (
+    <View style={{ marginBottom: theme.space.medium }}>
+      <TouchableOpacity onPress={() => setOpen(true)}>
+        <Search.TwoLine
+          label="Find Work"
+          content={
+            <Box display="flex" flexDirection="row" justifyContent="center">
+              <Icon
+                size="xsmall"
+                icon="near-me-outlined"
+                intent="primary"
+                style={{ marginRight: theme.space.small }}
+              />
+              <Typography.Caption fontWeight="semi-bold" intent="primary">
+                {selected}
+              </Typography.Caption>
+            </Box>
+          }
+          suffix={<Search.SuffixIcon suffix={'adjustment'} />}
+          style={{ marginBottom: theme.space.medium }}
+          testID="idle-compound-search-handler"
+        />
+      </TouchableOpacity>
+      <BottomSheet
+        open={open}
+        onRequestClose={() => setOpen(false)}
+        header="Select location"
+      >
+        <FlatList
+          data={items}
+          renderItem={({ item }) => (
+            <List.Item
+              onPress={() => {
+                setSelected(item);
+                setOpen(false);
+              }}
+              title={item}
+              suffix={selected === item ? 'checkmark' : undefined}
+            />
+          )}
+        />
+      </BottomSheet>
+    </View>
+  );
+}
+```
+
+### Combine One Line and Two Line
+
+Example combine Search State and Search Text Input.
+
+```jsx live
+function App() {
+  const [open, setOpen] = React.useState(false);
+  const [value, setValue] = React.useState('Anywhere');
+
+  const inputRef = React.useRef(null);
+
+  const suffix = (
+    <TouchableOpacity
+      hitSlop={theme.space.small}
+      onPress={() => alert('Clicked')}
+    >
+      <Search.SuffixIcon suffix="adjustment" />
+    </TouchableOpacity>
+  );
+  return (
+    <View>
+      {open ? (
+        <Search.OneLine
+          onBlur={() => setOpen(false)}
+          placeholder="Search"
+          suffix={suffix}
+          value={value}
+          onChangeText={setValue}
+          ref={inputRef}
+        />
+      ) : (
+        <TouchableOpacity
+          onPress={() => {
+            setOpen(true);
+            setTimeout(() => {
+              inputRef.current.focus();
+            }, 100);
+          }}
+        >
+          <Search.TwoLine
+            label="Find Work"
+            content={
+              <Typography.Caption fontWeight="semi-bold" intent="subdued">
+                {value}
+              </Typography.Caption>
+            }
+            suffix={suffix}
+          />
+        </TouchableOpacity>
+      )}
+    </View>
+  );
+}
+```
+
+## Props
+
+### Search.OneLine
+
+<Props of="SearchOneLine" />
+
+### Search.TwoLine
+
+<Props of="SearchTwoLine" />
+
+### Search.SuffixIcon
+
+<Props of="SearchSuffixIcon" />

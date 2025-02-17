@@ -1,0 +1,110 @@
+---
+id: rate
+title: Rate
+---
+
+The rate component can be used to show evaluation or a quick rating operation on something.
+
+## Examples
+
+### Basic
+
+Basic usage of the component.
+
+```jsx live
+function RatePlayground() {
+  const theme = useTheme();
+
+  const ratingData = [
+    { value: 1, label: 'Terrible' },
+    { value: 2, label: 'Bad' },
+    { value: 3, label: 'Normal' },
+    { value: 4, label: 'Good' },
+    { value: 5, label: 'Wonderful' },
+  ];
+
+  const [rating, setRating] = useState(1);
+  const label = ratingData.find((item) => item.value === rating).label || null;
+
+  return (
+    <Box
+      bgColor="defaultGlobalSurface"
+      borderRadius="large"
+      alignItems="center"
+    >
+      <Typography.Body
+        variant="small"
+        style={{ marginBottom: theme.space.medium }}
+      >
+        {label}
+      </Typography.Body>
+
+      <Rate value={rating} onChange={setRating} options={ratingData} />
+    </Box>
+  );
+}
+```
+
+### Readonly
+
+You can use `readonly` prop to make the component not interactable.
+
+```jsx live
+function RatePlayground() {
+  const theme = useTheme();
+
+  const ratingData = [
+    { value: 1, label: 'Terrible' },
+    { value: 2, label: 'Bad' },
+    { value: 3, label: 'Normal' },
+    { value: 4, label: 'Good' },
+    { value: 5, label: 'Wonderful' },
+  ];
+
+  const [rating, setRating] = useState(1);
+
+  return (
+    <Box
+      bgColor="defaultGlobalSurface"
+      borderRadius="large"
+      alignItems="center"
+    >
+      <Rate readonly value={rating} onChange={setRating} options={ratingData} />
+    </Box>
+  );
+}
+```
+
+### Disabled
+
+You can pass `disabled` prop to disable the component.
+
+```jsx live
+function RatePlayground() {
+  const theme = useTheme();
+
+  const ratingData = [
+    { value: 1, label: 'Terrible' },
+    { value: 2, label: 'Bad' },
+    { value: 3, label: 'Normal' },
+    { value: 4, label: 'Good' },
+    { value: 5, label: 'Wonderful' },
+  ];
+
+  const [rating, setRating] = useState(1);
+
+  return (
+    <Box
+      bgColor="defaultGlobalSurface"
+      borderRadius="large"
+      alignItems="center"
+    >
+      <Rate disabled value={rating} onChange={setRating} options={ratingData} />
+    </Box>
+  );
+}
+```
+
+## Props
+
+<Props of="Rate" from="mobile" />

@@ -1,0 +1,51 @@
+---
+id: typography
+title: Typography
+---
+
+import { FontScale, FontWeights } from '../../helpers/Fonts';
+
+# Typography
+
+Typography helps to display and organisation which eventually guide users through the product.
+
+## Typeface
+
+- The default typeface for Hero Design for Mobile is **Be Vietnam Pro**, a modern and elegant sans serif typeface for universal professional design. The family contains 7 weights from Thin to Black and corresponding Italics.
+- To visualise playful content, we optionally use **Saiga** typeface.
+- Hero Design for Mobile only uses 3 weight steps from this family: **200** (Light), **400** (Regular) and **600** (SemiBold).
+
+```jsx
+<Typography.Body>This is default neutral text</Typography.Body>
+
+<Typography.Body typeface="playful">This is playful text</Typography.Body>
+```
+
+## Font Scale & Line Height
+
+Hero Design for Mobile uses [IBM type scale](https://www.carbondesignsystem.com/guidelines/typography/overview#scale) to define the scale for different font sizes which go with corresponding line heights as follow:
+
+<FontScale type="mobile" />
+
+<br />
+
+## Font Weight
+
+Hero Design for Mobile provides 3 types of font weights for emphasizing the content.
+
+<FontWeights type="mobile" />
+
+<br />
+
+## Font Color
+
+There are various colors of text from multiple themes used across the system which are defined in [Colors](/mobile/guidelines/colors) section.
+
+## Font Capitalization
+
+For headings and sentences, we follow [**Sentence case**](https://www.stylemanual.gov.au/grammar-punctuation-and-conventions/punctuation-and-capitalisation#capitalise_the_first_word_in_a_sentence_and_in_headings) standard: capitalise the first word in a sentence, and use lower case for all other words, unless those words include proper nouns. This standard is used for:
+
+- [Opening quoted speech within a sentence](https://www.stylemanual.gov.au/grammar-punctuation-and-conventions/punctuation/quotation-marks)
+- [Headings](https://www.stylemanual.gov.au/structuring-content/headings)
+
+We should also avoid using all capitals for headings, unless the visual design for the content meets [WCAG 2.1](https://www.w3.org/TR/WCAG21/) in all respects.

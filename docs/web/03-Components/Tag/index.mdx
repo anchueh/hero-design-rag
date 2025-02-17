@@ -1,0 +1,62 @@
+---
+id: tag
+title: Tag
+---
+
+# Tag
+
+Tag is for categorizing or markup to tag by dimension or property.
+
+## Examples
+
+### Tag Variants
+
+There are `basic`, `filled` and `outlined` tag. Though `basic` tag does not require color, it need to be passed through `intent` when `filled` or `outlined` variant is used.
+
+```jsx live
+<>
+  <Box mb="small">
+    <Tag text="BASIC" />
+  </Box>
+  <Box mb="small" sx={{ display: 'flex', gap: 'small', flexWrap: 'wrap' }}>
+    <Tag text="PRIMARY" variant="filled" intent="primary" />
+    <Tag text="WARNING" variant="filled" intent="warning" />
+    <Tag text="DANGER" variant="filled" intent="danger" />
+    <Tag text="ERROR" variant="filled" intent="error" />
+    <Tag text="SUCCESS" variant="filled" intent="success" />
+    <Tag text="ARCHIVED" variant="filled" intent="archived" />
+  </Box>
+  <Box sx={{ display: 'flex', gap: 'small', flexWrap: 'wrap' }}>
+    <Tag text="PRIMARY" variant="outlined" intent="primary" />
+    <Tag text="WARNING" variant="outlined" intent="warning" />
+    <Tag text="DANGER" variant="outlined" intent="danger" />
+    <Tag text="ERROR" variant="outlined" intent="error" />
+    <Tag text="SUCCESS" variant="outlined" intent="success" />
+    <Tag text="ARCHIVED" variant="outlined" intent="archived" />
+  </Box>
+</>
+```
+
+### Tag Sizes
+
+Tag support 3 different sizes: `small`, `medium` and `large`. It is set to `medium` by default.
+
+```jsx live
+<>
+  <Tag text="LARGE" size="large" style={{ marginRight: theme.space.small }} />
+  <Tag text="MEDIUM" size="medium" style={{ marginRight: theme.space.small }} />
+  <Tag text="SMALL" size="small" />
+</>
+```
+
+### Removable Tag
+
+A Tag can be removed by using onRemove hanlder. A remove button will be render next to the tag.
+
+```jsx live
+<Tag value="removable-tag" text="REMOVE" onRemove={(tag) => console.log(tag)} />
+```
+
+## Props
+
+<Props of="Tag" from="web" />

@@ -1,0 +1,131 @@
+---
+id: divider
+title: Divider
+---
+
+# Divider
+
+A divider is used to separate contents or UI sections.
+
+## Examples
+
+Both horizontal and vertical margin of Divider can be set with 5 options as below:
+
+| Option | Margin |
+| ------ | ------ |
+| xsmall | 4      |
+| small  | 8      |
+| medium | 16     |
+| large  | 24     |
+| xlarge | 32     |
+
+As default, Divider's `left/right` and `top/bottom` margin would be `0px`.
+
+### Basic
+
+Divider can be used to separate a header and a paragraph.
+
+```jsx live
+<>
+  <Typography.Title level={2}>Employment Hero</Typography.Title>
+  <Divider marginY="medium" />
+  <Typography.Text>
+    Employment Hero is Australia&apos;s first all-in-one HR software, Payroll
+    and benefits platform for employers & employees.
+  </Typography.Text>
+</>
+```
+
+### Divider can be rendered horizontally or vertically
+
+#### Horizontal dividers
+
+Divider is rendered horizontally by default.
+
+```jsx live
+<>
+  <DividerHorizontalExample title="default">
+    <Divider />
+  </DividerHorizontalExample>
+  <br />
+  <DividerHorizontalExample title="marginX=xsmall">
+    <Divider marginX="xsmall" />
+  </DividerHorizontalExample>
+  <DividerHorizontalExample title="marginX=small">
+    <Divider marginX="small" />
+  </DividerHorizontalExample>
+  <DividerHorizontalExample title="marginX=medium">
+    <Divider marginX="medium" />
+  </DividerHorizontalExample>
+  <DividerHorizontalExample title="marginX=large">
+    <Divider marginX="large" />
+  </DividerHorizontalExample>
+  <DividerHorizontalExample title="marginX=xlarge">
+    <Divider marginX="xlarge" />
+  </DividerHorizontalExample>
+  <br />
+  <DividerHorizontalExample title="marginY=xsmall">
+    <Divider marginY="xsmall" />
+  </DividerHorizontalExample>
+  <DividerHorizontalExample title="marginY=small">
+    <Divider marginY="small" />
+  </DividerHorizontalExample>
+  <DividerHorizontalExample title="marginY=medium">
+    <Divider marginY="medium" />
+  </DividerHorizontalExample>
+  <DividerHorizontalExample title="marginY=large">
+    <Divider marginY="large" />
+  </DividerHorizontalExample>
+  <DividerHorizontalExample title="marginY=xlarge">
+    <Divider marginY="xlarge" />
+  </DividerHorizontalExample>
+</>
+```
+
+#### Vertical dividers
+
+Divider can be rendered vertically when the prop `variant` is set as `vertical`.
+
+```jsx live
+<>
+  <DividerVerticalExample title="default">
+    <Divider variant="vertical" />
+  </DividerVerticalExample>
+  <br />
+  <DividerVerticalExample title="marginX=xsmall">
+    <Divider variant="vertical" marginX="xsmall" />
+  </DividerVerticalExample>
+  <DividerVerticalExample title="marginX=small">
+    <Divider variant="vertical" marginX="small" />
+  </DividerVerticalExample>
+  <DividerVerticalExample title="marginX=medium">
+    <Divider variant="vertical" marginX="medium" />
+  </DividerVerticalExample>
+  <DividerVerticalExample title="marginX=large">
+    <Divider variant="vertical" marginX="large" />
+  </DividerVerticalExample>
+  <DividerVerticalExample title="marginX=xlarge">
+    <Divider variant="vertical" marginX="xlarge" />
+  </DividerVerticalExample>
+  <br />
+  <DividerVerticalExample title="marginY=xsmall">
+    <Divider variant="vertical" marginY="xsmall" />
+  </DividerVerticalExample>
+  <DividerVerticalExample title="marginY=small">
+    <Divider variant="vertical" marginY="small" />
+  </DividerVerticalExample>
+  <DividerVerticalExample title="marginY=medium">
+    <Divider variant="vertical" marginY="medium" />
+  </DividerVerticalExample>
+  <DividerVerticalExample title="marginY=large">
+    <Divider variant="vertical" marginY="large" />
+  </DividerVerticalExample>
+  <DividerVerticalExample title="marginY=xlarge">
+    <Divider variant="vertical" marginY="xlarge" />
+  </DividerVerticalExample>
+</>
+```
+
+## Props
+
+<Props of="Divider" from="web" />

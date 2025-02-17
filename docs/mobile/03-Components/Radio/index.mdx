@@ -1,0 +1,90 @@
+---
+id: radio
+title: Radio
+---
+
+<PageTitle
+  title="Radio"
+  content="The radio usually prepresents an option in a list where only one item can be selected at a time."
+/>
+
+## Examples
+
+### Basic Radio.Group
+
+```jsx live
+function RadioExample() {
+  const [value, setValue] = useState('everything');
+
+  return (
+    <Radio.Group
+      options={[
+        { text: 'Everything', value: 'everything' },
+        { text: 'Direct mentions only', value: 'direct_mentions' },
+        { text: 'Nothing', value: 'nothing' },
+      ]}
+      value={value}
+      onPress={setValue}
+    />
+  );
+}
+```
+
+### Intents
+
+Radio.Group supports 2 intents for inactive Radio button: `light` and `dark` that can be used with the `inactiveIntent` prop.
+
+```jsx live
+function RadioExample() {
+  const [value, setValue] = useState('everything');
+
+  return (
+    <Radio.Group
+      inactiveIntent="dark"
+      options={[
+        { text: 'Everything', value: 'everything' },
+        { text: 'Direct mentions only', value: 'direct_mentions' },
+        { text: 'Nothing', value: 'nothing' },
+      ]}
+      value={value}
+      onPress={setValue}
+    />
+  );
+}
+```
+
+### With subtext
+
+Radio.Group also supports rendering subtext using `subText` in the option object.
+
+```jsx live
+function RadioExample() {
+  const [value, setValue] = useState('on_demand');
+
+  return (
+    <Radio.Group
+      inactiveIntent="dark"
+      options={[
+        {
+          text: 'On demand/now',
+          subText: 'InstaPay Now',
+          value: 'on_demand',
+        },
+        {
+          text: 'Everyday',
+          subText: 'InstaPay Daily',
+          value: 'everyday',
+        },
+      ]}
+      value={value}
+      onPress={setValue}
+    />
+  );
+}
+```
+
+## Props
+
+### Radio.Group Props
+
+<Props of="RadioGroup" />

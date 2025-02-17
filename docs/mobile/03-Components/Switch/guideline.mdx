@@ -1,0 +1,156 @@
+---
+title: Guideline
+---
+
+import SwitchDosAndDonts from './SwitchDosAndDonts';
+
+<PageTitle
+  title="Switch"
+  content="Switches are a useful way to change the state of functionalities and preferences in a system. They work by controlling two options that are mutually exclusive, meaning only one of them can be selected at a time. And they always have a default state, such as on/off or true/false."
+/>
+
+<SwitchDosAndDonts />
+
+## When do we use radio buttons?
+
+- Use radio buttons when only one item can be selected from a list.
+
+```jsx live previewOnly
+<Box padding="xlarge" paddingBottom="small" flex={1}>
+  <Box flex={1}>
+    <Typography.Body>Notify me about: </Typography.Body>
+    <Radio.Group
+      options={[
+        { text: 'Everything', value: 'everything' },
+        { text: 'Direct mentions only', value: 'direct_mentions' },
+        { text: 'Nothing', value: 'nothing' },
+      ]}
+    />
+
+    <Toolbar>
+      <Toolbar.Group
+        align="right"
+        items={[
+          {
+            label: 'Save',
+          },
+        ]}
+      />
+    </Toolbar>
+  </Box>
+</Box>
+```
+
+<br />
+
+- Use radio buttons to toggle items on or off. Radio buttons represent a set of mutually exclusive options that can be selected one at a time only. Radio button options usually take effect after user taps a save/submit button.
+
+```jsx live previewOnly
+<Box padding="large">
+  <DatePicker
+    value={new Date('2022-09-16')}
+    label="Issue Date"
+    confirmLabel="OK"
+  />
+  <Radio.Group
+    options={[
+      { text: 'Never expires', value: 'never' },
+      { text: 'Has an expiry date', value: 'expiry_date' },
+    ]}
+    value={'never'}
+  />
+  <DatePicker
+    value={new Date('2022-09-16')}
+    label="Expired Date"
+    disabled={true}
+    confirmLabel="OK"
+  />
+</Box>
+```
+
+<br />
+
+## Where do we place a switch?
+
+- Switches usually appears within a list or bottom sheet component, and they are often arranged in stacked views.
+
+```jsx live previewOnly
+<Box padding="large">
+  <List.Item title="List Item" suffix={<Switch checked />} />
+  <List.Item title="List Item" suffix={<Switch />} />
+  <List.Item title="List Item" suffix={<Switch checked />} />
+</Box>
+```
+
+<br />
+
+- Switch selector always sits under the horizontal navigation and above any content.
+
+```jsx live previewOnly
+<Box>
+  <Box
+    paddingHorizontal="large"
+    paddingVertical="medium"
+    style={{ height: 60 }}
+    flexDirection="row"
+    alignItems="center"
+  >
+    <Typography.Body style={{ marginRight: theme.space.medium }}>
+      Certifications
+    </Typography.Body>
+    <Typography.Body
+      style={{
+        marginRight: theme.space.medium,
+        padding: theme.space.xsmall,
+        backgroundColor: theme.colors.decorativePrimarySurface,
+        borderRadius: theme.radii.large,
+      }}
+    >
+      Policies
+    </Typography.Body>
+
+    <Typography.Body style={{ marginRight: theme.space.medium }}>
+      Goals
+    </Typography.Body>
+    <Typography.Body>Events</Typography.Body>
+  </Box>
+  <Box paddingHorizontal="large">
+    <Switch.Selector
+      options={[
+        {
+          value: 'employee',
+          text: 'My Dashboard',
+          icon: 'user',
+        },
+        {
+          value: 'manager',
+          text: 'Manager Dashboard',
+          icon: 'multiple-users',
+          badge: { type: 'status' },
+        },
+      ]}
+      value={'employee'}
+    />
+  </Box>
+  <Box padding="large">
+    <Box
+      marginBottom="medium"
+      borderRadius="large"
+      backgroundColor="highlightedSurface"
+      style={{ width: '100%', height: 120 }}
+    />
+    <Box flexDirection="row" justifyContent="space-between">
+      <Box
+        borderRadius="large"
+        backgroundColor="highlightedSurface"
+        style={{ flex: 1, height: 120 }}
+      />
+      <Box
+        borderRadius="large"
+        backgroundColor="highlightedSurface"
+        style={{ flex: 1, height: 120, marginLeft: theme.space.medium }}
+      />
+    </Box>
+  </Box>
+</Box>
+```

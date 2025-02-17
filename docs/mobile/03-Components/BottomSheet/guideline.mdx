@@ -1,0 +1,107 @@
+---
+title: Guideline
+---
+
+import DoAndDonts from './BottomSheetDosAndDonts.tsx';
+
+<PageTitle
+  title="Bottom Sheet"
+  content="A bottom sheet is a sheet component that slides up from the bottom of a screen. It is designed to reveal supplementary content that complements the main content on the screen without taking up excessive space. "
+/>
+
+<DoAndDonts />
+
+## Use close icons in the bottom sheet header
+
+While most use cases for dismissing a bottom sheet involve clicking a close (X) icon, the close icons of bottom sheets are dynamic and can vary depending on the parent item that triggers them.
+
+If the parent item is a dropdown input, then bottom sheet will use a reverse dropdown icon and the parent item has a calendar or clock as suffix, use close (X) icon for bottom sheet.
+
+Or if the parent item is a menu list, also use close (X) icon for bottom sheet.
+
+```jsx live previewOnly
+function CustomSingleSelect() {
+  const options = [
+    { text: 'Monday', value: 'mon' },
+    { text: 'Tuesday', value: 'tue' },
+    { text: 'Wednesday', value: 'wed' },
+    { text: 'Thursday', value: 'thu' },
+    { text: 'Friday', value: 'fri' },
+    { text: 'Saturday', value: 'sat' },
+    { text: 'Sunday', value: 'sun', disabled: true },
+  ];
+
+  const CustomSingleSelect = (props) => {
+    const [singleValue, setSingleValue] = useState('mon');
+    const [open, setOpen] = useState(false);
+
+    useEffect(() => {
+      setOpen(false);
+    }, [singleValue]);
+
+    return (
+      <Select
+        options={options}
+        value={singleValue}
+        onConfirm={setSingleValue}
+        keyExtractor={(opt) => opt.value}
+        renderSelectedValue={(_selectedValue, inputProps) => {
+          return (
+            <div
+              onClick={() => setOpen(true)}
+              style={{ display: 'flex', width: '100%' }}
+            >
+              <Box flex={1} flexDirection="row" alignItems="center">
+                <Box flex={1} marginLeft="medium" flexDirection="column">
+                  <Typography.Body>{inputProps.value}</Typography.Body>
+                </Box>
+
+                <Box>
+                  <Icon
+                    icon={open ? 'caret-up-small' : 'caret-down-small'}
+                    size="small"
+                  />
+                </Box>
+              </Box>
+            </div>
+          );
+        }}
+        {...props}
+      />
+    );
+  };
+
+  return (
+    <Box
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: theme.space.large,
+      }}
+    >
+      <Typography.Body variant="small">Select custom value</Typography.Body>
+      <CustomSingleSelect
+        style={{ minWidth: 400 }}
+        label="Custom selected value"
+      />
+    </Box>
+  );
+}
+```
+
+<br />
+
+## Behavior
+
+Bottom sheets that appears in front of an app content, usually triggered by a user action, such as tapping a text input (dropdown, time/date picker) or a button (utility button, primary button, text button) etc.
+
+When a bottom sheet is activated, all other functionalities on the app will cease functioning until the bottom sheet has been confirmed or dismissed.
+
+A bottom sheet can be dismissed by
+
+<Ul>
+  <Li>tapping a menu item or a button on the bottom sheet footer</Li>
+  <Li>tapping the close icon on the bottom sheet header</Li>
+  <Li>tapping the scrim</Li>
+</Ul>

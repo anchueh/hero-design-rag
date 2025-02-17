@@ -1,0 +1,117 @@
+---
+id: banner
+title: Banner
+---
+
+# Banner
+
+Banner can be used as announcements to let users know about important events/things.
+
+## Examples
+
+### Basic
+
+Show banner with title and content.
+
+```jsx live
+<Banner title="Banner examples" content="Employment Hero new beta program" />
+```
+
+### Compact style
+
+Without title.
+
+```jsx live
+<Banner content="Employment Hero new beta program" />
+```
+
+### Intents and Icons
+
+Different intents come with different icons.
+
+```jsx live
+<>
+  <Banner
+    title="Informational Notes"
+    content="Additional description and advice about what the user can do."
+  />
+  <br />
+  <Banner
+    intent="success"
+    title="Success Tips"
+    content="Detailed description and advice about what the user can do."
+  />
+  <br />
+  <Banner
+    intent="warning"
+    title="Warning"
+    content="Warning description goes here to warn the user of a potentially important use case."
+  />
+  <br />
+  <Banner
+    intent="error"
+    title="Error"
+    content="Error description goes here to inform the user that an error has been made."
+  />
+  <br />
+  <Banner
+    intent="danger"
+    title="Danger"
+    content="Error description goes here to inform the user that an error has made."
+  />
+</>
+```
+
+### Custom icons
+
+Icon can be customised through `icon` prop. It can be either from hero-design's icon set or your custom ones.
+
+```jsx live
+<Banner
+  icon="user"
+  intent="success"
+  title="Banner examples"
+  content="Employment Hero new beta program"
+/>
+```
+
+### Close button
+
+Pass a `onClose` callback to render a close button.
+
+```jsx live
+<Banner
+  intent="success"
+  title="Banner examples"
+  content="Employment Hero new beta program"
+  onClose={() => console.log('Click on close')}
+/>
+```
+
+### Custom content
+
+```jsx live
+<Banner
+  icon={null}
+  content={
+    <Typography.Text
+      tagName="div"
+      intent="main"
+      style={{ display: 'flex', alignItems: 'center' }}
+    >
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+      <Button
+        text="Enroll"
+        variant="filled-reversed"
+        intent="success"
+        sx={{ marginLeft: 'auto' }}
+      />
+    </Typography.Text>
+  }
+  intent="success"
+/>
+```
+
+## Props
+
+<Props of="Banner" from="web" />

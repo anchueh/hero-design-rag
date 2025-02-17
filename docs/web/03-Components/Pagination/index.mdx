@@ -1,0 +1,47 @@
+---
+id: pagination
+title: Pagination
+---
+
+import Note from '../../../helpers/Note';
+
+# Pagination
+
+A component to show a long list of pages, fragment the data into multiple pages.
+
+## Examples
+
+### Basic
+
+Render the pagination by providing `current`, `total` and `onChange` props.
+
+<Note title="Indexing of 'current' prop">
+  Pagination used 1-based indexing. So the first item of the page has index of
+  1.
+</Note>
+
+```jsx live
+<Pagination current={1} total={15} onChange={() => alert('Page changed')} />
+```
+
+### Compact
+
+Simpler version of pagination.
+
+```jsx live
+function CompactPagination() {
+  const [currentPage, setCurrentPage] = React.useState(2);
+  return (
+    <Pagination
+      current={currentPage}
+      total={15}
+      onChange={(newPage) => setCurrentPage(newPage)}
+      variant="compact"
+    />
+  );
+}
+```
+
+## Props
+
+<Props of="Pagination" from="web" />

@@ -1,0 +1,65 @@
+---
+id: mapPin
+title: Map Pin
+---
+
+# MapPin
+
+A component for pinning a location on a map.
+
+## Basic
+
+Map Pin can be used with image and icon.
+
+```jsx live
+<View style={{ display: 'flex', flexDirection: 'row' }}>
+  <MapPin
+    state="idle"
+    style={{ marginEnd: theme.space.medium }}
+    image={{
+      source: {
+        uri: '/img/hero_design_icon.ico',
+      },
+    }}
+  />
+  <MapPin state="idle" icon="checkmark" />
+</View>
+```
+
+## States
+
+Map Pin has 3 states: `idle`, `selected`, and `applied`.
+
+```jsx live
+<View style={{ display: 'flex', flexDirection: 'row' }}>
+  <MapPin
+    state="idle"
+    icon="checkmark"
+    style={{ marginEnd: theme.space.medium }}
+  />
+  <MapPin
+    state="selected"
+    icon="checkmark"
+    style={{ marginEnd: theme.space.medium }}
+  />
+  <MapPin state="applied" icon="checkmark" />
+</View>
+```
+
+## MapPin.Focussed
+
+Display focussed state of the Map Pin
+
+```jsx live
+<MapPin.Focussed />
+```
+
+## Props
+
+### MapPin
+
+<Props of="MapPin" />
+
+### MapPin.Focussed
+
+<Props of="Focussed" />

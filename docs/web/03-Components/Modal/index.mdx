@@ -1,0 +1,403 @@
+---
+id: modal
+title: Modal
+---
+
+# Modal
+
+Modal is used for showing contents or requiring interaction from users without directing to a new page.
+
+## Examples
+
+### Basic
+
+A modal has 3 sections including `Title`, `Body` and `Footer`.
+
+```jsx live
+function BasicModal() {
+  const [openBasic, setOpenBasic] = React.useState(false);
+  const [openPrimary, setOpenPrimary] = React.useState(false);
+  return (
+    <>
+      <Button
+        text="Open basic modal"
+        onClick={() => setOpenBasic((value) => !value)}
+        style={{ marginRight: theme.space.small }}
+      />
+      <Button
+        text="Open primary modal"
+        onClick={() => setOpenPrimary((value) => !value)}
+      />
+      {openBasic && (
+        <Modal
+          title="Basic modal"
+          open
+          variant="basic"
+          onClose={() => setOpenBasic(false)}
+          body="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+          footer={
+            <>
+              <Button
+                text="Cancel"
+                variant="text"
+                onClick={() => setOpenBasic(false)}
+              />
+              <Button text="Submit" onClick={() => setOpenBasic(false)} />
+            </>
+          }
+        />
+      )}
+      {openPrimary && (
+        <Modal
+          title="Primary modal"
+          open
+          variant="primary"
+          onClose={() => setOpenPrimary(false)}
+          body="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+          footer={
+            <>
+              <Button
+                text="Cancel"
+                variant="text"
+                onClick={() => setOpenPrimary(false)}
+              />
+              <Button text="Submit" onClick={() => setOpenPrimary(false)} />
+            </>
+          }
+        />
+      )}
+    </>
+  );
+}
+```
+
+### Control modal sizes
+
+Using size prop to display different modal sizes.
+
+```jsx live
+function ModalWithSizes() {
+  const [openSmall, setOpenSmall] = React.useState(false);
+  const [openMedium, setOpenMedium] = React.useState(false);
+  const [openLarge, setOpenLarge] = React.useState(false);
+  const [openExtraLarge, setOpenExtraLarge] = React.useState(false);
+  const [openDoubleExtraLarge, setOpenDoubleExtraLarge] = React.useState(false);
+  return (
+    <>
+      <Button
+        text="Open small modal"
+        onClick={() => setOpenSmall(true)}
+        style={{ marginRight: theme.space.small }}
+      />
+      <Button
+        text="Open medium modal"
+        onClick={() => setOpenMedium(true)}
+        style={{ marginRight: theme.space.small }}
+      />
+      <Button
+        text="Open large modal"
+        onClick={() => setOpenLarge(true)}
+        style={{ marginRight: theme.space.small }}
+      />
+      <Button
+        text="Open extra large modal"
+        onClick={() => setOpenExtraLarge(true)}
+        style={{ marginRight: theme.space.small }}
+      />
+      <Button
+        text="Open double extra large modal"
+        onClick={() => setOpenDoubleExtraLarge(true)}
+        style={{ marginRight: theme.space.small }}
+      />
+      {openSmall && (
+        <Modal
+          title="Small modal"
+          size="small"
+          open
+          onClose={() => setOpenSmall(false)}
+          body="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+          footer={<Button text="OK" />}
+        />
+      )}
+      {openMedium && (
+        <Modal
+          title="Medium modal"
+          size="medium"
+          open
+          onClose={() => setOpenMedium(false)}
+          body="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+          footer={<Button text="OK" />}
+        />
+      )}
+      {openLarge && (
+        <Modal
+          title="Large modal"
+          size="large"
+          open
+          onClose={() => setOpenLarge(false)}
+          body="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+          footer={<Button text="OK" />}
+        />
+      )}
+      {openExtraLarge && (
+        <Modal
+          title="Extra large modal"
+          size="xlarge"
+          open={openExtraLarge}
+          onClose={() => setOpenExtraLarge(false)}
+          body="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+          footer={<Button text="OK" />}
+        />
+      )}
+      {openDoubleExtraLarge && (
+        <Modal
+          title="Double Extra large modal"
+          size="xxlarge"
+          open={openDoubleExtraLarge}
+          onClose={() => setOpenDoubleExtraLarge(false)}
+          body="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+          footer={<Button text="OK" />}
+        />
+      )}
+    </>
+  );
+}
+```
+
+### PopUp Modal
+
+Use this modal to provide feedbacks to users. There are 5 variants: `info`, `success`, `warning`, `danger` and `confirm`.
+
+```jsx live
+function PopupModal() {
+  const [openInfo, setOpenInfo] = React.useState(false);
+  const [openSuccess, setOpenSuccess] = React.useState(false);
+  const [openWarning, setOpenWarning] = React.useState(false);
+  const [openDanger, setOpenDanger] = React.useState(false);
+  const [openConfirm, setOpenConfirm] = React.useState(false);
+  return (
+    <>
+      <Button
+        text="Info Modal"
+        onClick={() => setOpenInfo((value) => !value)}
+        style={{ marginRight: theme.space.small }}
+      />
+      <Button
+        text="Success Modal"
+        onClick={() => setOpenSuccess((value) => !value)}
+        style={{ marginRight: theme.space.small }}
+      />
+      <Button
+        text="Warning Modal"
+        onClick={() => setOpenWarning((value) => !value)}
+        style={{ marginRight: theme.space.small }}
+      />
+      <Button
+        text="Danger Modal"
+        onClick={() => setOpenDanger((value) => !value)}
+        style={{ marginRight: theme.space.small }}
+      />
+      <Button
+        text="Confirm Modal"
+        onClick={() => setOpenConfirm((value) => !value)}
+      />
+      {openInfo && (
+        <Modal.PopUp
+          title="Info pop up dialogue"
+          open
+          variant="info"
+          onClose={() => setOpenInfo(false)}
+          body="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+          footer={
+            <>
+              <Button
+                text="Cancel"
+                variant="text"
+                onClick={() => setOpenInfo(false)}
+              />
+              <Button text="Submit" onClick={() => setOpenInfo(false)} />
+            </>
+          }
+        />
+      )}
+      {openSuccess && (
+        <Modal.PopUp
+          title="You have successfully done this!"
+          open
+          variant="success"
+          onClose={() => setOpenSuccess(false)}
+          body="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+          footer={
+            <>
+              <Button
+                text="Cancel"
+                variant="text"
+                onClick={() => setOpenSuccess(false)}
+              />
+              <Button text="Submit" onClick={() => setOpenSuccess(false)} />
+            </>
+          }
+        />
+      )}
+      {openWarning && (
+        <Modal.PopUp
+          title="Are you sure you want to do this?"
+          open
+          variant="warning"
+          onClose={() => setOpenWarning(false)}
+          body="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+          footer={
+            <>
+              <Button
+                text="Cancel"
+                variant="text"
+                onClick={() => setOpenWarning(false)}
+              />
+              <Button text="Submit" onClick={() => setOpenWarning(false)} />
+            </>
+          }
+        />
+      )}
+      {openDanger && (
+        <Modal.PopUp
+          title="Do you want to delete these items?"
+          open
+          variant="danger"
+          onClose={() => setOpenDanger(false)}
+          body="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+          footer={
+            <>
+              <Button
+                text="Cancel"
+                variant="text"
+                intent="danger"
+                onClick={() => setOpenDanger(false)}
+              />
+              <Button
+                text="Delete"
+                intent="danger"
+                onClick={() => setOpenDanger(false)}
+              />
+            </>
+          }
+        />
+      )}
+      {openConfirm && (
+        <Modal.PopUp
+          title="Please confirm that you want to do this action."
+          open={openConfirm}
+          variant="confirm"
+          onClose={() => setOpenConfirm(false)}
+          body="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+          footer={
+            <>
+              <Button
+                text="Cancel"
+                variant="text"
+                onClick={() => setOpenConfirm(false)}
+              />
+              <Button text="Confirm" onClick={() => setOpenConfirm(false)} />
+            </>
+          }
+        />
+      )}
+    </>
+  );
+}
+```
+
+### Modal rendering customisation
+
+Modal also exposes several components which allow you to fully customize the content UI:
+
+- Modal.Header
+- Modal.Body
+- Modal.Footer
+- Modal.CloseButton
+
+In below example, we will render a modal with an image header.
+
+```jsx live
+function CustomModal() {
+  const [open, setOpen] = React.useState(false);
+  const onClose = React.useCallback(() => setOpen(false), [setOpen]);
+  return (
+    <>
+      <Button text="Custom Modal" onClick={() => setOpen((value) => !value)} />
+      <Modal open={open} size="xlarge" onClose={onClose}>
+        <div style={{ position: 'relative', margin: 0, padding: 0 }}>
+          <img
+            style={{
+              width: '100%',
+              borderTopLeftRadius: theme.radii.base,
+              borderTopRightRadius: theme.radii.base,
+              margin: 'auto',
+              padding: 0,
+            }}
+            alt="demo"
+            src="/img/modal-banner.jpg"
+          />
+          <Modal.CloseButton
+            style={{
+              position: 'absolute',
+              right: theme.space.medium,
+              top: theme.space.medium,
+            }}
+            onClick={onClose}
+          />
+        </div>
+        <Modal.Body>
+          <Typography.Title level={4}>
+            Welcome to your new Custom Security
+          </Typography.Title>
+          <Typography.Text
+            intent="body"
+            style={{
+              marginTop: theme.space.small,
+              marginBottom: theme.space.medium,
+            }}
+          >
+            We&apos;ve made improvements to the Custom Security Groups module
+            and we&apos;re excited to share them with you!
+          </Typography.Text>
+          <Alert
+            variant="outlined"
+            title="Note"
+            content="Legacy custom security will no longer be supported and you'll no longer have access to the beta custom report."
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="text" text="Ask me later" onClick={onClose} />
+          <Button text="Start" onClick={onClose} />
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+}
+```
+
+## Props
+
+### Modal Props
+
+<Props of="Modal" from="web" />
+
+### Modal.PopUp Props
+
+<Props of="PopUpModal" from="web" />
+
+### Modal.Header Props
+
+<Props of="ModalHeader" from="web" />
+
+### Modal.Body Props
+
+<Props of="ModalBody" from="web" />
+
+### Modal.Footer Props
+
+<Props of="ModalFooter" from="web" />
+
+### Modal.CloseButton Props
+
+<Props of="ModalCloseButton" from="web" />

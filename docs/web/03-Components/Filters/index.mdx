@@ -1,0 +1,1324 @@
+---
+id: filters
+title: Filters
+---
+
+import Props from '@site/src/components/Props';
+
+# Filters
+
+Filters is a composite component that filters the items of a list or table.
+
+## Features
+
+- [Default settings](#default-settings-using-with-table) using with Table.
+- [Customized filter apply changes](#customized-filter-apply-changes).
+- [Customized filter apply all changes](#customized-filter-apply-all-changes).
+
+## Examples
+
+### Default settings using with Table
+
+:::tip
+
+For typescript usage, ref to [FiltersTableExample.tsx](https://github.com/Thinkei/hero-design/blob/master/packages/website/src/components/Filters/FiltersTableExample.tsx)
+
+:::
+
+```jsx live
+function DefaultSettingsWithTable() {
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'Personnel',
+        accessor: 'name',
+        Cell: ({ value }) => (
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              padding: 0,
+              margin: 0,
+            }}
+          >
+            <div
+              style={{
+                background: theme.colors.palette.blueDark30,
+                backgroundSize: 'cover',
+                width: theme.sizes.xxlarge,
+                height: theme.sizes.xxlarge,
+                borderRadius: '50%',
+                margin: 0,
+                padding: 0,
+                marginRight: theme.space.small,
+              }}
+            />
+            <Button.Link href="#" text={value} target="_blank" />
+          </div>
+        ),
+      },
+      {
+        Header: 'Start date',
+        accessor: 'startDate',
+      },
+      {
+        Header: 'End date',
+        accessor: 'endDate',
+      },
+      {
+        Header: 'Leave category',
+        accessor: 'leaveCategory',
+      },
+      {
+        Header: 'Duration',
+        accessor: 'duration',
+      },
+      {
+        Header: 'Remaining',
+        accessor: 'remaining',
+      },
+      {
+        Header: 'Status',
+        accessor: 'status',
+        Cell: ({ value }) => {
+          const intent = value === 'Approved' ? 'success' : 'warning';
+          return (
+            <Tag
+              text={value.toUpperCase()}
+              variant="outlined"
+              intent={intent}
+            />
+          );
+        },
+      },
+    ],
+    []
+  );
+
+  const [loading, setLoading] = React.useState(false);
+  const [data, setData] = React.useState([]);
+
+  const initialFilterValues = {
+    status: 'Pending',
+    reportingPersonnel: 'all',
+    search: '',
+  };
+  const [filterValues, setFilterValues] = useState(initialFilterValues);
+
+  useEffect(() => {
+    setLoading(true);
+    fetchEmployees(filterValues, tableData).then((res) => {
+      setData(res);
+      setLoading(false);
+    });
+  }, [filterValues]);
+
+  return (
+    <Grid>
+      <Grid.Row>
+        <Grid.Col span={[24, 24, 24, 24, 24]}>
+          <Filters
+            leftAddon={() => <Filters.Label text="Filter by" />}
+            sx={{ mb: 'large' }}
+            value={filterValues}
+            onChange={setFilterValues}
+            defaultValue={initialFilterValues}
+          >
+            <Filters.Filter
+              text="Leave category"
+              filterKey="leaveCategory"
+              noDropdown
+            >
+              {({ value, onChange, commit }) => (
+                <Select
+                  placeholder="Leave category"
+                  value={String(value)}
+                  onChange={(item) => {
+                    onChange(item);
+                    commit(item);
+                  }}
+                  options={[
+                    { value: 'Annual Leave', text: 'Annual Leave' },
+                    {
+                      value: 'Compassionate Leave',
+                      text: 'Compassionate Leave',
+                    },
+                    { value: 'Leisure Rules Day', text: 'Leisure Rules Day' },
+                    {
+                      value: 'Paid Paternity Leave',
+                      text: 'Paid Paternity Leave',
+                    },
+                    { value: 'Sick Leave', text: 'Sick Leave' },
+                    { value: 'Study Leave', text: 'Study Leave' },
+                    { value: 'Unpaid Leave', text: 'Unpaid Leave' },
+                    { value: 'Working From Home', text: 'Working From Home' },
+                  ]}
+                />
+              )}
+            </Filters.Filter>
+            <Filters.Filter text="Status" filterKey="status">
+              {({ value, onChange, commit }) => (
+                <Radio.Group
+                  value={value}
+                  onChange={onChange}
+                  options={[
+                    { value: 'Pending', text: 'Pending' },
+                    { value: 'Approved', text: 'Approved' },
+                    { value: 'Declined', text: 'Declined' },
+                  ]}
+                />
+              )}
+            </Filters.Filter>
+            <Filters.Group text="More" data-test-id="default-setting-more-btn">
+              <Filters.Group.Filter
+                text="Personnel"
+                tooltip={{ content: 'Employee name' }}
+                filterKey="personnel"
+              >
+                {({ value, onChange }) => (
+                  <Select
+                    value={value}
+                    onChange={onChange}
+                    options={[
+                      { value: 'Vinh Hoang', text: 'Vinh Hoang' },
+                      { value: 'Kien Tran', text: 'Kien Tran' },
+                      { value: 'Hau Dao', text: 'Hau Dao' },
+                      { value: 'Minh Dinh', text: 'Minh Dinh' },
+                      { value: 'Tung Nguyen', text: 'Tung Nguyen' },
+                      { value: 'Thong Quach', text: 'Thong Quach' },
+                      { value: 'Khoa Thai', text: 'Khoa Thai' },
+                      { value: 'Son Trinh', text: 'Son Trinh' },
+                      { value: 'Sang Nguyen', text: 'Sang Nguyen' },
+                      { value: 'Thuong Huynh', text: 'Thuong Huynh' },
+                      { value: 'Anh Dau', text: 'Anh Dau' },
+                    ]}
+                    placeholder="Select..."
+                  />
+                )}
+              </Filters.Group.Filter>
+              <Filters.Group.Filter
+                text="Reporting personnel"
+                filterKey="reportingPersonnel"
+              >
+                {({ value, onChange }) => (
+                  <Radio.Group
+                    value={value}
+                    onChange={onChange}
+                    options={[
+                      { value: 'direct', text: 'Direct' },
+                      { value: 'indirect', text: 'Indirect' },
+                      { value: 'all', text: 'All personnel' },
+                    ]}
+                  />
+                )}
+              </Filters.Group.Filter>
+            </Filters.Group>
+          </Filters>
+        </Grid.Col>
+        <Grid.Col
+          span={[24, 24, 24, 24, 24]}
+          style={{ maxHeight: 500, overflow: 'auto' }}
+        >
+          <Table
+            data={data}
+            columns={columns}
+            loading={loading}
+            sx={{ mb: 'large' }}
+            sticky
+          />
+        </Grid.Col>
+      </Grid.Row>
+    </Grid>
+  );
+}
+```
+
+### Customized filter apply changes
+
+:::tip
+
+For typescript usage, ref to [CustomizedFilterApplyChanges.tsx](https://github.com/Thinkei/hero-design/blob/master/packages/website/src/components/Filters/CustomizedFilterApplyChanges.tsx)
+
+:::
+
+```jsx live
+function CustomisedFilterWithApplyChanges() {
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'Personnel',
+        accessor: 'name',
+        Cell: ({ value }) => (
+          <Box style={{ display: 'flex', alignItems: 'center' }}>
+            <Box
+              backgroundColor="blue-dark-30"
+              mr="small"
+              sx={{
+                backgroundSize: 'cover',
+                width: theme.sizes.xxlarge,
+                height: theme.sizes.xxlarge,
+                borderRadius: '50%',
+              }}
+            />
+            <Button.Link href="#" text={value} target="_blank" />
+          </Box>
+        ),
+      },
+      {
+        Header: 'Start date',
+        accessor: 'startDate',
+      },
+      {
+        Header: 'End date',
+        accessor: 'endDate',
+      },
+      {
+        Header: 'Leave category',
+        accessor: 'leaveCategory',
+      },
+      {
+        Header: 'Duration',
+        accessor: 'duration',
+      },
+      {
+        Header: 'Remaining',
+        accessor: 'remaining',
+      },
+      {
+        Header: 'Status',
+        accessor: 'status',
+        Cell: ({ value }) => {
+          const intent = value === 'Approved' ? 'success' : 'warning';
+          return (
+            <Tag
+              text={value.toUpperCase()}
+              variant="outlined"
+              intent={intent}
+            />
+          );
+        },
+      },
+    ],
+    []
+  );
+
+  const [loading, setLoading] = React.useState(false);
+  const [data, setData] = React.useState([]);
+
+  const initialFilterValues = {
+    status: 'Pending',
+    reportingPersonnel: 'all',
+    search: '',
+  };
+  const [filterValues, setFilterValues] = useState(initialFilterValues);
+
+  useEffect(() => {
+    setLoading(true);
+    fetchEmployees(filterValues, tableData).then((res) => {
+      setData(res);
+      setLoading(false);
+    });
+  }, [filterValues]);
+
+  return (
+    <Grid>
+      <Grid.Row>
+        <Grid.Col span={[24, 24, 24, 24, 24]}>
+          <Filters
+            leftAddon={() => <Filters.Label text="Filter by" />}
+            sx={{ mb: 'large' }}
+            value={filterValues}
+            onChange={setFilterValues}
+            defaultValue={initialFilterValues}
+          >
+            <Filters.Filter
+              text="Status"
+              filterKey="status"
+              isApplyChangeOnClose={false}
+            >
+              {({ value, onChange, commit, closeDropdown, reset }) => (
+                <>
+                  <Radio.Group
+                    value={value}
+                    onChange={onChange}
+                    options={[
+                      { value: 'Pending', text: 'Pending' },
+                      { value: 'Approved', text: 'Approved' },
+                      { value: 'Declined', text: 'Declined' },
+                    ]}
+                  />
+                  <Divider marginY="medium" />
+                  <div
+                    style={{ display: 'flex', justifyContent: 'space-between' }}
+                  >
+                    <Button
+                      size="small"
+                      variant="text"
+                      text="Clear"
+                      onClick={() => {
+                        reset('');
+                        closeDropdown();
+                      }}
+                    />
+                    <Button
+                      size="small"
+                      variant="filled"
+                      intent="primary"
+                      text="Apply"
+                      onClick={() => {
+                        commit(value);
+                        closeDropdown();
+                      }}
+                    />
+                  </div>
+                </>
+              )}
+            </Filters.Filter>
+            <Filters.Group
+              data-test-id="custom-apply-change-more-btn"
+              text="More"
+              isApplyChangeOnClose={false}
+              bottomAddon={({ closeDropdown, reset, commit }) => (
+                <>
+                  <Divider marginY="medium" />
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                    }}
+                  >
+                    <Button
+                      size="small"
+                      variant="text"
+                      text="Clear"
+                      onClick={() => {
+                        reset();
+                        closeDropdown();
+                      }}
+                    />
+                    <Button
+                      size="small"
+                      variant="filled"
+                      intent="primary"
+                      text="Apply"
+                      onClick={() => {
+                        commit();
+                        closeDropdown();
+                      }}
+                    />
+                  </div>
+                </>
+              )}
+            >
+              <Filters.Group.Filter text="Personnel" filterKey="personnel">
+                {({ value, onChange }) => (
+                  <Select
+                    value={value}
+                    onChange={onChange}
+                    options={[
+                      { value: 'Vinh Hoang', text: 'Vinh Hoang' },
+                      { value: 'Kien Tran', text: 'Kien Tran' },
+                      { value: 'Hau Dao', text: 'Hau Dao' },
+                      { value: 'Minh Dinh', text: 'Minh Dinh' },
+                      { value: 'Tung Nguyen', text: 'Tung Nguyen' },
+                      { value: 'Thong Quach', text: 'Thong Quach' },
+                      { value: 'Khoa Thai', text: 'Khoa Thai' },
+                      { value: 'Son Trinh', text: 'Son Trinh' },
+                      { value: 'Sang Nguyen', text: 'Sang Nguyen' },
+                      { value: 'Thuong Huynh', text: 'Thuong Huynh' },
+                      { value: 'Anh Dau', text: 'Anh Dau' },
+                    ]}
+                    placeholder="Select..."
+                  />
+                )}
+              </Filters.Group.Filter>
+              <Filters.Group.Filter
+                text="Reporting personnel"
+                filterKey="reportingPersonnel"
+              >
+                {({ value, onChange }) => (
+                  <Radio.Group
+                    value={value}
+                    onChange={onChange}
+                    options={[
+                      { value: 'direct', text: 'Direct' },
+                      { value: 'indirect', text: 'Indirect' },
+                      { value: 'all', text: 'All personnel' },
+                    ]}
+                  />
+                )}
+              </Filters.Group.Filter>
+            </Filters.Group>
+          </Filters>
+        </Grid.Col>
+        <Grid.Col
+          span={[24, 24, 24, 24, 24]}
+          style={{ maxHeight: 500, overflow: 'auto' }}
+        >
+          <Table
+            data={data}
+            columns={columns}
+            loading={loading}
+            sx={{ mb: 'large' }}
+            sticky
+          />
+        </Grid.Col>
+      </Grid.Row>
+    </Grid>
+  );
+}
+```
+
+### Customized filter apply all changes
+
+:::tip
+
+For typescript usage, ref to [FiltersApplyChangesAllExample.tsx](https://github.com/Thinkei/hero-design/blob/master/packages/website/src/components/Filters/FiltersApplyChangesAllExample.tsx)
+
+:::
+
+:::tip
+
+To make a tag not removable, specify `onTagRemove` null.
+
+:::
+
+```jsx live
+function FiltersApplyChangesAllExample() {
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'Personnel',
+        accessor: 'name',
+        Cell: ({ value }) => (
+          <Box style={{ display: 'flex', alignItems: 'center' }}>
+            <Box
+              backgroundColor="blue-dark-30"
+              mr="small"
+              sx={{
+                backgroundSize: 'cover',
+                width: theme.sizes.xxlarge,
+                height: theme.sizes.xxlarge,
+                borderRadius: '50%',
+              }}
+            />
+            <Button.Link href="#" text={value} target="_blank" />
+          </Box>
+        ),
+      },
+      {
+        Header: 'Start date',
+        accessor: 'startDate',
+      },
+      {
+        Header: 'End date',
+        accessor: 'endDate',
+      },
+      {
+        Header: 'Leave category',
+        accessor: 'leaveCategory',
+      },
+      {
+        Header: 'Duration',
+        accessor: 'duration',
+      },
+      {
+        Header: 'Remaining',
+        accessor: 'remaining',
+      },
+      {
+        Header: 'Status',
+        accessor: 'status',
+        Cell: ({ value }) => {
+          const intent = value === 'Approved' ? 'success' : 'warning';
+          return (
+            <Tag
+              text={value.toUpperCase()}
+              variant="outlined"
+              intent={intent}
+            />
+          );
+        },
+      },
+    ],
+    []
+  );
+
+  const [loading, setLoading] = React.useState(false);
+  const [data, setData] = React.useState([]);
+
+  const initialFilterValues = {
+    status: 'Pending',
+    reportingPersonnel: 'all',
+    search: '',
+  };
+  const [filterValues, setFilterValues] = useState(initialFilterValues);
+
+  useEffect(() => {
+    setLoading(true);
+    fetchEmployees(filterValues, tableData).then((res) => {
+      setData(res);
+      setLoading(false);
+    });
+  }, [filterValues]);
+
+  return (
+    <Grid>
+      <Grid.Row>
+        <Grid.Col span={[24, 24, 24, 24, 24]}>
+          <Filters
+            leftAddon={() => <Filters.Label text="Filter by" />}
+            sx={{ mb: 'large' }}
+            value={filterValues}
+            onChange={setFilterValues}
+            defaultValue={initialFilterValues}
+            rightAddon={({ commitAll, resetAll }) => {
+              return (
+                <Box
+                  pt="xsmall"
+                  pb="xsmall"
+                  pl="medium"
+                  pr="medium"
+                  sx={{ display: 'flex', gap: 'small' }}
+                >
+                  <Button
+                    size="small"
+                    variant="text"
+                    text="Clear"
+                    intent="primary"
+                    onClick={() => {
+                      resetAll();
+                      // closeDropdown();
+                    }}
+                  />
+                  <Button
+                    size="small"
+                    variant="filled"
+                    intent="primary"
+                    text="Apply"
+                    onClick={() => {
+                      commitAll();
+                      // closeDropdown();
+                    }}
+                  />
+                </Box>
+              );
+            }}
+          >
+            <Filters.Filter
+              text="Status"
+              filterKey="status"
+              isApplyChangeOnClose={false}
+              onTagRemove={null}
+            >
+              {({ value, onChange }) => (
+                <Radio.Group
+                  value={value}
+                  onChange={onChange}
+                  options={[
+                    { value: 'Pending', text: 'Pending' },
+                    { value: 'Approved', text: 'Approved' },
+                    { value: 'Declined', text: 'Declined' },
+                  ]}
+                />
+              )}
+            </Filters.Filter>
+            <Filters.Group text="More" isApplyChangeOnClose={false}>
+              <Filters.Group.Filter text="Personnel" filterKey="personnel">
+                {({ value, onChange }) => (
+                  <Select
+                    value={value}
+                    onChange={onChange}
+                    options={[
+                      { value: 'Vinh Hoang', text: 'Vinh Hoang' },
+                      { value: 'Kien Tran', text: 'Kien Tran' },
+                      { value: 'Hau Dao', text: 'Hau Dao' },
+                      { value: 'Minh Dinh', text: 'Minh Dinh' },
+                      { value: 'Tung Nguyen', text: 'Tung Nguyen' },
+                      { value: 'Thong Quach', text: 'Thong Quach' },
+                      { value: 'Khoa Thai', text: 'Khoa Thai' },
+                      { value: 'Son Trinh', text: 'Son Trinh' },
+                      { value: 'Sang Nguyen', text: 'Sang Nguyen' },
+                      { value: 'Thuong Huynh', text: 'Thuong Huynh' },
+                      { value: 'Anh Dau', text: 'Anh Dau' },
+                    ]}
+                    placeholder="Select..."
+                  />
+                )}
+              </Filters.Group.Filter>
+              <Filters.Group.Filter
+                text="Reporting personnel"
+                filterKey="reportingPersonnel"
+              >
+                {({ value, onChange }) => (
+                  <Radio.Group
+                    value={value}
+                    onChange={onChange}
+                    options={[
+                      { value: 'direct', text: 'Direct' },
+                      { value: 'indirect', text: 'Indirect' },
+                      { value: 'all', text: 'All personnel' },
+                    ]}
+                  />
+                )}
+              </Filters.Group.Filter>
+            </Filters.Group>
+          </Filters>
+        </Grid.Col>
+        <Grid.Col
+          span={[24, 24, 24, 24, 24]}
+          style={{ maxHeight: 500, overflow: 'auto' }}
+        >
+          <Table
+            data={data}
+            columns={columns}
+            loading={loading}
+            sx={{ mb: 'large' }}
+            sticky
+          />
+        </Grid.Col>
+      </Grid.Row>
+    </Grid>
+  );
+}
+```
+
+### Controlled draft filter value
+
+Filters allows to take control of the draft value (the filter value that hasn't been committed) by providing `draftValue` and `onDraftValueChange` props.
+
+:::tip
+
+For typescript usage, ref to [ControlledDraftFilterValue.tsx](https://github.com/Thinkei/hero-design/blob/master/packages/website/src/components/Filters/ControlledDraftFilterValue.tsx)
+
+:::
+
+```jsx live
+function ControlledDraftFilterValue() {
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'Personnel',
+        accessor: 'name',
+        Cell: ({ value }) => (
+          <Box style={{ display: 'flex', alignItems: 'center' }}>
+            <Box
+              backgroundColor="blue-dark-30"
+              mr="small"
+              sx={{
+                backgroundSize: 'cover',
+                width: theme.sizes.xxlarge,
+                height: theme.sizes.xxlarge,
+                borderRadius: '50%',
+              }}
+            />
+            <Button.Link href="#" text={value} target="_blank" />
+          </Box>
+        ),
+      },
+      {
+        Header: 'Start date',
+        accessor: 'startDate',
+      },
+      {
+        Header: 'End date',
+        accessor: 'endDate',
+      },
+      {
+        Header: 'Leave category',
+        accessor: 'leaveCategory',
+      },
+      {
+        Header: 'Duration',
+        accessor: 'duration',
+      },
+      {
+        Header: 'Remaining',
+        accessor: 'remaining',
+      },
+      {
+        Header: 'Status',
+        accessor: 'status',
+        Cell: ({ value }) => {
+          const intent = value === 'Approved' ? 'success' : 'warning';
+          return (
+            <Tag
+              text={value.toUpperCase()}
+              variant="outlined"
+              intent={intent}
+            />
+          );
+        },
+      },
+    ],
+    []
+  );
+
+  const [loading, setLoading] = React.useState(false);
+  const [data, setData] = React.useState([]);
+
+  const initialFilterValues = {
+    status: 'Pending',
+    reportingPersonnel: 'all',
+    search: '',
+  };
+  const [filterValues, setFilterValues] = useState(initialFilterValues);
+  const [draftFilterValue, setDraftFilterValue] = useState(initialFilterValues);
+
+  useEffect(() => {
+    setLoading(true);
+    fetchEmployees(filterValues, tableData).then((res) => {
+      setData(res);
+      setLoading(false);
+    });
+  }, [filterValues]);
+
+  return (
+    <Grid>
+      <Grid.Row>
+        <Grid.Col span={[24, 24, 24, 24, 24]} sx={{ mb: 'small' }}>
+          <Button
+            variant="filled"
+            intent="primary"
+            sx={{ mr: 'small' }}
+            text="Set Filters"
+            onClick={() => {
+              setFilterValues({ status: 'Approved' });
+              setDraftFilterValue({ status: 'Approved' });
+            }}
+          />
+          <Typography.Text intent="subdued" fontSize={10}>
+            Try this button to set the filter value and draft value
+          </Typography.Text>
+        </Grid.Col>
+        <Grid.Col span={[24, 24, 24, 24, 24]}>
+          <Filters
+            leftAddon={() => <Filters.Label text="Filter by" />}
+            sx={{ mb: 'large' }}
+            value={filterValues}
+            onChange={setFilterValues}
+            defaultValue={initialFilterValues}
+            draftValue={draftFilterValue}
+            onDraftValueChange={setDraftFilterValue}
+          >
+            <Filters.Filter
+              text="Status"
+              filterKey="status"
+              isApplyChangeOnClose={false}
+            >
+              {({ value, onChange, commit, closeDropdown, reset }) => (
+                <>
+                  <Radio.Group
+                    value={value}
+                    onChange={onChange}
+                    options={[
+                      { value: 'Pending', text: 'Pending' },
+                      { value: 'Approved', text: 'Approved' },
+                      { value: 'Declined', text: 'Declined' },
+                    ]}
+                  />
+                  <Divider marginY="medium" />
+                  <div
+                    style={{ display: 'flex', justifyContent: 'space-between' }}
+                  >
+                    <Button
+                      size="small"
+                      variant="text"
+                      text="Clear"
+                      onClick={() => {
+                        reset('');
+                        closeDropdown();
+                      }}
+                    />
+                    <Button
+                      size="small"
+                      variant="filled"
+                      intent="primary"
+                      text="Apply"
+                      onClick={() => {
+                        commit(value);
+                        closeDropdown();
+                      }}
+                    />
+                  </div>
+                </>
+              )}
+            </Filters.Filter>
+            <Filters.Group
+              data-test-id="draft-filter-value-more-btn"
+              text="More"
+              isApplyChangeOnClose={false}
+              bottomAddon={({ closeDropdown, reset, commit }) => (
+                <>
+                  <Divider marginY="medium" />
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                    }}
+                  >
+                    <Button
+                      size="small"
+                      variant="text"
+                      text="Clear"
+                      onClick={() => {
+                        reset();
+                        closeDropdown();
+                      }}
+                    />
+                    <Button
+                      size="small"
+                      variant="filled"
+                      intent="primary"
+                      text="Apply"
+                      onClick={() => {
+                        commit();
+                        closeDropdown();
+                      }}
+                    />
+                  </div>
+                </>
+              )}
+            >
+              <Filters.Group.Filter text="Personnel" filterKey="personnel">
+                {({ value, onChange }) => (
+                  <Select
+                    value={value}
+                    onChange={onChange}
+                    options={[
+                      { value: 'Vinh Hoang', text: 'Vinh Hoang' },
+                      { value: 'Kien Tran', text: 'Kien Tran' },
+                      { value: 'Hau Dao', text: 'Hau Dao' },
+                      { value: 'Minh Dinh', text: 'Minh Dinh' },
+                      { value: 'Tung Nguyen', text: 'Tung Nguyen' },
+                      { value: 'Thong Quach', text: 'Thong Quach' },
+                      { value: 'Khoa Thai', text: 'Khoa Thai' },
+                      { value: 'Son Trinh', text: 'Son Trinh' },
+                      { value: 'Sang Nguyen', text: 'Sang Nguyen' },
+                      { value: 'Thuong Huynh', text: 'Thuong Huynh' },
+                      { value: 'Anh Dau', text: 'Anh Dau' },
+                    ]}
+                    placeholder="Select..."
+                  />
+                )}
+              </Filters.Group.Filter>
+              <Filters.Group.Filter
+                text="Reporting personnel"
+                filterKey="reportingPersonnel"
+              >
+                {({ value, onChange }) => (
+                  <Radio.Group
+                    value={value}
+                    onChange={onChange}
+                    options={[
+                      { value: 'direct', text: 'Direct' },
+                      { value: 'indirect', text: 'Indirect' },
+                      { value: 'all', text: 'All personnel' },
+                    ]}
+                  />
+                )}
+              </Filters.Group.Filter>
+            </Filters.Group>
+          </Filters>
+        </Grid.Col>
+        <Grid.Col
+          span={[24, 24, 24, 24, 24]}
+          style={{ maxHeight: 500, overflow: 'auto' }}
+        >
+          <Table
+            data={data}
+            columns={columns}
+            loading={loading}
+            sx={{ mb: 'large' }}
+            sticky
+          />
+        </Grid.Col>
+      </Grid.Row>
+    </Grid>
+  );
+}
+```
+
+### Filter.Group with wide layout
+
+When number of filters inside a Filter.Group exceed 5, a wide layout will be used to render filters. This layout is available only on large and xlarge screens.
+
+```jsx live
+function WideLayoutFilterGroup() {
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'Personnel',
+        accessor: 'name',
+        Cell: ({ value }) => (
+          <Box style={{ display: 'flex', alignItems: 'center' }}>
+            <Box
+              backgroundColor="blue-dark-30"
+              mr="small"
+              sx={{
+                backgroundSize: 'cover',
+                width: theme.sizes.xxlarge,
+                height: theme.sizes.xxlarge,
+                borderRadius: '50%',
+              }}
+            />
+            <Button.Link href="#" text={value} target="_blank" />
+          </Box>
+        ),
+      },
+      {
+        Header: 'Start date',
+        accessor: 'startDate',
+      },
+      {
+        Header: 'End date',
+        accessor: 'endDate',
+      },
+      {
+        Header: 'Leave category',
+        accessor: 'leaveCategory',
+      },
+      {
+        Header: 'Duration',
+        accessor: 'duration',
+      },
+      {
+        Header: 'Remaining',
+        accessor: 'remaining',
+      },
+      {
+        Header: 'Status',
+        accessor: 'status',
+        Cell: ({ value }) => {
+          const intent = value === 'Approved' ? 'success' : 'warning';
+          return (
+            <Tag
+              text={value.toUpperCase()}
+              variant="outlined"
+              intent={intent}
+            />
+          );
+        },
+      },
+    ],
+    []
+  );
+
+  const [loading, setLoading] = React.useState(false);
+  const [data, setData] = React.useState([]);
+
+  const initialFilterValues = {
+    status: 'Approved',
+    search: 'Sang',
+    dateRange: {
+      startDate: '01/01/2022',
+      endDate: '02/01/2022',
+    },
+  };
+  const [filterValues, setFilterValues] = useState(initialFilterValues);
+
+  useEffect(() => {
+    setLoading(true);
+    fetchEmployees(filterValues, tableData).then((res) => {
+      setData(res);
+      setLoading(false);
+    });
+  }, [filterValues]);
+
+  return (
+    <Grid>
+      <Grid.Row>
+        <Grid.Col span={[24, 24, 24, 24, 24]}>
+          <Filters
+            leftAddon={() => <Filters.Label text="Filter by" />}
+            sx={{ mb: 'large' }}
+            value={filterValues}
+            onChange={setFilterValues}
+            defaultValue={initialFilterValues}
+          >
+            <Filters.Group
+              data-test-id="wide-layout-more-btn"
+              text="More"
+              isApplyChangeOnClose={false}
+              bottomAddon={({ closeDropdown, reset, commit }) => (
+                <>
+                  <Divider marginY="medium" />
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                    }}
+                  >
+                    <Button
+                      size="small"
+                      variant="text"
+                      text="Clear"
+                      onClick={() => {
+                        reset();
+                        closeDropdown();
+                      }}
+                    />
+                    <Button
+                      size="small"
+                      variant="filled"
+                      intent="primary"
+                      text="Apply"
+                      onClick={() => {
+                        commit();
+                        closeDropdown();
+                      }}
+                    />
+                  </div>
+                </>
+              )}
+            >
+              <Filters.Group.Filter text="Search" filterKey="search">
+                {({ value, onChange }) => (
+                  <Input
+                    value={value}
+                    onChange={(e) => onChange(e.target.value)}
+                    placeholder="Search by name"
+                  />
+                )}
+              </Filters.Group.Filter>
+              <Filters.Group.Filter text="Personnel" filterKey="personnel">
+                {({ value, onChange }) => (
+                  <Select
+                    value={value}
+                    onChange={onChange}
+                    options={[
+                      { value: 'Vinh Hoang', text: 'Vinh Hoang' },
+                      { value: 'Kien Tran', text: 'Kien Tran' },
+                      { value: 'Hau Dao', text: 'Hau Dao' },
+                      { value: 'Minh Dinh', text: 'Minh Dinh' },
+                      { value: 'Tung Nguyen', text: 'Tung Nguyen' },
+                      { value: 'Thong Quach', text: 'Thong Quach' },
+                      { value: 'Khoa Thai', text: 'Khoa Thai' },
+                      { value: 'Son Trinh', text: 'Son Trinh' },
+                      { value: 'Sang Nguyen', text: 'Sang Nguyen' },
+                      { value: 'Thuong Huynh', text: 'Thuong Huynh' },
+                      { value: 'Anh Dau', text: 'Anh Dau' },
+                    ]}
+                    placeholder="Select..."
+                  />
+                )}
+              </Filters.Group.Filter>
+              <Filters.Group.Filter text="Data range" filterKey="dateRange">
+                {({ value, onChange }) => (
+                  <DatePicker.Range value={value} onChange={onChange} />
+                )}
+              </Filters.Group.Filter>
+              <Filters.Group.Filter
+                text="Reporting personnel"
+                filterKey="reportingPersonnel"
+              >
+                {({ value, onChange }) => (
+                  <Select
+                    value={value}
+                    onChange={onChange}
+                    options={[
+                      { value: 'direct', text: 'Direct' },
+                      { value: 'indirect', text: 'Indirect' },
+                      { value: 'all', text: 'All personnel' },
+                    ]}
+                  />
+                )}
+              </Filters.Group.Filter>
+              <Filters.Group.Filter text="Status" filterKey="status">
+                {({ value, onChange }) => (
+                  <Select
+                    value={value}
+                    onChange={onChange}
+                    options={[
+                      { value: 'Pending', text: 'Pending' },
+                      { value: 'Approved', text: 'Approved' },
+                      { value: 'Declined', text: 'Declined' },
+                    ]}
+                  />
+                )}
+              </Filters.Group.Filter>
+              <Filters.Group.Filter
+                text="Leave category"
+                filterKey="leaveCategory"
+              >
+                {({ value, onChange }) => (
+                  <Select
+                    value={value}
+                    onChange={onChange}
+                    options={[
+                      { value: 'Annual Leave', text: 'Annual Leave' },
+                      {
+                        value: 'Compassionate Leave',
+                        text: 'Compassionate Leave',
+                      },
+                      { value: 'Leisure Rules Day', text: 'Leisure Rules Day' },
+                      {
+                        value: 'Paid Paternity Leave',
+                        text: 'Paid Paternity Leave',
+                      },
+                      { value: 'Sick Leave', text: 'Sick Leave' },
+                      { value: 'Study Leave', text: 'Study Leave' },
+                      { value: 'Unpaid Leave', text: 'Unpaid Leave' },
+                      { value: 'Working From Home', text: 'Working From Home' },
+                    ]}
+                  />
+                )}
+              </Filters.Group.Filter>
+            </Filters.Group>
+          </Filters>
+        </Grid.Col>
+        <Grid.Col
+          span={[24, 24, 24, 24, 24]}
+          style={{ maxHeight: 500, overflow: 'auto' }}
+        >
+          <Table
+            data={data}
+            columns={columns}
+            loading={loading}
+            sx={{ mb: 'large' }}
+            sticky
+          />
+        </Grid.Col>
+      </Grid.Row>
+    </Grid>
+  );
+}
+```
+
+### With different Dropdown button sizes
+
+```jsx live
+function DefaultSettingsWithTable() {
+  const [loading, setLoading] = React.useState(false);
+  const [data, setData] = React.useState([]);
+
+  const initialFilterValues = {
+    status: 'Pending',
+    reportingPersonnel: 'all',
+    search: '',
+  };
+  const [filterValues, setFilterValues] = useState(initialFilterValues);
+  const [smallFilterValues, setSmallFilterValues] =
+    useState(initialFilterValues);
+
+  return (
+    <Grid>
+      <Grid.Row>
+        <Grid.Col span={[24, 24, 24, 24, 24]}>
+          <Filters
+            size="medium"
+            leftAddon={() => (
+              <Filters.Label text="Medium-size Filters with Selected Tag" />
+            )}
+            sx={{ mb: 'large' }}
+            value={filterValues}
+            onChange={setFilterValues}
+            defaultValue={initialFilterValues}
+          >
+            <Filters.Filter text="Status" filterKey="status">
+              {({ value, onChange, commit }) => (
+                <Radio.Group
+                  value={value}
+                  onChange={onChange}
+                  options={[
+                    { value: 'Pending', text: 'Pending' },
+                    { value: 'Approved', text: 'Approved' },
+                    { value: 'Declined', text: 'Declined' },
+                  ]}
+                />
+              )}
+            </Filters.Filter>
+            <Filters.Group text="More" data-test-id="default-setting-more-btn">
+              <Filters.Group.Filter
+                text="Reporting personnel"
+                filterKey="reportingPersonnel"
+              >
+                {({ value, onChange }) => (
+                  <Radio.Group
+                    value={value}
+                    onChange={onChange}
+                    options={[
+                      { value: 'direct', text: 'Direct' },
+                      { value: 'indirect', text: 'Indirect' },
+                      { value: 'all', text: 'All personnel' },
+                    ]}
+                  />
+                )}
+              </Filters.Group.Filter>
+            </Filters.Group>
+          </Filters>
+        </Grid.Col>
+      </Grid.Row>
+      <Grid.Row>
+        <Grid.Col span={[24, 24, 24, 24, 24]}>
+          <Filters
+            size="small"
+            leftAddon={() => (
+              <Filters.Label text="Small-size Filters with no Selected Tag" />
+            )}
+            sx={{ mb: 'large' }}
+            value={smallFilterValues}
+            onChange={setSmallFilterValues}
+            defaultValue={initialFilterValues}
+            noSelectedTags
+          >
+            <Filters.Filter text="Status" filterKey="status">
+              {({ value, onChange, commit }) => (
+                <Radio.Group
+                  value={value}
+                  onChange={onChange}
+                  options={[
+                    { value: 'Pending', text: 'Pending' },
+                    { value: 'Approved', text: 'Approved' },
+                    { value: 'Declined', text: 'Declined' },
+                  ]}
+                />
+              )}
+            </Filters.Filter>
+            <Filters.Group text="More" data-test-id="default-setting-more-btn">
+              <Filters.Group.Filter
+                text="Reporting personnel"
+                filterKey="reportingPersonnel"
+              >
+                {({ value, onChange }) => (
+                  <Radio.Group
+                    value={value}
+                    onChange={onChange}
+                    options={[
+                      { value: 'direct', text: 'Direct' },
+                      { value: 'indirect', text: 'Indirect' },
+                      { value: 'all', text: 'All personnel' },
+                    ]}
+                  />
+                )}
+              </Filters.Group.Filter>
+            </Filters.Group>
+          </Filters>
+        </Grid.Col>
+      </Grid.Row>
+    </Grid>
+  );
+}
+```
+
+## Props
+
+### Filters
+
+<Props of="Filters" from="web" />
+
+### Filters.Filter
+
+<Props of="Filters.Filter" from="web" />
+
+### Filters.Label
+
+<Props of="Filters.Label" from="web" />
+
+### Filters.Group
+
+<Props of="Filters.Group" from="web" />
+
+### Filters.Group.Filter
+
+<Props of="Filters.Group.Filter" from="web" />

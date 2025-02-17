@@ -1,0 +1,53 @@
+---
+id: spacing
+title: Spacing
+---
+
+import SpacingTable from '../../helpers/Spacing';
+
+# What is Spacing?
+
+Spacing is the negative area between between elements and components. It is typically managed in code with the use of margins and padding through tokens and layout components, to ensure consistency across the app.
+
+The spacing scale includes distinct tokens for each level of spacing, which can be utilised within components for building and between components for layout spacing.
+
+When constructing individual components, it's important to use the spacing scale to establish appropriate spatial relationships for detailed designs.
+
+The spacing scale can be applied to both margin and padding properties, as well as to vertical and horizontal edges. Tokens replace the values that would normally be assigned to margins and padding.
+
+## Do's and Don'ts
+
+### Do
+
+- Use the spacing scale when building individual components to establish appropriate spatial relationships.
+- Apply the spacing scale to both margin and padding properties, as well as to vertical and horizontal edges.
+- Use Hero Design spacing tokens in place of values assigned to margins and padding.
+
+### Don't
+
+- Don't neglect the importance of spacing in a design system as it impacts the overall look and feel of the product.
+- Don't use arbitrary or inconsistent spacing values, instead, follow the established spacing scale for consistency.
+
+## Spacing tokens
+
+<SpacingTable type="mobile" />
+
+<br />
+
+## What is Baseline grid?
+
+A baseline grid is a horizontal grid used in design systems to align text, typography, and other elements to a consistent rhythm or pattern. The grid serves as a underlying structure to ensure that the elements on a page have a harmonious vertical rhythm and balance. The baseline grid is usually established by setting a specific vertical distance, known as the baseline, that all text and other elements will align to. This helps to create a cohesive and organised layout, and makes it easier to maintain a consistent visual style across different device sizes or sections of a screen.
+
+To allow for accurate scale across multiple screen sizes, we use a baseline grid of 4px.
+
+### Do
+
+- Use the baseline grid to align text, typography, and other elements to a consistent rhythm or pattern.
+- Align all elements, including headings, body text, images, and other design elements, to the baseline grid to maintain a harmonious vertical rhythm.
+- Use the baseline grid to ensure consistent vertical spacing across different pages or sections of a product.
+
+### Don't
+
+- Don't neglect the use of a baseline grid as it is a key tool in ensuring consistent typography and vertical spacing.
+- Don't use a baseline grid in an arbitrary or inconsistent manner, instead, follow the established grid for consistency.
+- Don't ignore the importance of the baseline grid in creating a cohesive and organised layout.

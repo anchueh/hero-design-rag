@@ -1,0 +1,168 @@
+---
+id: richTextEditor
+title: Rich Text Editor
+---
+
+import ComponentPreview from '../../../src/components/ComponentPreview';
+
+# Rich Text Editor
+
+- Rich text editor help users to create rich text content with common formatting options (bold, italic, underline, heading one, heading two)
+- It also supports the mention feature that let users autocomplete mentioning a user by their username when using with the MentionList component
+
+## Preview
+
+<ComponentPreview
+  iosSrc="/img/screenshots/rich-text-editor-ios.png"
+  androidSrc="/img/screenshots/rich-text-editor-android.png"
+/>
+
+## Example
+
+```SnackPlayer name=RichTextEditor/Example
+import React, { useState } from 'react';
+import {
+  SafeAreaView,
+  View,
+  Platform,
+  KeyboardAvoidingView,
+  SafeViewArea,
+  FlatList,
+  ScrollView,
+} from 'react-native';
+import {
+  theme,
+  RichTextEditor,
+  Typography,
+  List,
+  Avatar,
+} from './@hero-design/rn';
+import PlaygroundContext from './PlaygroundContext.js';
+
+const getAcronym = (str: string) => (str.match(/\b\w/g) || []).join('');
+const isEmpty = (arr: any[]) => arr.length === 0;
+
+const suggestionData = [
+  { id: '1', name: 'Tuan Mai', job: 'Team leader' },
+  {
+    id: '2',
+    name: 'Dan Abramov',
+    job: 'Bug creator',
+    avatar: 'https://avatars0.githubusercontent.com/u/17645203?s=400&v=4',
+  },
+  { id: '3', name: 'Gia Toan', job: 'Mobile developer' },
+  { id: '4', name: 'Kien Tran', job: 'Mobile developer' },
+  { id: '5', name: 'Hieu Pham', job: 'Web developer' },
+  {
+    id: '6',
+    name: 'ReasonML',
+    job: 'Functional language',
+    avatar: 'https://avatars3.githubusercontent.com/u/20414525?s=400&v=4',
+  },
+];
+
+const SuggestionList = ({ searchValue, onSelect }) => {
+  const searchResult = suggestionData.filter(({ name }) =>
+    name.toLowerCase().includes(searchValue.toLowerCase())
+  );
+
+  if (isEmpty(searchResult)) {
+    return (
+      <View
+        style={{
+          marginBottom: theme.space.xxxlarge,
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: theme.space.xxlarge,
+          borderTopWidth: StyleSheet.hairlineWidth,
+          borderTopColor: theme.colors.outline,
+        }}
+      >
+        <Typography.Body variant="small" style={{ fontWeight: '500' }}>
+          No result 😕
+        </Typography.Body>
+      </View>
+    );
+  }
+
+  return (
+    <FlatList
+      data={searchResult}
+      keyExtractor={(item) => item.name}
+      style={{ maxHeight: 4 * theme.space.xxxlarge }}
+      renderItem={({ item: { id, name, job, avatar } }) => (
+        <List.BasicItem
+          prefix={
+            <Avatar
+              size="small"
+              title={getAcronym(name)}
+              source={{ uri: avatar }}
+              style={{ marginRight: theme.space.medium }}
+            />
+          }
+          title={name}
+          suffix={<Typography.Body variant="small" intent="subdued">{job}</Typography.Body>}
+          onPress={() => onSelect(id, name)}
+        />
+      )}
+    />
+  );
+};
+
+const App = () => {
+  const [value, setValue] = useState();
+  const isIOS = Platform.OS === 'ios';
+
+  return (
+    <PlaygroundContext>
+      <KeyboardAvoidingView
+        behavior={isIOS ? 'padding' : undefined}
+        style={{ flex: 1 }}
+      >
+        <View style={{ flex: 1, justifyContent: 'space-between' }}>
+          <ScrollView
+            scrollEventThrottle={100}
+            contentContainerStyle={{ padding: theme.space.medium }}
+          >
+            <RichTextEditor
+              name="basic"
+              value={value}
+              label="Add announcement"
+              helpText="Has someone brightened up your day? Type @ to give them a Shout Out!"
+              onChange={setValue}
+            />
+          </ScrollView>
+          <RichTextEditor.MentionList
+            name="basic"
+            render={(
+              searchValue: string,
+              onSelect: (id: string, name: string) => void
+            ) => (
+              <SuggestionList searchValue={searchValue} onSelect={onSelect} />
+            )}
+          />
+          <View style={{ marginBottom: 0 }}>
+            <RichTextEditor.Toolbar name="basic" />
+          </View>
+        </View>
+      </KeyboardAvoidingView>
+    </PlaygroundContext>
+  );
+};
+
+export default App;
+```
+
+## Props
+
+### RichTextEditor
+
+<Props of="RichTextEditor" />
+
+### RichTextEditor.MentionList
+
+<Props of="MentionList" />
+
+### RichTextEditor.Toolbar
+
+<Props of="EditorToolbar" />

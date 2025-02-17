@@ -1,0 +1,79 @@
+---
+id: result
+title: Result
+---
+
+# Result
+
+It is used to feed back the results of a series of operational tasks. When operations need to inform the user to process the results and the feedback is more complicated.
+
+## Examples
+
+### Basic
+
+Show a simple failure.
+
+```jsx live
+<Result
+  title="Oops!!"
+  subTitle="This job has no hiring process, please add one in job settings page."
+  status="error"
+  extra={<Button variant="filled" intent="primary" text="Add a process" />}
+/>
+```
+
+### Exception
+
+The page you visited does not exist.
+
+```jsx live
+<Result
+  title="404"
+  subTitle="Oops, we’ve gotten lost. We can’t seem to find the page you’re looking for."
+  status="404"
+  extra={<Button variant="filled" intent="primary" text="Go to Dashboard" />}
+/>
+```
+
+### Unauthorised
+
+The page you visited is not permitted.
+
+```jsx live
+<Result
+  title="403"
+  subTitle="You shall not pass, as you are unauthorised. Sorry about that."
+  status="403"
+  extra={<Button variant="filled" intent="primary" text="Go to Dashboard" />}
+/>
+```
+
+### Server error
+
+Server encountered an unexpected condition.
+
+```jsx live
+<Result
+  title="500"
+  subTitle="Sorry, we're experiencing a light technical issue. We should have things back to normal soon."
+  status="500"
+  extra={<Button variant="filled" intent="primary" text="Go to Dashboard" />}
+/>
+```
+
+### Server unavailable
+
+Server is temporary unavailable or a feature is under maintenance.
+
+```jsx live
+<Result
+  title="[Your feature] is under maintenance"
+  subTitle="We are currently working on making this feature better for you! This will be available for you again in approximately an hour."
+  status="503"
+  extra={<Button variant="filled" intent="primary" text="Refresh" />}
+/>
+```
+
+## Props
+
+<Props of="Result" from="web" />

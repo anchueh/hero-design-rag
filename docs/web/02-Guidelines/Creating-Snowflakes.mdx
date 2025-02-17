@@ -1,0 +1,53 @@
+---
+id: creating-snowflakes
+title: Creating Snowflakes
+---
+
+# Creating Snowflakes
+
+:::caution
+Snowflakes are customizations or deviations from the original Hero Design components. While some snowflakes are acceptable, others may not align with our goal of UI consistency. Please process with caution.
+:::
+
+Please follow this process before creating snowflakes:
+
+## Step 1: Initiate the design
+
+- Start to design the page/module based on feature requirements.
+- Leverage the existing Hero Design components as much as possible.
+- If the existing components do not meet the requirements, reach out to Hero Design cooridnators (UX & Andromeda) for guidance. This could be done via Slack channel [#eh-hero-design](https://employmenthero.slack.com/archives/CHWMT4F44).
+
+## Step 2: Clarify component requirements
+
+- Andromeda and squad team to discuss the requirements with the design team to understand the design intent.
+- There are 3 senarios that could happen:
+  1. **Case 1**: If the design intent is not reasonale, the design team will guide the squad team to use the existing components.
+  2. **Case 2**: If the design intent is a common and reusable pattern, the design team will create a new component in the Hero Design library or enhance the existing components. Go to [Step 3.1](#step-3-1-create-a-new-component-in-hero-design-library) for more details.
+  3. **Case 3**: If the design intent is a one-off pattern, the design team will create a new component for the project level only. Go to [Step 3.2](#step-3-2-create-a-new-component-for-the-project-level) for more details.
+
+## Step 3: Implementation
+
+### Step 3.1: Create a new component in Hero Design library
+
+:::info
+For Andromeda to handle Case 2
+:::
+
+- Andromeda will implement the new component/update the existing component in the Hero Design library.
+- The new component will be released in the next version of the Hero Design library.
+- Squad team use next version of Hero Design to implement new feature.
+
+### Step 3.2: Create a new component for the project level
+
+:::info
+For squad team to handle Case 3
+:::
+
+- Squad team use existing Hero Design tokens and components if possible to create the new component (this is now considered as snowflake) in their module codebase only.
+- Open pull request for snowflake code review. By default, snowflake PRs should be prevented from merging by snowflake-guard bot until approved by Andromeda team.
+- Reach out to Andromeda for code review and snowflake approval.
+- Once approved, ask repository admins to merge the PR and release the feature.
+
+:::info
+This process is a part of design system governance model to ensure the consistency and maintainability of the design system. For a viusal look of the process, please refer to this [workflow diagram](https://employmenthero.atlassian.net/wiki/spaces/ANDR/pages/1841463484/Design+system+governance+model).
+:::

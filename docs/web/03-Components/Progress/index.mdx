@@ -1,0 +1,263 @@
+---
+id: progress
+title: Progress
+---
+
+import Note, { Highlight } from '../../../helpers/Note';
+
+# Progress
+
+Progress is used to display:
+
+- The current progress of a long operation.
+- The completion in percentage of an operation.
+
+## Examples
+
+### Basic
+
+Render a progress bar by specifying `value` prop.
+
+<Note title="Value range">
+  Valid value is in range of <Highlight>[0, 100]</Highlight>.
+</Note>
+
+```jsx live
+<Progress value={50} />
+```
+
+### With vertical style
+
+Use variant `vertical` to show the bar vertically.
+
+```jsx live
+<Box sx={{ height: 200 }}>
+  <Progress value={50} variant="vertical" status="custom" intent="primary" />
+</Box>
+```
+
+### With markers
+
+Progress allows to show markers to indicate milestones of a whole progress.
+
+```jsx live
+<>
+  <Box sx={{ width: 300 }}>
+    <Progress
+      value={50}
+      markers={[
+        { value: 20, text: 'Bad', intent: 'red' },
+        { value: 80, text: 'Good', intent: 'dodger-blue-light-30' },
+      ]}
+    />
+  </Box>
+  <br />
+  <Box sx={{ height: 200 }}>
+    <Progress
+      value={50}
+      variant="vertical"
+      status="custom"
+      intent="success"
+      markers={[{ value: 80, text: 'Average', intent: 'dodger-blue-light-30' }]}
+    />
+  </Box>
+</>
+```
+
+### With circular style
+
+`Progress` is rendered in circular style when we use Progress.Circle
+
+```jsx live
+<Progress.Circle value={50} />
+```
+
+### With statuses
+
+`status` can be `active` (default), `exception` or `custom`:
+
+- `active`: the progress of operation is normal, progress intent and information rendering will be controlled by the component itself.
+- `exception`: there are something wrong with the operation, an error icon will be rendered instead of progress value.
+- `custom`: use this along with `intent` prop to customise progress intent for your own need.
+
+```jsx live
+<div style={{ margin: 0, padding: 0 }}>
+  <div style={{ maxWidth: '400px', margin: 0, padding: 0 }}>
+    <Progress value={0} status="active" />
+    <Progress value={50} status="active" />
+    <Progress value={100} status="active" />
+    <br />
+    <Progress value={0} status="exception" />
+    <Progress value={50} status="exception" />
+    <Progress value={100} status="exception" />
+    <br />
+    <Progress value={30} status="custom" />
+    <Progress value={50} status="custom" intent="success" />
+    <Progress value={80} status="custom" intent="warning" />
+    <Progress value={30} status="custom" intent="error" />
+    <Progress value={50} status="custom" intent="danger" />
+    <Progress value={80} status="custom" intent="archived" />
+    <Progress value={30} status="custom" intent="red-light-30" />
+    <Progress value={50} status="custom" intent="yellow" />
+    <Progress value={80} status="custom" intent="blue-light-30" />
+  </div>
+  <br />
+  <Box
+    sx={{
+      height: 200,
+      width: 250,
+      display: 'flex',
+      justifyContent: 'space-between',
+    }}
+  >
+    <Progress value={50} variant="vertical" status="custom" intent="primary" />
+    <Progress value={40} variant="vertical" status="custom" intent="success" />
+    <Progress value={60} variant="vertical" status="custom" intent="danger" />
+    <Progress value={30} variant="vertical" status="custom" intent="warning" />
+    <Progress
+      value={80}
+      variant="vertical"
+      status="custom"
+      intent="blue-light-30"
+    />
+  </Box>
+  <br />
+  <Box sx={{ display: 'flex', gap: 'small' }}>
+    <Progress.Circle value={0} status="active" />
+    <Progress.Circle value={50} status="active" />
+    <Progress.Circle value={100} status="active" />
+  </Box>
+  <Box mt="medium" sx={{ display: 'flex', gap: 'small' }}>
+    <Progress.Circle value={0} status="exception" />
+    <Progress.Circle value={50} status="exception" />
+    <Progress.Circle value={100} status="exception" />
+  </Box>
+  <Box mt="medium" sx={{ display: 'flex', gap: 'small' }}>
+    <Progress.Circle value={30} status="custom" />
+    <Progress.Circle value={50} status="custom" intent="success" />
+    <Progress.Circle value={80} status="custom" intent="warning" />
+  </Box>
+  <Box mt="medium" sx={{ display: 'flex', gap: 'small' }}>
+    <Progress.Circle value={30} status="custom" intent="error" />
+    <Progress.Circle value={50} status="custom" intent="danger" />
+    <Progress.Circle value={80} status="custom" intent="archived" />
+  </Box>
+  <Box mt="medium" sx={{ display: 'flex', gap: 'small' }}>
+    <Progress.Circle value={30} status="custom" intent="red-light-30" />
+    <Progress.Circle value={50} status="custom" intent="yellow" />
+    <Progress.Circle value={80} status="custom" intent="blue-light-30" />
+  </Box>
+</div>
+```
+
+### With sizes
+
+There are 2 sizes of progress: `medium` (default) & `small`.
+
+```jsx live
+<div style={{ margin: 0, padding: 0 }}>
+  <div style={{ maxWidth: '400px', margin: 0, padding: 0 }}>
+    <Progress value={0} size="medium" />
+    <Progress value={50} size="medium" />
+    <Progress value={100} size="medium" />
+    <br />
+    <Progress value={0} size="small" />
+    <Progress value={50} size="small" />
+    <Progress value={100} size="small" />
+  </div>
+  <br />
+  <Box
+    sx={{
+      height: 200,
+      width: 100,
+      display: 'flex',
+      justifyContent: 'space-between',
+    }}
+  >
+    <Progress
+      value={50}
+      variant="vertical"
+      status="custom"
+      intent="primary"
+      size="medium"
+    />
+    <Progress
+      value={40}
+      variant="vertical"
+      status="custom"
+      intent="success"
+      size="small"
+    />
+  </Box>
+  <br />
+  <Box sx={{ display: 'flex', gap: 'large' }}>
+    <Progress.Circle value={0} size="large" />
+    <Progress.Circle value={50} size="large" />
+    <Progress.Circle value={100} size="large" />
+  </Box>
+  <Box mt="large" sx={{ display: 'flex', gap: 'small' }}>
+    <Progress.Circle value={0} size="medium" />
+    <Progress.Circle value={50} size="medium" />
+    <Progress.Circle value={100} size="medium" />
+  </Box>
+  <Box mt="medium" sx={{ display: 'flex', gap: 'small' }}>
+    <Progress.Circle value={0} size="small" />
+    <Progress.Circle value={50} size="small" />
+    <Progress.Circle value={100} size="small" />
+  </Box>
+</div>
+```
+
+### Customise value rendering
+
+By default, hero-design renders progress value with `%`, to customise this behavior, we can use `valueRenderer` prop.
+
+```jsx live
+function App() {
+  function valueRenderer(value) {
+    if (value < 50) {
+      return '<50';
+    }
+    return '>50';
+  }
+
+  return (
+    <div style={{ margin: 0, padding: 0 }}>
+      <div style={{ maxWidth: '400px', margin: 0, padding: 0 }}>
+        <Progress value={0} size="medium" valueRenderer={valueRenderer} />
+        <Progress value={50} size="medium" valueRenderer={valueRenderer} />
+        <Progress value={100} size="medium" valueRenderer={valueRenderer} />
+      </div>
+      <Box mt="medium" sx={{ display: 'flex', gap: 'small' }}>
+        <Progress.Circle
+          value={0}
+          size="medium"
+          valueRenderer={valueRenderer}
+        />
+        <Progress.Circle
+          value={50}
+          size="medium"
+          valueRenderer={valueRenderer}
+        />
+        <Progress.Circle
+          value={100}
+          size="medium"
+          valueRenderer={valueRenderer}
+        />
+      </Box>
+    </div>
+  );
+}
+```
+
+## Props
+
+### Progress Props
+
+<Props of="ProgressBar" from="web" />
+
+<br />
+
+### Progress.Circle Props
+
+<Props of="ProgressCircle" from="web" />

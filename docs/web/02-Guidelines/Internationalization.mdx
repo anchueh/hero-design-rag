@@ -1,0 +1,43 @@
+---
+id: i18n
+title: Internationalization
+---
+
+# Internationalization
+
+The default language of `@ehrocks/hero-design-react` is currently English (Australia). If you wish to use other languages, follow the instructions below.
+
+## HeroDesignProvider
+
+`@ehrocks/hero-design-react` provides a React Component `HeroDesignProvider` as a uniform configuration support for components. Including config hero-design locale text globally.
+
+```jsx
+import { HeroDesignProvider } from '@ehrocks/hero-design-react';
+import enAU from '@ehrocks/hero-design-react/locale/en_AU';
+
+return (
+  <HeroDesignProvider locale={enAU}>
+    <App />
+  </HeroDesignProvider>
+);
+```
+
+You can see the complete configuration here: HeroDesignProvider.
+
+Note: `en_AU` is the filename, the following table also follows the same rules.
+
+The following languages are currently supported:
+
+| Language            | Filename |
+| ------------------- | -------- |
+| English (Australia) | en_AU    |
+| Vietnam             | vi_VN    |
+
+## Adding new language
+
+If your language is not in above list, feel free follow these step for adding new language:
+
+1. Follow [Contributing Process](../04-Contributing/contributing.mdx).
+2. Create your language file based on our `en_AU` file located at `packages/react/src/locales`.
+3. Make sure your locale is work by using `HeroDesignProvider` components.
+4. Create a Pull Request. That's it.

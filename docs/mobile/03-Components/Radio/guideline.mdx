@@ -1,0 +1,59 @@
+---
+title: Guideline
+---
+
+import SectionHeadingDosAndDonts from './SectionHeadingDosAndDonts';
+
+<PageTitle
+  title="Radio"
+  content="The radio usually prepresents an option in a list where only one item can be selected at a time."
+/>
+
+<SectionHeadingDosAndDonts />
+
+## What is Radio Button?
+
+Radio buttons allow user to select one option from a pre-defined list of mutually exclusive options.
+
+## Tip for...
+
+### Writing radio button labels
+
+Always use clear and concise labels for radio buttons.
+
+### Overflown labels
+
+- Consider rewording long labels, do not truncate radio button label text with an ellipsis.
+- Long labels may wrap to a second line
+
+### Layout
+
+- A group of radio buttons are frequently used in forms, and they typically appear below a subheading on the screen or within a bottom sheet.
+- When radio buttons are grouped together, they are arranged vertically, and the subheading is left-aligned with the group.
+
+<img
+  src="/img/screenshots/radio-layout-guideline.png"
+  alt="Radio layout guideline"
+  style={{ width: 700 }}
+/>
+
+### Behaviours
+
+- Radio buttons are used for mutually exclusive choices, not for multiple choices. Only one radio button can be selected at a time. When a user chooses a new item, the previous choice is automatically deselected.
+- Users can trigger an item by tapping the radio button on either the button or its label. Having both regions interactive creates a more accessible target.
+
+## Which one to use?
+
+### Radio VS Dropdown
+
+Radio buttons may be a better choice than dropdown for questions with a limited number of options.
+
+Dropdown require an additional action from users as they must tap on the menu to access a bottom sheet of all available options.
+
+### Radio VS Checkbox
+
+Radio buttons represents a group of mutually exclusive choices, only one selection of a group is allowed.
+
+If a user can select from multiple options, use checkboxes instead of radio buttons.
+
+If it's simple Yes or No answer, considering use checkbox with a simple question, allowing users to easily check or uncheck for either 'Yes' or 'No' answer.

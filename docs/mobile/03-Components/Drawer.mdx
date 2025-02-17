@@ -1,0 +1,158 @@
+---
+id: drawer
+title: Drawer
+---
+
+import ComponentPreview from '../../../src/components/ComponentPreview';
+
+# Drawer
+
+A drawer is a temporary workspace that allows users to complete tasks without navigating to a new page.
+
+## Preview
+
+<ComponentPreview
+  iosSrc="/img/screenshots/drawer-ios.png"
+  androidSrc="/img/screenshots/drawer-android.png"
+/>
+
+## Example
+
+### Example 1: Drawer with backdrop
+
+```jsx live noInline
+const { Body } = Typography;
+
+const Content = () => (
+  <View style={{ padding: 30 }}>
+    <Body>Drawer Content</Body>
+    <Body>Drawer Content</Body>
+    <Body>Drawer Content</Body>
+    <Body>Drawer Content</Body>
+    <Body>Drawer Content</Body>
+    <Body>Drawer Content</Body>
+    <Body>Drawer Content</Body>
+  </View>
+);
+
+const App = () => {
+  const [visible, setVisiblity] = useState(false);
+
+  return (
+    <Box justifyContent="center" style={{ height: 300 }}>
+      <Button
+        text="Toggle Drawer"
+        variant="text"
+        onPress={() => setVisiblity(!visible)}
+      />
+      <Drawer visible={visible} onDismiss={() => setVisiblity(false)}>
+        <Content />
+        <Button
+          text="Close drawer"
+          variant="text"
+          onPress={() => setVisiblity(false)}
+        />
+      </Drawer>
+    </Box>
+  );
+};
+
+render(<App />);
+```
+
+### Example 2: Drawer without backdrop
+
+```jsx live noInline
+const { Body } = Typography;
+
+const Content = () => (
+  <View style={{ padding: 30 }}>
+    <Body>Drawer Content</Body>
+    <Body>Drawer Content</Body>
+    <Body>Drawer Content</Body>
+    <Body>Drawer Content</Body>
+    <Body>Drawer Content</Body>
+    <Body>Drawer Content</Body>
+    <Body>Drawer Content</Body>
+  </View>
+);
+
+const App = () => {
+  const [visible, setVisiblity] = useState(false);
+
+  return (
+    <Box justifyContent="center" style={{ height: 300 }}>
+      <Button
+        text="Toggle Drawer"
+        variant="text"
+        onPress={() => setVisiblity(!visible)}
+      />
+      <Drawer
+        hasBackdrop="false"
+        visible={visible}
+        onDismiss={() => setVisiblity(false)}
+      >
+        <Content />
+        <Button
+          text="Close drawer"
+          variant="text"
+          onPress={() => setVisiblity(false)}
+        />
+      </Drawer>
+    </Box>
+  );
+};
+
+render(<App />);
+```
+
+### Example 3: Dragable Drawer
+
+```SnackPlayer name=Drawer/Example3
+import React, { useState } from 'react';
+import { Button, View, SafeAreaView } from 'react-native';
+import { theme, Typography, Drawer } from './@hero-design/rn';
+import PlaygroundContext from './PlaygroundContext.js';
+
+const { Body } = Typography;
+
+const Content = () => (
+  <View style={{ padding: 30 }}>
+    <Body>Drawer Content</Body>
+    <Body>Drawer Content</Body>
+    <Body>Drawer Content</Body>
+    <Body>Drawer Content</Body>
+    <Body>Drawer Content</Body>
+    <Body>Drawer Content</Body>
+    <Body>Drawer Content</Body>
+  </View>
+);
+
+const App = () => (
+  <PlaygroundContext>
+    <Drawer.Dragable
+      initialHeightPercentage={30}
+      minimumHeightPercentage={10}
+      snapPoints={[30, 75]}
+      onCollapsed={() => alert('Collapsed')}
+      onExpanded={() => alert('Expanded')}
+    >
+      <Content />
+      <Content />
+      <Content />
+    </Drawer.Dragable>
+  </PlaygroundContext>
+);
+
+export default App;
+```
+
+### Props
+
+#### Drawer Props
+
+<Props of="Drawer" />
+
+#### Drawer.Dragable Props
+
+<Props of="DragableDrawer" />

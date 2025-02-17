@@ -1,0 +1,101 @@
+---
+id: success
+title: Success
+---
+
+import ComponentPreview from '../../../src/components/ComponentPreview';
+
+# Success
+
+- A component to display success state and action buttons
+
+## Examples
+
+### In-page Success Screen
+
+```jsx live
+function SuccessExample1() {
+  return (
+    <Success
+      variant="in-page"
+      title="Success"
+      description="Success description"
+      image={{
+        uri: 'https://i.pinimg.com/originals/e6/92/fe/e692fe2bef601bf4760425bd62118117.jpg',
+      }}
+    />
+  );
+}
+```
+
+### In-page Success Screen with CTA
+
+```jsx live
+function SuccessExample2() {
+  return (
+    <Success
+      variant="in-page"
+      title="Success"
+      description="Success description"
+      image={{
+        uri: 'https://i.pinimg.com/originals/e6/92/fe/e692fe2bef601bf4760425bd62118117.jpg',
+      }}
+      ctaText="Got it"
+      onCtaPress={() => navigation.goBack()}
+      onSecondaryCtaPress={() => navigation.goBack()}
+      secondaryCtaText="Dismiss"
+    />
+  );
+}
+```
+
+### Fullscreen Success Screen
+
+<ComponentPreview
+  iosSrc="/img/screenshots/success-ios.png"
+  androidSrc="/img/screenshots/success-android.png"
+/>
+
+```SnackPlayer name=Success/Example3
+import React, { useState } from 'react';
+import { Button, Success, HeroDesignProvider, theme } from './@hero-design/rn';
+import { View } from 'react-native';
+import PlaygroundContext from './PlaygroundContext.js';
+function SuccessExample3() {
+  const [isVisible, setIsVisible] = useState(false);
+  return (
+  <HeroDesignProvider theme={theme}>
+    <PlaygroundContext>
+    <View style={{ flex: 1 }}>
+      <Button
+        variant="text"
+        text="Show Full Screen Success page"
+        onPress={() => setIsVisible(!isVisible)}
+        testID="success-btn-toggle"
+      />
+      {isVisible && (
+        <Success
+          variant="full-screen"
+          title="Success"
+          description="Success description"
+          image={{
+            uri: 'https://i.pinimg.com/originals/e6/92/fe/e692fe2bef601bf4760425bd62118117.jpg',
+          }}
+          ctaText="Gotit"
+          onCtaPress={() => {
+            setIsVisible(false);
+          }}
+        />
+      )}
+    </View>
+    </PlaygroundContext>
+      </HeroDesignProvider>
+  );
+}
+
+export default SuccessExample3;
+```
+
+## Props
+
+<Props of="Success" />

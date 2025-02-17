@@ -1,0 +1,101 @@
+---
+id: attachment
+title: Attachment
+---
+
+# Attachment
+
+Attachment is a simple way to display the UI for an attachment file that followed the hero-design principle.
+
+## Example
+
+### Attachment with Image
+
+```jsx live
+function App() {
+  return (
+    <>
+      <Attachment
+        filename="Screenshot.png"
+        previewElement={
+          <Image
+            source={{
+              uri: 'https://i.pinimg.com/originals/e6/92/fe/e692fe2bef601bf4760425bd62118117.jpg',
+            }}
+          />
+        }
+        onRemove={() => Alert.alert('Remove pressed')}
+        style={{ marginBottom: theme.space.small }}
+      />
+      <Attachment
+        filename="demo.pdf"
+        previewElement={
+          <Image
+            source={{
+              uri: 'https://i.pinimg.com/originals/e6/92/fe/e692fe2bef601bf4760425bd62118117.jpg',
+            }}
+          />
+        }
+        backgroundHighlighted
+        style={{ marginBottom: theme.space.small, maxWidth: 250 }}
+        onDownload={() => Alert.alert('Download pressed')}
+      />
+      <Attachment
+        previewElement={
+          <Image
+            source={{
+              uri: 'https://i.pinimg.com/originals/e6/92/fe/e692fe2bef601bf4760425bd62118117.jpg',
+            }}
+          />
+        }
+        style={{ maxWidth: 300 }}
+        onDownload={() => Alert.alert('Download pressed')}
+      />
+    </>
+  );
+}
+```
+
+### Attachment with Icon
+
+```jsx live
+function App() {
+  return (
+    <>
+      <Attachment
+        filename="PdfDocument.pdf"
+        previewElement={<Icon icon="file-pdf" size="xlarge" intent="danger" />}
+        onRemove={() => Alert.alert('Remove pressed')}
+        style={{ marginBottom: theme.space.small }}
+      />
+      <Attachment
+        filename="DocxDocument.docx"
+        previewElement={<Icon icon="file-word" size="xlarge" intent="info" />}
+        onRemove={() => Alert.alert('Remove pressed')}
+        style={{ marginBottom: theme.space.small }}
+      />
+      <Attachment
+        filename="CsvDemo.csv"
+        previewElement={
+          <Icon icon="file-csv" size="xlarge" intent="disabled-text" />
+        }
+        backgroundHighlighted
+        style={{ marginBottom: theme.space.small, maxWidth: 250 }}
+        onDownload={() => Alert.alert('Download pressed')}
+      />
+      <Attachment
+        filename="PptDemo.ppt"
+        previewElement={
+          <Icon icon="file-powerpoint" size="xlarge" intent="disabled-text" />
+        }
+        onDownload={() => Alert.alert('Download pressed')}
+        onRemove={() => Alert.alert('Remove pressed')}
+      />
+    </>
+  );
+}
+```
+
+## Props
+
+<Props of="Attachment" />

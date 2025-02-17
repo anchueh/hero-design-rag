@@ -1,0 +1,489 @@
+---
+id: select
+title: Select
+---
+
+# Select
+
+Select component to select options from a list.
+
+## Examples
+
+:::info Landscape mode
+To use this component in landscape mode on iOS, you must first pass the `supportedOrientations` prop as specified in the [React Native doc](https://reactnative.dev/docs/modal#supportedorientations-ios).
+:::
+
+### Basic Select
+
+```jsx live
+function BasicSelect() {
+  const options = [
+    { text: 'Monday', value: 'mon' },
+    { text: 'Tuesday', value: 'tue' },
+    { text: 'Wednesday', value: 'wed' },
+    { text: 'Thursday', value: 'thu' },
+    { text: 'Friday', value: 'fri' },
+    { text: 'Saturday', value: 'sat' },
+    { text: 'Sunday', value: 'sun', disabled: true },
+  ];
+
+  const ControlledSelect = (props) => {
+    const [singleValue, setSingleValue] = useState('mon');
+    return (
+      <Select
+        options={options}
+        value={singleValue}
+        onConfirm={setSingleValue}
+        keyExtractor={(opt) => opt.value}
+        {...props}
+      />
+    );
+  };
+
+  const ControlledMultiSelect = (props) => {
+    const [multiValue, setMultiValue] = useState(['mon', 'tue']);
+    return (
+      <Select.Multi
+        footerLabel="Confirm"
+        options={options}
+        value={multiValue}
+        onConfirm={setMultiValue}
+        keyExtractor={(opt) => opt.value}
+        {...props}
+      />
+    );
+  };
+
+  return (
+    <ScrollView>
+      <Typography.Body variant="small">Select</Typography.Body>
+      <ControlledSelect label="Allow notifications" />
+      <Typography.Body variant="small">Select.Multi</Typography.Body>
+      <ControlledMultiSelect label="Allow notifications" />
+    </ScrollView>
+  );
+}
+```
+
+### Select with search
+
+```jsx live
+function SelectWithSearch() {
+  const options = [
+    { text: 'Monday', value: 'mon' },
+    { text: 'Tuesday', value: 'tue' },
+    { text: 'Wednesday', value: 'wed' },
+    { text: 'Thursday', value: 'thu' },
+    { text: 'Friday', value: 'fri' },
+    { text: 'Saturday', value: 'sat' },
+    { text: 'Sunday', value: 'sun', disabled: true },
+  ];
+
+  const sections = [
+    {
+      category: 'A',
+      data: [{ text: 'Anh', value: 'anh', role: 'Junior Developer' }],
+    },
+    {
+      category: 'D',
+      data: [
+        { text: 'Daniel', value: 'daniel', role: 'Senior Developer' },
+        { text: 'Daemon', value: 'daemon', role: 'Manager' },
+      ],
+    },
+    {
+      category: 'J',
+      data: [
+        { text: 'Jennifer', value: 'jennifer', role: 'UX Designer' },
+        { text: 'Josh ', value: 'josh', role: 'Manager' },
+      ],
+    },
+    {
+      category: 'T',
+      data: [
+        { text: 'Thomas', value: 'thomas', role: 'Product Owner' },
+        { text: 'Tim ', value: 'tim', role: 'Accountant' },
+      ],
+    },
+  ];
+
+  const endReachedHandler = useCallback(() => {
+    setIsLoading(true);
+    setTimeout(() => setIsLoading(false), 2000);
+  }, []);
+
+  const [searchValue, setSearchValue] = useState('');
+  const [filteredOptions, setFilteredOptions] = useState(sections);
+
+  const setSearchFilter = useCallback((text) => {
+    setSearchValue(text);
+    setFilteredOptions(
+      sections.filter((section) =>
+        text
+          ? section.category.toLowerCase().includes(text.toLowerCase())
+          : true
+      )
+    );
+  }, []);
+  const [singleWithSearchValue, setSingleWithSearchValue] = useState('');
+  const [multiWithSearchValue, setMultiWithSearchValue] = useState([]);
+
+  const renderSingleOption = ({ item, selected, onPress, theme }) => (
+    <List.BasicItem
+      selected={selected}
+      onPress={onPress}
+      prefix={<Avatar title={item.text.slice(0, 2)} size="large" />}
+      title={
+        <>
+          <Typography.Body variant="regular-bold">{item.text}</Typography.Body>
+          <Typography.Body intent="subdued">{item.role}</Typography.Body>
+        </>
+      }
+      style={{ marginHorizontal: theme.space.smallMedium }}
+    />
+  );
+
+  const renderMultipleOption = ({ item, selected, onPress, theme }) => (
+    <List.BasicItem
+      selected={selected}
+      suffix={selected ? 'checkmark' : undefined}
+      onPress={onPress}
+      prefix={<Avatar title={item.text.slice(0, 2)} size="large" />}
+      title={
+        <>
+          <Typography.Body variant="regular-bold">{item.text}</Typography.Body>
+          <Typography.Body intent="subdued">{item.role}</Typography.Body>
+        </>
+      }
+      style={{ marginHorizontal: theme.space.smallMedium }}
+    />
+  );
+
+  const ControlledSelect = (props) => {
+    const [singleValue, setSingleValue] = useState('mon');
+    return (
+      <Select
+        options={options}
+        value={singleValue}
+        onConfirm={setSingleValue}
+        keyExtractor={(opt) => opt.value}
+        {...props}
+      />
+    );
+  };
+
+  const ControlledMultiSelect = (props) => {
+    const [multiValue, setMultiValue] = useState(['mon', 'tue']);
+    return (
+      <Select.Multi
+        footerLabel="Confirm"
+        options={options}
+        value={multiValue}
+        onConfirm={setMultiValue}
+        keyExtractor={(opt) => opt.value}
+        {...props}
+      />
+    );
+  };
+
+  return (
+    <ScrollView>
+      <Typography.Body variant="small">Select with Search</Typography.Body>
+      <Select
+        label="Choose collaborators"
+        options={filteredOptions}
+        renderOption={(info) => renderSingleOption({ ...info, theme })}
+        value={singleWithSearchValue}
+        onConfirm={setSingleWithSearchValue}
+        keyExtractor={(opt) => opt.value}
+        query={searchValue}
+        onQueryChange={setSearchFilter}
+        onDimiss={() => setSearchFilter('')}
+      />
+      <Typography.Body variant="small">
+        Select.Multi with Search
+      </Typography.Body>
+      <Select.Multi
+        label="Choose collaborators"
+        options={filteredOptions}
+        renderOption={(info) => renderMultipleOption({ ...info, theme })}
+        value={multiWithSearchValue}
+        onConfirm={setMultiWithSearchValue}
+        keyExtractor={(opt) => opt.value}
+        query={searchValue}
+        onQueryChange={setSearchFilter}
+        onDimiss={() => setSearchFilter('')}
+        footerLabel="Confirm"
+      />
+    </ScrollView>
+  );
+}
+```
+
+### Select with long list
+
+```jsx live
+function LongListSelect() {
+  let ind = 0;
+  const longOptions = Array.from(Array(30), () => {
+    ind += 1;
+    return { text: `Value ${ind}`, value: `value_${ind}` };
+  });
+
+  const [singleLongListValue, setSingleLongListValue] = useState('value_1');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const endReachedHandler = useCallback(() => {
+    setIsLoading(true);
+    setTimeout(() => setIsLoading(false), 2000);
+  }, []);
+
+  return (
+    <ScrollView>
+      <Select
+        label="Long list selection"
+        options={longOptions}
+        value={singleLongListValue}
+        onConfirm={setSingleLongListValue}
+        keyExtractor={(opt) => opt.value}
+        onEndReached={endReachedHandler}
+        loading={isLoading}
+      />
+    </ScrollView>
+  );
+}
+```
+
+### Select with different states
+
+```jsx live
+function SelectStates() {
+  const options = [
+    { text: 'Monday', value: 'mon' },
+    { text: 'Tuesday', value: 'tue' },
+    { text: 'Wednesday', value: 'wed' },
+    { text: 'Thursday', value: 'thu' },
+    { text: 'Friday', value: 'fri' },
+    { text: 'Saturday', value: 'sat' },
+    { text: 'Sunday', value: 'sun', disabled: true },
+  ];
+
+  const ControlledSelect = (props) => {
+    const [singleValue, setSingleValue] = useState('mon');
+    return (
+      <Select
+        options={options}
+        value={singleValue}
+        onConfirm={setSingleValue}
+        keyExtractor={(opt) => opt.value}
+        {...props}
+      />
+    );
+  };
+
+  const ControlledMultiSelect = (props) => {
+    const [multiValue, setMultiValue] = useState(['mon', 'tue']);
+    return (
+      <Select.Multi
+        footerLabel="Confirm"
+        options={options}
+        value={multiValue}
+        onConfirm={setMultiValue}
+        keyExtractor={(opt) => opt.value}
+        {...props}
+      />
+    );
+  };
+
+  return (
+    <>
+      <ScrollView>
+        <ControlledSelect label="Not editable (read-only)" editable={false} />
+        <ControlledSelect label="Required" inputProps={{ required: true }} />
+        <ControlledSelect label="Loading" inputProps={{ loading: true }} />
+        <ControlledSelect label="Disabled" disabled />
+        <ControlledSelect label="Error" error="Error message" />
+        <Typography.Body variant="small">
+          Select.Multi with different states
+        </Typography.Body>
+        <ControlledMultiSelect
+          label="Not editable (read-only)"
+          editable={false}
+        />
+        <ControlledMultiSelect
+          label="Required"
+          inputProps={{ required: true }}
+        />
+        <ControlledMultiSelect label="Loading" inputProps={{ loading: true }} />
+        <ControlledMultiSelect label="Disabled" disabled />
+        <ControlledMultiSelect label="Error" error="Error message" />
+      </ScrollView>
+    </>
+  );
+}
+```
+
+### Select with custom value
+
+```jsx live
+function CustomSingleSelect() {
+  const options = [
+    { text: 'Monday', value: 'mon' },
+    { text: 'Tuesday', value: 'tue' },
+    { text: 'Wednesday', value: 'wed' },
+    { text: 'Thursday', value: 'thu' },
+    { text: 'Friday', value: 'fri' },
+    { text: 'Saturday', value: 'sat' },
+    { text: 'Sunday', value: 'sun', disabled: true },
+  ];
+
+  const CustomSingleSelect = (props) => {
+    const [singleValue, setSingleValue] = useState('mon');
+    return (
+      <Select
+        options={options}
+        value={singleValue}
+        onConfirm={setSingleValue}
+        keyExtractor={(opt) => opt.value}
+        renderSelectedValue={(_selectedValue, inputProps) => {
+          return (
+            <Box flex={1} flexDirection="row" alignItems="center">
+              <Avatar
+                source={{
+                  uri: 'https://i.pinimg.com/originals/e6/92/fe/e692fe2bef601bf4760425bd62118117.jpg',
+                }}
+                size="medium"
+              />
+              <Box marginLeft="medium">
+                <Typography.Body variant="small">
+                  {inputProps.value}
+                </Typography.Body>
+              </Box>
+            </Box>
+          );
+        }}
+        {...props}
+      />
+    );
+  };
+
+  return (
+    <ScrollView>
+      <CustomSingleSelect label="Custom selected value" />
+    </ScrollView>
+  );
+}
+```
+
+### Select.Multi with custom footer
+
+```jsx live
+function SelectExample() {
+  const options = [
+    { text: 'Monday', value: 'mon' },
+    { text: 'Tuesday', value: 'tue' },
+    { text: 'Wednesday', value: 'wed' },
+    { text: 'Thursday', value: 'thu' },
+    { text: 'Friday', value: 'fri' },
+    { text: 'Saturday', value: 'sat' },
+    { text: 'Sunday', value: 'sun', disabled: true },
+  ];
+
+  const ControlledMultiSelectWithCustomFooter = (props) => {
+    const [multiValue, setMultiValue] = useState(['mon', 'tue']);
+    const theme = useTheme();
+
+    const renderCustomFooter = ({ value, closeModal }) => {
+      return (
+        <>
+          <Button
+            variant="text"
+            style={{ marginRight: theme.space.small }}
+            onPress={() => {
+              setMultiValue([]);
+              closeModal();
+            }}
+            text="Clear all"
+          />
+          <Button
+            variant="text"
+            onPress={() => {
+              setMultiValue(value);
+              closeModal();
+            }}
+            text="Save"
+          />
+        </>
+      );
+    };
+
+    return (
+      <Select.Multi
+        options={options}
+        value={multiValue}
+        onConfirm={setMultiValue}
+        keyExtractor={(opt) => opt.value}
+        footerLabel={renderCustomFooter}
+        {...props}
+      />
+    );
+  };
+
+  return (
+    <ScrollView>
+      <ControlledMultiSelectWithCustomFooter label="Allow notifications" />
+    </ScrollView>
+  );
+}
+```
+
+### Select with custom BottomSheet config
+
+Select's BottomSheet header and variant can be customised by using the `bottomSheetConfig` prop.
+
+```jsx live
+function CustomSingleSelect() {
+  const options = [
+    { text: 'Monday', value: 'mon' },
+    { text: 'Tuesday', value: 'tue' },
+    { text: 'Wednesday', value: 'wed' },
+    { text: 'Thursday', value: 'thu' },
+    { text: 'Friday', value: 'fri' },
+    { text: 'Saturday', value: 'sat' },
+    { text: 'Sunday', value: 'sun', disabled: true },
+  ];
+
+  const CustomSingleSelect = (props) => {
+    const [singleValue, setSingleValue] = useState('mon');
+    return (
+      <Select
+        options={options}
+        value={singleValue}
+        onConfirm={setSingleValue}
+        keyExtractor={(opt) => opt.value}
+        bottomSheetConfig={{
+          header: 'Custom header',
+          variant: 'floating',
+        }}
+        {...props}
+      />
+    );
+  };
+
+  return (
+    <ScrollView>
+      <CustomSingleSelect label="Custom selected value" />
+    </ScrollView>
+  );
+}
+```
+
+## Props
+
+### Select Props
+
+<Props of="SingleSelect" />
+
+### Select.Multi Props
+
+<Props of="MultiSelect" />

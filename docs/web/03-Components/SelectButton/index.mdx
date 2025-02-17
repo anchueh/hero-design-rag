@@ -1,0 +1,126 @@
+---
+id: selectbutton
+title: SelectButton [Deprecated]
+---
+
+:::danger DEPRECATED
+
+<strong>SelectButton</strong> and <strong>SelectButton.Group</strong> are deprecated.
+Please use <a href="/web/components/radio#radiobutton">Radio.Button</a> and <a href="/web/components/radio#radiobuttongroup">
+  Radio.ButtonGroup
+</a> with the same functionalities.
+
+:::
+
+<br />
+
+# SelectButton
+
+The select button is treated as a single radio button. It can be used when there is a limited number of options and it is beneficial to let users have a look at all of them.
+
+## Examples
+
+### Basic
+
+Basic usage of SelectButton.
+
+```jsx live
+<>
+  <SelectButton
+    value="hr_document"
+    text="HR Document"
+    name="basic_usage"
+    style={{ marginRight: theme.space.small }}
+  />
+  <SelectButton value="hr_guide" text="HR Guide" name="basic_usage" />
+</>
+```
+
+### Disabled state
+
+SelectButton can also be disabled.
+
+```jsx live
+<>
+  <SelectButton
+    value="disabled"
+    text="Disabled (Selected)"
+    selected
+    disabled
+    style={{ marginRight: theme.space.small }}
+  />
+  <SelectButton
+    value="disabled"
+    text="Disabled (Unselected)"
+    selected={false}
+    disabled
+  />
+</>
+```
+
+### Sizes
+
+SelectButton has 3 sizes: `small`, `medium` (default) and `large`.
+
+```jsx live
+<>
+  <SelectButton
+    value="small"
+    text="Small"
+    name="small"
+    size="small"
+    style={{ marginRight: theme.space.small }}
+  />
+  <SelectButton
+    value="medium"
+    text="Medium"
+    name="medium"
+    size="medium"
+    style={{ marginRight: theme.space.small }}
+  />
+  <SelectButton value="large" text="Large" name="large" size="large" />
+</>
+```
+
+### SelectButton.Group
+
+All buttons can be grouped together with SelectButton.Group
+
+```jsx live
+<>
+  {() => {
+    const [value, setValue] = React.useState('full_time');
+    return (
+      <SelectButton.Group
+        value={value}
+        name="name"
+        options={[
+          {
+            text: 'Full-time',
+            value: 'full_time',
+          },
+          {
+            text: 'Part-time',
+            value: 'part_time',
+          },
+          {
+            text: 'Casual',
+            value: 'casual',
+          },
+        ]}
+        onChange={(val) => setValue(val)}
+      />
+    );
+  }}
+</>
+```
+
+## Props
+
+### SelectButton Props
+
+<Props of="SelectButton" from="web" />
+
+### SelectButton.Group Props
+
+<Props of="SelectButtonGroup" from="web" />

@@ -1,0 +1,99 @@
+---
+id: contentNavigator
+title: Content Navigator
+---
+
+# Content Navigator
+
+- A content navigator is used to navigate between values.
+- Only use this component when user can easily predict the next/previous value when navigating such as: number navigator, calendar navigator.
+
+## Examples
+
+```jsx live noInline
+const addDays = (date, numDays) => {
+  const milliseconds = numDays * 24 * 60 * 60 * 1000;
+  return new Date(date.valueOf() + milliseconds);
+};
+
+const getMondayAndSunday = (date) => {
+  const daysFromMonday = (date.getDay() || 7) - 1;
+  const monday = addDays(date, -daysFromMonday);
+  const sunday = addDays(monday, 6);
+
+  return { monday, sunday };
+};
+
+const formatDate = (date) => {
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+};
+
+const App = () => {
+  const [age, setAge] = useState(20);
+  const [date, setDate] = useState(new Date());
+  const { monday, sunday } = getMondayAndSunday(date);
+
+  return (
+    <Box margin="medium">
+      <Typography.Body style={{ marginBottom: theme.space.medium }}>
+        Age (18 to 25):
+      </Typography.Body>
+      <Box flexDirection="row" marginBottom="medium">
+        <ContentNavigator
+          value={
+            <TouchableOpacity
+              style={{
+                alignItems: 'center',
+                flexDirection: 'row',
+              }}
+              onPress={() => alert('Age value pressed')}
+            >
+              <Typography.Body fontWeight="semi-bold">{age}</Typography.Body>
+              <Icon icon="arrow-down" size="xsmall" />
+            </TouchableOpacity>
+          }
+          onPreviousPress={() => setAge(age - 1)}
+          onNextPress={() => setAge(age + 1)}
+          previousDisabled={age <= 18}
+          nextDisabled={age >= 25}
+        />
+      </Box>
+
+      <Typography.Body style={{ marginBottom: theme.space.medium }}>
+        Week calendar:
+      </Typography.Body>
+      <Box flexDirection="row" marginBottom="medium">
+        <ContentNavigator
+          value={`${formatDate(monday)} - ${formatDate(sunday)}`}
+          onPreviousPress={() => setDate(addDays(date, -7))}
+          onNextPress={() => setDate(addDays(date, 7))}
+          onPress={() => alert('ContentNavigator')}
+        />
+      </Box>
+
+      <Typography.Body style={{ marginBottom: theme.space.medium }}>
+        Week calendar (large):
+      </Typography.Body>
+      <Box flexDirection="row" marginBottom="medium">
+        <ContentNavigator
+          value={`${formatDate(monday)} - ${formatDate(sunday)}`}
+          onPreviousPress={() => setDate(addDays(date, -7))}
+          onNextPress={() => setDate(addDays(date, 7))}
+          onPress={() => alert('ContentNavigator')}
+          fontSize="large"
+        />
+      </Box>
+    </Box>
+  );
+};
+
+render(<App />);
+```
+
+## Props
+
+<Props of="ContentNavigator" />

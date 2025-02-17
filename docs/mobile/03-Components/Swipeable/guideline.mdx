@@ -1,0 +1,90 @@
+---
+title: Guideline
+---
+
+import SwipeableDosAndDonts from './SwipeableDosAndDonts';
+
+<PageTitle
+  title="Swipeable"
+  content="Swipeable lists can be swiped horizontally to reveal additional actions, such as ‘Delete’, ‘Decline’, ‘Approve’ or ‘Mark as read’. It allows users for a quick and accessible interaction with individual elements in a list."
+/>
+
+<SwipeableDosAndDonts />
+
+<br />
+
+## Behavior
+
+<br />
+
+```jsx live previewOnly
+<Box
+  margin="medium"
+  style={{
+    width: '100%',
+    flexDirection: 'row',
+  }}
+>
+  <Box
+    style={{
+      flex: 1,
+    }}
+  >
+    <img
+      width="320"
+      src="/img/screenshots/swipeable-behaviour-long-press-and-swipe.gif"
+    />
+    <Typography.Body variant="small">
+      Swipeable list can be ony triggered after a long press and swipe motion
+    </Typography.Body>
+  </Box>
+
+  <Box
+    style={{
+      flex: 1,
+    }}
+  >
+    <img
+      width="320"
+      src="/img/screenshots/swipeable-behaviour-swipe-left-right.gif"
+    />
+    <Typography.Body variant="small">
+      Swiping a list item (either left or right) can perform an action
+    </Typography.Body>
+  </Box>
+</Box>
+```
+
+```jsx live previewOnly
+<Box
+  margin="medium"
+  style={{
+    width: '100%',
+    flexDirection: 'row',
+  }}
+>
+  <Box
+    style={{
+      flex: 1,
+    }}
+  >
+    <img width="320" src="/img/screenshots/swipeable-behaviour-2-actions.png" />
+    <Typography.Body variant="small">
+      When there are 2 actions on one list:
+      <li> Swipe left for primary action </li>
+      <li> Swipe right for secondary action </li>
+    </Typography.Body>
+  </Box>
+
+  <Box
+    style={{
+      flex: 1,
+    }}
+  >
+    <img width="320" src="/img/screenshots/swipeable-behaviour-1-action.png" />
+    <Typography.Body variant="small">
+      Swiping a list item (either left or right) can perform an action
+    </Typography.Body>
+  </Box>
+</Box>
+```

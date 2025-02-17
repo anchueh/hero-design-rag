@@ -1,0 +1,318 @@
+---
+id: progress
+title: Progress
+---
+
+# Progress
+
+Progress is used to display:
+
+- The current progress of a long operation.
+- The completion in percentage of an operation.
+
+## Example
+
+### Basic Progress Bar
+
+Render a progress bar by specifying `value` prop. Valid value is in range of `[0,100]`
+
+```jsx live
+function BasicProgressExample() {
+  const [progress, setProgress] = useState(0);
+
+  return (
+    <Box marginTop="large">
+      <Progress.Bar
+        value={progress}
+        style={{ marginBottom: theme.space.medium }}
+      />
+      <Button
+        variant="text"
+        text="Random Value"
+        onPress={() => setProgress(Math.floor(Math.random() * 100))}
+      />
+    </Box>
+  );
+}
+```
+
+### Basic Progress Circle
+
+Render a progress circle by specifying `value` prop. Valid value is in range of `[0,100]`
+
+```jsx live
+function BasicProgressCircleExample() {
+  const [progress, setProgress] = useState(0);
+
+  return (
+    <Box
+      display="flex"
+      marginTop="large"
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Progress.Circle
+        value={progress}
+        style={{ marginBottom: theme.space.medium }}
+      />
+      <Button
+        variant="text"
+        text="Random Value"
+        onPress={() => setProgress(Math.floor(Math.random() * 100))}
+      />
+    </Box>
+  );
+}
+```
+
+### Intents
+
+Progress Bar and Progress Circle come with 10 intents which are:
+
+- `primary`, `success`, `warning`, `danger`, `info`, `archived`.
+- `primary-inverted`, `success-inverted`, `warning-inverted`, `danger-inverted`, `info-inverted`, `archived-inverted`.
+
+#### Normal intents
+
+```jsx live
+function NormalIntentsExample() {
+  const Variants = ({ progress }) => {
+    return (
+      <Box flex={1} paddingHorizontal="medium">
+        <Box alignItems="center" paddingVertical="xlarge">
+          <Typography.Body style={{ marginBottom: theme.space.small }}>
+            Progress Circle
+          </Typography.Body>
+          <Box flexDirection="row" alignItems="center">
+            <Progress.Circle
+              value={progress}
+              style={{ marginHorizontal: theme.space.medium }}
+              intent="primary"
+            />
+            <Progress.Circle
+              value={progress}
+              style={{ marginHorizontal: theme.space.medium }}
+              intent="success"
+            />
+          </Box>
+          <Box flexDirection="row" alignItems="center" marginTop="medium">
+            <Progress.Circle
+              value={progress}
+              style={{ marginHorizontal: theme.space.medium }}
+              intent="warning"
+            />
+            <Progress.Circle
+              value={progress}
+              style={{ marginHorizontal: theme.space.medium }}
+              intent="danger"
+            />
+          </Box>
+          <Box flexDirection="row" alignItems="center" marginTop="medium">
+            <Progress.Circle
+              value={progress}
+              style={{ marginHorizontal: theme.space.medium }}
+              intent="info"
+            />
+            <Progress.Circle
+              value={progress}
+              style={{ marginHorizontal: theme.space.medium }}
+              intent="archived"
+            />
+          </Box>
+        </Box>
+        <Box alignItems="center" paddingVertical="small">
+          <Typography.Body>Progress Bar</Typography.Body>
+          <Box padding="small" style={{ width: '100%' }}>
+            <Progress.Bar value={progress} intent="primary" />
+          </Box>
+          <Box padding="small" style={{ width: '100%' }}>
+            <Progress.Bar value={progress} intent="success" />
+          </Box>
+          <Box padding="small" style={{ width: '100%' }}>
+            <Progress.Bar value={progress} intent="warning" />
+          </Box>
+          <Box padding="small" style={{ width: '100%' }}>
+            <Progress.Bar value={progress} intent="danger" />
+          </Box>
+          <Box padding="small" style={{ width: '100%' }}>
+            <Progress.Bar value={progress} intent="info" />
+          </Box>
+          <Box padding="small" style={{ width: '100%' }}>
+            <Progress.Bar value={progress} intent="archived" />
+          </Box>
+        </Box>
+      </Box>
+    );
+  };
+
+  const [progress, setProgress] = useState(0);
+  return (
+    <>
+      <Variants progress={progress} />
+
+      <Box alignItems="center" padding="xlarge">
+        <Box flexDirection="row" width="80%" justifyContent="center">
+          <Button
+            variant="text"
+            text="Random Value"
+            onPress={() => setProgress(Math.floor(Math.random() * 100))}
+          />
+          <Button variant="text" text="Min" onPress={() => setProgress(0)} />
+          <Button variant="text" text="Max" onPress={() => setProgress(100)} />
+        </Box>
+      </Box>
+    </>
+  );
+}
+```
+
+#### Inverted intents
+
+```jsx live
+function InvertedIntentsExample() {
+  const InvertedVariants = ({ progress }) => {
+    return (
+      <Box flex={1} paddingHorizontal="medium">
+        <Box alignItems="center" paddingVertical="xlarge">
+          <Typography.Body style={{ marginBottom: theme.space.small }}>
+            Inverted
+          </Typography.Body>
+          <Box flexDirection="row" alignItems="center">
+            <Box bgColor="secondary">
+              <Progress.Circle
+                value={progress}
+                renderValue={(value) => (
+                  <Typography.Body intent="inverted">{`${value}%`}</Typography.Body>
+                )}
+                style={{ marginHorizontal: theme.space.medium }}
+                intent="primary-inverted"
+              />
+            </Box>
+            <Box bgColor="success">
+              <Progress.Circle
+                value={progress}
+                style={{ marginHorizontal: theme.space.medium }}
+                intent="success-inverted"
+              />
+            </Box>
+          </Box>
+          <Box flexDirection="row" alignItems="center" marginTop="medium">
+            <Box bgColor="warning">
+              <Progress.Circle
+                value={progress}
+                style={{ marginHorizontal: theme.space.medium }}
+                intent="warning-inverted"
+              />
+            </Box>
+            <Box bgColor="error">
+              <Progress.Circle
+                value={progress}
+                style={{ marginHorizontal: theme.space.medium }}
+                intent="danger-inverted"
+              />
+            </Box>
+          </Box>
+          <Box flexDirection="row" alignItems="center" marginTop="medium">
+            <Box bgColor="info">
+              <Progress.Circle
+                value={progress}
+                style={{ marginHorizontal: theme.space.medium }}
+                intent="info-inverted"
+              />
+            </Box>
+            <Box bgColor="archived">
+              <Progress.Circle
+                value={progress}
+                style={{ marginHorizontal: theme.space.medium }}
+                intent="archived-inverted"
+              />
+            </Box>
+          </Box>
+        </Box>
+        <Box alignItems="center" paddingVertical="small">
+          <Typography.Body>Inverted</Typography.Body>
+          <Box bgColor="secondary" padding="small" style={{ width: '100%' }}>
+            <Progress.Bar value={progress} intent="primary-inverted" />
+          </Box>
+          <Box bgColor="success" padding="small" style={{ width: '100%' }}>
+            <Progress.Bar value={progress} intent="success-inverted" />
+          </Box>
+          <Box bgColor="warning" padding="small" style={{ width: '100%' }}>
+            <Progress.Bar value={progress} intent="warning-inverted" />
+          </Box>
+          <Box bgColor="error" padding="small" style={{ width: '100%' }}>
+            <Progress.Bar value={progress} intent="danger-inverted" />
+          </Box>
+          <Box bgColor="info" padding="small" style={{ width: '100%' }}>
+            <Progress.Bar value={progress} intent="info-inverted" />
+          </Box>
+          <Box bgColor="archived" padding="small" style={{ width: '100%' }}>
+            <Progress.Bar value={progress} intent="archived-inverted" />
+          </Box>
+        </Box>
+      </Box>
+    );
+  };
+
+  const [progress, setProgress] = useState(0);
+  return (
+    <>
+      <InvertedVariants progress={progress} />
+
+      <Box alignItems="center" padding="xlarge">
+        <Box flexDirection="row" width="80%" justifyContent="center">
+          <Button
+            variant="text"
+            text="Random Value"
+            onPress={() => setProgress(Math.floor(Math.random() * 100))}
+          />
+          <Button variant="text" text="Min" onPress={() => setProgress(0)} />
+          <Button variant="text" text="Max" onPress={() => setProgress(100)} />
+        </Box>
+      </Box>
+    </>
+  );
+}
+```
+
+### Progress.Step
+
+```jsx live
+function ProgressStep() {
+  return (
+    <Box padding="medium">
+      <Typography.Body style={{ marginBottom: theme.space.medium }}>
+        Single step
+      </Typography.Body>
+      <Progress.Step steps={1} current={0} />
+      <Typography.Body style={{ marginVertical: theme.space.medium }}>
+        Completed single step
+      </Typography.Body>
+      <Progress.Step steps={1} current={1} />
+
+      <Typography.Body style={{ marginVertical: theme.space.medium }}>
+        Multiple steps
+      </Typography.Body>
+      <Progress.Step steps={5} current={3} />
+    </Box>
+  );
+}
+```
+
+## Props
+
+### Progress.Bar Props
+
+<Props of="ProgressBar" />
+
+<br />
+
+### Progress.Circle Props
+
+<Props of="ProgressCircle" />
+
+<br />
+
+### Progress.Step Props
+
+<Props of="ProgressStep" />

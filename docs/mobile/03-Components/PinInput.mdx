@@ -1,0 +1,67 @@
+---
+id: pinInput
+title: Pin Input
+---
+
+# PinInput
+
+A component for inputting PIN/OTP into the app via a numeric keyboard.
+
+## Examples
+
+```jsx live
+function PinInputExample() {
+  const PIN = '0000';
+
+  const [pin, setPin] = useState('');
+  const [secure, setSecure] = useState(true);
+  const [disabled, setDisabled] = useState(false);
+  const [error, setError] = useState('');
+  const onFulFill = (value) => {
+    if (value !== PIN) {
+      setPin('');
+      setError('PIN is not correct');
+    } else {
+      alert('Congratulations, the entered PIN is correct!');
+      setError('');
+    }
+  };
+
+  return (
+    <Box
+      style={{
+        alignItems: 'center',
+      }}
+    >
+      <Typography.Body style={{ marginBottom: theme.space.medium }}>
+        {`Correct PIN: ${PIN}`}
+      </Typography.Body>
+      <PinInput
+        value={pin}
+        onChangeText={setPin}
+        onFulfill={onFulFill}
+        disabled={disabled}
+        autoFocus
+        error={error}
+        secure={secure}
+        style={{ marginBottom: theme.space.xlarge }}
+      />
+      <Button
+        variant="text"
+        onPress={() => setSecure(!secure)}
+        icon={secure ? 'eye-outlined' : 'eye-invisible-outlined'}
+        text={secure ? 'Show PIN' : 'Hide PIN'}
+      />
+      <Button
+        variant="text"
+        onPress={() => setDisabled(!disabled)}
+        text={disabled ? 'Enable PIN' : 'Disable PIN'}
+      />
+    </Box>
+  );
+}
+```
+
+## Props
+
+<Props of="PinInput" />

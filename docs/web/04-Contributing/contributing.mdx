@@ -1,0 +1,258 @@
+---
+id: process
+title: General process
+---
+
+# Contributing
+
+Before starting, please make sure you have access to Hero Design's Github repo (https://github.com/Thinkei/hero-design).
+
+You are welcome to contribute to the project by either reporting bugs, requesting new features or helping with implementation.
+
+- For bug reporting, feature or enhancement request, please follow the instruction [here](https://github.com/Thinkei/hero-design/issues/new/choose) to open a ticket.
+- For direct contribution to the project, please follow the process below.
+
+## Contributing process
+
+1. Once you wanna get your hand dirty, please pick a task that suits you. You can:
+
+- Look at [available Github issues](https://github.com/Thinkei/hero-design/issues) and pick one that has come to final solution.
+- Have a discussion with Hero design team via Slack channel [`#eh-hero-design`](https://employmentinnovations.slack.com/archives/CHWMT4F44).
+
+2. Use designs from designer and issue descriptions for references. If there is any concern, please raise this in [`#eh-hero-design`](https://employmentinnovations.slack.com/archives/CHWMT4F44)
+3. Start your implementation.
+4. Test our implementation.
+5. Open PR and code review.
+6. We take care of the rest.
+
+## Bring up development environment
+
+1. Clone the repo to your local.
+
+```
+git clone git@github.com:Thinkei/hero-design.git
+```
+
+2. Install [Node.js](https://nodejs.org/en/)(>=20.0.0)
+
+3. Enable Corepack Nodejs feature
+
+```bash
+corepack enable
+```
+
+4. Install dependencies
+
+```bash
+yarn install
+```
+
+5. Start the dev documentation & playground for local development.
+
+```bash
+yarn dev:website
+```
+
+## Run visual test
+
+- Visual test is the testsuite to ensure UI appearance. It takes snapshots of all components on documentation server and identify the changes by pixel comparison.
+
+- Visual snapshots are generated on Linux to ensure it can be run on CI, on MacOS and Windows, [Docker](https://docs.docker.com/get-docker) and [Docker-compose](https://docs.docker.com/compose/install) are required to run visual test.
+
+build and run visual-test
+
+```bash
+docker-compose up --build
+```
+
+Run visual-test only
+
+```bash
+docker-compose up
+```
+
+or
+
+Run visual-test and update snapshots
+
+```bash
+docker-compose run visual_test yarn visual-test:update
+```
+
+Access to docker shell.
+
+```
+docker-compose run visual_test bash
+```
+
+:::info Note
+For Apple Silicon chip
+Please set this environment variable.
+
+```
+export DOCKER_DEFAULT_PLATFORM=linux/arm64
+```
+
+:::
+
+#### Tips
+
+- Specify to only component you want to run to save time:
+
+```bash
+# Run visual test for only Table documentation page.
+docker-compose run visual_test yarn visual-test:update -- -- Table
+```
+
+- Re-run test on file changed:
+
+```bash
+# Run visual test for only Table documentation page on watch mode.
+docker-compose run visual_test yarn visual-test:update -- -- Table --watch
+```
+
+## Code structure
+
+Hero Design is a mono repo multiple packages:
+
+- react: Implementation for ReactJS
+- rn: Implementation for React-native
+- colors: Shared color palette & semantic/functional definitions
+- website: Documentation containing @hero-design/rn and @ehrocks/hero-design-react components & design guideline for both web and mobile.
+
+#### React
+
+All the implementation is placed under `src` folder which is divided into 2 parts: `components` and `theme`.
+
+##### components
+
+This folder contains all the components' implementation code and theirs styling using `styled-components`. Please use these docs for references:
+
+- API interface: https://blueprintjs.com/docs/.
+- Styling: https://styled-components.com/docs.
+
+##### theme
+
+Theme configuration for the library. It includes:
+
+- `global` which is base configuration for `colors`, `sizes`, `spacing`, `borders`, `typography` and `shadows`.
+- `components` which is configuration specified for every single component.
+
+The theme configuration is built based on `styled-system`. Please refer to its [doc](https://styled-system.com/table) for organising the theme object.
+
+##### Styling notes:
+
+- With @ehrocks/hero-design-react, we favour using `css in js` by using `styled-components`.
+- `@ehrocks/hero-design-react` supports theme at two levels and you should obey that:
+  - Every component must have their own theme put under `theme/components` folder which is not shared with any other components.
+  - All variables used to create component's theme must be got from global theme at `theme/global`, apart from specific ones used for that component itself only.
+
+#### website
+
+- Components' docs built with [docusaurus](https://docusaurus.io/). All documents are written as markdown files (.mdx) placed under `docs/` folder.
+- Each document should follow this format:
+
+```markdown
+# Component Name
+
+General description & usage of the component.
+
+## Examples
+
+Interactive examples of the component with description.
+
+## Props
+
+Component's API interface. This is automatically generated from component's interface.
+```
+
+###### develop website
+
+- Build and run the website
+
+```bash
+yarn dev:website
+```
+
+- If you want to the website automatically reload when you make changes in @ehrocks/hero-design-react
+
+```bash
+yarn dev:react
+```
+
+## Opening a Pull Request
+
+1. Search our repository for open or closed
+   [Pull Requests](https://github.com/Thinkei/hero-design/pulls)
+   that relate to your submission. You don't want to duplicate effort.
+2. Create your feature branch (`git checkout -b amazing_feature`)
+3. If required, create a `changeset` that describes your changes (`yarn changeset`). In cases where a changeset is not required, an empty changeset can be created instead (`yarn changeset --empty`) - an empty changeset will not generate a changelog entry for the change, so please use it as an escape hatch or for internal refactors only.
+4. Commit your changes (`git commit -m 'Add amazing_feature'`)
+5. Push to the branch (`git push origin amazing_feature`)
+6. [Open a Pull Request](https://github.com/Thinkei/hero-design/compare?expand=1). Make sure the description includes enough information for the reviewer to understand what the PR is about.
+7. Follow the instructions of the pull request template.
+
+## Changesets
+
+For more details about changesets, see [Adding a Changeset](https://github.com/changesets/changesets/blob/main/docs/adding-a-changeset.md).
+A changeset is a piece of information about changes made in a branch or commit. It holds three bits of information:
+
+- What we need to release
+- What version we are releasing packages at (using a semver bump type)
+- A changelog entry for the released packages
+
+For example:
+
+```markdown
+---
+'@ehrocks/hero-design-react': patch
+---
+
+Description goes here
+```
+
+Will generate the following changelog entry:
+
+```markdown
+Patch Changes
+• [2efc40c45] Thanks @phucdph! - Description goes here
+```
+
+**Changelog entry framework**:
+
+Keep it concise and as information-rich as possible. The most comprehensive changelog entry may include:
+
+- What’s the type of change? - type
+  - bug fix, feature, breaking change, chore, etc.
+- What’s the TL;DR? - summary
+- What more details can we share? - details
+- What user benefit has this change? - benefit
+- More information. Can we link to related things? - resources
+
+A changelog entry should at least contain the **type** of change and a **summary**.
+
+If your PR contains changes that require the user to update their code, explain **how** they can migrate.
+
+**Tips**:
+
+- Changesets are just markdown files. Feel free to add as much markdown as you want to better describe the change. If e.g. your changeset contains function or package names, use the `inline code` syntax to denote this.
+- Multiple changesets can be added in a single PR if needed, please see [Tips on adding changesets](https://github.com/changesets/changesets/blob/main/docs/adding-a-changeset.md#you-can-add-more-than-one-changeset-to-a-pull-request)
+- You can determine how to write a correct changeset based on the type of change below:
+  | Changes | Description | Bump type |
+  | ---------------- | ---------------------------------------------------------------------------------- | --------- |
+  | Breaking Changes | Release as a breaking change. This requires a migration guide. | major |
+  | New Feature | New feature. New props/behaviors/variants/states added to the components. | minor |
+  | Bug Fix | Bug fix. This won't change the interface. | patch |
+  | Enhancement | Improvement on UI / UX or internal implementation. This won't change the interface | patch |
+  | Documentation | Improvement / Update on the documentation. | patch |
+  | Internal | Related to library build tool, library or internal change. | patch |
+
+If you don't want to include your changes on the change log, please commit an empty changeset.
+
+### Why We Use Changesets
+
+Writing clear and concise release notes and changelogs is a vital aspect of quality software. At Employment Hero, we constantly strive to deliver updates and enhancements to our libraries. However, this also entails a responsibility to communicate these changes to our users in an effective and understandable manner. We have encountered libraries that present their changelogs as a mere collection of commits, which may be convenient for the library developers, but hardly ideal for the library users. To achieve the excellence that we expect from our library users' experience with EH, we believe that nothing surpasses hand-written changelogs by the developers who implemented the features, and this is precisely what changesets enables us to offer.
+
+Changesets offers efficient and consistent tools and guidance to ensure that developers working on features can write excellent changelogs with ease, and assembles release notes for us at the quality standard that we aspire to. Remember to adopt the perspective of a user when writing changesets to make it absolutely clear what your feature does, what effect it has on the library, how to use it, and how to access more detail, if relevant.
+
+### Thank you for your interest and volunteering in Employment Hero Design System. Peace! ✌️

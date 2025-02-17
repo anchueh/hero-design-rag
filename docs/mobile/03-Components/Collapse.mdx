@@ -1,0 +1,91 @@
+---
+id: collapse
+title: Collapse
+---
+
+# Collapse
+
+Collapse is used to toggle show and hide user content.
+
+## Examples
+
+```jsx live
+function App() {
+  const source = { uri: 'https://i.pravatar.cc/300' };
+  const [isCollapsed, setIsCollapsed] = React.useState(true);
+
+  const toggleContent = React.useCallback(() => {
+    setIsCollapsed(!isCollapsed);
+  }, [isCollapsed]);
+
+  return (
+    <>
+      <Card
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          backgroundColor: theme.colors.backgroundLight,
+          padding: theme.space.medium,
+          ...(isCollapsed
+            ? {}
+            : {
+                borderBottomEndRadius: 0,
+                borderBottomStartRadius: 0,
+              }),
+        }}
+      >
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+          }}
+        >
+          <Avatar source={source} />
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              marginLeft: theme.space.medium,
+            }}
+          >
+            <Typography.Body>Rob Dunn</Typography.Body>
+            <Typography.Body variant="small" intent="subdued">
+              3 OKRS
+            </Typography.Body>
+          </View>
+        </View>
+        <Button.Icon
+          icon={`caret-${isCollapsed ? 'right' : 'down'}`}
+          intent="text"
+          size="xsmall"
+          onPress={toggleContent}
+          style={{ margin: theme.space.small }}
+        />
+      </Card>
+      <Collapse
+        open={!isCollapsed}
+        style={{
+          backgroundColor: theme.colors.backgroundLight,
+        }}
+      >
+        <View
+          style={{
+            padding: theme.space.large,
+            borderTopWidth: theme.space.xxsmall,
+            borderTopColor: theme.colors.backgroundLight,
+          }}
+        >
+          <Typography.Body variant="small">Hidden Content</Typography.Body>
+        </View>
+      </Collapse>
+    </>
+  );
+}
+```
+
+## Props
+
+<Props of="Collapse" />

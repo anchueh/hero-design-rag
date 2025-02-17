@@ -1,0 +1,161 @@
+---
+title: Guideline
+---
+
+import AlertDosAndDonts from './AlertDosAndDonts';
+
+<PageTitle
+  title="Alert"
+  content="Alerts are used to call out critical information or give the user contextual feedback after performing a task. The four types of alerts are Informational, Success, Warning and Error.
+"
+/>
+
+<AlertDosAndDonts />
+
+<br />
+
+## Writing alerts content
+
+Alerts should be written in a concise manner. It is recommended that alert descriptions do not exceed 2-3 lines of text. Headings, flat buttons or inline text links may be included to support the alert’s message.
+
+<br />
+
+```jsx live previewOnly
+<Box
+  padding="large"
+  flexDirection="row"
+  alignItems="center"
+  justifyContent="center"
+  style={{ flexWrap: 'wrap', gap: theme.space.medium }}
+>
+  <Alert
+    title="Info"
+    content="There will be a scheduled maintenance from 7 A.M to 8 A.M."
+    intent="info"
+    style={{
+      width: '48%',
+    }}
+    onClose={() => alert('Closed')}
+  />
+
+  <Alert
+    title="Error"
+    content="Last name is not valid. Please remove any symbols or numbers."
+    intent="error"
+    style={{
+      width: '48%',
+    }}
+    onClose={() => alert('Closed')}
+  />
+
+  <Alert
+    title="Success"
+    content="This policy has been successfully acknowledged."
+    intent="success"
+    style={{
+      width: '48%',
+    }}
+    onClose={() => alert('Closed')}
+  />
+
+  <Alert
+    title="Warning"
+    content="Please proceed to enrol a card before you start shopping."
+    intent="warning"
+    style={{
+      width: '48%',
+    }}
+    onClose={() => alert('Closed')}
+  />
+</Box>
+```
+
+<br />
+
+Avoid using technical jargon or overly complex language - alerts should be easy to understand for all users.
+
+<br />
+
+## Use icons in alerts
+
+Icons should provide an additional information about the alert to assist the
+user in quickly and easily identifying the message. The user should always be
+able to close the alert therefore a dismiss icon should always be visible unless
+an actionable button that behaves similarly is present.
+
+```jsx live previewOnly
+<Box padding="large" flexDirection="row" style={{ gap: theme.space.large }}>
+  <Icon icon="circle-ok" />
+  <Icon icon="circle-info" />
+  <Icon icon="circle-question" />
+  <Icon icon="warning" />
+</Box>
+```
+
+<br />
+<br />
+
+## Behavior
+
+Limit the frequency of alerts - excessive alerts can be distracting and annoying to users.
+
+```jsx live previewOnly
+
+<Box flexDirection="row" flexWrap="wrap" style={{gap: theme.space.large, width: '100%'}} padding="large">
+  <Box borderRadius="large" style={{width: '48%'}} padding="large">
+    <Card style={{ backgroundColor: theme.colors.defaultGlobalSurface }}>
+      <Box padding="medium">
+        <Box flexDirection="row" alignItems="flex-end">
+        <Typography.Title level="h1" typeface="playful">
+          $953
+        </Typography.Title>
+        <Typography.Title level="h3" typeface="playful">
+          .04
+        </Typography.Title>
+        </Box>
+
+        <Box flexDirection="row" justifyContent="space-between" marginTop="small">
+
+        <Typography.Body>Spend account balance</Typography.Body>
+        <Icon icon="money-notes" />
+        </Box>
+      </Box>
+    </Card>
+
+    <Alert style={{marginTop: theme.space.medium}} content="Scheduled maintenance" />
+
+    <Card style={{backgroundColor: theme.colors.defaultGlobalSurface, marginTop: theme.space.medium, ...theme.shadows.default}}>
+      <Box padding="medium" flexDirection="row" justifyContent="space-between" alignItems="center">
+        <Box>
+          <Typography.Body >636-220 | 1234567890</Typography.Body>
+          <Typography.Caption style={{marginTop: theme.space.xsmall}}>Account detail</Typography.Body>
+        </Box>
+        <Icon icon="upload-outlined" size="xsmall" intent="primary" />
+      </Box>
+    </Card>
+
+    <Card style={{backgroundColor: theme.colors.defaultGlobalSurface, marginTop: theme.space.medium, ...theme.shadows.default}}>
+      <Box padding="medium" flexDirection="row" justifyContent="space-between" alignItems="center">
+        <Box>
+        <Typography.Body >786-245 | 9876543219</Typography.Body>
+        <Typography.Caption style={{marginTop: theme.space.xsmall}}>Account detail</Typography.Body>
+        </Box>
+        <Icon icon="upload-outlined" size="xsmall" intent="primary" />
+      </Box>
+    </Card>
+  </Box>
+
+  <Box borderRadius="large" style={{width: '48%'}} padding="large">
+    <Box marginBottom="medium" borderRadius="large" bgColor="highlightedSurface" style={{width: '100%', height: 120}} />
+      <Box flexDirection="row" justifyContent="space-between">
+      <Box borderRadius="large" bgColor="highlightedSurface" style={{width: '48%', height: 120}} />
+      <Box borderRadius="large" bgColor="highlightedSurface" style={{width: '48%', height: 120}} />
+    </Box>
+
+    <Alert onClose={() => ({})} intent="warning" style={{marginTop: theme.space.medium}} content="Please enrol a card before you start shopping." />
+  </Box>
+</Box>
+
+```
+
+<br />

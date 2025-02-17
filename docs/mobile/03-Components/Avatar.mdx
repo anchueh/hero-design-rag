@@ -1,0 +1,304 @@
+---
+id: avatar
+title: Avatar
+---
+
+# Avatar
+
+Avatar is used to show a profile picture or a text picture.
+
+## Examples
+
+### Basic Avatar
+
+Basic avatar can be customized using various props such as `size`, `source`, `title`, `intent`,... See the below props table for more details.
+
+```jsx live
+function AvatarPlayground() {
+  return (
+    <Box flexDirection="row" alignItems="center">
+      <Avatar title="TT" style={{ marginRight: theme.space.medium }} />
+      <Avatar
+        size="large"
+        title="SS"
+        source="https://i.pravatar.cc/300?u=a042581f4e29026704d"
+        style={{ marginRight: theme.space.medium }}
+      />
+      <Avatar
+        size="xxlarge"
+        title="AA"
+        intent="success"
+        style={{ marginRight: theme.space.medium }}
+      />
+    </Box>
+  );
+}
+```
+
+### Avatar.Stack
+
+Avatar.Stack comes in two variants: `horizontal` and `vertical`.
+
+```jsx live
+function AvatarPlayground() {
+  return (
+    <Box>
+      <Box marginBottom="medium">
+        <Typography.Body>Horizontal Avatar.Stack: </Typography.Body>
+        <Avatar.Stack>
+          <Avatar title="TT" />
+          <Avatar title="SS" />
+          <Avatar title="AA" />
+          <Avatar title="OO" />
+          <Avatar title="NA" />
+        </Avatar.Stack>
+      </Box>
+
+      <Box marginBottom="medium">
+        <Typography.Body>Vertical Avatar.Stack: </Typography.Body>
+        <Avatar.Stack variant="vertical">
+          <Avatar title="TT" />
+          <Avatar title="SS" />
+          <Avatar title="AA" />
+          <Avatar title="OO" />
+          <Avatar title="NA" />
+        </Avatar.Stack>
+      </Box>
+    </Box>
+  );
+}
+```
+
+#### Custom Avatar.Stack
+
+The number of Avatars being displayed can be controlled using the `max` prop, and the surplus value can be controlled by the `total` prop.
+When **both props are set**, the number of avatars will prioritize the `max` prop, and the surplus value will prioritize the `total` prop.
+
+```jsx live
+function AvatarPlayground() {
+  return (
+    <Box>
+      <Box>
+        <Typography.Body>
+          Limiting the number of Avatars being displayed:
+        </Typography.Body>
+        <Avatar.Stack
+          style={{ marginTop: theme.space.medium }}
+          max={3}
+          size="medium"
+        >
+          <Avatar title="TT" />
+          <Avatar title="SS" />
+          <Avatar title="AA" />
+          <Avatar title="OO" />
+          <Avatar title="NA" />
+        </Avatar.Stack>
+      </Box>
+
+      <Box marginTop="medium">
+        <Typography.Body>Setting the total number of Avatars:</Typography.Body>
+        <Avatar.Stack
+          style={{ marginTop: theme.space.medium }}
+          max={3}
+          total={200}
+          size="medium"
+        >
+          <Avatar title="TT" />
+          <Avatar title="SS" />
+          <Avatar title="AA" />
+          <Avatar title="OO" />
+          <Avatar title="NA" />
+        </Avatar.Stack>
+      </Box>
+    </Box>
+  );
+}
+```
+
+### Avatar.Stack with custom surplus
+
+Avatar surplus can be further customized by using the `renderSurplus` render function.
+
+```jsx live
+function AvatarPlayground() {
+  const listSources = [
+    { uri: 'https://i.pravatar.cc/300?u=a042581f4e29026704d' },
+    { uri: 'https://i.pravatar.cc/300?u=a042582f4e29026704d' },
+    { uri: 'https://i.pravatar.cc/300?u=a042583f4e29026704d' },
+    { uri: 'https://i.pravatar.cc/300?u=a042584f4e29026704d' },
+    { uri: 'https://i.pravatar.cc/300?u=a042585f4e29026704d' },
+  ];
+
+  return (
+    <Box
+      padding="medium"
+      borderRadius="large"
+      bgColor="neutralGlobalSurface"
+      marginVertical="medium"
+      style={{ alignSelf: 'flex-start' }}
+    >
+      <Box
+        padding="xsmall"
+        borderRadius="rounded"
+        bgColor="defaultGlobalSurface"
+        style={{ alignSelf: 'flex-start' }}
+      >
+        <Avatar.Stack
+          max={4}
+          variant="horizontal"
+          total={450000}
+          renderSurplus={(surplus) => (
+            <Box
+              flex={1}
+              justifyContent="center"
+              alignItems="center"
+              bgColor="defaultGlobalSurface"
+              borderRadius="rounded"
+            >
+              <Typography.Body variant="regular-bold">
+                {Math.round(surplus / 1000)}K
+              </Typography.Body>
+            </Box>
+          )}
+          size="xlarge"
+        >
+          <Avatar title="TT" source={listSources[0]} />
+          <Avatar title="TT" source={listSources[1]} />
+          <Avatar title="TT" source={listSources[2]} />
+          <Avatar title="TT" source={listSources[3]} />
+        </Avatar.Stack>
+      </Box>
+    </Box>
+  );
+}
+```
+
+### useAvatarColors
+
+Avatar support a hook called `useAvatarColors` to randomize a group of single avatar colors in a stable way.
+
+```jsx live
+function AvatarPlayground() {
+  const colors = useAvatarColors();
+  return (
+    <Box flexDirection="row" paddingVertical="small">
+      <Avatar title="TT" style={{ backgroundColor: colors[0] }} />
+      <Avatar title="SS" style={{ backgroundColor: colors[1] }} />
+      <Avatar title="AA" style={{ backgroundColor: colors[2] }} />
+      <Avatar title="OO" style={{ backgroundColor: colors[3] }} />
+      <Avatar title="NA" style={{ backgroundColor: colors[4] }} />
+    </Box>
+  );
+}
+```
+
+### Fallback to text when image failed to load
+
+```jsx live
+function AvatarPlayground() {
+  return (
+    <Avatar
+      source={{ uri: 'error URI' }}
+      title="TT"
+      size="large"
+      style={{ marginLeft: theme.space.xsmall }}
+    />
+  );
+}
+```
+
+### Text Avatar with different sizes and intents
+
+Avatar comes with 5 primary intents, ` success`, `warning`, `danger`, and `info`.
+
+```jsx live
+function AvatarPlayground() {
+  const source = { uri: 'https://i.pravatar.cc/300' };
+  const text = 'MD';
+
+  return (
+    <ScrollView contentContainerStyle={{ margin: theme.space.medium }}>
+      <Typography.Body style={{ marginBottom: theme.space.xsmall }}>
+        Text Avatar with different sizes
+      </Typography.Body>
+      <Box flexDirection="row" marginBottom="large" alignItems="flex-end">
+        <Avatar title={text} />
+        <Avatar
+          title={text}
+          size="medium"
+          intent="info"
+          style={{ marginLeft: theme.space.xsmall }}
+        />
+        <Avatar
+          title={text}
+          size="large"
+          intent="success"
+          style={{ marginLeft: theme.space.xsmall }}
+        />
+        <Avatar
+          title={text}
+          size="xlarge"
+          intent="danger"
+          style={{ marginLeft: theme.space.xsmall }}
+        />
+      </Box>
+
+      <Box flexDirection="row" marginBottom="large" alignItems="flex-end">
+        <Avatar size="xxlarge" title={text} />
+        <Avatar
+          title={text}
+          size="xxxlarge"
+          intent="info"
+          style={{ marginLeft: theme.space.xsmall }}
+        />
+        <Avatar
+          title={text}
+          size="xxxxlarge"
+          intent="success"
+          style={{ marginLeft: theme.space.xsmall }}
+        />
+      </Box>
+
+      <Box flexDirection="row" marginBottom="large" alignItems="flex-end">
+        <Avatar
+          title={text}
+          size="xxxxxlarge"
+          style={{ marginLeft: theme.space.xsmall }}
+        />
+      </Box>
+    </ScrollView>
+  );
+}
+```
+
+### Pressable avatar
+
+```jsx live
+function AvatarPlayground() {
+  const source = { uri: 'https://i.pravatar.cc/300' };
+  const text = 'MD';
+
+  const triggerAlert = () =>
+    alert('Alert Title', 'My Alert Msg', [
+      {
+        text: 'Cancel',
+        onPress: () => {},
+        style: 'cancel',
+      },
+      { text: 'OK', onPress: () => {} },
+    ]);
+  return (
+    <Box flexDirection="row" alignItems="flex-end">
+      <Avatar source={source} onPress={triggerAlert} size="large" />
+    </Box>
+  );
+}
+```
+
+## Avatar Props
+
+<Props of="Avatar" />
+
+## Avatar.Stack Props
+
+<Props of="AvatarStack" />

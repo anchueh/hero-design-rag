@@ -1,0 +1,207 @@
+---
+id: Carousel
+title: Carousel
+---
+
+## Carousel
+
+A carousel is a slide of components that can be used to display a set of items in a horizontal manner.
+
+:::info
+
+1. shouldShowPagination prop has been deprecated.
+
+2. The use of 'pageControlPosition == bottom' has been deprecated.
+
+:::
+
+### Examples
+
+```jsx live
+function App() {
+  const carouselData = [
+    {
+      content: <Image source={{ uri: 'https://picsum.photos/30' }} />,
+      heading: 'Welcome to the new Employment Hsero app',
+      body: 'Access your Work, Money and Benefits in the palm of your hand.',
+      background: theme.colors.highlightedSurface,
+    },
+    {
+      image: { uri: 'https://picsum.photos/800/1200' },
+      content: <Image source={{ uri: 'https://picsum.photos/30' }} />,
+      heading: 'Same app with a new looks!',
+      body: 'Our app now has a new bright clean modern look and feel -  with the same great features.',
+      background: theme.colors.decorativePrimarySurface,
+    },
+    {
+      image: {
+        uri: 'https://picsum.photos/1200/800',
+        width: '100%',
+        height: 100,
+        resizeMode: 'cover',
+      },
+      heading: 'Easier to get around',
+      body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae pulvinar quam, ac facilisis massa. Aliquam facilisis nisi eu justo dignissim, vel tempus justo iaculis.',
+      background: theme.colors.decorativePrimarySurface,
+    },
+  ];
+
+  return (
+    <HeroDesignProvider theme={theme}>
+      <View style={{ flex: 1, height: 860 }}>
+        <Carousel
+          pageControlPosition="top"
+          style={{ flex: 1, height: 860 }}
+          items={carouselData}
+          renderActions={(currentIndex) => {
+            const isLast = currentIndex === carouselData.length - 1;
+            if (isLast) {
+              return (
+                <>
+                  <Button
+                    variant="text"
+                    onPress={() => Alert.alert('Skip pressed')}
+                    text="Skip"
+                  />
+                  <Button
+                    variant="filled"
+                    onPress={() => Alert.alert("Let's go pressed")}
+                    text="Let's go"
+                  />
+                </>
+              );
+            }
+            return (
+              <Button
+                variant="text"
+                onPress={() => Alert.alert('Skip pressed')}
+                text="Skip"
+              />
+            );
+          }}
+        />
+      </View>
+    </HeroDesignProvider>
+  );
+}
+```
+
+## Card Carousel
+
+A Card carousel is a slide of components with card style
+
+### Examples
+
+```jsx live
+function CardCarouselPlayground() {
+  function Item({
+    imageURL,
+    contentTitle,
+    contentDescription,
+    footerTitle,
+    footerDescription,
+    contentBackgroundColor,
+  }) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          alignContent: 'stretch',
+        }}
+      >
+        <View
+          style={{
+            alignItems: 'center',
+            flex: 1,
+            backgroundColor:
+              contentBackgroundColor || theme.colors.defaultSurface,
+            paddingHorizontal: theme.space.xlarge,
+            paddingVertical: theme.space.medium,
+            alignContent: 'stretch',
+          }}
+        >
+          <Image source={{ uri: imageURL }} />
+          <View
+            style={{
+              marginTop: theme.space.medium,
+              alignItems: 'center',
+            }}
+          >
+            <Typography.Body>{contentTitle}</Typography.Body>
+            <Typography.Caption
+              intent="subdued"
+              style={{
+                textAlign: 'center',
+                marginBottom: theme.space.medium,
+              }}
+            >
+              {contentDescription}
+            </Typography.Caption>
+          </View>
+        </View>
+        <View
+          style={{
+            alignItems: 'center',
+            backgroundColor: theme.colors.defaultGlobalSurface,
+            paddingHorizontal: theme.space.large,
+            paddingVertical: theme.space.medium,
+          }}
+        >
+          <Typography.Body variant="regular-bold">
+            {footerTitle}
+          </Typography.Body>
+          <Typography.Caption style={{ textAlign: 'center' }}>
+            {footerDescription}
+          </Typography.Caption>
+        </View>
+      </View>
+    );
+  }
+
+  const ref: React.RefObject<CardCarouselHandles> = React.useRef(null);
+  return (
+    <HeroDesignProvider theme={theme}>
+      <Carousel.Card
+        autoPlay={true}
+        ref={ref}
+        items={[
+          <Item
+            imageURL="https://picsum.photos/200/300"
+            contentTitle="Simple Sepnder"
+            contentDescription="Use your Swag Spend account for purchases like treating yourself
+                to a coffee. "
+            footerTitle="10% of my pay"
+            footerDescription="to be deposited into my Swag Spend Account, each time I get
+                paid. "
+          />,
+          <Item
+            contentBackgroundColor={theme.colors.highlightedSurface}
+            imageURL="https://picsum.photos/200/301"
+            contentTitle="Savvy Spender"
+            contentDescription="Use your Swag Spend account for all daily purchases and use it in our Discount store."
+            footerTitle="30% of my pay"
+            footerDescription="to be deposited into my Swag Spend Account, each time I get paid."
+          />,
+          <Item
+            imageURL="https://picsum.photos/200/302"
+            contentTitle="Super saver"
+            contentDescription="Use your Spend account to maximise your savings on daily essentials and big-ticket items in the Discount store"
+            footerTitle="50% of my pay"
+            footerDescription="to be deposited into my Swag Spend Account, each time I get paid."
+          />,
+        ]}
+      />
+    </HeroDesignProvider>
+  );
+}
+```
+
+## Props
+
+### Carousel Props
+
+<Props of="Carousel" />
+
+### Card Carousel Props
+
+<Props of="CardCarousel" />

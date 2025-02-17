@@ -1,0 +1,14 @@
+---
+id: web
+title: '@ehrocks/hero-design-react'
+---
+
+import ChangelogVersionSelect from '@site/src/components/ChangelogVersionSelect';
+// eslint-disable-next-line import/no-relative-packages
+import Changelog, { toc as ChangelogToc } from '../../../react/CHANGELOG.md';
+
+<ChangelogVersionSelect options={ChangelogToc} />
+
+<Changelog />
+
+export const toc = ChangelogToc;

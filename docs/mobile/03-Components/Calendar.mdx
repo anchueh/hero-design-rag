@@ -1,0 +1,141 @@
+---
+id: calendar
+title: Calendar
+---
+
+import ComponentPreview from '../../../src/components/ComponentPreview';
+
+# Calendar
+
+A calendar is chart or series of pages showing the days, weeks, and months of a particular year.
+
+## Examples
+
+### Example 1: Basic usage
+
+```jsx live
+function App() {
+  const today = new Date();
+  const [visibleDate, setVisibleDate] = useState(today);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const markedDates = Array(5)
+    .fill('')
+    .map(
+      (_, index) =>
+        new Date(visibleDate.getFullYear(), visibleDate.getMonth(), index + 5)
+    );
+
+  return (
+    <View style={{ paddingVertical: theme.space.medium }}>
+      <Calendar
+        value={selectedDate}
+        visibleDate={visibleDate}
+        onChange={(date) => setSelectedDate(date)}
+        markedDates={[today, ...markedDates]}
+        onPreviousPress={() =>
+          setVisibleDate(
+            new Date(visibleDate.getFullYear(), visibleDate.getMonth() - 1, 1)
+          )
+        }
+        onNextPress={() =>
+          setVisibleDate(
+            new Date(visibleDate.getFullYear(), visibleDate.getMonth() + 1, 1)
+          )
+        }
+        onTitlePress={() => alert('Title Press')}
+      />
+      <View style={{ padding: theme.space.medium }}>
+        <Typography.Body variant="small">{`Today: ${today.toDateString()}`}</Typography.Body>
+        <Typography.Body variant="small">{`Selected date: ${selectedDate.toDateString()}`}</Typography.Body>
+      </View>
+    </View>
+  );
+}
+```
+
+### Example 2: Calendar with fixed date range
+
+Calendar can be configured to display a limited date range via `minDate` and `maxDate` props.
+
+```jsx live
+function App() {
+  const today = new Date();
+  const [visibleDate, setVisibleDate] = useState(today);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const markedDates = Array(5)
+    .fill('')
+    .map(
+      (_, index) =>
+        new Date(visibleDate.getFullYear(), visibleDate.getMonth(), index + 5)
+    );
+  const minDate = new Date(today.getFullYear(), today.getMonth(), -3);
+  const maxDate = new Date(today.getFullYear(), today.getMonth() + 1, 4);
+
+  return (
+    <View style={{ paddingVertical: theme.space.medium }}>
+      <Calendar
+        value={selectedDate}
+        visibleDate={visibleDate}
+        onChange={(date) => setSelectedDate(date)}
+        markedDates={[today, ...markedDates]}
+        onPreviousPress={() =>
+          setVisibleDate(
+            new Date(visibleDate.getFullYear(), visibleDate.getMonth() - 1, 1)
+          )
+        }
+        onNextPress={() =>
+          setVisibleDate(
+            new Date(visibleDate.getFullYear(), visibleDate.getMonth() + 1, 1)
+          )
+        }
+        onTitlePress={() => alert('Title Press')}
+        minDate={minDate}
+        maxDate={maxDate}
+      />
+      <View style={{ padding: theme.space.medium }}>
+        <Typography.Body variant="small">{`Today: ${today.toDateString()}`}</Typography.Body>
+        <Typography.Body variant="small">{`Selected date: ${selectedDate.toDateString()}`}</Typography.Body>
+      </View>
+    </View>
+  );
+}
+```
+
+### Example 3: Calendar with month picker
+
+:::info Info
+In order to use this function, make sure you have `@hero-design/react-native-month-year-picker` installed.
+:::
+
+<ComponentPreview
+  iosSrc="/img/screenshots/calendar-month-picker-ios.png"
+  androidSrc="/img/screenshots/calendar-month-picker-android.png"
+/>
+
+Calendar also supports month picker for fast navigation, simply pass `onMonthChange`, this will disable `onTitlePress`.
+
+```jsx
+<Calendar
+  value={selectedDate}
+  visibleDate={visibleDate}
+  onChange={(date) => setSelectedDate(date)}
+  markedDates={[today, ...markedDates]}
+  onPreviousPress={() =>
+    setVisibleDate(
+      new Date(visibleDate.getFullYear(), visibleDate.getMonth() - 1, 1)
+    )
+  }
+  onNextPress={() =>
+    setVisibleDate(
+      new Date(visibleDate.getFullYear(), visibleDate.getMonth() + 1, 1)
+    )
+  }
+  minDate={minDate}
+  maxDate={maxDate}
+  onMonthChange={(date) => setVisibleDate(date)}
+/>
+```
+
+## Props
+
+<Props of="Calendar" />

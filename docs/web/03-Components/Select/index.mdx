@@ -1,0 +1,690 @@
+---
+id: select
+title: Select
+---
+
+import Note, { Highlight } from '../../../helpers/Note';
+
+# Select
+
+Select component to select options from a list.
+
+## Examples
+
+### Basic
+
+Basic usage example.
+
+```jsx live
+function BasicSelect() {
+  const options = [
+    { value: 'item-1', text: 'Item 1' },
+    { value: 'item-2', text: 'Item 2' },
+    { value: 'item-3', text: 'Item 3' },
+    { value: 'item-4', text: 'Item 4', disabled: true },
+    { value: 'item-5', text: 'Item 5' },
+    { value: 'item-6', text: 'Item 6' },
+  ];
+  const [value, setValue] = useState('item-1');
+  return (
+    <Select
+      options={options}
+      value={value}
+      onChange={setValue}
+      placeholder="Select an item"
+      data-test-id="basic"
+    />
+  );
+}
+```
+
+### Custom option renderer
+
+Select option can be customised via `optionRenderer` callback.
+
+```jsx live
+function CustomSelect() {
+  const [value, setValue] = useState();
+  const options = [
+    { value: 'item-1', text: 'Item 1', icon: 'add-person' },
+    { value: 'item-2', text: 'Item 2', icon: 'alignment' },
+    { value: 'item-3', text: 'Item 3', icon: 'bell' },
+  ];
+  const optionRenderer = React.useCallback(
+    ({ option: { text, icon }, index }) => (
+      <>
+        <Icon icon={icon} style={{ marginRight: theme.space.small }} />
+        <span style={{ margin: 0, padding: 0 }}>{`${index + 1}: ${text}`}</span>
+      </>
+    ),
+    []
+  );
+  return (
+    <Select
+      options={options}
+      optionRenderer={optionRenderer}
+      value={value}
+      onChange={setValue}
+      placeholder="Select an item"
+      data-test-id="customized-option"
+    />
+  );
+}
+```
+
+### Custom selected option renderer
+
+Select allows to custom the selected option text via `selectedOptionRenderer` callback.
+
+```jsx live
+function CustomOption() {
+  const [value, setValue] = useState('vnd');
+  const options = [
+    { value: 'usd', text: 'USD - US Dollar' },
+    { value: 'eur', text: 'EUR - Euro' },
+    { value: 'aud', text: 'AUD - Australian Dollar' },
+    { value: 'vnd', text: 'VND - Vietnam Dong' },
+  ];
+  return (
+    <Select
+      options={options}
+      selectedOptionRenderer={({ option }) => option.text.substring(0, 3)}
+      value={value}
+      onChange={setValue}
+      placeholder="Select currency"
+      data-test-id="customized-selected-option"
+    />
+  );
+}
+```
+
+### GroupedOptions
+
+Options can be grouped into different categories. However, value of options in all categories must be unique.
+
+```jsx live
+function GroupedOptions() {
+  const options = [
+    {
+      category: 'Teams',
+      options: [
+        { value: 'team-1', text: 'Team 1', helpText: '5 members' },
+        { value: 'team-2', text: 'Team 2', helpText: '3 members' },
+      ],
+    },
+    {
+      category: 'Locations',
+      options: [{ value: 'location-1', text: 'Location 1' }],
+    },
+    {
+      category: 'Individual',
+      options: [
+        { value: 'person-1', text: 'Person 1' },
+        { value: 'person-2', text: 'Person 2' },
+      ],
+    },
+  ];
+  const [value, setValue] = useState('team-2');
+  return (
+    <Select
+      options={options}
+      value={value}
+      onChange={setValue}
+      placeholder="Select an item"
+      data-test-id="grouped-option"
+    />
+  );
+}
+```
+
+### Sizes
+
+There are three sizes of a Select box: `small`, `medium` and `large`. It is set to `medium` by default.
+
+```jsx live
+function SelectSizes() {
+  const options = [
+    { value: 'item-1', text: 'Item 1' },
+    { value: 'item-2', text: 'Item 2' },
+    { value: 'item-3', text: 'Item 3' },
+  ];
+  const [value, setValue] = useState();
+  return (
+    <>
+      <Select
+        options={options}
+        value={value}
+        onChange={setValue}
+        placeholder="Small"
+        size="small"
+        style={{ marginBottom: theme.space.medium }}
+      />
+      <Select
+        options={options}
+        value={value}
+        onChange={setValue}
+        placeholder="Medium"
+        style={{ marginBottom: theme.space.medium }}
+      />
+      <Select
+        options={options}
+        value={value}
+        onChange={setValue}
+        placeholder="Large"
+        size="large"
+      />
+    </>
+  );
+}
+```
+
+### Prefix
+
+Add prefix icons to the input.
+
+```jsx live
+function SelectPrefix() {
+  const options = [
+    { value: 'item-1', text: 'Item 1' },
+    { value: 'item-2', text: 'Item 2' },
+    { value: 'item-3', text: 'Item 3' },
+    { value: 'item-4', text: 'Item 4' },
+    { value: 'item-5', text: 'Item 5' },
+  ];
+  const [value, setValue] = useState();
+  return (
+    <Select
+      options={options}
+      value={value}
+      onChange={setValue}
+      placeholder="Select an item"
+      prefix="envelope"
+    />
+  );
+}
+```
+
+### Callback when scroll to bottom.
+
+A callback can be called when user scroll to bottom of the option list. This is set through `onScrollListToBottom`.
+
+```jsx live
+function SelectCallback() {
+  const options = [
+    { value: 'item-1', text: 'Item 1' },
+    { value: 'item-2', text: 'Item 2' },
+    { value: 'item-3', text: 'Item 3' },
+    { value: 'item-4', text: 'Item 4' },
+    { value: 'item-5', text: 'Item 5' },
+    { value: 'item-6', text: 'Item 6' },
+    { value: 'item-7', text: 'Item 7' },
+    { value: 'item-8', text: 'Item 8' },
+    { value: 'item-9', text: 'Item 9' },
+    { value: 'item-10', text: 'Item 10' },
+  ];
+  const [value, setValue] = useState();
+  return (
+    <Select
+      options={options}
+      value={value}
+      onChange={setValue}
+      placeholder="Select an item"
+      prefix="envelope"
+      onScrollListToBottom={() => console.log('Now at bottom')}
+    />
+  );
+}
+```
+
+### Select with searching options
+
+Select provides default searching feature by providing the query props `query` & `onQueryChange`.
+
+```jsx live
+function SelectWithSearch() {
+  const options = [
+    {
+      category: 'Teams',
+      options: [
+        { value: 'team-1', text: 'Team 1', helpText: '5 members' },
+        { value: 'team-2', text: 'Team 2', helpText: '3 members' },
+      ],
+    },
+    {
+      category: 'Individual',
+      options: [
+        { value: 'person-1', text: 'Person 1' },
+        { value: 'person-2', text: 'Person 2' },
+      ],
+    },
+  ];
+  const [value, setValue] = useState();
+  const [query, setQuery] = useState();
+  return (
+    <Select
+      options={options}
+      value={value}
+      onChange={setValue}
+      placeholder="Search..."
+      prefix="envelope"
+      query={query}
+      onQueryChange={setQuery}
+      id="searchable-select-input"
+      noResults={
+        <Box p="small">
+          <Typography.Text intent="subdued" style={{ textAlign: 'center' }}>
+            No results
+          </Typography.Text>
+        </Box>
+      }
+    />
+  );
+}
+```
+
+### Customise searching behaviour
+
+The default searching is case-insensitive. Select allow customise searching behaviour by providing the `optionPredicate` prop.
+
+```jsx live
+function SelectWithCustomSearching() {
+  const options = [
+    { value: 'option-a', text: 'Option a' },
+    { value: 'option-A', text: 'Option A' },
+  ];
+  const [value, setValue] = useState();
+  const [query, setQuery] = useState();
+
+  const customOptionPredicate = (query) => (option) =>
+    option.text.includes(query || '');
+
+  return (
+    <Select
+      options={options}
+      value={value}
+      onChange={setValue}
+      placeholder="Search..."
+      query={query}
+      onQueryChange={setQuery}
+      optionPredicate={customOptionPredicate}
+      id="searchable-select-input"
+      noResults={
+        <Box p="small">
+          <Typography.Text intent="subdued" style={{ textAlign: 'center' }}>
+            No results
+          </Typography.Text>
+        </Box>
+      }
+    />
+  );
+}
+```
+
+### Allow to create new option
+
+Select allows creating a new option by providing the `onCreateNewOption` prop.
+
+<Note title="Feature availability">
+  Create new option feature is only available when searching is enable by
+  passing <Highlight>query</Highlight> & <Highlight>onQueryChange</Highlight>{' '}
+  props.
+</Note>
+
+```jsx live
+function SelectOptions() {
+  const originalOptions = [
+    { value: 'item-1', text: 'Item 1' },
+    { value: 'item-2', text: 'Item 2' },
+    { value: 'item-3', text: 'Item 3' },
+  ];
+  const [options, setOptions] = useState(originalOptions);
+  const [value, setValue] = useState();
+  const [query, setQuery] = useState();
+  const onCreateNewOption = (optionText) => {
+    const newOption = { value: optionText, text: optionText };
+    setOptions([...options, newOption]);
+    setValue(newOption.value);
+  };
+  return (
+    <Select
+      options={options}
+      value={value}
+      onChange={setValue}
+      placeholder="Search..."
+      prefix="envelope"
+      query={query}
+      onQueryChange={setQuery}
+      onCreateNewOption={onCreateNewOption}
+      id="creatable-select-input"
+      noResults={
+        <Box p="small">
+          <Typography.Text intent="subdued" style={{ textAlign: 'center' }}>
+            No results
+          </Typography.Text>
+        </Box>
+      }
+    />
+  );
+}
+```
+
+### Allow to clear selected option
+
+Select allows to clear selected option by setting `clearable` prop.
+
+```jsx live
+function ClearSelect() {
+  const options = [
+    { value: 'item-1', text: 'Item 1' },
+    { value: 'item-2', text: 'Item 2' },
+    { value: 'item-3', text: 'Item 3' },
+  ];
+  const [value, setValue] = useState('item-1');
+  return (
+    <Select
+      options={options}
+      value={value}
+      onChange={setValue}
+      placeholder="Select an item"
+      data-test-id="clearable"
+      clearable
+    />
+  );
+}
+```
+
+### MultiSelect
+
+Using `Select.Multi` to allow to select more than one option.
+
+```jsx live
+function MultiSelect() {
+  const options = [
+    { value: 'item-1', text: 'Item 1' },
+    { value: 'item-2', text: 'Item 2', removable: false },
+    { value: 'item-3', text: 'Item 3', removable: false },
+    { value: 'item-4', text: 'Item 4', disabled: true },
+    { value: 'item-5', text: 'Item 5' },
+  ];
+  const [value, setValue] = useState(['item-1']);
+  return (
+    <Select.Multi
+      options={options}
+      value={value}
+      onChange={setValue}
+      placeholder="Select an item"
+      data-test-id="basic-multiselect"
+    />
+  );
+}
+```
+
+### MultiSelect with custom option renderer
+
+Select.Multi option can be customised via `optionRenderer` callback.
+
+```jsx live
+function MultiSelect() {
+  const [value, setValue] = useState([]);
+  const options = [
+    { value: 'item-1', text: 'Item 1', icon: 'add-person' },
+    { value: 'item-2', text: 'Item 2', icon: 'alignment' },
+    { value: 'item-3', text: 'Item 3', icon: 'bell' },
+    { value: 'item-4', text: 'Item 4', icon: 'billing' },
+    { value: 'item-5', text: 'Item 5', icon: 'bookmark' },
+  ];
+  const optionRenderer = React.useCallback(
+    ({ option: { text, icon }, index }) => (
+      <>
+        <Icon icon={icon} style={{ marginRight: theme.space.small }} />
+        <span style={{ margin: 0, padding: 0 }}>{`${index + 1}: ${text}`}</span>
+      </>
+    ),
+    []
+  );
+  return (
+    <Select.Multi
+      options={options}
+      optionRenderer={optionRenderer}
+      value={value}
+      onChange={setValue}
+      placeholder="Select an item"
+      prefix="envelope"
+      data-test-id="multiselect-customized-option"
+    />
+  );
+}
+```
+
+### MultiSelect with custom selected option renderer
+
+Select.Multi allows to custom the selected option text via `selectedOptionRenderer` callback.
+
+```jsx live
+function CustomSelect() {
+  const [value, setValue] = useState(['item-1']);
+  const options = [
+    { value: 'item-1', text: 'Item 1' },
+    { value: 'item-2', text: 'Item 2' },
+    { value: 'item-3', text: 'Item 3' },
+    { value: 'item-4', text: 'Item 4' },
+    { value: 'item-5', text: 'Item 5' },
+  ];
+  const selectedOptionRenderer = React.useCallback(
+    ({ option }) => (
+      <span
+        style={{ margin: 0, padding: 0, display: 'flex', alignItems: 'center' }}
+      >
+        <Icon icon="user" style={{ marginRight: theme.space.small }} />
+        {option.text}
+      </span>
+    ),
+    []
+  );
+  return (
+    <Select.Multi
+      options={options}
+      selectedOptionRenderer={selectedOptionRenderer}
+      value={value}
+      onChange={setValue}
+      placeholder="Select an item"
+      prefix="envelope"
+    />
+  );
+}
+```
+
+### MultiSelect with GroupedOption
+
+```jsx live
+function MultiSelectGroup() {
+  const options = [
+    {
+      category: 'Teams',
+      options: [
+        { value: 'team-1', text: 'Team 1', helpText: '5 members' },
+        { value: 'team-2', text: 'Team 2', helpText: '3 members' },
+      ],
+    },
+    {
+      category: 'Locations',
+      options: [{ value: 'location-1', text: 'Location 1' }],
+    },
+    {
+      category: 'Individual',
+      options: [
+        { value: 'person-1', text: 'Person 1' },
+        { value: 'person-2', text: 'Person 2' },
+      ],
+    },
+  ];
+  const [value, setValue] = useState(['team-1']);
+  return (
+    <Select.Multi
+      options={options}
+      value={value}
+      onChange={setValue}
+      placeholder="Select an item"
+      prefix="envelope"
+      data-test-id="multiselect-grouped-options"
+    />
+  );
+}
+```
+
+### MultiSelect with searching options
+
+```jsx live
+function MultiSelectWithSearch() {
+  const options = [
+    {
+      category: 'Teams',
+      options: [
+        { value: 'team-1', text: 'Team 1', helpText: '5 members' },
+        { value: 'team-2', text: 'Team 2', helpText: '3 members' },
+      ],
+    },
+    {
+      category: 'Individual',
+      options: [
+        { value: 'person-1', text: 'Person 1' },
+        { value: 'person-2', text: 'Person 2' },
+      ],
+    },
+  ];
+  const [value, setValue] = useState([]);
+  const [query, setQuery] = useState();
+  return (
+    <Select.Multi
+      options={options}
+      value={value}
+      onChange={setValue}
+      placeholder="Search..."
+      query={query}
+      onQueryChange={setQuery}
+      id="searchable-multiselect-input"
+      noResults={
+        <Box p="small">
+          <Typography.Text intent="subdued" style={{ textAlign: 'center' }}>
+            No results
+          </Typography.Text>
+        </Box>
+      }
+    />
+  );
+}
+```
+
+### MultiSelect with customised searching behaviour
+
+```jsx live
+function SelectWithCustomSearching() {
+  const options = [
+    { value: 'option-a', text: 'Option a' },
+    { value: 'option-A', text: 'Option A' },
+  ];
+  const [value, setValue] = useState();
+  const [query, setQuery] = useState();
+
+  const customOptionPredicate = (query) => (option) =>
+    option.text.includes(query || '');
+
+  return (
+    <Select.Multi
+      options={options}
+      value={value}
+      onChange={setValue}
+      placeholder="Search..."
+      query={query}
+      onQueryChange={setQuery}
+      optionPredicate={customOptionPredicate}
+      id="searchable-select-input"
+      noResults={
+        <Box p="small">
+          <Typography.Text intent="subdued" style={{ textAlign: 'center' }}>
+            No results
+          </Typography.Text>
+        </Box>
+      }
+    />
+  );
+}
+```
+
+### MultiSelect with creating new option
+
+```jsx live
+function MultiSelectOptions() {
+  const originalOptions = [
+    { value: 'item-1', text: 'Item 1' },
+    { value: 'item-2', text: 'Item 2' },
+    { value: 'item-3', text: 'Item 3' },
+  ];
+  const [options, setOptions] = useState(originalOptions);
+  const [value, setValue] = useState([]);
+  const [query, setQuery] = useState();
+  const onCreateNewOption = (optionText) => {
+    const newOption = { value: optionText, text: optionText };
+    setOptions([...options, newOption]);
+    setValue([...value, newOption.value]);
+  };
+  return (
+    <Select.Multi
+      options={options}
+      value={value}
+      onChange={setValue}
+      placeholder="Search..."
+      prefix="envelope"
+      query={query}
+      onQueryChange={setQuery}
+      id="creatable-multiselect-input"
+      noResults={
+        <Box p="small">
+          <Typography.Text intent="subdued" style={{ textAlign: 'center' }}>
+            No results
+          </Typography.Text>
+        </Box>
+      }
+      onCreateNewOption={onCreateNewOption}
+    />
+  );
+}
+```
+
+### MultiSelect with compact mode
+
+Using `Select.Multi` with `compact` variant allows to render only 1 selected tag to save some space. This requires a custom `selectedOptionRenderer` to get the label representing selected items.
+
+```jsx live
+function MultiSelect() {
+  const options = [
+    { value: 'item-1', text: 'Item 1' },
+    { value: 'item-2', text: 'Item 2' },
+    { value: 'item-3', text: 'Item 3' },
+    { value: 'item-4', text: 'Item 4' },
+    { value: 'item-5', text: 'Item 5' },
+  ];
+  const [value, setValue] = useState(['item-1', 'item-2']);
+  return (
+    <Select.Multi
+      options={options}
+      value={value}
+      onChange={setValue}
+      placeholder="Select an item"
+      data-test-id="compact-multiselect"
+      variant="compact"
+      selectedOptionRenderer={() => 'Some item selected'}
+    />
+  );
+}
+```
+
+## Props
+
+### Select
+
+<Props of="SingleSelect" from="web" />
+
+### Select.Multi
+
+<Props of="MultiSelect" from="web" />
